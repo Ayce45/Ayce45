@@ -19,12 +19,6 @@
 - [Ayce45/angular-beers-pokemons](https://github.com/Ayce45/angular-beers-pokemons) - Angular basic app to fetch pokemons and beers with api.
 - [Ayce45/faq-accordion-card](https://github.com/Ayce45/faq-accordion-card) - 
 
-#### 📓 Gists I wrote
-
-- [](https://gist.github.com/333415d35f5565dca6b83ae51d6212ed) (1 week ago)
-- [YouTube Vimeo URL Parser](https://gist.github.com/796f13a2d0a16dfbafa86dd104cfcce4) (2 months ago)
-- [404 Paralax](https://gist.github.com/74b178754721903bbd7193aa2955449a) (1 year ago)
-
 #### ⭐ Recent Stars
 
 - [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (1 day ago)
