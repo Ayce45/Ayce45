@@ -24,7 +24,7 @@
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapid UI development. (today)
 - [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (today)
 - [storybookjs/storybook](https://github.com/storybookjs/storybook) - 📓 The UI component explorer. Develop, document, &amp; test React, Vue, Angular, Web Components, Ember, Svelte &amp; more! (today)
-- [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js) - The Intuitive Vue Framework (today)
+- [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js) - The Intuitive Vue(2) Framework (today)
 - [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (1 day ago)
 
 #### 👯 Check out some of my recent followers
