@@ -6,7 +6,7 @@
 #### 👷 Check out what I'm currently working on
 
 - [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (today)
-- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (1 day ago)
+- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (today)
 - [Ayce45/Flimotek](https://github.com/Ayce45/Flimotek) - Leasing Movies (3 days ago)
 - [Ayce45/article-news-card](https://github.com/Ayce45/article-news-card) - Article News Card - Version entraînement (3 days ago)
 - [Ayce45/unity-ball-game](https://github.com/Ayce45/unity-ball-game) - Ball game in unity (1 week ago)
