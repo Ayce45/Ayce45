@@ -5,8 +5,8 @@
 
 #### 👷 Check out what I'm currently working on
 
-- [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (6 days ago)
-- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (6 days ago)
+- [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (1 week ago)
+- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (1 week ago)
 - [Ayce45/article-news-card](https://github.com/Ayce45/article-news-card) - Article News Card - Version entraînement (1 week ago)
 - [Ayce45/Flimotek](https://github.com/Ayce45/Flimotek) - Leasing Movies (1 week ago)
 - [Ayce45/unity-ball-game](https://github.com/Ayce45/unity-ball-game) - Ball game in unity (2 weeks ago)
@@ -21,10 +21,10 @@
 
 #### ⭐ Recent Stars
 
-- [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapid UI development. (6 days ago)
-- [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (6 days ago)
-- [storybookjs/storybook](https://github.com/storybookjs/storybook) - 📓 The UI component explorer. Develop, document, &amp; test React, Vue, Angular, Web Components, Ember, Svelte &amp; more! (6 days ago)
-- [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js) - The Intuitive Vue(2) Framework (6 days ago)
+- [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapid UI development. (1 week ago)
+- [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (1 week ago)
+- [storybookjs/storybook](https://github.com/storybookjs/storybook) - 📓 The UI component explorer. Develop, document, &amp; test React, Vue, Angular, Web Components, Ember, Svelte &amp; more! (1 week ago)
+- [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js) - The Intuitive Vue(2) Framework (1 week ago)
 - [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (1 week ago)
 
 #### 👯 Check out some of my recent followers
