@@ -5,19 +5,19 @@
 
 #### 👷 Check out what I'm currently working on
 
+- [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (today)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (4 days ago)
-- [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (4 weeks ago)
 - [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (4 weeks ago)
-- [Ayce45/article-news-card](https://github.com/Ayce45/article-news-card) - Article News Card - Version entraînement (1 month ago)
+- [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (4 weeks ago)
 - [Ayce45/Flimotek](https://github.com/Ayce45/Flimotek) - Leasing Movies (1 month ago)
 
 #### 🌱 My latest projects
 
+- [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge
 - [Ayce45/rock-paper-scissors](https://github.com/Ayce45/rock-paper-scissors) - Simple rock paper scissors in vuejs and tailwindcss
 - [Ayce45/speed-module-stpbb](https://github.com/Ayce45/speed-module-stpbb) - Speed module for stpbb demo
 - [Ayce45/sunnyside-agency-landing-page](https://github.com/Ayce45/sunnyside-agency-landing-page) - Landing page challenge
 - [Ayce45/angular-beers-pokemons](https://github.com/Ayce45/angular-beers-pokemons) - Angular basic app to fetch pokemons and beers with api.
-- [Ayce45/faq-accordion-card](https://github.com/Ayce45/faq-accordion-card) - Faq accordion card challenge
 
 #### ⭐ Recent Stars
 
