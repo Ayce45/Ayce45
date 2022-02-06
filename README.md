@@ -6,7 +6,7 @@
 #### 👷 Check out what I'm currently working on
 
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (2 weeks ago)
-- [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (4 weeks ago)
+- [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (1 month ago)
 - [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (1 month ago)
 - [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (1 month ago)
 - [Ayce45/Flimotek](https://github.com/Ayce45/Flimotek) - Leasing Movies (2 months ago)
@@ -25,7 +25,7 @@
 - [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (1 month ago)
 - [storybookjs/storybook](https://github.com/storybookjs/storybook) - 📓 The UI component explorer. Develop, document, &amp; test React, Vue, Angular, Web Components, Ember, Svelte &amp; more! (1 month ago)
 - [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js) - The Intuitive Vue(2) Framework (1 month ago)
-- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (1 month ago)
+- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (2 months ago)
 
 #### 👯 Check out some of my recent followers
 
