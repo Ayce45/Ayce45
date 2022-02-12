@@ -29,5 +29,4 @@
 
 #### 👯 Check out some of my recent followers
 
-- [kibotrel](https://github.com/kibotrel)
 - [pimeo](https://github.com/pimeo)
