@@ -5,11 +5,11 @@
 
 #### 👷 Check out what I'm currently working on
 
-- [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (4 weeks ago)
+- [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (today)
 - [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (1 month ago)
 - [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (2 months ago)
 - [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (2 months ago)
-- [Ayce45/Flimotek](https://github.com/Ayce45/Flimotek) - Leasing Movies (2 months ago)
+- [Ayce45/article-news-card](https://github.com/Ayce45/article-news-card) - Article News Card - Version entraînement (2 months ago)
 
 #### 🌱 My latest projects
 
@@ -21,11 +21,11 @@
 
 #### ⭐ Recent Stars
 
+- [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (today)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapid UI development. (2 months ago)
 - [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (2 months ago)
 - [storybookjs/storybook](https://github.com/storybookjs/storybook) - 📓 The UI component explorer. Develop, document, &amp; test React, Vue, Angular, Web Components, Ember, Svelte &amp; more! (2 months ago)
 - [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js) - The Intuitive Vue(2) Framework (2 months ago)
-- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (2 months ago)
 
 #### 👯 Check out some of my recent followers
 
