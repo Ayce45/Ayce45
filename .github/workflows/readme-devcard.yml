@@ -1,4 +1,4 @@
-name: DevCard
+name: Generate DevCard
 
 on:
   workflow_dispatch:
