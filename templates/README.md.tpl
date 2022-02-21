@@ -1,3 +1,5 @@
+<img align="center" src="/github-metrics.svg" alt="Metrics" width="400">
+
 ## Hey, I'm Ayce!
 - 🔭 I’m currently working on <a href="https://link-u.nified.com/">Unified</a> and <a href="https://sertizh.fr/">Sertizh</a>
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
