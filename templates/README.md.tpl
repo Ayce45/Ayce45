@@ -3,6 +3,8 @@
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
 - ⚡ Fun fact: I'm riding with electric skateboard
 
+<a href="https://app.daily.dev/Ayce"><img src="https://api.daily.dev/devcards/6f27abf04ef249b1a106e3ddb7e7cda4.png?r=tkh" width="400" alt="Evan JUGE's Dev Card"/></a>
+
 #### 👷 Check out what I'm currently working on
 {{range recentContributions 5}}
 - [{{.Repo.Name}}]({{.Repo.URL}}) - {{.Repo.Description}} ({{humanize .OccurredAt}})
