@@ -21,11 +21,11 @@
 
 #### ⭐ Recent Stars
 
+- [lowlighter/metrics](https://github.com/lowlighter/metrics) - 📊 An infographics generator with 30&#43; plugins and 200&#43; options to display stats about your GitHub account and render them as SVG, Markdown, PDF or JSON! (today)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (6 days ago)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapid UI development. (2 months ago)
 - [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (2 months ago)
 - [storybookjs/storybook](https://github.com/storybookjs/storybook) - 📓 The UI component explorer. Develop, document, &amp; test React, Vue, Angular, Web Components, Ember, Svelte &amp; more! (2 months ago)
-- [nuxt/nuxt.js](https://github.com/nuxt/nuxt.js) - The Intuitive Vue(2) Framework (2 months ago)
 
 #### 👯 Check out some of my recent followers
 
