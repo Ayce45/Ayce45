@@ -1,5 +1,3 @@
-<img align="center" src="/github-metrics.svg" alt="Metrics" width="400">
-
 ## Hey, I'm Ayce!
 - 🔭 I’m currently working on <a href="https://link-u.nified.com/">Unified</a> and <a href="https://sertizh.fr/">Sertizh</a>
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
@@ -32,5 +30,9 @@
 #### 👯 Check out some of my recent followers
 
 - [pimeo](https://github.com/pimeo)
-  
+
+## GitHub Metrics
+<img align="center" src="/github-metrics.svg" alt="Metrics" width="400">
+
+## DailyDev  
 <a href="https://app.daily.dev/Ayce"><img src="https://api.daily.dev/devcards/6f27abf04ef249b1a106e3ddb7e7cda4.png?r=tkh" width="400" alt="Evan JUGE's Dev Card"/></a>
