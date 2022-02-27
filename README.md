@@ -5,7 +5,7 @@
 
 #### 👷 Check out what I'm currently working on
 
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) -  (2 days ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) -  (3 days ago)
 - [Ayce45/.github](https://github.com/Ayce45/.github) -  (1 week ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 week ago)
 - [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (1 month ago)
@@ -21,7 +21,7 @@
 
 #### ⭐ Recent Stars
 
-- [lowlighter/metrics](https://github.com/lowlighter/metrics) - 📊 An infographics generator with 30&#43; plugins and 200&#43; options to display stats about your GitHub account and render them as SVG, Markdown, PDF or JSON! (5 days ago)
+- [lowlighter/metrics](https://github.com/lowlighter/metrics) - 📊 An infographics generator with 30&#43; plugins and 200&#43; options to display stats about your GitHub account and render them as SVG, Markdown, PDF or JSON! (6 days ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 week ago)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapid UI development. (2 months ago)
 - [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (2 months ago)
