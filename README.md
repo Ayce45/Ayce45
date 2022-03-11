@@ -3,6 +3,8 @@
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
 - ⚡ Fun fact: I'm riding with electric skateboard
 
+[![My Skills](https://skillicons.dev/icons?i=angular,cloudflare,css,dart,docker,figma,git,html,js,jquery,md,mongodb,mysql,nodejs,nuxtjs,php,postgres,py,react,tailwind,ts,vue)](https://skillicons.dev)
+
 #### 👷 Check out what I'm currently working on
 
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) -  (2 weeks ago)
