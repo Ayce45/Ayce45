@@ -8,9 +8,9 @@
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
 - ⚡ Fun fact: I'm riding with electric skateboard
 
-[![My Skills](https://skillicons.dev/icons?i=html,css,js,ts,angular,vue,react,nuxtjs,tailwind,mongodb,mysql)](https://skillicons.dev)
-[![My Skills](https://skillicons.dev/icons?i=nodejs,php,py)](https://skillicons.dev)
-[![My Skills](https://skillicons.dev/icons?i=git,dart,docker,figma)](https://skillicons.dev)
+<div>[![My Skills](https://skillicons.dev/icons?i=html,css,js,ts,angular,vue,react,nuxtjs,tailwind,mongodb,mysql)](https://skillicons.dev)</div>
+<div>[![My Skills](https://skillicons.dev/icons?i=nodejs,php,py)](https://skillicons.dev)</div>
+<div>[![My Skills](https://skillicons.dev/icons?i=git,dart,docker,figma)](https://skillicons.dev)</div>
 
 <details>
   <summary>Check out what I'm currently working on 👷</summary>
@@ -38,11 +38,11 @@
   <summary>Recent Stars ⭐</summary>
   
 
+- [tandpfun/skill-icons](https://github.com/tandpfun/skill-icons) - Showcase your skills on your Github readme or resumé with ease ✨ (today)
 - [lowlighter/metrics](https://github.com/lowlighter/metrics) - 📊 An infographics generator with 30&#43; plugins and 200&#43; options to display stats about your GitHub account and render them as SVG, Markdown, PDF or JSON! (2 weeks ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (3 weeks ago)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) - A utility-first CSS framework for rapid UI development. (3 months ago)
 - [facebook/jest](https://github.com/facebook/jest) - Delightful JavaScript Testing. (3 months ago)
-- [storybookjs/storybook](https://github.com/storybookjs/storybook) - 📓 The UI component explorer. Develop, document, &amp; test React, Vue, Angular, Web Components, Ember, Svelte &amp; more! (3 months ago)
 </details>
 
 <details>
