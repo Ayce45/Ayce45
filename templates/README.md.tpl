@@ -1,34 +1,39 @@
 ## Hey, I'm Ayce!
+[![My Skills](https://skillicons.dev/icons?i=angular,cloudflare,css,dart,docker,figma,git,html,js,jquery,md,mongodb,mysql,nodejs,nuxtjs,php,postgres,py,react,tailwind,ts,vue)](https://skillicons.dev)
 - 🔭 I’m currently working on <a href="https://link-u.nified.com/">Unified</a> and <a href="https://sertizh.fr/">Sertizh</a>
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
 - ⚡ Fun fact: I'm riding with electric skateboard
-
-[![My Skills](https://skillicons.dev/icons?i=angular,cloudflare,css,dart,docker,figma,git,html,js,jquery,md,mongodb,mysql,nodejs,nuxtjs,php,postgres,py,react,tailwind,ts,vue)](https://skillicons.dev)
 
 ![status](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/status/538785123987095556?simple=true)
 ![playing](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/playing/538785123987095556)
 ![vscode](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/vscode/538785123987095556)
 [![spotify](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/spotify/538785123987095556)](https://dev.discordprofiles.me/openspotify/538785123987095556)
 
-#### 👷 Check out what I'm currently working on
+
+
+<details>
+  <summary>Check out what I'm currently working on 👷</summary>
+  
 {{range recentContributions 5}}
 - [{{.Repo.Name}}]({{.Repo.URL}}) - {{.Repo.Description}} ({{humanize .OccurredAt}})
 {{- end}}
+</details>
 
-#### 🌱 My latest projects
+<details>
+  <summary>My latest projects 🌱</summary>
+  
 {{range recentRepos 5}}
 - [{{.Name}}]({{.URL}}) - {{.Description}}
 {{- end}}
+</details>
 
-#### ⭐ Recent Stars
+<details>
+  <summary>Recent Stars ⭐</summary>
+  
 {{range recentStars 5}}
 - [{{.Repo.Name}}]({{.Repo.URL}}) - {{.Repo.Description}} ({{humanize .StarredAt}})
 {{- end}}
-
-#### 👯 Check out some of my recent followers
-{{range followers 5}}
-- [{{.Login}}]({{.URL}})
-{{- end}}
+</details>
 
 <details>
   <summary>GitHub Metrics 🌊</summary>
