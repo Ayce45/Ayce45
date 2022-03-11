@@ -8,7 +8,9 @@
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
 - ⚡ Fun fact: I'm riding with electric skateboard
 
-[![My Skills](https://skillicons.dev/icons?i=angular,css,dart,docker,figma,git,html,js,md,mongodb,mysql,nodejs,nuxtjs,php,py,react,tailwind,ts,vue)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,ts,angular,vue,react,nuxtjs,tailwind,mongodb,mysql)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=nodejs,php,py)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=git,dart,docker,figma)](https://skillicons.dev)
 
 <details>
   <summary>Check out what I'm currently working on 👷</summary>
