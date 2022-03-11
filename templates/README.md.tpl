@@ -18,7 +18,7 @@
   <img src="https://skillicons.dev/icons?i=git,dart,docker,figma" alt="Icon of git, docker and figma">
 </div>
 
-</hr>
+<hr>
 
 <details>
   <summary>Check out what I'm currently working on 👷</summary>
