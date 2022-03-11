@@ -5,6 +5,11 @@
 
 [![My Skills](https://skillicons.dev/icons?i=angular,cloudflare,css,dart,docker,figma,git,html,js,jquery,md,mongodb,mysql,nodejs,nuxtjs,php,postgres,py,react,tailwind,ts,vue)](https://skillicons.dev)
 
+![status](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/status/538785123987095556?simple=true)
+![playing](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/playing/538785123987095556)
+![vscode](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/vscode/538785123987095556)
+[![spotify](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/spotify/538785123987095556)](https://dev.discordprofiles.me/openspotify/538785123987095556)
+
 #### 👷 Check out what I'm currently working on
 
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) -  (2 weeks ago)
@@ -33,8 +38,14 @@
 
 - [pimeo](https://github.com/pimeo)
 
-## GitHub Metrics
-<img align="center" src="/github-metrics.svg" alt="Metrics" width="400">
+<details>
+  <summary>GitHub Metrics 🌊</summary>
+  
+  <img align="center" src="/github-metrics.svg" alt="Metrics" width="400">
+</details>
 
-## DailyDev  
-<a href="https://app.daily.dev/Ayce"><img src="https://api.daily.dev/devcards/6f27abf04ef249b1a106e3ddb7e7cda4.png?r=tkh" width="400" alt="Evan JUGE's Dev Card"/></a>
+<details>
+  <summary>DailyDev 📖</summary>
+  
+  <a href="https://app.daily.dev/Ayce"><img src="https://api.daily.dev/devcards/6f27abf04ef249b1a106e3ddb7e7cda4.png?r=tkh" width="400" alt="Evan JUGE's Dev Card"/></a>
+</details>
