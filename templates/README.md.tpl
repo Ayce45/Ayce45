@@ -5,6 +5,18 @@
 
 [![My Skills](https://skillicons.dev/icons?i=angular,cloudflare,css,dart,docker,figma,git,html,js,jquery,md,mongodb,mysql,nodejs,nuxtjs,php,postgres,py,react,tailwind,ts,vue)](https://skillicons.dev)
 
+![status](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/status/538785123987095556?simple=true)
+![playing](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/playing/538785123987095556)
+![vscode](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/vscode/538785123987095556)
+[![spotify](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/spotify/538785123987095556)](https://dev.discordprofiles.me/openspotify/538785123987095556)
+
+<details>
+  <summary>Github Stats ⚡</summary>
+  
+  <a href="#">![Github stats](https://github-readme-stats.vercel.app/api?username=ayce45&theme=blueberry&count_private=true&hide_border=true&line_height=20)</a>
+  <a href="#">![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ayce45&layout=compact&theme=blueberry&count_private=true&hide_border=true)</a>
+</details>
+
 #### 👷 Check out what I'm currently working on
 {{range recentContributions 5}}
 - [{{.Repo.Name}}]({{.Repo.URL}}) - {{.Repo.Description}} ({{humanize .OccurredAt}})
