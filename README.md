@@ -29,7 +29,7 @@
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 month ago)
 - [Ayce45/.github](https://github.com/Ayce45/.github) - .github template (1 month ago)
 - [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (2 months ago)
-- [Ayce45/surf-report](https://github.com/Ayce45/surf-report) - Surf report based on stormglass API (3 months ago)
+- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (3 months ago)
 </details>
 
 <details>
