@@ -25,22 +25,22 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
+- [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (today)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 month ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 month ago)
 - [Ayce45/.github](https://github.com/Ayce45/.github) - .github template (2 months ago)
 - [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (3 months ago)
-- [dunglas/vaccin.click](https://github.com/dunglas/vaccin.click) - Une extension Firefox pour trouver et réserver automatiquement votre créneau de vaccination COVID-19. (4 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3
 - [Ayce45/.github](https://github.com/Ayce45/.github) - .github template
 - [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge
 - [Ayce45/rock-paper-scissors](https://github.com/Ayce45/rock-paper-scissors) - Simple rock paper scissors in vuejs and tailwindcss
 - [Ayce45/speed-module-stpbb](https://github.com/Ayce45/speed-module-stpbb) - Speed module for stpbb demo
-- [Ayce45/sunnyside-agency-landing-page](https://github.com/Ayce45/sunnyside-agency-landing-page) - Landing page challenge
 </details>
 
 <details>
