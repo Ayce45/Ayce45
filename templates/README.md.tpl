@@ -16,7 +16,7 @@
   <img src="https://skillicons.dev/icons?i=nodejs,php,py,dart" alt="Icon of nodejs, php, py and dart">
 </div>
 <div>
-  <img src="https://skillicons.dev/icons?i=git,dart,docker,figma" alt="Icon of git, docker and figma">
+  <img src="https://skillicons.dev/icons?i=git,docker,figma" alt="Icon of git, docker and figma">
 </div>
 
 <hr>
