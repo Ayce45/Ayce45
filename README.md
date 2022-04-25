@@ -25,9 +25,9 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (4 days ago)
+- [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (5 days ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 month ago)
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 month ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 months ago)
 - [Ayce45/.github](https://github.com/Ayce45/.github) - .github template (2 months ago)
 - [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge (3 months ago)
 </details>
@@ -47,9 +47,9 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [annaig-lescop/commercial-meeting](https://github.com/annaig-lescop/commercial-meeting) - Commercial Meeting Programm (2 weeks ago)
-- [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (2 weeks ago)
-- [mathieucollet/decentralized-steam](https://github.com/mathieucollet/decentralized-steam) -  (4 weeks ago)
+- [annaig-lescop/commercial-meeting](https://github.com/annaig-lescop/commercial-meeting) - Commercial Meeting Programm (3 weeks ago)
+- [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (3 weeks ago)
+- [mathieucollet/decentralized-steam](https://github.com/mathieucollet/decentralized-steam) -  (1 month ago)
 - [ngneat/falso](https://github.com/ngneat/falso) - All the Fake Data for All Your Real Needs 🙂 (1 month ago)
 - [tandpfun/skill-icons](https://github.com/tandpfun/skill-icons) - Showcase your skills on your Github readme or resumé with ease ✨ (1 month ago)
 </details>
