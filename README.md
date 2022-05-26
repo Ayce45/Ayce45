@@ -47,7 +47,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (1 week ago)
+- [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (2 weeks ago)
 - [annaig-lescop/commercial-meeting](https://github.com/annaig-lescop/commercial-meeting) - Commercial Meeting Programm (1 month ago)
 - [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (1 month ago)
 - [mathieucollet/decentralized-steam](https://github.com/mathieucollet/decentralized-steam) -  (2 months ago)
