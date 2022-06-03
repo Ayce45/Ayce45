@@ -48,8 +48,8 @@
   
 
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (3 weeks ago)
-- [annaig-lescop/commercial-meeting](https://github.com/annaig-lescop/commercial-meeting) - Commercial Meeting Programm (1 month ago)
-- [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (1 month ago)
+- [annaig-lescop/commercial-meeting](https://github.com/annaig-lescop/commercial-meeting) - Commercial Meeting Programm (2 months ago)
+- [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (2 months ago)
 - [mathieucollet/decentralized-steam](https://github.com/mathieucollet/decentralized-steam) -  (2 months ago)
 - [ngneat/falso](https://github.com/ngneat/falso) - All the Fake Data for All Your Real Needs 🙂 (2 months ago)
 </details>
