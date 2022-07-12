@@ -47,11 +47,11 @@
   <summary>Recent Stars ⭐</summary>
   
 
+- [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (today)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (2 months ago)
 - [annaig-lescop/commercial-meeting](https://github.com/annaig-lescop/commercial-meeting) - Commercial Meeting Programm (3 months ago)
 - [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (3 months ago)
 - [mathieucollet/decentralized-steam](https://github.com/mathieucollet/decentralized-steam) -  (3 months ago)
-- [ngneat/falso](https://github.com/ngneat/falso) - All the Fake Data for All Your Real Needs 🙂 (3 months ago)
 </details>
 
 <details>
