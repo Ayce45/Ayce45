@@ -25,22 +25,22 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (today)
 - [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) -  (4 days ago)
 - [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) -  (1 month ago)
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (2 months ago)
 - [monkeytypegame/monkeytype](https://github.com/monkeytypegame/monkeytype) - The most customizable typing website with a minimalistic design and a ton of features. Test yourself in various modes, track your progress and improve your speed. (2 months ago)
-- [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (4 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - 
 - [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) - 
 - [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) - 
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3
 - [Ayce45/.github](https://github.com/Ayce45/.github) - .github template
-- [Ayce45/bookmark-landing-page](https://github.com/Ayce45/bookmark-landing-page) - Landing page challenge
 </details>
 
 <details>
