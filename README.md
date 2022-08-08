@@ -25,7 +25,7 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (2 days ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (today)
 - [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) -  (6 days ago)
 - [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) -  (1 month ago)
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (2 months ago)
