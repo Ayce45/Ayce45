@@ -25,7 +25,7 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (2 days ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (3 days ago)
 - [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) -  (1 week ago)
 - [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) -  (1 month ago)
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (2 months ago)
@@ -47,7 +47,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (4 weeks ago)
+- [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (1 month ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (3 months ago)
 - [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (4 months ago)
 - [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (4 months ago)
