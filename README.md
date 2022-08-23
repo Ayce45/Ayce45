@@ -26,7 +26,7 @@
   
 
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (5 days ago)
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (6 days ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog (6 days ago)
 - [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) -  (3 weeks ago)
 - [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) -  (2 months ago)
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (2 months ago)
@@ -36,7 +36,7 @@
   <summary>My latest projects 🌱</summary>
   
 
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - 
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog
 - [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) - 
 - [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) - 
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3
