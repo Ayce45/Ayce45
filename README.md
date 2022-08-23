@@ -25,9 +25,9 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (4 days ago)
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (5 days ago)
-- [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) -  (2 weeks ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (5 days ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) -  (6 days ago)
+- [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) -  (3 weeks ago)
 - [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) -  (2 months ago)
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (2 months ago)
 </details>
@@ -51,7 +51,7 @@
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (3 months ago)
 - [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (4 months ago)
 - [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (4 months ago)
-- [mathieucollet/decentralized-steam](https://github.com/mathieucollet/decentralized-steam) -  (4 months ago)
+- [mathieucollet/decentralized-steam](https://github.com/mathieucollet/decentralized-steam) -  (5 months ago)
 </details>
 
 <details>
