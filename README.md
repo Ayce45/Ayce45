@@ -47,7 +47,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (1 month ago)
+- [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (2 months ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (4 months ago)
 - [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (5 months ago)
 - [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (5 months ago)
