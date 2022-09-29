@@ -25,22 +25,22 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
+- [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) -  (today)
+- [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) -  (today)
+- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) -  (today)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (5 days ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog (1 month ago)
-- [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) -  (1 month ago)
-- [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) -  (3 months ago)
-- [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (3 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - 
+- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - 
+- [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - 
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog
 - [Ayce45/gitpod-laravel](https://github.com/Ayce45/gitpod-laravel) - 
-- [Ayce45/introduction-to-github](https://github.com/Ayce45/introduction-to-github) - 
-- [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3
-- [Ayce45/.github](https://github.com/Ayce45/.github) - .github template
 </details>
 
 <details>
