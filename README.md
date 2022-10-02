@@ -25,9 +25,9 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component (2 days ago)
-- [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (2 days ago)
-- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component (2 days ago)
+- [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component (3 days ago)
+- [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (3 days ago)
+- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component (3 days ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 week ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog (1 month ago)
 </details>
@@ -47,7 +47,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is where developers grow together 👩🏽‍💻 👨‍💻 (2 days ago)
+- [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is where developers grow together 👩🏽‍💻 👨‍💻 (3 days ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (2 months ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (4 months ago)
 - [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (6 months ago)
