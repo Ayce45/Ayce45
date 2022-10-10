@@ -48,7 +48,7 @@
   
 
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is where developers grow together 👩🏽‍💻 👨‍💻 (1 week ago)
-- [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (2 months ago)
+- [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (3 months ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (5 months ago)
 - [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (6 months ago)
 - [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (6 months ago)
