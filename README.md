@@ -40,7 +40,7 @@
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component
 - [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component
 - [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS
 </details>
 
 <details>
