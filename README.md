@@ -25,11 +25,11 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (4 days ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (5 days ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (3 weeks ago)
-- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component (4 weeks ago)
-- [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component (4 weeks ago)
-- [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (4 weeks ago)
+- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component (1 month ago)
+- [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component (1 month ago)
+- [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (1 month ago)
 </details>
 
 <details>
@@ -47,7 +47,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is where developers grow together 👩🏽‍💻 👨‍💻 (4 weeks ago)
+- [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is where developers grow together 👩🏽‍💻 👨‍💻 (1 month ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (3 months ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (5 months ago)
 - [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (6 months ago)
