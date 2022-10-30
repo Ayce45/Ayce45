@@ -25,8 +25,8 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (5 days ago)
-- [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (3 weeks ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (6 days ago)
+- [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (4 weeks ago)
 - [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component (1 month ago)
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component (1 month ago)
 - [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (1 month ago)
