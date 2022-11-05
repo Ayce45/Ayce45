@@ -25,22 +25,22 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
+- [Ayce45/ferway-trello](https://github.com/Ayce45/ferway-trello) -  (today)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 week ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (1 month ago)
 - [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component (1 month ago)
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component (1 month ago)
-- [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (1 month ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/ferway-trello](https://github.com/Ayce45/ferway-trello) - 
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component
 - [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component
 - [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS
 </details>
 
 <details>
