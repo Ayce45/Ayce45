@@ -25,7 +25,7 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/ferway-trello](https://github.com/Ayce45/ferway-trello) -  (today)
+- [Ayce45/ferway-trello](https://github.com/Ayce45/ferway-trello) -  (1 day ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 week ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (1 month ago)
 - [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component (1 month ago)
