@@ -26,7 +26,7 @@
   
 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (today)
-- [Ayce45/nextjs-trello](https://github.com/Ayce45/nextjs-trello) -  (2 days ago)
+- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) -  (2 days ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 weeks ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (1 month ago)
 - [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (1 month ago)
@@ -37,7 +37,7 @@
   
 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api
-- [Ayce45/nextjs-trello](https://github.com/Ayce45/nextjs-trello) - 
+- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - 
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component
 - [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component
