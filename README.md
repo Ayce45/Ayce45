@@ -25,8 +25,8 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (today)
-- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) -  (2 days ago)
+- [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (1 day ago)
+- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) -  (3 days ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 weeks ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (1 month ago)
 - [Ayce45/product-preview-card-component](https://github.com/Ayce45/product-preview-card-component) - Product preview card component (1 month ago)
