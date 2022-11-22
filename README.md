@@ -25,8 +25,8 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
-- [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (today)
-- [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (5 days ago)
+- [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (1 day ago)
+- [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (6 days ago)
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) -  (1 week ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (4 weeks ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (1 month ago)
