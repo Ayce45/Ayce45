@@ -26,7 +26,7 @@
   
 
 - [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (1 week ago)
-- [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (1 week ago)
+- [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (2 weeks ago)
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) -  (2 weeks ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 month ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (1 month ago)
@@ -50,8 +50,8 @@
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is where developers grow together 👩🏽‍💻 👨‍💻 (2 months ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (4 months ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (6 months ago)
-- [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (7 months ago)
-- [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (7 months ago)
+- [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (8 months ago)
+- [sertizh/clubsystem](https://github.com/sertizh/clubsystem) - Club Management System ... (8 months ago)
 </details>
 
 <details>
