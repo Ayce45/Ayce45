@@ -27,7 +27,7 @@
 
 - [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (1 month ago)
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (1 month ago)
-- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) -  (1 month ago)
+- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone (1 month ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 months ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (2 months ago)
 </details>
@@ -37,7 +37,7 @@
   
 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api
-- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - 
+- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component
 - [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component
