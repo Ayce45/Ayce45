@@ -25,10 +25,10 @@
   <summary>Check out what I'm currently working on 👷</summary>
   
 
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (today)
 - [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (2 months ago)
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (3 months ago)
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone (3 months ago)
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 months ago)
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component (4 months ago)
 </details>
 
