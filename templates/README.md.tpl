@@ -15,10 +15,12 @@
   <img src="https://skillicons.dev/icons?i=git,docker,figma" alt="Icon of git, docker and figma">
 </div>
 
+[![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
+
 <hr>
 
 <details>
-  <summary>Check out what I'm currently working on 👷</summary>
+  <summary>I'm currently working on 👷</summary>
   
 {{range recentContributions 5}}
 - [{{.Repo.Name}}]({{.Repo.URL}}) - {{.Repo.Description}} ({{humanize .OccurredAt}})
