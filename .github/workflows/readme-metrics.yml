@@ -47,7 +47,7 @@ jobs:
           plugin_notable: yes
           plugin_notable_from: organization
           plugin_notable_types: commit
-          plugin_projects: yes
+          plugin_projects: no
           plugin_projects_limit: 4
           plugin_repositories: 100
           plugin_repositories_affiliations: owner
@@ -57,7 +57,7 @@ jobs:
           plugin_starlists_limit_languages: 8
           plugin_starlists_limit_repositories: 2
           plugin_starlists_shuffle_repositories: yes
-          plugin_topics: yes
+          plugin_topics: no
           plugin_topics_limit: 15
           plugin_topics_mode: starred
           plugin_topics_sort: stars
