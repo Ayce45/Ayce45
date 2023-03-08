@@ -1,6 +1,5 @@
 ## Hey, I'm Ayce!
 ![views](https://komarev.com/ghpvc/?username=Ayce45)
-[![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
 
 - 🔭 I’m currently working at <a href="https://yogosha.com/">Yogosha</a>
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
