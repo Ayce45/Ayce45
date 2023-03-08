@@ -1,9 +1,6 @@
 ## Hey, I'm Ayce!
 ![views](https://komarev.com/ghpvc/?username=Ayce45)
-![status](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/status/538785123987095556?simple=true)
-![playing](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/playing/538785123987095556)
-![vscode](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/vscode/538785123987095556)
-[![spotify](https://nocache.advaith.workers.dev?url=https://img.shields.io/endpoint?url=https://dev.discordprofiles.me/api/badge/spotify/538785123987095556)](https://dev.discordprofiles.me/openspotify/538785123987095556)
+[![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
 
 - 🔭 I’m currently working at <a href="https://yogosha.com/">Yogosha</a>
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
