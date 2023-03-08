@@ -1,5 +1,5 @@
 ## Hey, I'm Ayce!
-![views](https://komarev.com/ghpvc/?username=Ayce45?style=for-the-badge)
+![views](https://komarev.com/ghpvc/?username=Ayce45&style=for-the-badge)
 
 - 🔭 I’m currently working at <a href="https://yogosha.com/">Yogosha</a>
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
@@ -15,10 +15,12 @@
   <img src="https://skillicons.dev/icons?i=git,docker,figma" alt="Icon of git, docker and figma">
 </div>
 
+[![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
+
 <hr>
 
 <details>
-  <summary>Check out what I'm currently working on 👷</summary>
+  <summary>I'm currently working on 👷</summary>
   
 
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 weeks ago)
