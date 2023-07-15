@@ -29,7 +29,7 @@
   
 
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (2 months ago)
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (4 months ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (5 months ago)
 - [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (7 months ago)
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (8 months ago)
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone (8 months ago)
