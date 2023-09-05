@@ -28,22 +28,22 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (today)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (3 months ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (6 months ago)
 - [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (9 months ago)
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api (9 months ago)
-- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone (9 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) - 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component
-- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component
 </details>
 
 <details>
