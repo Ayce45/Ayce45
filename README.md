@@ -28,7 +28,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (4 days ago)
+- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (5 days ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (4 months ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (6 months ago)
 - [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (9 months ago)
@@ -50,7 +50,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (7 months ago)
+- [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (8 months ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (11 months ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (1 year ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (1 year ago)
