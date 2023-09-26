@@ -28,7 +28,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (2 weeks ago)
+- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (3 weeks ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (4 months ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (7 months ago)
 - [Ayce45/flutter-business-card](https://github.com/Ayce45/flutter-business-card) - Business card in flutter (10 months ago)
@@ -54,7 +54,7 @@
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (1 year ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Smart, Fast and Extensible Build System (1 year ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (1 year ago)
-- [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (1 year ago)
+- [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (2 years ago)
 </details>
 
 <details>
