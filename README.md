@@ -28,7 +28,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (3 months ago)
+- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (4 months ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (7 months ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (10 months ago)
 </details>
@@ -50,7 +50,7 @@
 
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (11 months ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (1 year ago)
-- [nrwl/nx](https://github.com/nrwl/nx) - Smart Monorepos · Fast CI (1 year ago)
+- [nrwl/nx](https://github.com/nrwl/nx) - Smart Monorepos · Fast CI (2 years ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (2 years ago)
 - [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (2 years ago)
 </details>
