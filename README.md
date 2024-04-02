@@ -28,8 +28,8 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (6 days ago)
-- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (6 months ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (1 week ago)
+- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (7 months ago)
 </details>
 
 <details>
