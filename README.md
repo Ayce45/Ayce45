@@ -28,7 +28,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (1 week ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (2 weeks ago)
 - [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (7 months ago)
 </details>
 
