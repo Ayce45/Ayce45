@@ -29,7 +29,7 @@
   
 
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (1 month ago)
-- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (7 months ago)
+- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (8 months ago)
 </details>
 
 <details>
