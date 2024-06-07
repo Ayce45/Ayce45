@@ -30,18 +30,17 @@
 
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 week ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (2 months ago)
-- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) -  (9 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
-- [Ayce45/pwa-cache](https://github.com/Ayce45/pwa-cache) - 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component
 - [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component
+- [Ayce45/qr-code-component](https://github.com/Ayce45/qr-code-component) - QR code component
 </details>
 
 <details>
