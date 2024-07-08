@@ -30,7 +30,7 @@
 
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 month ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (3 months ago)
-- [Ayce45/SpotiSkills](https://github.com/Ayce45/SpotiSkills) -  (10 months ago)
+- [Ayce45/SpotiSkills](https://github.com/Ayce45/SpotiSkills) -  (11 months ago)
 </details>
 
 <details>
