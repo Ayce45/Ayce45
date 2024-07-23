@@ -28,7 +28,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 week ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 weeks ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (3 months ago)
 - [Ayce45/SpotiSkills](https://github.com/Ayce45/SpotiSkills) -  (11 months ago)
 </details>
