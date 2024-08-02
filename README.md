@@ -28,6 +28,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (today)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 week ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (4 months ago)
 - [Ayce45/SpotiSkills](https://github.com/Ayce45/SpotiSkills) -  (11 months ago)
@@ -37,11 +38,11 @@
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API
 - [Ayce45/SpotiSkills](https://github.com/Ayce45/SpotiSkills) - 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone
 - [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component
-- [Ayce45/profile-card-component](https://github.com/Ayce45/profile-card-component) - Profile card component
 </details>
 
 <details>
