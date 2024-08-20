@@ -37,11 +37,11 @@
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) - 
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API
 - [Ayce45/SpotiSkills](https://github.com/Ayce45/SpotiSkills) - 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api
 - [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone
-- [Ayce45/expenses-chart-component](https://github.com/Ayce45/expenses-chart-component) - Expenses chart component
 </details>
 
 <details>
