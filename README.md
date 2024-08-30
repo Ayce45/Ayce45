@@ -29,7 +29,7 @@
   
 
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) -  (1 week ago)
-- [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (3 weeks ago)
+- [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (4 weeks ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 month ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (5 months ago)
 </details>
