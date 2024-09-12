@@ -29,6 +29,7 @@
   
 
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (today)
+- [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) -  (today)
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) -  (3 weeks ago)
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (1 month ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (5 months ago)
@@ -38,11 +39,11 @@
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) - 
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) - 
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API
 - [Ayce45/SpotiSkills](https://github.com/Ayce45/SpotiSkills) - 
 - [Ayce45/next-iceandfire](https://github.com/Ayce45/next-iceandfire) - App in react with the ice and fire api
-- [Ayce45/next-trello](https://github.com/Ayce45/next-trello) - NextJS Trello Clone
 </details>
 
 <details>
