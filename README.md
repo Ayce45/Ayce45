@@ -32,7 +32,7 @@
 - [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) -  (1 week ago)
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) -  (1 month ago)
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (1 month ago)
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (5 months ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (6 months ago)
 </details>
 
 <details>
