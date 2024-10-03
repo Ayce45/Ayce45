@@ -28,8 +28,8 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 weeks ago)
-- [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) -  (2 weeks ago)
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 weeks ago)
+- [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) -  (3 weeks ago)
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) -  (1 month ago)
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (2 months ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (6 months ago)
