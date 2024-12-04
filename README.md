@@ -39,7 +39,7 @@
   <summary>My latest projects 🌱</summary>
   
 
-- [Ayce45/formation-ts](https://github.com/Ayce45/formation-ts) - 
+- [Ayce45/formation-ts](https://github.com/Ayce45/formation-ts) - Typescript pokemon battle simulator
 - [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) - Offline custom page using precache static assets
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) - Pomodoro app in alpinejs
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API
