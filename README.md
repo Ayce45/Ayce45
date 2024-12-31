@@ -28,11 +28,11 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 week ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 months ago)
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (2 months ago)
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) - Pomodoro app in alpinejs (2 months ago)
 - [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) - Offline custom page using precache static assets (3 months ago)
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (9 months ago)
 </details>
 
 <details>
