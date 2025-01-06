@@ -1,5 +1,4 @@
 ## Hey, I'm Ayce!
-![views](https://komarev.com/ghpvc/?username=Ayce45&style=for-the-badge)
 
 - 🔭 I’m currently working at <a href="https://www.digitaleo.com/">Digitaleo</a>
 - 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
