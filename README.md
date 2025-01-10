@@ -31,7 +31,7 @@
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 months ago)
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (3 months ago)
 - [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) - Pomodoro app in alpinejs (3 months ago)
-- [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) - Offline custom page using precache static assets (3 months ago)
+- [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) - Offline custom page using precache static assets (4 months ago)
 </details>
 
 <details>
