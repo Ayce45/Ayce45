@@ -27,22 +27,22 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - My clone repository (today)
 - [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - My clone repository (5 days ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (4 weeks ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 months ago)
 - [Ayce45/virtual-aquaruim](https://github.com/Ayce45/virtual-aquaruim) - Virtual Aquarium in VueJS Composition API (3 months ago)
-- [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) - Pomodoro app in alpinejs (3 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - My clone repository
 - [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - My clone repository
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github
 - [Ayce45/formation-ts](https://github.com/Ayce45/formation-ts) - Typescript pokemon battle simulator
 - [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) - Offline custom page using precache static assets
-- [Ayce45/pomodoroapp](https://github.com/Ayce45/pomodoroapp) - Pomodoro app in alpinejs
 </details>
 
 <details>
