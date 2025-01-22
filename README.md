@@ -28,21 +28,21 @@
   
 
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (today)
-- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - My clone repository (1 day ago)
-- [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - My clone repository (6 days ago)
+- [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (today)
+- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting. (1 day ago)
+- [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - Create a site or blog from your GitHub repositories with GitHub Pages. (6 days ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 month ago)
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (3 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
-- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - My clone repository
-- [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - My clone repository
+- [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow.
+- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting.
+- [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - Create a site or blog from your GitHub repositories with GitHub Pages.
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github
 - [Ayce45/formation-ts](https://github.com/Ayce45/formation-ts) - Typescript pokemon battle simulator
-- [Ayce45/custom-offline-page](https://github.com/Ayce45/custom-offline-page) - Offline custom page using precache static assets
 </details>
 
 <details>
