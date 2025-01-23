@@ -27,10 +27,10 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (today)
-- [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (today)
-- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting. (1 day ago)
-- [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - Create a site or blog from your GitHub repositories with GitHub Pages. (6 days ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (1 day ago)
+- [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (1 day ago)
+- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting. (2 days ago)
+- [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - Create a site or blog from your GitHub repositories with GitHub Pages. (1 week ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 month ago)
 </details>
 
