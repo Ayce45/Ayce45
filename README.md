@@ -27,22 +27,22 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects. (today)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (1 day ago)
 - [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (1 day ago)
 - [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting. (2 days ago)
 - [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - Create a site or blog from your GitHub repositories with GitHub Pages. (1 week ago)
-- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 month ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects.
 - [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow.
 - [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting.
 - [Ayce45/skills-github-pages](https://github.com/Ayce45/skills-github-pages) - Create a site or blog from your GitHub repositories with GitHub Pages.
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github
-- [Ayce45/formation-ts](https://github.com/Ayce45/formation-ts) - Typescript pokemon battle simulator
 </details>
 
 <details>
