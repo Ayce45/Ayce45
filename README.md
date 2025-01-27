@@ -27,11 +27,11 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub. (2 days ago)
-- [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects. (3 days ago)
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (4 days ago)
-- [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (4 days ago)
-- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting. (5 days ago)
+- [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub. (3 days ago)
+- [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects. (4 days ago)
+- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (5 days ago)
+- [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (5 days ago)
+- [Ayce45/skills-communicate-using-markdown](https://github.com/Ayce45/skills-communicate-using-markdown) - Organize ideas and collaborate using Markdown, a lightweight language for text formatting. (6 days ago)
 </details>
 
 <details>
