@@ -49,11 +49,11 @@
   <summary>Recent Stars ⭐</summary>
   
 
+- [obadmatar/remove-linkedin-connection](https://github.com/obadmatar/remove-linkedin-connection) - Remove Linkedin connection with single click (today)
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (2 years ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (2 years ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Build system, optimized for monorepos, with plugins for popular frameworks and tools and advanced CI capabilities including caching and distribution. (2 years ago)
 - [jacebrowning/memegen](https://github.com/jacebrowning/memegen) - The free and open source API to generate memes. (2 years ago)
-- [sertizh/commercial-meeting](https://github.com/sertizh/commercial-meeting) - Commercial Meeting Programm (2 years ago)
 </details>
 
 <details>
