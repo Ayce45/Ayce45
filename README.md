@@ -27,7 +27,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (1 day ago)
+- [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (today)
 - [Ayce45/skills-publish-packages](https://github.com/Ayce45/skills-publish-packages) - Use GitHub Actions to publish your project to a Docker image. (2 days ago)
 - [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub. (5 days ago)
 - [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects. (6 days ago)
