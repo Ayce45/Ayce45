@@ -27,10 +27,10 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (today)
-- [Ayce45/skills-publish-packages](https://github.com/Ayce45/skills-publish-packages) - Use GitHub Actions to publish your project to a Docker image. (2 days ago)
-- [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub. (5 days ago)
-- [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects. (6 days ago)
+- [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (1 day ago)
+- [Ayce45/skills-publish-packages](https://github.com/Ayce45/skills-publish-packages) - Use GitHub Actions to publish your project to a Docker image. (3 days ago)
+- [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub. (6 days ago)
+- [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects. (1 week ago)
 - [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (1 week ago)
 </details>
 
@@ -49,7 +49,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [obadmatar/remove-linkedin-connection](https://github.com/obadmatar/remove-linkedin-connection) - Remove Linkedin connection with single click (2 days ago)
+- [obadmatar/remove-linkedin-connection](https://github.com/obadmatar/remove-linkedin-connection) - Remove Linkedin connection with single click (3 days ago)
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (2 years ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (2 years ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Build system, optimized for monorepos, with plugins for popular frameworks and tools and advanced CI capabilities including caching and distribution. (2 years ago)
