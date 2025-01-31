@@ -28,10 +28,10 @@
   
 
 - [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (today)
+- [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (today)
 - [Ayce45/skills-publish-packages](https://github.com/Ayce45/skills-publish-packages) - Use GitHub Actions to publish your project to a Docker image. (4 days ago)
 - [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub. (1 week ago)
 - [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects. (1 week ago)
-- [Ayce45/blog.evanjuge.fr](https://github.com/Ayce45/blog.evanjuge.fr) - My blog - Next.js &amp; Sanity CMS (1 week ago)
 </details>
 
 <details>
