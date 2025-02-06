@@ -27,8 +27,8 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code. (today)
 - [skills/secure-code-game](https://github.com/skills/secure-code-game) - A GitHub Security Lab initiative, providing an in-repo learning experience, where learners secure intentionally vulnerable code. (2 days ago)
-- [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code. (2 days ago)
 - [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (6 days ago)
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (6 days ago)
 - [Ayce45/skills-publish-packages](https://github.com/Ayce45/skills-publish-packages) - Use GitHub Actions to publish your project to a Docker image. (1 week ago)
