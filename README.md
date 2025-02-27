@@ -27,7 +27,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code. (5 days ago)
+- [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code. (6 days ago)
 - [skills/secure-code-game](https://github.com/skills/secure-code-game) - A GitHub Security Lab initiative, providing an in-repo learning experience, where learners secure intentionally vulnerable code. (3 weeks ago)
 - [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (3 weeks ago)
 - [Ayce45/decentralize-steam](https://github.com/Ayce45/decentralize-steam) - An Decentralize Steam App in Web3 (3 weeks ago)
@@ -49,7 +49,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (2 days ago)
+- [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (3 days ago)
 - [obadmatar/remove-linkedin-connection](https://github.com/obadmatar/remove-linkedin-connection) - Remove Linkedin connection with single click (1 month ago)
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (2 years ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (2 years ago)
