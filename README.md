@@ -27,22 +27,22 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them. (today)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 week ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 weeks ago)
 - [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code. (3 weeks ago)
 - [skills/secure-code-game](https://github.com/skills/secure-code-game) - A GitHub Security Lab initiative, providing an in-repo learning experience, where learners secure intentionally vulnerable code. (1 month ago)
-- [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code (1 month ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them.
 - [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code.
 - [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code
 - [Ayce45/skills-publish-packages](https://github.com/Ayce45/skills-publish-packages) - Use GitHub Actions to publish your project to a Docker image.
 - [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub.
-- [Ayce45/skills-test-with-actions](https://github.com/Ayce45/skills-test-with-actions) - Create workflows that enable you to use Continuous Integration (CI) for your projects.
 </details>
 
 <details>
