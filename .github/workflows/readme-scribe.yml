@@ -2,7 +2,7 @@ name: Update README
 
 on:
   push:
-  schedule: [{cron: "0 * * * *"}]
+  schedule: [{cron: "0 0 * * *"}]
 
 jobs:
   markscribe:
