@@ -38,11 +38,11 @@
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/skill-setup-nuxt-base](https://github.com/Ayce45/skill-setup-nuxt-base) - The base image for the Nuxt
 - [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them.
 - [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code.
 - [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code
 - [Ayce45/skills-publish-packages](https://github.com/Ayce45/skills-publish-packages) - Use GitHub Actions to publish your project to a Docker image.
-- [Ayce45/skills-review-pull-requests](https://github.com/Ayce45/skills-review-pull-requests) - Collaborate and work together on GitHub.
 </details>
 
 <details>
