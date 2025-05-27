@@ -27,11 +27,11 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land (1 week ago)
 - [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them. (2 months ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (2 months ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 months ago)
 - [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code. (3 months ago)
-- [skills/secure-code-game](https://github.com/skills/secure-code-game) - A GitHub Security Lab initiative, providing an in-repo learning experience, where learners secure intentionally vulnerable code. (3 months ago)
 </details>
 
 <details>
@@ -40,9 +40,9 @@
 
 - [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - 
 - [Ayce45/skill-setup-nuxt-base](https://github.com/Ayce45/skill-setup-nuxt-base) - The base image for the Nuxt
+- [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land
 - [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them.
 - [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code.
-- [Ayce45/skills-copilot-codespaces-vscode](https://github.com/Ayce45/skills-copilot-codespaces-vscode) - Develop with AI-powered code suggestions using GitHub Copilot and VS Code
 </details>
 
 <details>
@@ -50,7 +50,7 @@
   
 
 - [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (3 months ago)
-- [obadmatar/remove-linkedin-connection](https://github.com/obadmatar/remove-linkedin-connection) - Remove Linkedin connection with single click (3 months ago)
+- [obadmatar/remove-linkedin-connection](https://github.com/obadmatar/remove-linkedin-connection) - Remove Linkedin connection with single click (4 months ago)
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (2 years ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (2 years ago)
 - [nrwl/nx](https://github.com/nrwl/nx) - Build system, optimized for monorepos, with AI-powered architectural awareness and advanced CI capabilities. (2 years ago)
