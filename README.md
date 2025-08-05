@@ -27,11 +27,11 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (6 days ago)
 - [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - Clean dom render with vanillaJS (3 weeks ago)
 - [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land (2 months ago)
 - [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them. (4 months ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (4 months ago)
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (5 months ago)
 </details>
 
 <details>
