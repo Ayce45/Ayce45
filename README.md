@@ -49,7 +49,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (5 months ago)
+- [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (6 months ago)
 - [bamatar/unlinkedin](https://github.com/bamatar/unlinkedin) - One-click removal of LinkedIn connections (6 months ago)
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (2 years ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (2 years ago)
