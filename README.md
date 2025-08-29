@@ -27,7 +27,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (4 weeks ago)
+- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 month ago)
 - [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - Clean dom render with vanillaJS (1 month ago)
 - [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land (3 months ago)
 - [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them. (5 months ago)
@@ -53,7 +53,7 @@
 - [bamatar/unlinkedin](https://github.com/bamatar/unlinkedin) - One-click removal of LinkedIn connections (7 months ago)
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (2 years ago)
 - [dailydotdev/daily](https://github.com/dailydotdev/daily) - daily.dev is a professional network for developers to learn, collaborate, and grow together 👩🏽‍💻 👨‍💻 (2 years ago)
-- [nrwl/nx](https://github.com/nrwl/nx) - An AI-first build platform that connects everything from your editor to CI. Helping you deliver fast, without breaking things. (3 years ago)
+- [nrwl/nx](https://github.com/nrwl/nx) - Get to green PRs in half the time. Nx optimizes your builds, scales your CI, and fixes failed PRs. Built for developers and AI agents. (3 years ago)
 </details>
 
 <details>
