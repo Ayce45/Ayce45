@@ -28,7 +28,7 @@
   
 
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (2 months ago)
-- [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - Clean dom render with vanillaJS (2 months ago)
+- [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - Clean dom render with vanillaJS (3 months ago)
 - [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land (4 months ago)
 - [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them. (6 months ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (7 months ago)
@@ -38,18 +38,18 @@
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/mustache-inline-javascript-typescript-highlighter](https://github.com/Ayce45/mustache-inline-javascript-typescript-highlighter) - Syntax highlighting for Mustache inside JavaScript/TypeScript strings
 - [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - Clean dom render with vanillaJS
 - [Ayce45/skill-setup-nuxt-base](https://github.com/Ayce45/skill-setup-nuxt-base) - The base image for the Nuxt
 - [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land
 - [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them.
-- [Ayce45/skills-secure-code-game](https://github.com/Ayce45/skills-secure-code-game) - Spot and fix vulnerable patterns in real-world code, build security into your workflows, and understand security alerts generated against your code.
 </details>
 
 <details>
   <summary>Recent Stars ⭐</summary>
   
 
-- [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (4 days ago)
+- [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (5 days ago)
 - [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (7 months ago)
 - [bamatar/unlinkedin](https://github.com/bamatar/unlinkedin) - One-click removal of LinkedIn connections (8 months ago)
 - [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Unofficial GoPro WiFi API Documentation - HTTP GET requests for commands, status, livestreaming and media query. (2 years ago)
