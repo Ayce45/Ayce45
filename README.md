@@ -49,7 +49,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [BriacDelaigue/shadcn-icon-picker](https://github.com/BriacDelaigue/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (3 weeks ago)
+- [BriacDelaigue/shadcn-icon-picker](https://github.com/BriacDelaigue/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (4 weeks ago)
 - [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (1 month ago)
 - [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (8 months ago)
 - [bamatar/unlinkedin](https://github.com/bamatar/unlinkedin) - One-click removal of LinkedIn connections (9 months ago)
