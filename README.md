@@ -30,8 +30,8 @@
 - [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (2 weeks ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (3 months ago)
 - [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - Clean dom render with vanillaJS (4 months ago)
-- [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land (5 months ago)
-- [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them. (7 months ago)
+- [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land (6 months ago)
+- [Ayce45/skills-resolve-merge-conflicts](https://github.com/Ayce45/skills-resolve-merge-conflicts) - Learn why conflicts happen and how to resolve them. (8 months ago)
 </details>
 
 <details>
