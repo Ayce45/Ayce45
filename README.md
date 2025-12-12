@@ -39,10 +39,10 @@
   
 
 - [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper
+- [Ayce45/wsfr2025-solidstart-base](https://github.com/Ayce45/wsfr2025-solidstart-base) - 
+- [Ayce45/wsfr2025-elysia-base](https://github.com/Ayce45/wsfr2025-elysia-base) - 
+- [Ayce45/wsfr2025-solidjs-dev](https://github.com/Ayce45/wsfr2025-solidjs-dev) - 
 - [Ayce45/mustache-inline-javascript-typescript-highlighter](https://github.com/Ayce45/mustache-inline-javascript-typescript-highlighter) - Syntax highlighting for Mustache inside JavaScript/TypeScript strings
-- [Ayce45/bug-free-octo-fortnight](https://github.com/Ayce45/bug-free-octo-fortnight) - Clean dom render with vanillaJS
-- [Ayce45/skill-setup-nuxt-base](https://github.com/Ayce45/skill-setup-nuxt-base) - The base image for the Nuxt
-- [Ayce45/taiwan-the-lucky-land](https://github.com/Ayce45/taiwan-the-lucky-land) - Nuxt full-stack app for taiwan the lucky land
 </details>
 
 <details>
