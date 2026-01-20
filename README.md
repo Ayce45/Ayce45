@@ -27,7 +27,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [dracula/beeper](https://github.com/dracula/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (3 days ago)
+- [dracula/beeper](https://github.com/dracula/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (4 days ago)
 - [Stunkymonkey/nautilus-open-any-terminal](https://github.com/Stunkymonkey/nautilus-open-any-terminal) -  (1 week ago)
 - [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (1 week ago)
 - [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (2 months ago)
@@ -52,7 +52,7 @@
 - [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (1 month ago)
 - [briacdev/shadcn-icon-picker](https://github.com/briacdev/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (3 months ago)
 - [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (3 months ago)
-- [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (10 months ago)
+- [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (11 months ago)
 - [bamatar/unlinkedin](https://github.com/bamatar/unlinkedin) - One-click removal of LinkedIn connections (11 months ago)
 </details>
 
