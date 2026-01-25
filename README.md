@@ -28,7 +28,7 @@
   
 
 - [dracula/beeper](https://github.com/dracula/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (1 week ago)
-- [Stunkymonkey/nautilus-open-any-terminal](https://github.com/Stunkymonkey/nautilus-open-any-terminal) -  (1 week ago)
+- [Stunkymonkey/nautilus-open-any-terminal](https://github.com/Stunkymonkey/nautilus-open-any-terminal) -  (2 weeks ago)
 - [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (2 weeks ago)
 - [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (2 months ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (5 months ago)
