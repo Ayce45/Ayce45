@@ -30,22 +30,22 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 day ago)
+- [Ayce45/geo.viewer](https://github.com/Ayce45/geo.viewer) - Drop a JSON file and instantly visualize thousands of store locations on an interactive clustered map. Built with Leaflet &amp; MarkerCluster. (1 day ago)
 - [Ayce45/postman](https://github.com/Ayce45/postman) - 🧛🏻‍♂️ Dark theme for Postman (1 week ago)
-- [dracula/beeper](https://github.com/dracula/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (2 weeks ago)
+- [dracula/beeper](https://github.com/dracula/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (3 weeks ago)
 - [Stunkymonkey/nautilus-open-any-terminal](https://github.com/Stunkymonkey/nautilus-open-any-terminal) -  (3 weeks ago)
-- [Ayce45/skills-hello-github-actions](https://github.com/Ayce45/skills-hello-github-actions) - Create a GitHub Action and use it in a workflow. (4 weeks ago)
-- [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper (3 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/geo.viewer](https://github.com/Ayce45/geo.viewer) - Drop a JSON file and instantly visualize thousands of store locations on an interactive clustered map. Built with Leaflet &amp; MarkerCluster.
 - [Ayce45/postman](https://github.com/Ayce45/postman) - 🧛🏻‍♂️ Dark theme for Postman
 - [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper
 - [Ayce45/wsfr2025-solidstart-base](https://github.com/Ayce45/wsfr2025-solidstart-base) - 
 - [Ayce45/wsfr2025-elysia-base](https://github.com/Ayce45/wsfr2025-elysia-base) - 
-- [Ayce45/wsfr2025-solidjs-dev](https://github.com/Ayce45/wsfr2025-solidjs-dev) - 
 </details>
 
 <details>
