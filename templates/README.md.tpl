@@ -20,12 +20,6 @@
 <hr>
 
 <details>
-  <summary>Discord Presence 🎧️</summary>
-  
-  [![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
-</details>
-
-<details>
   <summary>I'm currently working on 👷</summary>
   
 {{range recentContributions 5}}
@@ -47,6 +41,12 @@
 {{range recentStars 5}}
 - [{{.Repo.Name}}]({{.Repo.URL}}) - {{.Repo.Description}} ({{humanize .StarredAt}})
 {{- end}}
+</details>
+
+<details>
+  <summary>Discord Presence 🎧️</summary>
+  
+  [![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
 </details>
 
 <details>
