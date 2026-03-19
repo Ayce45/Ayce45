@@ -1,7 +1,6 @@
 ## Hey, I'm Ayce!
 
 - 🔭 I’m currently working at <a href="https://www.digitaleo.com/">Digitaleo</a>
-- 🌱 I’m currently learning NuxtJS, TailwindCSS, Storybook, Jest ...
 - ⚡ Fun fact: I'm riding with electric skateboard
 
 <div>
