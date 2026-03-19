@@ -20,17 +20,11 @@
 <hr>
 
 <details>
-  <summary>Discord Presence 🎧️</summary>
-  
-  [![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
-</details>
-
-<details>
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first. (today)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 week ago)
-- [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) -  (2 weeks ago)
 - [Ayce45/geo.viewer](https://github.com/Ayce45/geo.viewer) - Drop a JSON file and instantly visualize thousands of store locations on an interactive clustered map. Built with Leaflet &amp; MarkerCluster. (1 month ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (1 month ago)
 - [dracula/postman](https://github.com/dracula/postman) - 🧛🏻‍♂️ Dark theme for Postman (1 month ago)
@@ -40,11 +34,11 @@
   <summary>My latest projects 🌱</summary>
   
 
-- [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - 
+- [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first.
 - [Ayce45/geo.viewer](https://github.com/Ayce45/geo.viewer) - Drop a JSON file and instantly visualize thousands of store locations on an interactive clustered map. Built with Leaflet &amp; MarkerCluster.
 - [Ayce45/postman](https://github.com/Ayce45/postman) - 🧛🏻‍♂️ Dark theme for Postman
 - [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper
-- [Ayce45/wsfr2025-solidstart-base](https://github.com/Ayce45/wsfr2025-solidstart-base) - 
+- [Ayce45/wsfr2025-solidstart-base](https://github.com/Ayce45/wsfr2025-solidstart-base) - SolidStart Base for National Worldskills Competition
 </details>
 
 <details>
@@ -56,6 +50,12 @@
 - [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (5 months ago)
 - [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (1 year ago)
 - [bamatar/unlinkedin](https://github.com/bamatar/unlinkedin) - One-click removal of LinkedIn connections (1 year ago)
+</details>
+
+<details>
+  <summary>Discord Presence 🎧️</summary>
+  
+  [![Discord Presence](https://lanyard.cnrad.dev/api/538785123987095556)](https://discord.com/users/538785123987095556)
 </details>
 
 <details>
