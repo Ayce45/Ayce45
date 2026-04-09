@@ -23,22 +23,22 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first. (2 weeks ago)
-- [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (4 weeks ago)
+- [Ayce45/skills-workflow-artifacts](https://github.com/Ayce45/skills-workflow-artifacts) - Exercise: Work with Workflow Artifacts (1 day ago)
+- [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first. (3 weeks ago)
+- [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 month ago)
 - [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 months ago)
 - [Ayce45/geo.viewer](https://github.com/Ayce45/geo.viewer) - Drop a JSON file and instantly visualize thousands of store locations on an interactive clustered map. Built with Leaflet &amp; MarkerCluster. (2 months ago)
-- [dracula/postman](https://github.com/dracula/postman) - 🧛🏻‍♂️ Dark theme for Postman (2 months ago)
 </details>
 
 <details>
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/skills-workflow-artifacts](https://github.com/Ayce45/skills-workflow-artifacts) - Exercise: Work with Workflow Artifacts
 - [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first.
 - [Ayce45/geo.viewer](https://github.com/Ayce45/geo.viewer) - Drop a JSON file and instantly visualize thousands of store locations on an interactive clustered map. Built with Leaflet &amp; MarkerCluster.
 - [Ayce45/postman](https://github.com/Ayce45/postman) - 🧛🏻‍♂️ Dark theme for Postman
 - [Ayce45/beeper](https://github.com/Ayce45/beeper) - 🧛🏻‍♂️ Dark theme for Beeper
-- [Ayce45/wsfr2025-solidstart-base](https://github.com/Ayce45/wsfr2025-solidstart-base) - SolidStart Base for National Worldskills Competition
 </details>
 
 <details>
