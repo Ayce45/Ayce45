@@ -23,10 +23,10 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 day ago)
 - [Ayce45/skills-workflow-artifacts](https://github.com/Ayce45/skills-workflow-artifacts) - Exercise: Work with Workflow Artifacts (1 week ago)
 - [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first. (1 month ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 month ago)
-- [Ayce45/Ayce45.github.io](https://github.com/Ayce45/Ayce45.github.io) - My personal website (2 months ago)
 - [Ayce45/geo.viewer](https://github.com/Ayce45/geo.viewer) - Drop a JSON file and instantly visualize thousands of store locations on an interactive clustered map. Built with Leaflet &amp; MarkerCluster. (2 months ago)
 </details>
 
