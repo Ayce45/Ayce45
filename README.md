@@ -23,8 +23,8 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (1 day ago)
-- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (6 days ago)
+- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (2 days ago)
+- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 week ago)
 - [Ayce45/skills-workflow-artifacts](https://github.com/Ayce45/skills-workflow-artifacts) - Exercise: Work with Workflow Artifacts (2 weeks ago)
 - [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first. (1 month ago)
 - [Ayce45/gmail-pop3-auto-refresh](https://github.com/Ayce45/gmail-pop3-auto-refresh) - Chrome/Firefox extension to refresh unlimited POP3 email accounts of Gmail with a frequency of one minute for free. (1 month ago)
@@ -45,7 +45,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (5 days ago)
+- [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (6 days ago)
 - [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (5 months ago)
 - [briacdev/shadcn-icon-picker](https://github.com/briacdev/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (6 months ago)
 - [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (6 months ago)
