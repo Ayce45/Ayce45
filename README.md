@@ -23,8 +23,8 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (1 day ago)
-- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (5 days ago)
+- [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (2 days ago)
+- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (6 days ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 week ago)
 - [Ayce45/skills-workflow-artifacts](https://github.com/Ayce45/skills-workflow-artifacts) - Exercise: Work with Workflow Artifacts (3 weeks ago)
 - [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first. (1 month ago)
