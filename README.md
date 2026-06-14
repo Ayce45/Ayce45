@@ -23,8 +23,8 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (2 days ago)
-- [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (2 days ago)
+- [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (3 days ago)
+- [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (3 days ago)
 - [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (1 month ago)
 - [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (1 month ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 month ago)
