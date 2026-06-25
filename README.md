@@ -23,8 +23,8 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (1 week ago)
-- [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (1 week ago)
+- [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (2 weeks ago)
+- [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (2 weeks ago)
 - [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (1 month ago)
 - [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (2 months ago)
 - [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (2 months ago)
@@ -46,7 +46,7 @@
   
 
 - [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (2 months ago)
-- [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (6 months ago)
+- [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (7 months ago)
 - [briacdev/shadcn-icon-picker](https://github.com/briacdev/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (8 months ago)
 - [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (8 months ago)
 - [victorneuret/dailydrive](https://github.com/victorneuret/dailydrive) - Program to remove podcast from spotify daily drive playlist (1 year ago)
