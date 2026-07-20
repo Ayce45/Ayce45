@@ -58,5 +58,5 @@
 <details>
   <summary>DailyDev 📖</summary>
   
-  <a href="https://app.daily.dev/ayce"><img src="https://api.daily.dev/devcards/v2/Kl4kv3BRMUjSY4Y3a5Tkq.png?type=default&r=cl3" width="356" alt="Evan JUGE's Dev Card"/></a>
+  <a href="https://daily.dev/ayce"><img src="https://api.daily.dev/devcards/v2/Kl4kv3BRMUjSY4Y3a5Tkq.png?type=default&r=yna" width="356" alt="Evan JUGE's Dev Card"/></a>
 </details>
