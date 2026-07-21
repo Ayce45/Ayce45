@@ -45,7 +45,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [dailydotdev/awesome-developer-essentials](https://github.com/dailydotdev/awesome-developer-essentials) - A curated list of tools, platforms, browser extensions and resources for staying informed, productive, and growing as a software developer. (today)
+- [dailydotdev/awesome-developer-essentials](https://github.com/dailydotdev/awesome-developer-essentials) - A curated list of tools, platforms, browser extensions and resources for staying informed, productive, and growing as a software developer. (1 day ago)
 - [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (3 months ago)
 - [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (7 months ago)
 - [briacdev/shadcn-icon-picker](https://github.com/briacdev/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (9 months ago)
