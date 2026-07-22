@@ -1,0 +1,43 @@
+{
+  "data": {
+    "page": {
+      "pageInfo": {
+        "hasNextPage": true,
+        "endCursor": "cursor123"
+      },
+      "edges": [
+        {
+          "node": {
+            "id": "p1",
+            "title": "Why I Use a Hybrid Folder Structure",
+            "image": "https://media.daily.dev/image/upload/f_auto,q_auto/v1/posts/p1",
+            "permalink": "https://app.daily.dev/posts/p1",
+            "commentsPermalink": "https://app.daily.dev/posts/p1#comments",
+            "createdAt": "2026-07-20T10:00:00.000Z",
+            "readTime": 5,
+            "numUpvotes": 54,
+            "numComments": 6,
+            "tags": ["javascript", "vuejs"],
+            "source": {
+              "id": "vuejs",
+              "name": "Vuejs&Nuxtjs",
+              "image": "https://media.daily.dev/image/upload/t_logo/v1/logos/vuejs"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "p2",
+            "title": "SpringBoot is powerful",
+            "image": null,
+            "permalink": null,
+            "createdAt": "2026-07-18T08:00:00.000Z",
+            "numUpvotes": 11,
+            "numComments": 0,
+            "source": null
+          }
+        }
+      ]
+    }
+  }
+}
