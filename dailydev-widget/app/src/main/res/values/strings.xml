@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">daily.dev Widget</string>
+    <string name="widget_label">Feed daily.dev</string>
+    <string name="widget_description">Ton feed daily.dev personnalisé en cards sur l\'écran d\'accueil</string>
+
+    <string name="state_not_configured">Touche ici pour configurer ton feed daily.dev</string>
+    <string name="state_auth_error">Session expirée — touche pour recoller le cookie</string>
+    <string name="state_empty">Aucun article — touche ↻ pour rafraîchir</string>
+    <string name="badge_offline">hors ligne</string>
+    <string name="refresh_content_description">Rafraîchir</string>
+
+    <string name="config_title">Configuration du widget</string>
+    <string name="config_cookie_label">Cookie de session daily.dev</string>
+    <string name="config_cookie_help">Sur ton ordinateur : ouvre app.daily.dev connecté, DevTools (F12) → onglet Network → requête « graphql » → copie l\'en-tête « Cookie » complet et colle-le ici.</string>
+    <string name="config_cookie_saved_placeholder">•••• cookie enregistré — colle pour remplacer</string>
+    <string name="config_paste">Coller</string>
+    <string name="config_interval_label">Intervalle de rafraîchissement</string>
+    <string name="config_max_cards_label">Nombre d\'articles : %1$d</string>
+    <string name="config_save">Enregistrer</string>
+</resources>

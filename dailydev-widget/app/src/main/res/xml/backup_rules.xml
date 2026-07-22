@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Le cookie chiffré ne doit jamais être sauvegardé : la clé Keystore ne suit pas
+     l'appareil, une restauration produirait des préférences illisibles. -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="secure_prefs.xml" />
+</full-backup-content>

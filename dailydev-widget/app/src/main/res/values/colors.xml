@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ddw_background">#0E1217</color>
+    <color name="ddw_card">#1C1F26</color>
+    <color name="ddw_text_primary">#FFFFFF</color>
+    <color name="ddw_text_secondary">#A8B3CF</color>
+    <color name="ddw_accent">#CE3DF3</color>
+    <color name="ic_launcher_background">#0E1217</color>
+</resources>
