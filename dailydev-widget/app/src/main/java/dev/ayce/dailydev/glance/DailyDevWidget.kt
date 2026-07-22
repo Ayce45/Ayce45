@@ -15,7 +15,6 @@ import dev.ayce.dailydev.data.FeedCache
 import dev.ayce.dailydev.data.ImageCache
 import dev.ayce.dailydev.data.model.FeedState
 import dev.ayce.dailydev.glance.layouts.FeedLayout
-import dev.ayce.dailydev.glance.layouts.SmallLayout
 import dev.ayce.dailydev.work.RefreshScheduler
 
 /** Données prêtes à rendre : bitmaps décodés en amont, Glance ne chargeant rien lui-même. */
@@ -66,11 +65,8 @@ class DailyDevWidget : GlanceAppWidget() {
 @Composable
 private fun WidgetContent(render: RenderData) {
     val size = LocalSize.current
-    if (size.width >= DailyDevWidget.MEDIUM.width || size.height >= DailyDevWidget.MEDIUM.height) {
-        FeedLayout(render)
-    } else {
-        SmallLayout(render)
-    }
+    val columns = if (size.width >= DailyDevWidget.MEDIUM.width) 2 else 1
+    FeedLayout(render, columns)
 }
 
 class DailyDevWidgetReceiver : GlanceAppWidgetReceiver() {

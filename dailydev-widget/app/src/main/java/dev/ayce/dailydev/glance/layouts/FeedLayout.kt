@@ -4,7 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.appwidget.cornerRadius
-import androidx.glance.appwidget.lazy.LazyColumn
+import androidx.glance.appwidget.lazy.GridCells
+import androidx.glance.appwidget.lazy.LazyVerticalGrid
 import androidx.glance.appwidget.lazy.items
 import androidx.glance.background
 import androidx.glance.layout.Column
@@ -24,11 +25,12 @@ import dev.ayce.dailydev.glance.components.NotConfiguredCard
 import dev.ayce.dailydev.glance.components.PostCardLarge
 
 /**
- * Layout principal : liste scrollable de grandes cards façon extension Chrome,
- * avec « Charger plus » en dernier item tant qu'il reste des pages.
+ * Grille scrollable de cards façon daily.dev mobile. La largeur du widget fixe
+ * le nombre de colonnes (1 ou 2), sa hauteur le nombre de cards visibles :
+ * 2x2 ≈ 1 card, 2x4 ≈ 2, 4x4 ≈ 4. « Charger plus » pagine en dernière cellule.
  */
 @Composable
-fun FeedLayout(render: RenderData) {
+fun FeedLayout(render: RenderData, columns: Int) {
     val state = render.state
     when {
         state.status == FeedState.Status.NOT_CONFIGURED -> NotConfiguredCard()
@@ -39,24 +41,28 @@ fun FeedLayout(render: RenderData) {
                 .fillMaxSize()
                 .background(Palette.Background)
                 .cornerRadius(20.dp)
-                .padding(8.dp),
+                .padding(6.dp),
         ) {
             HeaderBar(state)
-            Spacer(GlanceModifier.height(4.dp))
-            LazyColumn(modifier = GlanceModifier.fillMaxSize()) {
+            Spacer(GlanceModifier.height(2.dp))
+            LazyVerticalGrid(
+                gridCells = GridCells.Fixed(columns),
+                modifier = GlanceModifier.fillMaxSize(),
+            ) {
                 items(state.posts, itemId = { it.id.hashCode().toLong() }) { post ->
-                    Column {
+                    Column(modifier = GlanceModifier.padding(3.dp)) {
                         PostCardLarge(
                             post = post,
                             thumb = render.thumbs[post.id],
                             logo = render.logos[post.id],
                         )
-                        Spacer(GlanceModifier.height(6.dp))
                     }
                 }
                 if (state.endCursor != null && state.posts.size < FeedRepository.MAX_TOTAL_POSTS) {
                     item {
-                        LoadMoreCard()
+                        Column(modifier = GlanceModifier.padding(3.dp)) {
+                            LoadMoreCard()
+                        }
                     }
                 }
             }
