@@ -14,18 +14,28 @@ object CookieStore {
     private const val PREFS_NAME = "secure_prefs"
     private const val KEY_COOKIE = "cookie"
 
-    private fun prefs(context: Context): SharedPreferences {
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        return EncryptedSharedPreferences.create(
-            context,
-            PREFS_NAME,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
-        )
-    }
+    // Instance unique : créer EncryptedSharedPreferences plusieurs fois en
+    // concurrence (worker du widget + activité de connexion) peut faire échouer
+    // les lectures et faire croire à une session absente.
+    @Volatile
+    private var cached: SharedPreferences? = null
+
+    private fun prefs(context: Context): SharedPreferences =
+        cached ?: synchronized(this) {
+            cached ?: run {
+                val appContext = context.applicationContext
+                val masterKey = MasterKey.Builder(appContext)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build()
+                EncryptedSharedPreferences.create(
+                    appContext,
+                    PREFS_NAME,
+                    masterKey,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
+                ).also { cached = it }
+            }
+        }
 
     fun get(context: Context): String? = prefs(context).getString(KEY_COOKIE, null)
 

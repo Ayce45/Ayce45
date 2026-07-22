@@ -21,9 +21,13 @@ object FeedRepository {
      */
     suspend fun refresh(context: Context): FeedState {
         val previous = FeedCache.read(context)
-        val cookie = CookieStore.get(context)
+        // Une lecture Keystore qui échoue est transitoire : ne surtout pas
+        // conclure « non configuré », garder l'état précédent tel quel.
+        val cookieRead = runCatching { CookieStore.get(context) }
+        val cookie = cookieRead.getOrNull()
 
         val state = when {
+            cookieRead.isFailure -> previous
             cookie.isNullOrBlank() -> FeedState(FeedState.Status.NOT_CONFIGURED)
             else -> try {
                 val pageSize = SettingsStore.maxCards(context)

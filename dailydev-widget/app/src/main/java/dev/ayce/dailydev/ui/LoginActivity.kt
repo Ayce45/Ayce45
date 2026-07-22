@@ -14,7 +14,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import dev.ayce.dailydev.R
+import dev.ayce.dailydev.appScope
 import dev.ayce.dailydev.data.CookieStore
+import dev.ayce.dailydev.data.FeedRepository
 import dev.ayce.dailydev.data.api.AuthException
 import dev.ayce.dailydev.data.api.DailyDevApi
 import dev.ayce.dailydev.work.RefreshScheduler
@@ -167,7 +169,10 @@ class LoginActivity : ComponentActivity() {
                 CookieStore.set(this@LoginActivity, cookie)
                 CookieManager.getInstance().flush()
                 RefreshScheduler.ensureScheduled(this@LoginActivity)
-                RefreshScheduler.refreshNow(this@LoginActivity)
+                // Refresh direct dans un scope processus : le widget se remplit
+                // tout de suite, sans dépendre de la latence de WorkManager.
+                val appContext = applicationContext
+                appScope.launch { FeedRepository.refresh(appContext) }
                 Toast.makeText(
                     this@LoginActivity,
                     getString(R.string.login_success),
