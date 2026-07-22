@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -47,6 +48,16 @@ class ConfigActivity : ComponentActivity() {
 
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
 
+    private val loginLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                    setResult(RESULT_OK, widgetResultIntent())
+                }
+                finish()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -71,6 +82,9 @@ class ConfigActivity : ComponentActivity() {
                         hasCookie = hasCookie,
                         initialInterval = initialInterval,
                         initialMaxCards = initialMaxCards,
+                        onLogin = {
+                            loginLauncher.launch(Intent(this, LoginActivity::class.java))
+                        },
                         onSave = ::save,
                     )
                 }
@@ -109,6 +123,7 @@ private fun ConfigScreen(
     hasCookie: Boolean,
     initialInterval: Int,
     initialMaxCards: Int,
+    onLogin: () -> Unit,
     onSave: (cookie: String, intervalMinutes: Int, maxCards: Int) -> Unit,
 ) {
     var cookie by remember { mutableStateOf("") }
@@ -128,6 +143,18 @@ private fun ConfigScreen(
             style = MaterialTheme.typography.headlineSmall,
         )
 
+        Button(onClick = onLogin, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.config_login_button))
+        }
+        Text(
+            text = stringResource(R.string.config_login_help),
+            style = MaterialTheme.typography.bodySmall,
+        )
+
+        Text(
+            text = stringResource(R.string.config_manual_section),
+            style = MaterialTheme.typography.titleMedium,
+        )
         OutlinedTextField(
             value = cookie,
             onValueChange = { cookie = it },

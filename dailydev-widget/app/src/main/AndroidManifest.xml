@@ -26,6 +26,10 @@
         </receiver>
 
         <activity
+            android:name=".ui.LoginActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.ConfigActivity"
             android:exported="true">
             <intent-filter>

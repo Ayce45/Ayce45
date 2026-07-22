@@ -32,20 +32,31 @@ cd dailydev-widget
 # APK : app/build/outputs/apk/debug/app-debug.apk
 ```
 
-## Configuration : récupérer le cookie de session
+## Configuration : se connecter
 
-Le feed personnalisé nécessite ton cookie de session daily.dev :
+Tout se fait depuis le téléphone :
 
-1. Sur un ordinateur, ouvre [app.daily.dev](https://app.daily.dev) connecté.
-2. Ouvre les DevTools (F12) → onglet **Network** → recharge la page.
-3. Clique sur une requête **graphql** → section *Request Headers*.
-4. Copie la valeur complète de l'en-tête **Cookie** (elle contient `da2=...; da3=...`).
-5. Envoie-la sur ton téléphone (par exemple via une note), ouvre l'app
-   **daily.dev Widget**, colle le cookie et enregistre.
+1. Ouvre l'app **daily.dev Widget** → bouton **« Se connecter à daily.dev »**.
+2. Connecte-toi dans la page qui s'ouvre — **GitHub ou email + mot de passe
+   recommandés** (Google peut refuser la connexion dans une vue intégrée).
+3. Dès que la connexion aboutit, le cookie de session est capturé et validé
+   automatiquement, l'écran se ferme et le widget se rafraîchit.
 
 Le cookie est stocké chiffré (Android Keystore) et exclu des sauvegardes.
-Quand il expire, le widget affiche « Session expirée » — un tap ramène à
-l'écran de configuration pour recoller un cookie frais.
+Quand il expire, le widget affiche « Session expirée » — un tap rouvre la
+page de connexion ; si la session y est encore active, le cookie se
+recapture tout seul, sans re-login.
+
+<details>
+<summary>Option avancée : coller le cookie manuellement (depuis un ordinateur)</summary>
+
+1. Ouvre [app.daily.dev](https://app.daily.dev) connecté.
+2. DevTools (F12) → onglet **Network** → recharge la page.
+3. Clique sur une requête **graphql** → section *Request Headers*.
+4. Copie la valeur complète de l'en-tête **Cookie** (elle contient `da2=...; da3=...`).
+5. Colle-la dans l'app, section « Option avancée ».
+
+</details>
 
 ## Resynchroniser la requête GraphQL
 
@@ -57,7 +68,7 @@ procédure que ci-dessus, onglet *Payload*) et mets à jour
 ## Checklist de test manuel
 
 - [ ] Placer un widget 2x2, 4x2 et 4x4 → les trois layouts s'affichent
-- [ ] Coller le cookie → les cards apparaissent après le refresh
+- [ ] « Se connecter à daily.dev » (GitHub ou email) → capture automatique, les cards apparaissent
 - [ ] Tap sur une card → l'article s'ouvre dans le navigateur
 - [ ] Bouton ↻ → le feed se rafraîchit
 - [ ] Corrompre le cookie dans les réglages → card « Session expirée » au refresh suivant

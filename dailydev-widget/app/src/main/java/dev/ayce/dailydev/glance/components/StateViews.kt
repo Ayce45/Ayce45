@@ -23,6 +23,7 @@ import dev.ayce.dailydev.R
 import dev.ayce.dailydev.glance.Palette
 import dev.ayce.dailydev.glance.RefreshAction
 import dev.ayce.dailydev.ui.ConfigActivity
+import dev.ayce.dailydev.ui.LoginActivity
 
 @Composable
 private fun MessageCard(text: String, action: Action) {
@@ -57,9 +58,11 @@ fun NotConfiguredCard() {
 
 @Composable
 fun AuthErrorCard() {
+    // Rouvre la WebView : si la session y est encore vivante, le cookie se
+    // recapture et l'écran se referme sans re-login.
     MessageCard(
         text = LocalContext.current.getString(R.string.state_auth_error),
-        action = actionStartActivity<ConfigActivity>(),
+        action = actionStartActivity<LoginActivity>(),
     )
 }
 
