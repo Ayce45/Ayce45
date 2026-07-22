@@ -2,9 +2,13 @@ package dev.ayce.dailydev.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Message
+import android.view.ViewGroup
 import android.webkit.CookieManager
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
@@ -15,6 +19,8 @@ import dev.ayce.dailydev.data.api.AuthException
 import dev.ayce.dailydev.data.api.DailyDevApi
 import dev.ayce.dailydev.work.RefreshScheduler
 import java.util.concurrent.atomic.AtomicBoolean
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 /**
@@ -22,46 +28,119 @@ import kotlinx.coroutines.launch
  * puis le cookie de session (y compris HttpOnly da2/da3, que CookieManager expose
  * contrairement à document.cookie) est capturé et validé automatiquement.
  *
+ * Les logins OAuth (GitHub…) s'ouvrent via window.open() : sans support
+ * multi-fenêtres la WebView affiche une page blanche, d'où la WebView popup
+ * empilée dans le FrameLayout via onCreateWindow.
+ *
  * daily.dev pose aussi un cookie da2 aux visiteurs anonymes : la capture n'est
  * validée qu'après un appel feed réussi, preuve que la session est authentifiée.
  */
 class LoginActivity : ComponentActivity() {
 
+    private companion object {
+        const val LOGIN_URL = "https://app.daily.dev/onboarding"
+        const val COOKIE_POLL_MS = 2_000L
+    }
+
+    private lateinit var container: FrameLayout
     private lateinit var webView: WebView
+    private var popupWebView: WebView? = null
     private val validating = AtomicBoolean(false)
     private var captured = false
 
-    @SuppressLint("SetJavaScriptEnabled")
+    private val captureClient = object : WebViewClient() {
+        override fun onPageFinished(view: WebView?, url: String?) {
+            maybeCaptureCookie()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        container = FrameLayout(this)
         webView = WebView(this)
-        setContentView(webView)
+        container.addView(
+            webView,
+            FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+            ),
+        )
+        setContentView(container)
 
-        with(webView.settings) {
-            javaScriptEnabled = true
-            domStorageEnabled = true
-            // Certains fournisseurs OAuth rejettent l'UA WebView explicite.
-            userAgentString = userAgentString.replace("; wv", "")
-        }
-        CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
-
-        webView.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                maybeCaptureCookie()
+        configureWebView(webView)
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onCreateWindow(
+                view: WebView,
+                isDialog: Boolean,
+                isUserGesture: Boolean,
+                resultMsg: Message,
+            ): Boolean {
+                closePopup()
+                val popup = WebView(this@LoginActivity)
+                configureWebView(popup)
+                popup.webChromeClient = object : WebChromeClient() {
+                    override fun onCloseWindow(window: WebView) {
+                        closePopup()
+                    }
+                }
+                popupWebView = popup
+                container.addView(
+                    popup,
+                    FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                    ),
+                )
+                (resultMsg.obj as WebView.WebViewTransport).webView = popup
+                resultMsg.sendToTarget()
+                return true
             }
         }
 
         onBackPressedDispatcher.addCallback(this) {
-            if (webView.canGoBack()) {
-                webView.goBack()
-            } else {
-                isEnabled = false
-                onBackPressedDispatcher.onBackPressed()
+            when {
+                popupWebView != null -> closePopup()
+                webView.canGoBack() -> webView.goBack()
+                else -> {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                }
             }
         }
 
-        webView.loadUrl("https://app.daily.dev/")
+        webView.loadUrl(LOGIN_URL)
+
+        // Après l'OAuth en popup, la page principale se met à jour en JS sans
+        // navigation : onPageFinished ne suffit pas, on sonde aussi les cookies.
+        lifecycleScope.launch {
+            while (isActive && !captured) {
+                maybeCaptureCookie()
+                delay(COOKIE_POLL_MS)
+            }
+        }
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun configureWebView(view: WebView) {
+        with(view.settings) {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            javaScriptCanOpenWindowsAutomatically = true
+            setSupportMultipleWindows(true)
+            // Certains fournisseurs OAuth rejettent l'UA WebView explicite.
+            userAgentString = userAgentString.replace("; wv", "")
+        }
+        CookieManager.getInstance().setAcceptThirdPartyCookies(view, true)
+        view.webViewClient = captureClient
+    }
+
+    private fun closePopup() {
+        popupWebView?.let {
+            container.removeView(it)
+            it.destroy()
+        }
+        popupWebView = null
     }
 
     private fun maybeCaptureCookie() {
@@ -101,6 +180,7 @@ class LoginActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        closePopup()
         webView.destroy()
         super.onDestroy()
     }
