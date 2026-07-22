@@ -14,8 +14,7 @@ import androidx.glance.appwidget.provideContent
 import dev.ayce.dailydev.data.FeedCache
 import dev.ayce.dailydev.data.ImageCache
 import dev.ayce.dailydev.data.model.FeedState
-import dev.ayce.dailydev.glance.layouts.LargeLayout
-import dev.ayce.dailydev.glance.layouts.MediumLayout
+import dev.ayce.dailydev.glance.layouts.FeedLayout
 import dev.ayce.dailydev.glance.layouts.SmallLayout
 import dev.ayce.dailydev.work.RefreshScheduler
 
@@ -34,7 +33,7 @@ class DailyDevWidget : GlanceAppWidget() {
         val LARGE = DpSize(220.dp, 320.dp)
 
         // Plafond dur pour rester sous le budget bitmap RemoteViews.
-        const val MAX_RENDERED_POSTS = 10
+        const val MAX_RENDERED_POSTS = 30
     }
 
     override val sizeMode: SizeMode = SizeMode.Responsive(setOf(SMALL, MEDIUM, LARGE))
@@ -67,10 +66,10 @@ class DailyDevWidget : GlanceAppWidget() {
 @Composable
 private fun WidgetContent(render: RenderData) {
     val size = LocalSize.current
-    when {
-        size.height >= DailyDevWidget.LARGE.height -> LargeLayout(render)
-        size.width >= DailyDevWidget.MEDIUM.width -> MediumLayout(render)
-        else -> SmallLayout(render)
+    if (size.width >= DailyDevWidget.MEDIUM.width || size.height >= DailyDevWidget.MEDIUM.height) {
+        FeedLayout(render)
+    } else {
+        SmallLayout(render)
     }
 }
 

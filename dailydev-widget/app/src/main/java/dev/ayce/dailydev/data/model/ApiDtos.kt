@@ -27,6 +27,19 @@ data class FeedData(
 @Serializable
 data class FeedConnection(
     val edges: List<FeedEdge> = emptyList(),
+    val pageInfo: PageInfo? = null,
+)
+
+@Serializable
+data class PageInfo(
+    val endCursor: String? = null,
+    val hasNextPage: Boolean = false,
+)
+
+/** Une page de feed prête à consommer : nodes + curseur de pagination (null si fin). */
+data class FeedPage(
+    val nodes: List<PostNode>,
+    val endCursor: String?,
 )
 
 @Serializable

@@ -19,23 +19,17 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
 import dev.ayce.dailydev.R
 import dev.ayce.dailydev.data.CookieStore
@@ -71,7 +65,7 @@ class ConfigActivity : ComponentActivity() {
             setResult(RESULT_CANCELED, widgetResultIntent())
         }
 
-        val hasCookie = CookieStore.isConfigured(this)
+        val isConnected = CookieStore.isConfigured(this)
         val initialInterval = runBlocking { SettingsStore.refreshIntervalMinutes(this@ConfigActivity) }
         val initialMaxCards = runBlocking { SettingsStore.maxCards(this@ConfigActivity) }
 
@@ -79,7 +73,7 @@ class ConfigActivity : ComponentActivity() {
             DailyDevTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     ConfigScreen(
-                        hasCookie = hasCookie,
+                        isConnected = isConnected,
                         initialInterval = initialInterval,
                         initialMaxCards = initialMaxCards,
                         onLogin = {
@@ -92,11 +86,8 @@ class ConfigActivity : ComponentActivity() {
         }
     }
 
-    private fun save(cookie: String, intervalMinutes: Int, maxCards: Int) {
+    private fun save(intervalMinutes: Int, maxCards: Int) {
         lifecycleScope.launch {
-            if (cookie.isNotBlank()) {
-                CookieStore.set(this@ConfigActivity, cookie)
-            }
             SettingsStore.save(this@ConfigActivity, intervalMinutes, maxCards)
             RefreshScheduler.reschedule(this@ConfigActivity, intervalMinutes)
             RefreshScheduler.refreshNow(this@ConfigActivity)
@@ -120,16 +111,14 @@ private val intervalOptions = listOf(
 
 @Composable
 private fun ConfigScreen(
-    hasCookie: Boolean,
+    isConnected: Boolean,
     initialInterval: Int,
     initialMaxCards: Int,
     onLogin: () -> Unit,
-    onSave: (cookie: String, intervalMinutes: Int, maxCards: Int) -> Unit,
+    onSave: (intervalMinutes: Int, maxCards: Int) -> Unit,
 ) {
-    var cookie by remember { mutableStateOf("") }
     var interval by remember { mutableIntStateOf(initialInterval) }
     var maxCards by remember { mutableIntStateOf(initialMaxCards) }
-    val clipboard = LocalClipboardManager.current
 
     Column(
         modifier = Modifier
@@ -143,37 +132,21 @@ private fun ConfigScreen(
             style = MaterialTheme.typography.headlineSmall,
         )
 
+        if (isConnected) {
+            Text(
+                text = stringResource(R.string.status_connected),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+        } else {
+            Text(
+                text = stringResource(R.string.config_login_help),
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
         Button(onClick = onLogin, modifier = Modifier.fillMaxWidth()) {
             Text(stringResource(R.string.config_login_button))
         }
-        Text(
-            text = stringResource(R.string.config_login_help),
-            style = MaterialTheme.typography.bodySmall,
-        )
-
-        Text(
-            text = stringResource(R.string.config_manual_section),
-            style = MaterialTheme.typography.titleMedium,
-        )
-        OutlinedTextField(
-            value = cookie,
-            onValueChange = { cookie = it },
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text(stringResource(R.string.config_cookie_label)) },
-            placeholder = {
-                if (hasCookie) Text(stringResource(R.string.config_cookie_saved_placeholder))
-            },
-            minLines = 3,
-            maxLines = 6,
-            textStyle = TextStyle(fontFamily = FontFamily.Monospace, fontSize = 12.sp),
-        )
-        OutlinedButton(onClick = { clipboard.getText()?.text?.let { cookie = it } }) {
-            Text(stringResource(R.string.config_paste))
-        }
-        Text(
-            text = stringResource(R.string.config_cookie_help),
-            style = MaterialTheme.typography.bodySmall,
-        )
 
         Text(
             text = stringResource(R.string.config_interval_label),
@@ -202,9 +175,8 @@ private fun ConfigScreen(
 
         Spacer(Modifier.height(8.dp))
         Button(
-            onClick = { onSave(cookie.trim(), interval, maxCards) },
+            onClick = { onSave(interval, maxCards) },
             modifier = Modifier.fillMaxWidth(),
-            enabled = hasCookie || cookie.isNotBlank(),
         ) {
             Text(stringResource(R.string.config_save))
         }

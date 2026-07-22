@@ -4,8 +4,8 @@ Widget Android (Kotlin + Jetpack Glance) qui affiche ton feed daily.dev personna
 en petites cards sur l'écran d'accueil, à la manière de l'extension Chrome.
 
 - **2x2** : une card héro (vignette + titre)
-- **4x2** : liste de 3 cards compactes
-- **4x4+** : liste scrollable de cards complètes (vignette, titre, source, ▲ upvotes, 💬 commentaires)
+- **Plus grand** : liste scrollable de grandes cards façon extension (logo + source, titre, date · temps de lecture, image pleine largeur, ▲ upvotes, 💬 commentaires)
+- **« Charger plus »** en bas de liste : va chercher la page suivante du feed (plafonné à 30 articles — les widgets Android ne peuvent pas détecter le scroll pour charger automatiquement)
 - Rafraîchissement périodique (WorkManager, 15 min à 3 h) + bouton ↻ manuel
 - Tap sur une card → ouvre l'article
 
@@ -46,17 +46,6 @@ Le cookie est stocké chiffré (Android Keystore) et exclu des sauvegardes.
 Quand il expire, le widget affiche « Session expirée » — un tap rouvre la
 page de connexion ; si la session y est encore active, le cookie se
 recapture tout seul, sans re-login.
-
-<details>
-<summary>Option avancée : coller le cookie manuellement (depuis un ordinateur)</summary>
-
-1. Ouvre [app.daily.dev](https://app.daily.dev) connecté.
-2. DevTools (F12) → onglet **Network** → recharge la page.
-3. Clique sur une requête **graphql** → section *Request Headers*.
-4. Copie la valeur complète de l'en-tête **Cookie** (elle contient `da2=...; da3=...`).
-5. Colle-la dans l'app, section « Option avancée ».
-
-</details>
 
 ## Resynchroniser la requête GraphQL
 

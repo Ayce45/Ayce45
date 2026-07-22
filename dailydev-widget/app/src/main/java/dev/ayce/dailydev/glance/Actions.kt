@@ -8,6 +8,7 @@ import androidx.glance.action.Action
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionStartActivity
+import dev.ayce.dailydev.data.FeedRepository
 import dev.ayce.dailydev.work.RefreshScheduler
 
 fun openUrl(url: String): Action = actionStartActivity(
@@ -21,5 +22,15 @@ class RefreshAction : ActionCallback {
         parameters: ActionParameters,
     ) {
         RefreshScheduler.refreshNow(context)
+    }
+}
+
+class LoadMoreAction : ActionCallback {
+    override suspend fun onAction(
+        context: Context,
+        glanceId: GlanceId,
+        parameters: ActionParameters,
+    ) {
+        FeedRepository.loadMore(context)
     }
 }

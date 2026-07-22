@@ -12,6 +12,7 @@ data class FeedState(
     val status: Status = Status.NOT_CONFIGURED,
     val posts: List<Post> = emptyList(),
     val fetchedAtEpochMs: Long = 0L,
+    val endCursor: String? = null,
 ) {
     enum class Status { OK, AUTH_ERROR, NETWORK_ERROR, NOT_CONFIGURED }
 }

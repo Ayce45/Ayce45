@@ -1,7 +1,7 @@
 package dev.ayce.dailydev.data.api
 
+import dev.ayce.dailydev.data.model.FeedPage
 import dev.ayce.dailydev.data.model.GraphQlResponse
-import dev.ayce.dailydev.data.model.PostNode
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +35,7 @@ object DailyDevApi {
         coerceInputValues = true
     }
 
-    suspend fun fetchFeed(cookie: String, first: Int): List<PostNode> =
+    suspend fun fetchFeed(cookie: String, first: Int, after: String? = null): FeedPage =
         withContext(Dispatchers.IO) {
             val request = Request.Builder()
                 .url(FeedQuery.ENDPOINT)
@@ -44,7 +44,7 @@ object DailyDevApi {
                 .header("Origin", "https://app.daily.dev")
                 .header("Referer", "https://app.daily.dev/")
                 .header("User-Agent", USER_AGENT)
-                .post(FeedQuery.buildBody(first).toRequestBody("application/json".toMediaType()))
+                .post(FeedQuery.buildBody(first, after).toRequestBody("application/json".toMediaType()))
                 .build()
 
             client.newCall(request).execute().use { response ->
@@ -60,7 +60,7 @@ object DailyDevApi {
         }
 
     /** Séparé et sans dépendance Android pour être testable en JVM pure. */
-    fun parseFeed(raw: String): List<PostNode> {
+    fun parseFeed(raw: String): FeedPage {
         val parsed = runCatching { json.decodeFromString(GraphQlResponse.serializer(), raw) }
             .getOrElse { throw IOException("Réponse GraphQL illisible", it) }
         val errors = parsed.errors.orEmpty()
@@ -69,7 +69,10 @@ object DailyDevApi {
         }
         val page = parsed.data?.page
             ?: throw IOException(errors.firstNotNullOfOrNull { it.message } ?: "Réponse sans données")
-        return page.edges.map { it.node }
+        return FeedPage(
+            nodes = page.edges.map { it.node },
+            endCursor = page.pageInfo?.takeIf { it.hasNextPage }?.endCursor,
+        )
     }
 
     fun downloadBytes(url: String): ByteArray? = runCatching {

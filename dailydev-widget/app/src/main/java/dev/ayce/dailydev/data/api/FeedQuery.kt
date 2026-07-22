@@ -18,8 +18,12 @@ object FeedQuery {
     private const val RANKING = "TIME"
 
     val OPERATION = """
-        query Feed(${'$'}first: Int, ${'$'}ranking: Ranking, ${'$'}version: Int) {
-          page: feed(first: ${'$'}first, ranking: ${'$'}ranking, version: ${'$'}version) {
+        query Feed(${'$'}first: Int, ${'$'}after: String, ${'$'}ranking: Ranking, ${'$'}version: Int) {
+          page: feed(first: ${'$'}first, after: ${'$'}after, ranking: ${'$'}ranking, version: ${'$'}version) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
             edges {
               node {
                 id
@@ -42,11 +46,12 @@ object FeedQuery {
         }
     """.trimIndent()
 
-    fun buildBody(first: Int): String {
+    fun buildBody(first: Int, after: String? = null): String {
         val body = buildJsonObject {
             put("query", OPERATION)
             putJsonObject("variables") {
                 put("first", first)
+                after?.let { put("after", it) }
                 put("ranking", RANKING)
                 put("version", FEED_VERSION)
             }

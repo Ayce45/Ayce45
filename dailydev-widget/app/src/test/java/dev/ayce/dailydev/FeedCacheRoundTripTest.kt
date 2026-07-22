@@ -28,6 +28,7 @@ class FeedCacheRoundTripTest {
                 ),
             ),
             fetchedAtEpochMs = 1_753_000_000_000,
+            endCursor = "cursor123",
         )
 
         val decoded = FeedStateJson.decode(FeedStateJson.encode(state))

@@ -12,14 +12,11 @@
 
     <string name="config_title">Configuration du widget</string>
     <string name="config_login_button">Se connecter à daily.dev</string>
-    <string name="config_login_help">Connecte-toi directement depuis le téléphone — le cookie est récupéré automatiquement. Utilise GitHub ou email + mot de passe (Google peut être bloqué dans la vue intégrée).</string>
+    <string name="config_login_help">Connecte-toi directement depuis le téléphone — la session est récupérée automatiquement. Utilise GitHub ou email + mot de passe (Google peut être bloqué dans la vue intégrée).</string>
     <string name="login_success">Connecté ! Le widget se met à jour.</string>
-    <string name="config_manual_section">Option avancée : coller le cookie manuellement</string>
-    <string name="config_cookie_label">Cookie de session daily.dev</string>
-    <string name="config_cookie_help">Sur un ordinateur : ouvre app.daily.dev connecté, DevTools (F12) → onglet Network → requête « graphql » → copie l\'en-tête « Cookie » complet et colle-le ici.</string>
-    <string name="config_cookie_saved_placeholder">•••• cookie enregistré — colle pour remplacer</string>
-    <string name="config_paste">Coller</string>
+    <string name="status_connected">✓ Connecté à daily.dev</string>
     <string name="config_interval_label">Intervalle de rafraîchissement</string>
-    <string name="config_max_cards_label">Nombre d\'articles : %1$d</string>
+    <string name="config_max_cards_label">Articles par chargement : %1$d</string>
     <string name="config_save">Enregistrer</string>
+    <string name="load_more">Charger plus ↓</string>
 </resources>

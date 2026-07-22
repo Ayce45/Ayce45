@@ -19,10 +19,11 @@ class FeedResponseParsingTest {
 
     @Test
     fun `parse une reponse feed complete`() {
-        val nodes = DailyDevApi.parseFeed(fixture("feed_response_sample.json"))
-        assertEquals(2, nodes.size)
+        val page = DailyDevApi.parseFeed(fixture("feed_response_sample.json"))
+        assertEquals(2, page.nodes.size)
+        assertEquals("cursor123", page.endCursor)
 
-        val first = nodes.first()
+        val first = page.nodes.first()
         assertEquals("p1", first.id)
         assertEquals("Why I Use a Hybrid Folder Structure", first.title)
         assertEquals(54, first.numUpvotes)
@@ -32,8 +33,8 @@ class FeedResponseParsingTest {
 
     @Test
     fun `mappe les nodes vers le domaine en ignorant les invalides`() {
-        val nodes = DailyDevApi.parseFeed(fixture("feed_response_sample.json"))
-        val posts = nodes.mapNotNull { it.toPost() }
+        val page = DailyDevApi.parseFeed(fixture("feed_response_sample.json"))
+        val posts = page.nodes.mapNotNull { it.toPost() }
 
         // Le second node n'a pas de permalink : écarté.
         assertEquals(1, posts.size)
@@ -46,14 +47,23 @@ class FeedResponseParsingTest {
     }
 
     @Test
-    fun `les champs inconnus sont ignores`() {
+    fun `les champs inconnus sont ignores et endCursor absent donne null`() {
         val raw = """
             {"data":{"page":{"edges":[
               {"node":{"id":"x","title":"T","permalink":"https://x","futureField":42}}
             ],"pageInfo":{"hasNextPage":true}}}}
         """.trimIndent()
-        val nodes = DailyDevApi.parseFeed(raw)
-        assertEquals(1, nodes.size)
+        val page = DailyDevApi.parseFeed(raw)
+        assertEquals(1, page.nodes.size)
+        assertNull(page.endCursor)
+    }
+
+    @Test
+    fun `hasNextPage false donne un endCursor null meme si fourni`() {
+        val raw = """
+            {"data":{"page":{"edges":[],"pageInfo":{"hasNextPage":false,"endCursor":"c9"}}}}
+        """.trimIndent()
+        assertNull(DailyDevApi.parseFeed(raw).endCursor)
     }
 
     @Test
