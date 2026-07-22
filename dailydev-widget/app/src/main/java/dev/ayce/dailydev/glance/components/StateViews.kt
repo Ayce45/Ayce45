@@ -22,7 +22,6 @@ import androidx.glance.unit.ColorProvider
 import dev.ayce.dailydev.R
 import dev.ayce.dailydev.glance.Palette
 import dev.ayce.dailydev.glance.RefreshAction
-import dev.ayce.dailydev.ui.ConfigActivity
 import dev.ayce.dailydev.ui.LoginActivity
 
 @Composable
@@ -52,7 +51,7 @@ private fun MessageCard(text: String, action: Action) {
 fun NotConfiguredCard() {
     MessageCard(
         text = LocalContext.current.getString(R.string.state_not_configured),
-        action = actionStartActivity<ConfigActivity>(),
+        action = actionStartActivity<LoginActivity>(),
     )
 }
 

@@ -17,6 +17,18 @@ android {
         versionName = "1.0"
     }
 
+    signingConfigs {
+        // Clé de debug versionnée : sans elle, chaque build CI serait signé avec
+        // une clé éphémère différente, forçant une désinstallation (et la perte
+        // de la session) à chaque mise à jour de l'APK.
+        getByName("debug") {
+            storeFile = rootProject.file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
