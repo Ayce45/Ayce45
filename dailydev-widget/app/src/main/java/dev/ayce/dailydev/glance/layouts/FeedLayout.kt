@@ -84,7 +84,7 @@ fun FeedLayout(render: RenderData, columns: Int) {
                 if (state.endCursor != null && state.posts.size < FeedRepository.MAX_TOTAL_POSTS) {
                     item {
                         Column(modifier = GlanceModifier.padding(3.dp)) {
-                            LoadMoreCard()
+                            LoadMoreCard(loading = state.loadingMore)
                         }
                     }
                 }

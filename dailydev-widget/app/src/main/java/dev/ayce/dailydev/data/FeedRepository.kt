@@ -31,14 +31,28 @@ object FeedRepository {
             cookie.isNullOrBlank() -> FeedState(FeedState.Status.NOT_CONFIGURED)
             else -> try {
                 val pageSize = SettingsStore.maxCards(context)
-                val page = fetchWithSessionRefresh(context, cookie, pageSize)
-                val posts = prefetchImages(context, page.nodes.mapNotNull { it.toPost() })
+                // Pré-charge jusqu'au plafond en enchaînant les pages : les widgets
+                // n'exposent pas le scroll, donc pas de chargement à la volée —
+                // on remplit d'avance pour un défilement continu sans bouton.
+                var page = fetchWithSessionRefresh(context, cookie, pageSize)
+                val nodes = page.nodes.toMutableList()
+                var guard = 0
+                while (page.endCursor != null && nodes.size < MAX_TOTAL_POSTS && guard < 5) {
+                    page = fetchWithSessionRefresh(context, cookie, pageSize, page.endCursor)
+                    val known = nodes.mapTo(mutableSetOf()) { it.id }
+                    nodes += page.nodes.filter { it.id !in known }
+                    guard++
+                }
+                val posts = prefetchImages(
+                    context,
+                    nodes.mapNotNull { it.toPost() }.take(MAX_TOTAL_POSTS),
+                )
                 evictUnusedImages(context, posts)
                 FeedState(
                     status = FeedState.Status.OK,
                     posts = posts,
                     fetchedAtEpochMs = System.currentTimeMillis(),
-                    endCursor = page.endCursor,
+                    endCursor = if (posts.size >= MAX_TOTAL_POSTS) null else page.endCursor,
                 )
             } catch (e: AuthException) {
                 previous.copy(status = FeedState.Status.AUTH_ERROR)
@@ -57,7 +71,10 @@ object FeedRepository {
         val current = FeedCache.read(context)
         val cookie = CookieStore.get(context) ?: return
         val cursor = current.endCursor ?: return
-        if (current.posts.size >= MAX_TOTAL_POSTS) return
+        if (current.posts.size >= MAX_TOTAL_POSTS || current.loadingMore) return
+
+        FeedCache.write(context, current.copy(loadingMore = true))
+        DailyDevWidget().updateAll(context)
 
         try {
             val page = fetchWithSessionRefresh(context, cookie, SettingsStore.maxCards(context), cursor)
@@ -78,7 +95,10 @@ object FeedRepository {
             FeedCache.write(context, current.copy(status = FeedState.Status.AUTH_ERROR))
             DailyDevWidget().updateAll(context)
         } catch (e: Exception) {
-            // Chargement optionnel : en cas d'échec réseau on garde la liste actuelle.
+            // Échec réseau : on garde la liste actuelle, mais on sort de l'état
+            // « Chargement… » pour ne pas y rester bloqué.
+            FeedCache.write(context, current.copy(loadingMore = false))
+            DailyDevWidget().updateAll(context)
         }
     }
 

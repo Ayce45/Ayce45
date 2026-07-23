@@ -116,22 +116,24 @@ fun PostCardLarge(post: Post, thumb: Bitmap?, logo: Bitmap?, uniform: Boolean = 
     }
 }
 
-/** Dernière cellule de la grille : va chercher la page suivante du feed. */
+/** Dernier item de la liste : va chercher la page suivante du feed. */
 @Composable
-fun LoadMoreCard() {
-    Box(
-        modifier = GlanceModifier
-            .fillMaxWidth()
-            .background(Palette.Card)
-            .cornerRadius(20.dp)
-            .padding(14.dp)
-            .clickable(actionStartActivity<LoadMoreActivity>()),
-        contentAlignment = Alignment.Center,
-    ) {
+fun LoadMoreCard(loading: Boolean) {
+    var modifier = GlanceModifier
+        .fillMaxWidth()
+        .background(Palette.Card)
+        .cornerRadius(20.dp)
+        .padding(14.dp)
+    if (!loading) {
+        modifier = modifier.clickable(actionStartActivity<LoadMoreActivity>())
+    }
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
         Text(
-            text = LocalContext.current.getString(R.string.load_more),
+            text = LocalContext.current.getString(
+                if (loading) R.string.load_more_loading else R.string.load_more
+            ),
             style = TextStyle(
-                color = ColorProvider(Palette.Accent),
+                color = ColorProvider(if (loading) Palette.TextSecondary else Palette.Accent),
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
