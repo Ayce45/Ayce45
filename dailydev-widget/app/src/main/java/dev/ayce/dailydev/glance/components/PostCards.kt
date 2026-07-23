@@ -8,8 +8,8 @@ import androidx.glance.GlanceModifier
 import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.LocalContext
+import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
-import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.background
 import androidx.glance.layout.Alignment
@@ -29,9 +29,9 @@ import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import dev.ayce.dailydev.R
 import dev.ayce.dailydev.data.model.Post
-import dev.ayce.dailydev.glance.LoadMoreAction
 import dev.ayce.dailydev.glance.Palette
 import dev.ayce.dailydev.glance.openUrl
+import dev.ayce.dailydev.ui.LoadMoreActivity
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -125,7 +125,7 @@ fun LoadMoreCard() {
             .background(Palette.Card)
             .cornerRadius(20.dp)
             .padding(14.dp)
-            .clickable(actionRunCallback<LoadMoreAction>()),
+            .clickable(actionStartActivity<LoadMoreActivity>()),
         contentAlignment = Alignment.Center,
     ) {
         Text(
