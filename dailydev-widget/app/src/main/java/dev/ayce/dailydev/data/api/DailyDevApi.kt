@@ -85,4 +85,46 @@ object DailyDevApi {
             response.body?.bytes()
         }
     }.getOrNull()
+
+    /**
+     * Renouvelle la session comme la webapp : GET /boot avec les cookies actuels ;
+     * le serveur régénère da2 (JWT court) grâce à da3 (longue durée) via Set-Cookie.
+     * Retourne la chaîne de cookies fusionnée, ou null si rien n'a été renouvelé.
+     */
+    suspend fun renewSession(cookie: String): String? = withContext(Dispatchers.IO) {
+        runCatching {
+            val request = Request.Builder()
+                .url("https://api.daily.dev/boot")
+                .header("Accept", "application/json")
+                .header("Cookie", cookie)
+                .header("Origin", "https://app.daily.dev")
+                .header("Referer", "https://app.daily.dev/")
+                .header("User-Agent", USER_AGENT)
+                .build()
+            client.newCall(request).execute().use { response ->
+                val setCookies = response.headers("set-cookie")
+                if (!response.isSuccessful || setCookies.isEmpty()) {
+                    null
+                } else {
+                    mergeCookies(cookie, setCookies)
+                }
+            }
+        }.getOrNull()
+    }
+
+    /** Fusion pure (testable en JVM) des en-têtes Set-Cookie dans la chaîne Cookie existante. */
+    fun mergeCookies(existing: String, setCookies: List<String>): String {
+        val jar = LinkedHashMap<String, String>()
+        existing.split(';').forEach { part ->
+            val trimmed = part.trim()
+            val eq = trimmed.indexOf('=')
+            if (eq > 0) jar[trimmed.substring(0, eq)] = trimmed.substring(eq + 1)
+        }
+        setCookies.forEach { header ->
+            val pair = header.substringBefore(';').trim()
+            val eq = pair.indexOf('=')
+            if (eq > 0) jar[pair.substring(0, eq)] = pair.substring(eq + 1)
+        }
+        return jar.entries.joinToString("; ") { "${it.key}=${it.value}" }
+    }
 }

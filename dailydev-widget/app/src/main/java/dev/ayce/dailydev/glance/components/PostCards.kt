@@ -41,17 +41,22 @@ import java.util.Locale
 /**
  * Card fidèle à la webapp mobile daily.dev : logo rond de la source, titre en
  * gras, « Aujourd'hui · 5 min de lecture », grande image, ▲ / 💬 en pied.
+ *
+ * En mode 2 colonnes (`uniform`), hauteur fixe : les RemoteViews n'alignent
+ * proprement les rangées que si les deux cards font la même taille.
  */
 @Composable
-fun PostCardLarge(post: Post, thumb: Bitmap?, logo: Bitmap?) {
-    Column(
-        modifier = GlanceModifier
-            .fillMaxWidth()
-            .background(Palette.Card)
-            .cornerRadius(20.dp)
-            .padding(12.dp)
-            .clickable(openUrl(post.url)),
-    ) {
+fun PostCardLarge(post: Post, thumb: Bitmap?, logo: Bitmap?, uniform: Boolean = false) {
+    var modifier = GlanceModifier
+        .fillMaxWidth()
+        .background(Palette.Card)
+        .cornerRadius(20.dp)
+        .padding(12.dp)
+        .clickable(openUrl(post.url))
+    if (uniform) {
+        modifier = modifier.height(230.dp)
+    }
+    Column(modifier = modifier) {
         if (logo != null) {
             Image(
                 provider = ImageProvider(logo),
@@ -63,7 +68,7 @@ fun PostCardLarge(post: Post, thumb: Bitmap?, logo: Bitmap?) {
         }
         Text(
             text = post.title,
-            maxLines = 3,
+            maxLines = if (uniform) 2 else 3,
             style = TextStyle(
                 color = ColorProvider(Palette.TextPrimary),
                 fontSize = 14.sp,
@@ -81,9 +86,15 @@ fun PostCardLarge(post: Post, thumb: Bitmap?, logo: Bitmap?) {
             Image(
                 provider = ImageProvider(thumb),
                 contentDescription = null,
-                modifier = GlanceModifier.fillMaxWidth().height(100.dp).cornerRadius(12.dp),
+                modifier = GlanceModifier
+                    .fillMaxWidth()
+                    .height(if (uniform) 90.dp else 100.dp)
+                    .cornerRadius(12.dp),
                 contentScale = ContentScale.Crop,
             )
+        }
+        if (uniform) {
+            Spacer(GlanceModifier.defaultWeight())
         }
         if (post.upvotes > 0 || post.comments > 0) {
             Spacer(GlanceModifier.height(8.dp))

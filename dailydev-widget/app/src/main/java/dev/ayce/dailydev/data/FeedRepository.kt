@@ -31,7 +31,7 @@ object FeedRepository {
             cookie.isNullOrBlank() -> FeedState(FeedState.Status.NOT_CONFIGURED)
             else -> try {
                 val pageSize = SettingsStore.maxCards(context)
-                val page = DailyDevApi.fetchFeed(cookie, pageSize)
+                val page = fetchWithSessionRefresh(context, cookie, pageSize)
                 val posts = prefetchImages(context, page.nodes.mapNotNull { it.toPost() })
                 evictUnusedImages(context, posts)
                 FeedState(
@@ -60,7 +60,7 @@ object FeedRepository {
         if (current.posts.size >= MAX_TOTAL_POSTS) return
 
         try {
-            val page = DailyDevApi.fetchFeed(cookie, SettingsStore.maxCards(context), cursor)
+            val page = fetchWithSessionRefresh(context, cookie, SettingsStore.maxCards(context), cursor)
             val knownIds = current.posts.mapTo(mutableSetOf()) { it.id }
             val fresh = page.nodes.mapNotNull { it.toPost() }.filter { it.id !in knownIds }
             val merged = (current.posts + prefetchImages(context, fresh)).take(MAX_TOTAL_POSTS)
@@ -74,9 +74,26 @@ object FeedRepository {
                 ),
             )
             DailyDevWidget().updateAll(context)
+        } catch (e: AuthException) {
+            FeedCache.write(context, current.copy(status = FeedState.Status.AUTH_ERROR))
+            DailyDevWidget().updateAll(context)
         } catch (e: Exception) {
-            // Chargement optionnel : en cas d'échec on garde simplement la liste actuelle.
+            // Chargement optionnel : en cas d'échec réseau on garde la liste actuelle.
         }
+    }
+
+    /** Tente le fetch ; sur session expirée, la renouvelle via /boot et retente une fois. */
+    private suspend fun fetchWithSessionRefresh(
+        context: Context,
+        cookie: String,
+        first: Int,
+        after: String? = null,
+    ) = try {
+        DailyDevApi.fetchFeed(cookie, first, after)
+    } catch (e: AuthException) {
+        val renewed = DailyDevApi.renewSession(cookie) ?: throw e
+        CookieStore.set(context, renewed)
+        DailyDevApi.fetchFeed(renewed, first, after)
     }
 
     private suspend fun prefetchImages(context: Context, posts: List<Post>): List<Post> =

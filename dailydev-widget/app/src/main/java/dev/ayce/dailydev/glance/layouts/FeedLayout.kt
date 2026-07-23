@@ -4,13 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.appwidget.cornerRadius
-import androidx.glance.appwidget.lazy.GridCells
-import androidx.glance.appwidget.lazy.LazyVerticalGrid
+import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
 import androidx.glance.background
+import androidx.glance.layout.Box
 import androidx.glance.layout.Column
+import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxSize
+import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import dev.ayce.dailydev.data.FeedRepository
@@ -25,9 +27,10 @@ import dev.ayce.dailydev.glance.components.NotConfiguredCard
 import dev.ayce.dailydev.glance.components.PostCardLarge
 
 /**
- * Grille scrollable de cards façon daily.dev mobile. La largeur du widget fixe
- * le nombre de colonnes (1 ou 2), sa hauteur le nombre de cards visibles :
- * 2x2 ≈ 1 card, 2x4 ≈ 2, 4x4 ≈ 4. « Charger plus » pagine en dernière cellule.
+ * Feed scrollable de cards façon daily.dev mobile. En 2 colonnes, chaque item de
+ * la LazyColumn est une rangée de deux cards de hauteur fixe — une vraie grille
+ * RemoteViews imposerait une hauteur de rangée uniforme et rognerait les cards.
+ * « Charger plus » pagine en dernier item pleine largeur.
  */
 @Composable
 fun FeedLayout(render: RenderData, columns: Int) {
@@ -45,17 +48,37 @@ fun FeedLayout(render: RenderData, columns: Int) {
         ) {
             HeaderBar(state)
             Spacer(GlanceModifier.height(2.dp))
-            LazyVerticalGrid(
-                gridCells = GridCells.Fixed(columns),
-                modifier = GlanceModifier.fillMaxSize(),
-            ) {
-                items(state.posts, itemId = { it.id.hashCode().toLong() }) { post ->
-                    Column(modifier = GlanceModifier.padding(3.dp)) {
-                        PostCardLarge(
-                            post = post,
-                            thumb = render.thumbs[post.id],
-                            logo = render.logos[post.id],
-                        )
+            LazyColumn(modifier = GlanceModifier.fillMaxSize()) {
+                if (columns >= 2) {
+                    items(
+                        state.posts.chunked(2),
+                        itemId = { it.first().id.hashCode().toLong() },
+                    ) { pair ->
+                        Row(modifier = GlanceModifier.fillMaxWidth()) {
+                            pair.forEach { post ->
+                                Box(modifier = GlanceModifier.defaultWeight().padding(3.dp)) {
+                                    PostCardLarge(
+                                        post = post,
+                                        thumb = render.thumbs[post.id],
+                                        logo = render.logos[post.id],
+                                        uniform = true,
+                                    )
+                                }
+                            }
+                            if (pair.size == 1) {
+                                Spacer(GlanceModifier.defaultWeight())
+                            }
+                        }
+                    }
+                } else {
+                    items(state.posts, itemId = { it.id.hashCode().toLong() }) { post ->
+                        Column(modifier = GlanceModifier.padding(3.dp)) {
+                            PostCardLarge(
+                                post = post,
+                                thumb = render.thumbs[post.id],
+                                logo = render.logos[post.id],
+                            )
+                        }
                     }
                 }
                 if (state.endCursor != null && state.posts.size < FeedRepository.MAX_TOTAL_POSTS) {
