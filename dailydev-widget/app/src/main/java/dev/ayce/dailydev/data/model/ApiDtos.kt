@@ -47,11 +47,39 @@ data class FeedEdge(
     val node: FeedNode,
 )
 
+/**
+ * Gère les deux formes de réponse : feedV2 imbrique l'article sous `post`, la
+ * query feed classique met les champs directement sur le node.
+ */
 @Serializable
 data class FeedNode(
-    // null pour les items non-post (ex. FeedHighlightsItem), à ignorer.
     val post: PostNode? = null,
-)
+    val id: String? = null,
+    val title: String? = null,
+    val image: String? = null,
+    val permalink: String? = null,
+    val commentsPermalink: String? = null,
+    val createdAt: String? = null,
+    val readTime: Int? = null,
+    val numUpvotes: Int? = null,
+    val numComments: Int? = null,
+    val source: SourceNode? = null,
+) {
+    fun resolve(): PostNode? = post ?: id?.let {
+        PostNode(
+            id = it,
+            title = title,
+            image = image,
+            permalink = permalink,
+            commentsPermalink = commentsPermalink,
+            createdAt = createdAt,
+            readTime = readTime,
+            numUpvotes = numUpvotes,
+            numComments = numComments,
+            source = source,
+        )
+    }
+}
 
 @Serializable
 data class PostNode(

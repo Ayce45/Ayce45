@@ -53,14 +53,45 @@ object FeedQuery {
         }
     """.trimIndent()
 
-    fun buildBody(first: Int, after: String? = null): String {
+    // Fallback : query feed classique (structure à plat), utilisée si feedV2 est
+    // vide. Personnalisée (feed logged-in) et triée par popularité.
+    val LEGACY_OPERATION = """
+        query Feed(${'$'}first: Int, ${'$'}after: String, ${'$'}ranking: Ranking, ${'$'}version: Int) {
+          page: feed(first: ${'$'}first, after: ${'$'}after, ranking: ${'$'}ranking, version: ${'$'}version) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            edges {
+              node {
+                id
+                title
+                image
+                permalink
+                commentsPermalink
+                createdAt
+                readTime
+                numUpvotes
+                numComments
+                source {
+                  id
+                  name
+                  image
+                }
+              }
+            }
+          }
+        }
+    """.trimIndent()
+
+    fun buildBody(first: Int, after: String? = null, legacy: Boolean = false): String {
         val body = buildJsonObject {
-            put("query", OPERATION)
+            put("query", if (legacy) LEGACY_OPERATION else OPERATION)
             putJsonObject("variables") {
                 put("first", first)
                 after?.let { put("after", it) }
                 put("ranking", RANKING)
-                put("version", FEED_VERSION)
+                put("version", if (legacy) 1 else FEED_VERSION)
             }
         }
         return body.toString()

@@ -35,29 +35,49 @@ object DailyDevApi {
         coerceInputValues = true
     }
 
+    /**
+     * Tente d'abord feedV2 (le vrai « For you ») ; s'il revient vide ou en erreur
+     * réseau, retombe sur la query feed classique (flat) qui a fait ses preuves —
+     * le widget n'est jamais vide tant qu'une des deux répond.
+     */
     suspend fun fetchFeed(cookie: String, first: Int, after: String? = null): FeedPage =
         withContext(Dispatchers.IO) {
-            val request = Request.Builder()
-                .url(FeedQuery.ENDPOINT)
-                .header("Accept", "application/json")
-                .header("Cookie", cookie)
-                .header("Origin", "https://app.daily.dev")
-                .header("Referer", "https://app.daily.dev/")
-                .header("User-Agent", USER_AGENT)
-                .post(FeedQuery.buildBody(first, after).toRequestBody("application/json".toMediaType()))
-                .build()
-
-            client.newCall(request).execute().use { response ->
-                if (response.code == 401 || response.code == 403) {
-                    throw AuthException("HTTP ${response.code}")
-                }
-                if (!response.isSuccessful) {
-                    throw IOException("HTTP ${response.code}")
-                }
-                val raw = response.body?.string() ?: throw IOException("Réponse vide")
-                parseFeed(raw)
+            val primary = try {
+                postGraphQl(cookie, FeedQuery.buildBody(first, after, legacy = false))
+            } catch (e: AuthException) {
+                throw e // laisser le renouvellement de session gérer
+            } catch (e: IOException) {
+                null
+            }
+            if (primary != null && primary.nodes.isNotEmpty()) {
+                primary
+            } else {
+                postGraphQl(cookie, FeedQuery.buildBody(first, after, legacy = true))
             }
         }
+
+    private fun postGraphQl(cookie: String, body: String): FeedPage {
+        val request = Request.Builder()
+            .url(FeedQuery.ENDPOINT)
+            .header("Accept", "application/json")
+            .header("Cookie", cookie)
+            .header("Origin", "https://app.daily.dev")
+            .header("Referer", "https://app.daily.dev/")
+            .header("User-Agent", USER_AGENT)
+            .post(body.toRequestBody("application/json".toMediaType()))
+            .build()
+
+        return client.newCall(request).execute().use { response ->
+            if (response.code == 401 || response.code == 403) {
+                throw AuthException("HTTP ${response.code}")
+            }
+            if (!response.isSuccessful) {
+                throw IOException("HTTP ${response.code}")
+            }
+            val raw = response.body?.string() ?: throw IOException("Réponse vide")
+            parseFeed(raw)
+        }
+    }
 
     /** Séparé et sans dépendance Android pour être testable en JVM pure. */
     fun parseFeed(raw: String): FeedPage {
@@ -70,7 +90,7 @@ object DailyDevApi {
         val page = parsed.data?.page
             ?: throw IOException(errors.firstNotNullOfOrNull { it.message } ?: "Réponse sans données")
         return FeedPage(
-            nodes = page.edges.mapNotNull { it.node.post },
+            nodes = page.edges.mapNotNull { it.node.resolve() },
             endCursor = page.pageInfo?.takeIf { it.hasNextPage }?.endCursor,
         )
     }
