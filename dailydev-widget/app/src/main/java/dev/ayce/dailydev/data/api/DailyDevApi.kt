@@ -70,7 +70,7 @@ object DailyDevApi {
         val page = parsed.data?.page
             ?: throw IOException(errors.firstNotNullOfOrNull { it.message } ?: "Réponse sans données")
         return FeedPage(
-            nodes = page.edges.map { it.node },
+            nodes = page.edges.mapNotNull { it.node.post },
             endCursor = page.pageInfo?.takeIf { it.hasNextPage }?.endCursor,
         )
     }

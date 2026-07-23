@@ -50,12 +50,25 @@ class FeedResponseParsingTest {
     fun `les champs inconnus sont ignores et endCursor absent donne null`() {
         val raw = """
             {"data":{"page":{"edges":[
-              {"node":{"id":"x","title":"T","permalink":"https://x","futureField":42}}
+              {"node":{"__typename":"FeedPostItem","post":{"id":"x","title":"T","permalink":"https://x","futureField":42}}}
             ],"pageInfo":{"hasNextPage":true}}}}
         """.trimIndent()
         val page = DailyDevApi.parseFeed(raw)
         assertEquals(1, page.nodes.size)
         assertNull(page.endCursor)
+    }
+
+    @Test
+    fun `les items sans post (highlights) sont ignores`() {
+        val raw = """
+            {"data":{"page":{"edges":[
+              {"node":{"__typename":"FeedHighlightsItem"}},
+              {"node":{"__typename":"FeedPostItem","post":{"id":"y","title":"T","permalink":"https://y"}}}
+            ],"pageInfo":{"hasNextPage":false}}}}
+        """.trimIndent()
+        val page = DailyDevApi.parseFeed(raw)
+        assertEquals(1, page.nodes.size)
+        assertEquals("y", page.nodes.first().id)
     }
 
     @Test

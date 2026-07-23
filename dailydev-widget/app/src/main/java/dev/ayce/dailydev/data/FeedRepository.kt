@@ -31,28 +31,14 @@ object FeedRepository {
             cookie.isNullOrBlank() -> FeedState(FeedState.Status.NOT_CONFIGURED)
             else -> try {
                 val pageSize = SettingsStore.maxCards(context)
-                // Pré-charge jusqu'au plafond en enchaînant les pages : les widgets
-                // n'exposent pas le scroll, donc pas de chargement à la volée —
-                // on remplit d'avance pour un défilement continu sans bouton.
-                var page = fetchWithSessionRefresh(context, cookie, pageSize)
-                val nodes = page.nodes.toMutableList()
-                var guard = 0
-                while (page.endCursor != null && nodes.size < MAX_TOTAL_POSTS && guard < 5) {
-                    page = fetchWithSessionRefresh(context, cookie, pageSize, page.endCursor)
-                    val known = nodes.mapTo(mutableSetOf()) { it.id }
-                    nodes += page.nodes.filter { it.id !in known }
-                    guard++
-                }
-                val posts = prefetchImages(
-                    context,
-                    nodes.mapNotNull { it.toPost() }.take(MAX_TOTAL_POSTS),
-                )
+                val page = fetchWithSessionRefresh(context, cookie, pageSize)
+                val posts = prefetchImages(context, page.nodes.mapNotNull { it.toPost() })
                 evictUnusedImages(context, posts)
                 FeedState(
                     status = FeedState.Status.OK,
                     posts = posts,
                     fetchedAtEpochMs = System.currentTimeMillis(),
-                    endCursor = if (posts.size >= MAX_TOTAL_POSTS) null else page.endCursor,
+                    endCursor = page.endCursor,
                 )
             } catch (e: AuthException) {
                 previous.copy(status = FeedState.Status.AUTH_ERROR)

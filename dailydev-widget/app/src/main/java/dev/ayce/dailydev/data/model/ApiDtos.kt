@@ -44,7 +44,13 @@ data class FeedPage(
 
 @Serializable
 data class FeedEdge(
-    val node: PostNode,
+    val node: FeedNode,
+)
+
+@Serializable
+data class FeedNode(
+    // null pour les items non-post (ex. FeedHighlightsItem), à ignorer.
+    val post: PostNode? = null,
 )
 
 @Serializable

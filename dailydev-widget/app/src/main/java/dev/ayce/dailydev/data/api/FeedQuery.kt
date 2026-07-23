@@ -13,32 +13,39 @@ import kotlinx.serialization.json.putJsonObject
 object FeedQuery {
     const val ENDPOINT = "https://api.daily.dev/graphql"
 
-    // Version d'algorithme de feed envoyée par la webapp ; ajuster si besoin.
-    private const val FEED_VERSION = 1
-    private const val RANKING = "TIME"
+    // Feed personnalisé « For you » = opération FeedV2 (champ feedV2), version 15,
+    // classement POPULARITY — valeurs de la webapp daily.dev (packages/shared feed.ts
+    // + feature flag feed_version). L'article est imbriqué sous node.post.
+    private const val FEED_VERSION = 15
+    private const val RANKING = "POPULARITY"
 
     val OPERATION = """
-        query Feed(${'$'}first: Int, ${'$'}after: String, ${'$'}ranking: Ranking, ${'$'}version: Int) {
-          page: feed(first: ${'$'}first, after: ${'$'}after, ranking: ${'$'}ranking, version: ${'$'}version) {
+        query FeedV2(${'$'}first: Int, ${'$'}after: String, ${'$'}ranking: Ranking, ${'$'}version: Int, ${'$'}supportedTypes: [String!] = ["Article","Share","Freeform","VideoYouTube","Collection"]) {
+          page: feedV2(first: ${'$'}first, after: ${'$'}after, ranking: ${'$'}ranking, version: ${'$'}version, supportedTypes: ${'$'}supportedTypes) {
             pageInfo {
               hasNextPage
               endCursor
             }
             edges {
               node {
-                id
-                title
-                image
-                permalink
-                commentsPermalink
-                createdAt
-                readTime
-                numUpvotes
-                numComments
-                source {
-                  id
-                  name
-                  image
+                __typename
+                ... on FeedPostItem {
+                  post {
+                    id
+                    title
+                    image
+                    permalink
+                    commentsPermalink
+                    createdAt
+                    readTime
+                    numUpvotes
+                    numComments
+                    source {
+                      id
+                      name
+                      image
+                    }
+                  }
                 }
               }
             }
