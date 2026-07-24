@@ -27,7 +27,7 @@
 - [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (1 month ago)
 - [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (1 month ago)
 - [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (2 months ago)
-- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (2 months ago)
+- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (3 months ago)
 </details>
 
 <details>
@@ -45,7 +45,7 @@
   <summary>Recent Stars ⭐</summary>
   
 
-- [dailydotdev/awesome-developer-essentials](https://github.com/dailydotdev/awesome-developer-essentials) - A curated list of tools, platforms, browser extensions and resources for staying informed, productive, and growing as a software developer. (3 days ago)
+- [dailydotdev/awesome-developer-essentials](https://github.com/dailydotdev/awesome-developer-essentials) - A curated list of tools, platforms, browser extensions and resources for staying informed, productive, and growing as a software developer. (4 days ago)
 - [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (3 months ago)
 - [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (7 months ago)
 - [briacdev/shadcn-icon-picker](https://github.com/briacdev/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (9 months ago)
