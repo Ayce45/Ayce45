@@ -14,6 +14,9 @@ data class FeedState(
     val fetchedAtEpochMs: Long = 0L,
     val endCursor: String? = null,
     val loadingMore: Boolean = false,
+    // Diagnostic affiché dans l'écran de configuration.
+    val feedSource: String? = null,
+    val lastError: String? = null,
 ) {
     enum class Status { OK, AUTH_ERROR, NETWORK_ERROR, NOT_CONFIGURED }
 }

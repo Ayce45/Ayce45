@@ -90,7 +90,8 @@ object FeedQuery {
             putJsonObject("variables") {
                 put("first", first)
                 after?.let { put("after", it) }
-                put("ranking", RANKING)
+                // TIME sur le fallback : ranking éprouvé sur ce feed, contenu frais.
+                put("ranking", if (legacy) "TIME" else RANKING)
                 put("version", if (legacy) 1 else FEED_VERSION)
             }
         }

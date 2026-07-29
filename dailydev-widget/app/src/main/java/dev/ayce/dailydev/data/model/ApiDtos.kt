@@ -40,6 +40,8 @@ data class PageInfo(
 data class FeedPage(
     val nodes: List<PostNode>,
     val endCursor: String?,
+    // Quelle requête a répondu ("feedV2" ou "feed") — affiché dans le diagnostic.
+    val source: String? = null,
 )
 
 @Serializable

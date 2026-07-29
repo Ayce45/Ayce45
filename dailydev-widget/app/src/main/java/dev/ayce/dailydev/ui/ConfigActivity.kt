@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
 import dev.ayce.dailydev.R
 import dev.ayce.dailydev.data.CookieStore
+import dev.ayce.dailydev.data.FeedCache
 import dev.ayce.dailydev.data.SettingsStore
 import dev.ayce.dailydev.work.RefreshScheduler
 import kotlinx.coroutines.launch
@@ -68,6 +69,13 @@ class ConfigActivity : ComponentActivity() {
         val isConnected = CookieStore.isConfigured(this)
         val initialInterval = runBlocking { SettingsStore.refreshIntervalMinutes(this@ConfigActivity) }
         val initialMaxCards = runBlocking { SettingsStore.maxCards(this@ConfigActivity) }
+        val feedState = runBlocking { FeedCache.read(this@ConfigActivity) }
+        val diagnostic = buildString {
+            append(feedState.status.name)
+            append(" · ").append(feedState.posts.size).append(" articles")
+            feedState.feedSource?.let { append(" · source ").append(it) }
+            feedState.lastError?.let { append("\nDernière erreur : ").append(it.take(200)) }
+        }
 
         setContent {
             DailyDevTheme {
@@ -76,6 +84,7 @@ class ConfigActivity : ComponentActivity() {
                         isConnected = isConnected,
                         initialInterval = initialInterval,
                         initialMaxCards = initialMaxCards,
+                        diagnostic = diagnostic,
                         onLogin = {
                             loginLauncher.launch(Intent(this, LoginActivity::class.java))
                         },
@@ -114,6 +123,7 @@ private fun ConfigScreen(
     isConnected: Boolean,
     initialInterval: Int,
     initialMaxCards: Int,
+    diagnostic: String,
     onLogin: () -> Unit,
     onSave: (intervalMinutes: Int, maxCards: Int) -> Unit,
 ) {
@@ -180,5 +190,10 @@ private fun ConfigScreen(
         ) {
             Text(stringResource(R.string.config_save))
         }
+
+        Text(
+            text = stringResource(R.string.config_diagnostic_label) + "\n" + diagnostic,
+            style = MaterialTheme.typography.bodySmall,
+        )
     }
 }

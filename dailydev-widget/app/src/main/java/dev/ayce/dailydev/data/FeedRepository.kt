@@ -39,11 +39,12 @@ object FeedRepository {
                     posts = posts,
                     fetchedAtEpochMs = System.currentTimeMillis(),
                     endCursor = page.endCursor,
+                    feedSource = page.source,
                 )
             } catch (e: AuthException) {
-                previous.copy(status = FeedState.Status.AUTH_ERROR)
+                previous.copy(status = FeedState.Status.AUTH_ERROR, lastError = e.message)
             } catch (e: Exception) {
-                previous.copy(status = FeedState.Status.NETWORK_ERROR)
+                previous.copy(status = FeedState.Status.NETWORK_ERROR, lastError = e.toString())
             }
         }
 

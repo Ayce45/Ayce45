@@ -50,9 +50,10 @@ object DailyDevApi {
                 null
             }
             if (primary != null && primary.nodes.isNotEmpty()) {
-                primary
+                primary.copy(source = "feedV2")
             } else {
                 postGraphQl(cookie, FeedQuery.buildBody(first, after, legacy = true))
+                    .copy(source = "feed")
             }
         }
 
