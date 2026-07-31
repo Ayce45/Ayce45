@@ -88,6 +88,16 @@ class DebugActivity : ComponentActivity() {
                                 Text(stringResource(R.string.debug_clear))
                             }
                         }
+                        OutlinedButton(
+                            onClick = { copyToClipboard(buildReport(includeSession = true)) },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(stringResource(R.string.debug_copy_session))
+                        }
+                        Text(
+                            text = stringResource(R.string.debug_session_warning),
+                            style = MaterialTheme.typography.bodySmall,
+                        )
                         SelectionContainer(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -106,7 +116,7 @@ class DebugActivity : ComponentActivity() {
 
     private fun stringResource(id: Int): String = getString(id)
 
-    private fun buildReport(): String {
+    private fun buildReport(includeSession: Boolean = false): String {
         val feedState = runBlocking { FeedCache.read(this@DebugActivity) }
         val interval = runBlocking { SettingsStore.refreshIntervalMinutes(this@DebugActivity) }
         val maxCards = runBlocking { SettingsStore.maxCards(this@DebugActivity) }
@@ -148,6 +158,11 @@ class DebugActivity : ComponentActivity() {
             appendLine()
             appendLine("--- Journal des appels API ---")
             appendLine(DebugLog.read(this@DebugActivity))
+            if (includeSession) {
+                appendLine()
+                appendLine("--- SESSION (SENSIBLE — ne partager que pour debug) ---")
+                appendLine("Cookie: ${cookie ?: "-"}")
+            }
         }
     }
 

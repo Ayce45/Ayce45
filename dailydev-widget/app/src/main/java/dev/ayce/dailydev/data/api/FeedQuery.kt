@@ -13,17 +13,15 @@ import kotlinx.serialization.json.putJsonObject
 object FeedQuery {
     const val ENDPOINT = "https://api.daily.dev/graphql"
 
-    // Feed personnalisé « For you » = opération FeedV2 (champ feedV2), version 15,
-    // classement POPULARITY — valeurs de la webapp daily.dev (packages/shared feed.ts
-    // + feature flag feed_version). L'article est imbriqué sous node.post.
-    private const val FEED_VERSION = 15
     private const val RANKING = "POPULARITY"
 
-    // « For you » : la webapp n'envoie PAS de ranking à feedV2 (le service ML
-    // choisit), mais passe columns, highlightsLimit et les types dont "highlight".
+    // « For you » : ne pas envoyer version ni ranking — le serveur applique ses
+    // défauts (version 20, POPULARITY) ; une version obsolète (ex. 15) tombe sur
+    // un générateur ML mort qui renvoie une page vide. Pas de "highlight" ni de
+    // highlightsLimit : uniquement des posts.
     val OPERATION = """
-        query FeedV2(${'$'}first: Int, ${'$'}after: String, ${'$'}version: Int, ${'$'}columns: Int, ${'$'}highlightsLimit: Int, ${'$'}supportedTypes: [String!] = ["Article","Share","Freeform","SocialTwitter","VideoYouTube","Collection","Poll","LiveRoom","highlight"]) {
-          page: feedV2(first: ${'$'}first, after: ${'$'}after, version: ${'$'}version, columns: ${'$'}columns, highlightsLimit: ${'$'}highlightsLimit, supportedTypes: ${'$'}supportedTypes) {
+        query FeedV2(${'$'}first: Int, ${'$'}after: String, ${'$'}columns: Int, ${'$'}supportedTypes: [String!] = ["Article","Share","Freeform","SocialTwitter","VideoYouTube","Collection","Poll","LiveRoom"]) {
+          page: feedV2(first: ${'$'}first, after: ${'$'}after, columns: ${'$'}columns, supportedTypes: ${'$'}supportedTypes) {
             pageInfo {
               hasNextPage
               endCursor
@@ -110,9 +108,7 @@ object FeedQuery {
                     put("ranking", RANKING)
                     put("version", 1)
                 } else {
-                    put("version", FEED_VERSION)
                     put("columns", 1)
-                    put("highlightsLimit", 5)
                 }
             }
         }
