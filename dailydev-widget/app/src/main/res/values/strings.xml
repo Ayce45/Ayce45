@@ -21,4 +21,11 @@
     <string name="load_more">Charger plus ↓</string>
     <string name="load_more_loading">Chargement…</string>
     <string name="config_diagnostic_label">Diagnostic du dernier rafraîchissement :</string>
+    <string name="config_debug_button">🔧 Écran de debug</string>
+    <string name="debug_title">Debug</string>
+    <string name="debug_copy">Copier le rapport</string>
+    <string name="debug_refresh">Rafraîchir</string>
+    <string name="debug_refresh_started">Rafraîchissement lancé…</string>
+    <string name="debug_clear">Vider le journal</string>
+    <string name="debug_copied">Rapport copié — colle-le dans la conversation !</string>
 </resources>

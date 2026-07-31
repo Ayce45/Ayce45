@@ -1,6 +1,7 @@
 package dev.ayce.dailydev
 
 import android.app.Application
+import dev.ayce.dailydev.data.DebugLog
 import dev.ayce.dailydev.work.RefreshScheduler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +13,7 @@ val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        DebugLog.install(this)
         RefreshScheduler.ensureScheduled(this)
     }
 }

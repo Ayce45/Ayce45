@@ -2,6 +2,7 @@ package dev.ayce.dailydev.data
 
 import android.content.Context
 import androidx.glance.appwidget.updateAll
+import dev.ayce.dailydev.data.DebugLog
 import dev.ayce.dailydev.data.api.AuthException
 import dev.ayce.dailydev.data.api.DailyDevApi
 import dev.ayce.dailydev.data.model.FeedState
@@ -40,6 +41,7 @@ object FeedRepository {
                     fetchedAtEpochMs = System.currentTimeMillis(),
                     endCursor = page.endCursor,
                     feedSource = page.source,
+                    streak = DailyDevApi.fetchStreak(cookie) ?: previous.streak,
                 )
             } catch (e: AuthException) {
                 previous.copy(status = FeedState.Status.AUTH_ERROR, lastError = e.message)
@@ -48,6 +50,10 @@ object FeedRepository {
             }
         }
 
+        DebugLog.log(
+            "refresh terminé: ${state.status} · ${state.posts.size} posts · " +
+                "source=${state.feedSource ?: "-"} · streak=${state.streak ?: "-"}"
+        )
         FeedCache.write(context, state)
         DailyDevWidget().updateAll(context)
         return state
@@ -98,7 +104,9 @@ object FeedRepository {
     ) = try {
         DailyDevApi.fetchFeed(cookie, first, after)
     } catch (e: AuthException) {
+        DebugLog.log("session expirée → tentative de renouvellement /boot")
         val renewed = DailyDevApi.renewSession(cookie) ?: throw e
+        DebugLog.log("session renouvelée via /boot")
         CookieStore.set(context, renewed)
         DailyDevApi.fetchFeed(renewed, first, after)
     }

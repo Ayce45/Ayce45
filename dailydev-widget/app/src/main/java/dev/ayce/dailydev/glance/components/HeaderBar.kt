@@ -40,6 +40,13 @@ fun HeaderBar(state: FeedState) {
                 fontWeight = FontWeight.Bold,
             ),
         )
+        state.streak?.takeIf { it > 0 }?.let { streak ->
+            Spacer(GlanceModifier.width(6.dp))
+            Text(
+                text = "🔥 $streak",
+                style = TextStyle(color = ColorProvider(Palette.TextSecondary), fontSize = 10.sp),
+            )
+        }
         if (state.status == FeedState.Status.NETWORK_ERROR) {
             Spacer(GlanceModifier.width(6.dp))
             Text(

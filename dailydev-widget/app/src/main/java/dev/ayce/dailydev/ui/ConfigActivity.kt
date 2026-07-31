@@ -88,6 +88,9 @@ class ConfigActivity : ComponentActivity() {
                         onLogin = {
                             loginLauncher.launch(Intent(this, LoginActivity::class.java))
                         },
+                        onOpenDebug = {
+                            startActivity(Intent(this, DebugActivity::class.java))
+                        },
                         onSave = ::save,
                     )
                 }
@@ -125,6 +128,7 @@ private fun ConfigScreen(
     initialMaxCards: Int,
     diagnostic: String,
     onLogin: () -> Unit,
+    onOpenDebug: () -> Unit,
     onSave: (intervalMinutes: Int, maxCards: Int) -> Unit,
 ) {
     var interval by remember { mutableIntStateOf(initialInterval) }
@@ -195,5 +199,9 @@ private fun ConfigScreen(
             text = stringResource(R.string.config_diagnostic_label) + "\n" + diagnostic,
             style = MaterialTheme.typography.bodySmall,
         )
+
+        OutlinedButton(onClick = onOpenDebug, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.config_debug_button))
+        }
     }
 }

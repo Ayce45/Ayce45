@@ -84,6 +84,18 @@ object FeedQuery {
         }
     """.trimIndent()
 
+    val STREAK_OPERATION = """
+        query UserStreak {
+          userStreak {
+            current
+          }
+        }
+    """.trimIndent()
+
+    fun buildStreakBody(): String = buildJsonObject {
+        put("query", STREAK_OPERATION)
+    }.toString()
+
     fun buildBody(first: Int, after: String? = null, legacy: Boolean = false): String {
         val body = buildJsonObject {
             put("query", if (legacy) LEGACY_OPERATION else OPERATION)

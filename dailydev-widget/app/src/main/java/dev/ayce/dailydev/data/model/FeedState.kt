@@ -17,6 +17,8 @@ data class FeedState(
     // Diagnostic affiché dans l'écran de configuration.
     val feedSource: String? = null,
     val lastError: String? = null,
+    // Streak de lecture daily.dev (🔥), null si indisponible.
+    val streak: Int? = null,
 ) {
     enum class Status { OK, AUTH_ERROR, NETWORK_ERROR, NOT_CONFIGURED }
 }
