@@ -19,9 +19,11 @@ object FeedQuery {
     private const val FEED_VERSION = 15
     private const val RANKING = "POPULARITY"
 
+    // « For you » : la webapp n'envoie PAS de ranking à feedV2 (le service ML
+    // choisit), mais passe columns, highlightsLimit et les types dont "highlight".
     val OPERATION = """
-        query FeedV2(${'$'}first: Int, ${'$'}after: String, ${'$'}ranking: Ranking, ${'$'}version: Int, ${'$'}supportedTypes: [String!] = ["Article","Share","Freeform","VideoYouTube","Collection"]) {
-          page: feedV2(first: ${'$'}first, after: ${'$'}after, ranking: ${'$'}ranking, version: ${'$'}version, supportedTypes: ${'$'}supportedTypes) {
+        query FeedV2(${'$'}first: Int, ${'$'}after: String, ${'$'}version: Int, ${'$'}columns: Int, ${'$'}highlightsLimit: Int, ${'$'}supportedTypes: [String!] = ["Article","Share","Freeform","SocialTwitter","VideoYouTube","Collection","Poll","LiveRoom","highlight"]) {
+          page: feedV2(first: ${'$'}first, after: ${'$'}after, version: ${'$'}version, columns: ${'$'}columns, highlightsLimit: ${'$'}highlightsLimit, supportedTypes: ${'$'}supportedTypes) {
             pageInfo {
               hasNextPage
               endCursor
@@ -102,9 +104,16 @@ object FeedQuery {
             putJsonObject("variables") {
                 put("first", first)
                 after?.let { put("after", it) }
-                // TIME sur le fallback : ranking éprouvé sur ce feed, contenu frais.
-                put("ranking", if (legacy) "TIME" else RANKING)
-                put("version", if (legacy) 1 else FEED_VERSION)
+                if (legacy) {
+                    // POPULARITY : plus proche des recommandations que le tri
+                    // chronologique quand le fallback prend le relais.
+                    put("ranking", RANKING)
+                    put("version", 1)
+                } else {
+                    put("version", FEED_VERSION)
+                    put("columns", 1)
+                    put("highlightsLimit", 5)
+                }
             }
         }
         return body.toString()

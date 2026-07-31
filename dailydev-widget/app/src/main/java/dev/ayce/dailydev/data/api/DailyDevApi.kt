@@ -90,6 +90,9 @@ object DailyDevApi {
                     "$label OK: ${page.nodes.size} posts, suite=${page.endCursor != null}, " +
                         "1er=« ${page.nodes.firstOrNull()?.title?.take(45) ?: "-"} »"
                 )
+                if (page.nodes.isEmpty()) {
+                    DebugLog.log("$label corps vide: ${raw.take(400)}")
+                }
                 page
             } catch (e: Exception) {
                 DebugLog.log("$label parse KO: ${e.message?.take(120)} — corps: ${raw.take(300)}")
