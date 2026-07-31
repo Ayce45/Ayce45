@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.intOrNull
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -115,10 +115,12 @@ object DailyDevApi {
                 .build()
             client.newCall(request).execute().use { response ->
                 val raw = response.body?.string().orEmpty()
-                val streak = Json.parseToJsonElement(raw).jsonObject["data"]
-                    ?.jsonObject?.get("userStreak")
-                    ?.jsonObject?.get("current")
-                    ?.jsonPrimitive?.intOrNull
+                // Navigation null-safe : data/userStreak/current peuvent être JsonNull.
+                fun obj(e: Any?) = e as? JsonObject
+                val root = obj(Json.parseToJsonElement(raw))
+                val streak = (obj(root?.get("data"))?.get("userStreak"))
+                    .let { obj(it) }?.get("current")
+                    .let { it as? JsonPrimitive }?.intOrNull
                 DebugLog.log("streak: ${streak ?: "indisponible (HTTP ${response.code})"}")
                 streak
             }

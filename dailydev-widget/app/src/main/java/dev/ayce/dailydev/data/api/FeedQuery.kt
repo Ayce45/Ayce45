@@ -15,13 +15,13 @@ object FeedQuery {
 
     private const val RANKING = "POPULARITY"
 
-    // « For you » : ne pas envoyer version ni ranking — le serveur applique ses
-    // défauts (version 20, POPULARITY) ; une version obsolète (ex. 15) tombe sur
-    // un générateur ML mort qui renvoie une page vide. Pas de "highlight" ni de
-    // highlightsLimit : uniquement des posts.
+    // « For you » : ne pas envoyer version ni ranking (le serveur applique ses
+    // défauts : version 20, générateur de recommandation). Les supportedTypes
+    // doivent être en MINUSCULES ("article", pas "Article") — sinon le générateur
+    // ne matche aucun type et renvoie une page vide (confirmé en testant l'API).
     val OPERATION = """
-        query FeedV2(${'$'}first: Int, ${'$'}after: String, ${'$'}columns: Int, ${'$'}supportedTypes: [String!] = ["Article","Share","Freeform","SocialTwitter","VideoYouTube","Collection","Poll","LiveRoom"]) {
-          page: feedV2(first: ${'$'}first, after: ${'$'}after, columns: ${'$'}columns, supportedTypes: ${'$'}supportedTypes) {
+        query FeedV2(${'$'}first: Int, ${'$'}after: String, ${'$'}supportedTypes: [String!] = ["article","share","freeform","video:youtube","collection","poll","social:twitter","live:room"]) {
+          page: feedV2(first: ${'$'}first, after: ${'$'}after, supportedTypes: ${'$'}supportedTypes) {
             pageInfo {
               hasNextPage
               endCursor
@@ -107,9 +107,8 @@ object FeedQuery {
                     // chronologique quand le fallback prend le relais.
                     put("ranking", RANKING)
                     put("version", 1)
-                } else {
-                    put("columns", 1)
                 }
+                // feedV2 : aucune variable de plus, supportedTypes a un défaut.
             }
         }
         return body.toString()
