@@ -14,7 +14,13 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        // Hash du commit injecté à la compilation : permet d'identifier la build
+        // exacte qui tourne (le rapport de debug l'affiche).
+        val gitSha = runCatching {
+            providers.exec { commandLine("git", "rev-parse", "--short", "HEAD") }
+                .standardOutput.asText.get().trim()
+        }.getOrDefault("dev")
+        versionName = "1.0-$gitSha"
     }
 
     signingConfigs {

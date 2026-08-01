@@ -34,6 +34,7 @@ object FeedQuery {
                     id
                     title
                     image
+                    contentHtml
                     permalink
                     commentsPermalink
                     createdAt

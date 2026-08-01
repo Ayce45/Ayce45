@@ -88,6 +88,8 @@ data class PostNode(
     val id: String,
     val title: String? = null,
     val image: String? = null,
+    // Posts Squad (freeform) : image absente, mais présente dans le HTML.
+    val contentHtml: String? = null,
     val permalink: String? = null,
     val commentsPermalink: String? = null,
     val createdAt: String? = null,
@@ -96,6 +98,12 @@ data class PostNode(
     val numComments: Int? = null,
     val source: SourceNode? = null,
 )
+
+private val HTML_IMG_REGEX = Regex("""<img[^>]+src=["']([^"']+)["']""")
+
+/** Première image d'un contenu HTML (fallback pour les posts sans champ image). */
+private fun firstHtmlImage(html: String?): String? =
+    html?.let { HTML_IMG_REGEX.find(it)?.groupValues?.getOrNull(1) }
 
 @Serializable
 data class SourceNode(
@@ -118,7 +126,7 @@ fun PostNode.toPost(): Post? {
         comments = numComments ?: 0,
         readTimeMinutes = readTime,
         createdAt = createdAt,
-        imageUrl = image,
+        imageUrl = image ?: firstHtmlImage(contentHtml),
         sourceLogoUrl = source?.image,
     )
 }
