@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 /**
- * Enveloppe persistée sur disque. En cas d'erreur, `posts` conserve le dernier
- * contenu réussi pour que le widget affiche du contenu périmé plutôt que rien.
+ * Envelope persisted to disk. On error, `posts` keeps the last successful content
+ * so the widget shows stale content rather than nothing.
  */
 @Serializable
 data class FeedState(
@@ -14,11 +14,13 @@ data class FeedState(
     val fetchedAtEpochMs: Long = 0L,
     val endCursor: String? = null,
     val loadingMore: Boolean = false,
-    // Diagnostic affiché dans l'écran de configuration.
+    // Diagnostics shown in the debug screen.
     val feedSource: String? = null,
     val lastError: String? = null,
-    // Streak de lecture daily.dev (🔥), null si indisponible.
+    // daily.dev reading streak (🔥), null if unavailable.
     val streak: Int? = null,
+    // True when the streak hasn't been kept today yet (nothing read today).
+    val streakAtRisk: Boolean = false,
 ) {
     enum class Status { OK, AUTH_ERROR, NETWORK_ERROR, NOT_CONFIGURED }
 }

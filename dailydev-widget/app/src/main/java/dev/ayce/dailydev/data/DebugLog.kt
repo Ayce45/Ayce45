@@ -35,7 +35,7 @@ object DebugLog {
     fun read(context: Context): String {
         val file = File(context.filesDir, FILE_NAME)
         val content = runCatching { file.readText() }.getOrDefault("")
-        return content.ifBlank { "(journal vide)" }
+        return content.ifBlank { "(empty log)" }
     }
 
     fun clear(context: Context) {

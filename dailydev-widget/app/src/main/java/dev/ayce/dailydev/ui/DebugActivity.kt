@@ -120,47 +120,50 @@ class DebugActivity : ComponentActivity() {
         val feedState = runBlocking { FeedCache.read(this@DebugActivity) }
         val interval = runBlocking { SettingsStore.refreshIntervalMinutes(this@DebugActivity) }
         val maxCards = runBlocking { SettingsStore.maxCards(this@DebugActivity) }
+        val feedType = runBlocking { SettingsStore.feedType(this@DebugActivity) }
+        val browser = runBlocking { SettingsStore.browserPackage(this@DebugActivity) }
         val cookie = runCatching { CookieStore.get(this) }.getOrNull()
         val cookieNames = cookie.orEmpty()
             .split(';')
             .map { it.substringBefore('=').trim() }
             .filter { it.isNotBlank() }
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.FRENCH)
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH)
 
         return buildString {
-            appendLine("=== RAPPORT DEBUG daily.dev Widget ===")
-            appendLine("Version app : ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
-            appendLine("Android : ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT}) · ${Build.MANUFACTURER} ${Build.MODEL}")
-            appendLine("Généré : ${dateFormat.format(Date())}")
+            appendLine("=== daily.dev Widget DEBUG REPORT ===")
+            appendLine("App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
+            appendLine("Android: ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT}) · ${Build.MANUFACTURER} ${Build.MODEL}")
+            appendLine("Generated: ${dateFormat.format(Date())}")
             appendLine()
-            appendLine("--- État du feed ---")
-            appendLine("Statut : ${feedState.status}")
-            appendLine("Source de la requête : ${feedState.feedSource ?: "-"}")
-            appendLine("Articles en cache : ${feedState.posts.size}")
-            appendLine("Dernier fetch : ${if (feedState.fetchedAtEpochMs > 0) dateFormat.format(Date(feedState.fetchedAtEpochMs)) else "-"}")
-            appendLine("Curseur suite : ${feedState.endCursor?.take(30) ?: "aucun"}")
-            appendLine("Chargement en cours : ${feedState.loadingMore}")
-            appendLine("Streak : ${feedState.streak ?: "-"}")
-            appendLine("Dernière erreur : ${feedState.lastError ?: "aucune"}")
+            appendLine("--- Feed state ---")
+            appendLine("Status: ${feedState.status}")
+            appendLine("Query source: ${feedState.feedSource ?: "-"}")
+            appendLine("Cached articles: ${feedState.posts.size}")
+            appendLine("Last fetch: ${if (feedState.fetchedAtEpochMs > 0) dateFormat.format(Date(feedState.fetchedAtEpochMs)) else "-"}")
+            appendLine("Next cursor: ${feedState.endCursor?.take(30) ?: "none"}")
+            appendLine("Loading more: ${feedState.loadingMore}")
+            appendLine("Streak: ${feedState.streak ?: "-"} (at risk: ${feedState.streakAtRisk})")
+            appendLine("Last error: ${feedState.lastError ?: "none"}")
             appendLine()
-            appendLine("--- 5 premiers articles ---")
+            appendLine("--- First 5 articles ---")
             feedState.posts.take(5).forEachIndexed { index, post ->
                 appendLine("${index + 1}. [${post.sourceName ?: "?"}] ${post.title.take(60)} (▲${post.upvotes} 💬${post.comments})")
             }
-            if (feedState.posts.isEmpty()) appendLine("(aucun)")
+            if (feedState.posts.isEmpty()) appendLine("(none)")
             appendLine()
             appendLine("--- Session ---")
-            appendLine("Cookie présent : ${!cookie.isNullOrBlank()} (${cookie?.length ?: 0} caractères)")
-            appendLine("Cookies : ${cookieNames.joinToString(", ").ifBlank { "-" }}")
+            appendLine("Cookie present: ${!cookie.isNullOrBlank()} (${cookie?.length ?: 0} chars)")
+            appendLine("Cookies: ${cookieNames.joinToString(", ").ifBlank { "-" }}")
             appendLine()
-            appendLine("--- Réglages ---")
-            appendLine("Intervalle : $interval min · Articles par chargement : $maxCards")
+            appendLine("--- Settings ---")
+            appendLine("Feed: ${feedType.label} · interval: $interval min · articles/load: $maxCards")
+            appendLine("Browser: ${browser.ifBlank { "system default" }}")
             appendLine()
-            appendLine("--- Journal des appels API ---")
+            appendLine("--- API call log ---")
             appendLine(DebugLog.read(this@DebugActivity))
             if (includeSession) {
                 appendLine()
-                appendLine("--- SESSION (SENSIBLE — ne partager que pour debug) ---")
+                appendLine("--- SESSION (SENSITIVE — only share for debugging) ---")
                 appendLine("Cookie: ${cookie ?: "-"}")
             }
         }

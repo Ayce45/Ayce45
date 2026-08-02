@@ -27,10 +27,9 @@ import dev.ayce.dailydev.glance.components.NotConfiguredCard
 import dev.ayce.dailydev.glance.components.PostCardLarge
 
 /**
- * Feed scrollable de cards façon daily.dev mobile. En 2 colonnes, chaque item de
- * la LazyColumn est une rangée de deux cards de hauteur fixe — une vraie grille
- * RemoteViews imposerait une hauteur de rangée uniforme et rognerait les cards.
- * « Charger plus » pagine en dernier item pleine largeur.
+ * Scrollable feed of cards, daily.dev-mobile style. In 2 columns each LazyColumn
+ * item is a row of two fixed-height cards — a real RemoteViews grid would force a
+ * uniform row height and clip cards. "Load more" paginates as a full-width item.
  */
 @Composable
 fun FeedLayout(render: RenderData, columns: Int) {
@@ -61,6 +60,7 @@ fun FeedLayout(render: RenderData, columns: Int) {
                                         post = post,
                                         thumb = render.thumbs[post.id],
                                         logo = render.logos[post.id],
+                                        browserPackage = render.browserPackage,
                                         uniform = true,
                                     )
                                 }
@@ -77,6 +77,7 @@ fun FeedLayout(render: RenderData, columns: Int) {
                                 post = post,
                                 thumb = render.thumbs[post.id],
                                 logo = render.logos[post.id],
+                                browserPackage = render.browserPackage,
                             )
                         }
                     }

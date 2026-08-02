@@ -2,12 +2,16 @@ package dev.ayce.dailydev.ui
 
 import android.appwidget.AppWidgetManager
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -35,9 +40,13 @@ import dev.ayce.dailydev.R
 import dev.ayce.dailydev.data.CookieStore
 import dev.ayce.dailydev.data.FeedCache
 import dev.ayce.dailydev.data.SettingsStore
+import dev.ayce.dailydev.data.model.FeedType
 import dev.ayce.dailydev.work.RefreshScheduler
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+
+/** A browser/app that can open articles: label + package (empty = sentinel). */
+private data class BrowserOption(val label: String, val packageName: String)
 
 class ConfigActivity : ComponentActivity() {
 
@@ -61,7 +70,7 @@ class ConfigActivity : ComponentActivity() {
             AppWidgetManager.INVALID_APPWIDGET_ID,
         ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
 
-        // Un retour arrière doit annuler proprement le placement du widget.
+        // Back press must cancel widget placement cleanly.
         if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
             setResult(RESULT_CANCELED, widgetResultIntent())
         }
@@ -69,12 +78,15 @@ class ConfigActivity : ComponentActivity() {
         val isConnected = CookieStore.isConfigured(this)
         val initialInterval = runBlocking { SettingsStore.refreshIntervalMinutes(this@ConfigActivity) }
         val initialMaxCards = runBlocking { SettingsStore.maxCards(this@ConfigActivity) }
+        val initialFeed = runBlocking { SettingsStore.feedType(this@ConfigActivity) }
+        val initialBrowser = runBlocking { SettingsStore.browserPackage(this@ConfigActivity) }
+        val browsers = browserOptions()
         val feedState = runBlocking { FeedCache.read(this@ConfigActivity) }
         val diagnostic = buildString {
             append(feedState.status.name)
             append(" · ").append(feedState.posts.size).append(" articles")
             feedState.feedSource?.let { append(" · source ").append(it) }
-            feedState.lastError?.let { append("\nDernière erreur : ").append(it.take(200)) }
+            feedState.lastError?.let { append("\nLast error: ").append(it.take(200)) }
         }
 
         setContent {
@@ -84,6 +96,9 @@ class ConfigActivity : ComponentActivity() {
                         isConnected = isConnected,
                         initialInterval = initialInterval,
                         initialMaxCards = initialMaxCards,
+                        initialFeed = initialFeed,
+                        initialBrowser = initialBrowser,
+                        browsers = browsers,
                         diagnostic = diagnostic,
                         onLogin = {
                             loginLauncher.launch(Intent(this, LoginActivity::class.java))
@@ -98,9 +113,22 @@ class ConfigActivity : ComponentActivity() {
         }
     }
 
-    private fun save(intervalMinutes: Int, maxCards: Int) {
+    /** Apps that can open an app.daily.dev article link (browsers + daily.dev app). */
+    private fun browserOptions(): List<BrowserOption> {
+        val probe = Intent(Intent.ACTION_VIEW, Uri.parse("https://app.daily.dev/posts/example"))
+        val resolved = packageManager.queryIntentActivities(probe, 0)
+        return resolved
+            .mapNotNull { info ->
+                val pkg = info.activityInfo?.packageName ?: return@mapNotNull null
+                BrowserOption(info.loadLabel(packageManager).toString(), pkg)
+            }
+            .distinctBy { it.packageName }
+            .sortedBy { it.label.lowercase() }
+    }
+
+    private fun save(intervalMinutes: Int, maxCards: Int, feedType: FeedType, browserPackage: String) {
         lifecycleScope.launch {
-            SettingsStore.save(this@ConfigActivity, intervalMinutes, maxCards)
+            SettingsStore.save(this@ConfigActivity, intervalMinutes, maxCards, feedType, browserPackage)
             RefreshScheduler.reschedule(this@ConfigActivity, intervalMinutes)
             RefreshScheduler.refreshNow(this@ConfigActivity)
             if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
@@ -121,18 +149,24 @@ private val intervalOptions = listOf(
     180 to "3 h",
 )
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ConfigScreen(
     isConnected: Boolean,
     initialInterval: Int,
     initialMaxCards: Int,
+    initialFeed: FeedType,
+    initialBrowser: String,
+    browsers: List<BrowserOption>,
     diagnostic: String,
     onLogin: () -> Unit,
     onOpenDebug: () -> Unit,
-    onSave: (intervalMinutes: Int, maxCards: Int) -> Unit,
+    onSave: (intervalMinutes: Int, maxCards: Int, feedType: FeedType, browserPackage: String) -> Unit,
 ) {
     var interval by remember { mutableIntStateOf(initialInterval) }
     var maxCards by remember { mutableIntStateOf(initialMaxCards) }
+    var feed by remember { mutableStateOf(initialFeed) }
+    var browser by remember { mutableStateOf(initialBrowser) }
 
     Column(
         modifier = Modifier
@@ -162,6 +196,22 @@ private fun ConfigScreen(
             Text(stringResource(R.string.config_login_button))
         }
 
+        // Feed selector
+        Text(
+            text = stringResource(R.string.config_feed_label),
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FeedType.entries.forEach { option ->
+                if (feed == option) {
+                    Button(onClick = {}) { Text(option.label) }
+                } else {
+                    OutlinedButton(onClick = { feed = option }) { Text(option.label) }
+                }
+            }
+        }
+
+        // Refresh interval
         Text(
             text = stringResource(R.string.config_interval_label),
             style = MaterialTheme.typography.titleMedium,
@@ -176,6 +226,7 @@ private fun ConfigScreen(
             }
         }
 
+        // Articles per load
         Text(
             text = stringResource(R.string.config_max_cards_label, maxCards),
             style = MaterialTheme.typography.titleMedium,
@@ -187,9 +238,29 @@ private fun ConfigScreen(
             steps = 14,
         )
 
+        // Browser chooser
+        Text(
+            text = stringResource(R.string.config_browser_label),
+            style = MaterialTheme.typography.titleMedium,
+        )
+        val browserChoices = buildList {
+            add(BrowserOption(stringResource(R.string.config_browser_default), SettingsStore.BROWSER_DEFAULT))
+            add(BrowserOption(stringResource(R.string.config_browser_ask), SettingsStore.BROWSER_ASK))
+            addAll(browsers)
+        }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            browserChoices.forEach { option ->
+                if (browser == option.packageName) {
+                    Button(onClick = {}) { Text(option.label) }
+                } else {
+                    OutlinedButton(onClick = { browser = option.packageName }) { Text(option.label) }
+                }
+            }
+        }
+
         Spacer(Modifier.height(8.dp))
         Button(
-            onClick = { onSave(interval, maxCards) },
+            onClick = { onSave(interval, maxCards, feed, browser) },
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(stringResource(R.string.config_save))

@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">daily.dev Widget</string>
-    <string name="widget_label">Feed daily.dev</string>
-    <string name="widget_description">Ton feed daily.dev personnalisé en cards sur l\'écran d\'accueil</string>
+    <string name="widget_label">daily.dev feed</string>
+    <string name="widget_description">Your personalized daily.dev feed as cards on your home screen</string>
 
-    <string name="state_not_configured">Touche ici pour configurer ton feed daily.dev</string>
-    <string name="state_auth_error">Session expirée — touche pour te reconnecter</string>
-    <string name="state_empty">Aucun article — touche ↻ pour rafraîchir</string>
-    <string name="badge_offline">hors ligne</string>
-    <string name="refresh_content_description">Rafraîchir</string>
+    <string name="state_not_configured">Tap here to set up your daily.dev feed</string>
+    <string name="state_auth_error">Session expired — tap to sign in again</string>
+    <string name="state_empty">No articles — tap ↻ to refresh</string>
+    <string name="badge_offline">offline</string>
+    <string name="refresh_content_description">Refresh</string>
 
-    <string name="config_title">Configuration du widget</string>
-    <string name="config_login_button">Se connecter à daily.dev</string>
-    <string name="config_login_help">Connecte-toi directement depuis le téléphone — la session est récupérée automatiquement. Utilise GitHub ou email + mot de passe (Google peut être bloqué dans la vue intégrée).</string>
-    <string name="login_success">Connecté ! Le widget se met à jour.</string>
-    <string name="status_connected">✓ Connecté à daily.dev</string>
-    <string name="config_interval_label">Intervalle de rafraîchissement</string>
-    <string name="config_max_cards_label">Articles par chargement : %1$d</string>
-    <string name="config_save">Enregistrer</string>
-    <string name="load_more">Charger plus ↓</string>
-    <string name="load_more_loading">Chargement…</string>
-    <string name="config_diagnostic_label">Diagnostic du dernier rafraîchissement :</string>
-    <string name="config_debug_button">🔧 Écran de debug</string>
+    <string name="config_title">Widget settings</string>
+    <string name="config_login_button">Sign in to daily.dev</string>
+    <string name="config_login_help">Sign in right from your phone — the session is captured automatically. Use GitHub or email + password (Google may be blocked inside the embedded view).</string>
+    <string name="login_success">Signed in! The widget is updating.</string>
+    <string name="status_connected">✓ Signed in to daily.dev</string>
+    <string name="config_feed_label">Feed</string>
+    <string name="config_interval_label">Refresh interval</string>
+    <string name="config_max_cards_label">Articles per load: %1$d</string>
+    <string name="config_browser_label">Open articles with</string>
+    <string name="config_browser_default">System default</string>
+    <string name="config_browser_ask">Always ask</string>
+    <string name="config_save">Save</string>
+    <string name="load_more">Load more ↓</string>
+    <string name="load_more_loading">Loading…</string>
+    <string name="config_diagnostic_label">Last refresh diagnostics:</string>
+    <string name="config_debug_button">🔧 Debug screen</string>
     <string name="debug_title">Debug</string>
-    <string name="debug_copy">Copier le rapport</string>
-    <string name="debug_refresh">Rafraîchir</string>
-    <string name="debug_refresh_started">Rafraîchissement lancé…</string>
-    <string name="debug_clear">Vider le journal</string>
-    <string name="debug_copied">Rapport copié — colle-le dans la conversation !</string>
-    <string name="debug_copy_session">Copier le rapport + session (debug avancé)</string>
-    <string name="debug_session_warning">⚠️ Le rapport « + session » contient ton cookie de connexion daily.dev : ne le partage que dans la conversation de debug, jamais publiquement.</string>
+    <string name="debug_copy">Copy report</string>
+    <string name="debug_refresh">Refresh</string>
+    <string name="debug_refresh_started">Refresh started…</string>
+    <string name="debug_clear">Clear log</string>
+    <string name="debug_copied">Report copied — paste it in the conversation!</string>
+    <string name="debug_copy_session">Copy report + session (advanced debug)</string>
+    <string name="debug_session_warning">⚠️ The “+ session” report contains your daily.dev login cookie: only share it in the debug conversation, never publicly.</string>
 </resources>

@@ -30,6 +30,7 @@ import androidx.glance.unit.ColorProvider
 import dev.ayce.dailydev.R
 import dev.ayce.dailydev.data.model.Post
 import dev.ayce.dailydev.glance.Palette
+import dev.ayce.dailydev.glance.hideAction
 import dev.ayce.dailydev.glance.openUrl
 import dev.ayce.dailydev.ui.LoadMoreActivity
 import java.time.Instant
@@ -39,33 +40,53 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
- * Card fidèle à la webapp mobile daily.dev : logo rond de la source, titre en
- * gras, « Aujourd'hui · 5 min de lecture », grande image, ▲ / 💬 en pied.
+ * Card mirroring the daily.dev mobile web app: round source logo, bold title,
+ * "Today · 5 min read", large image, ▲ / 💬 footer, and a ✕ "not interested".
  *
- * En mode 2 colonnes (`uniform`), hauteur fixe : les RemoteViews n'alignent
- * proprement les rangées que si les deux cards font la même taille.
+ * In 2-column mode (`uniform`) the height is fixed: RemoteViews only aligns rows
+ * cleanly when both cards are the same size.
  */
 @Composable
-fun PostCardLarge(post: Post, thumb: Bitmap?, logo: Bitmap?, uniform: Boolean = false) {
+fun PostCardLarge(
+    post: Post,
+    thumb: Bitmap?,
+    logo: Bitmap?,
+    browserPackage: String,
+    uniform: Boolean = false,
+) {
+    val context = LocalContext.current
     var modifier = GlanceModifier
         .fillMaxWidth()
         .background(Palette.Card)
         .cornerRadius(20.dp)
         .padding(12.dp)
-        .clickable(openUrl(post.url))
+        .clickable(openUrl(post.url, browserPackage))
     if (uniform) {
         modifier = modifier.height(230.dp)
     }
     Column(modifier = modifier) {
-        if (logo != null) {
-            Image(
-                provider = ImageProvider(logo),
-                contentDescription = post.sourceName,
-                modifier = GlanceModifier.size(24.dp).cornerRadius(12.dp),
-                contentScale = ContentScale.Crop,
+        Row(
+            modifier = GlanceModifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (logo != null) {
+                Image(
+                    provider = ImageProvider(logo),
+                    contentDescription = post.sourceName,
+                    modifier = GlanceModifier.size(24.dp).cornerRadius(12.dp),
+                    contentScale = ContentScale.Crop,
+                )
+            }
+            Spacer(GlanceModifier.defaultWeight())
+            Text(
+                text = "✕",
+                modifier = GlanceModifier
+                    .padding(horizontal = 6.dp)
+                    .clickable(hideAction(context, post.id)),
+                style = TextStyle(color = ColorProvider(Palette.TextSecondary), fontSize = 14.sp),
             )
-            Spacer(GlanceModifier.height(8.dp))
         }
+        Spacer(GlanceModifier.height(8.dp))
         Text(
             text = post.title,
             maxLines = if (uniform) 2 else 3,
@@ -116,7 +137,7 @@ fun PostCardLarge(post: Post, thumb: Bitmap?, logo: Bitmap?, uniform: Boolean = 
     }
 }
 
-/** Dernier item de la liste : va chercher la page suivante du feed. */
+/** Last list item: fetches the next page of the feed. */
 @Composable
 fun LoadMoreCard(loading: Boolean) {
     var modifier = GlanceModifier
@@ -147,14 +168,14 @@ private fun dateAndReadTime(post: Post): String {
         runCatching {
             val day = Instant.parse(raw).atZone(ZoneId.systemDefault()).toLocalDate()
             when (day) {
-                LocalDate.now() -> "Aujourd'hui"
-                LocalDate.now().minusDays(1) -> "Hier"
-                else -> DateTimeFormatter.ofPattern("d MMM", Locale.FRENCH).format(day)
+                LocalDate.now() -> "Today"
+                LocalDate.now().minusDays(1) -> "Yesterday"
+                else -> DateTimeFormatter.ofPattern("d MMM", Locale.ENGLISH).format(day)
             }
         }.getOrNull()
     }
     return listOfNotNull(
         date,
-        post.readTimeMinutes?.let { "$it min de lecture" },
+        post.readTimeMinutes?.let { "$it min read" },
     ).joinToString(" · ")
 }

@@ -42,9 +42,14 @@ fun HeaderBar(state: FeedState) {
         )
         state.streak?.takeIf { it > 0 }?.let { streak ->
             Spacer(GlanceModifier.width(6.dp))
+            // At risk (nothing read today): red flame + "!" to nudge like the app.
             Text(
-                text = "🔥 $streak",
-                style = TextStyle(color = ColorProvider(Palette.TextSecondary), fontSize = 10.sp),
+                text = if (state.streakAtRisk) "🔥 $streak !" else "🔥 $streak",
+                style = TextStyle(
+                    color = ColorProvider(if (state.streakAtRisk) Palette.Warning else Palette.TextSecondary),
+                    fontSize = 10.sp,
+                    fontWeight = if (state.streakAtRisk) FontWeight.Bold else FontWeight.Normal,
+                ),
             )
         }
         if (state.status == FeedState.Status.NETWORK_ERROR) {
@@ -72,8 +77,8 @@ private fun relativeTime(epochMs: Long): String {
     if (epochMs <= 0) return ""
     val minutes = ((System.currentTimeMillis() - epochMs) / 60_000).coerceAtLeast(0)
     return when {
-        minutes < 1 -> "à l'instant"
-        minutes < 60 -> "il y a $minutes min"
-        else -> "il y a ${minutes / 60} h"
+        minutes < 1 -> "just now"
+        minutes < 60 -> "${minutes}m ago"
+        else -> "${minutes / 60}h ago"
     }
 }

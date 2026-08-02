@@ -13,15 +13,17 @@ import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.provideContent
 import dev.ayce.dailydev.data.FeedCache
 import dev.ayce.dailydev.data.ImageCache
+import dev.ayce.dailydev.data.SettingsStore
 import dev.ayce.dailydev.data.model.FeedState
 import dev.ayce.dailydev.glance.layouts.FeedLayout
 import dev.ayce.dailydev.work.RefreshScheduler
 
-/** Données prêtes à rendre : bitmaps décodés en amont, Glance ne chargeant rien lui-même. */
+/** Render-ready data: bitmaps decoded ahead of time, Glance loads nothing itself. */
 data class RenderData(
     val state: FeedState,
     val thumbs: Map<String, Bitmap>,
     val logos: Map<String, Bitmap>,
+    val browserPackage: String,
 )
 
 class DailyDevWidget : GlanceAppWidget() {
@@ -54,7 +56,8 @@ class DailyDevWidget : GlanceAppWidget() {
                 }
             }
         }
-        val render = RenderData(state.copy(posts = posts), thumbs, logos)
+        val browserPackage = SettingsStore.browserPackage(context)
+        val render = RenderData(state.copy(posts = posts), thumbs, logos, browserPackage)
 
         provideContent {
             WidgetContent(render)
