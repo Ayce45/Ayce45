@@ -23,7 +23,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (1 day ago)
+- [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (2 days ago)
 - [ueberdosis/tiptap](https://github.com/ueberdosis/tiptap) - The headless rich text editor framework for web artisans. (1 month ago)
 - [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (2 months ago)
 - [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (3 months ago)
@@ -34,11 +34,11 @@
   <summary>My latest projects 🌱</summary>
   
 
+- [Ayce45/terminator-agent-notify](https://github.com/Ayce45/terminator-agent-notify) - Desktop notifications, exact-pane focus, approvals, and auto-resume for Claude Code and Codex CLI in Terminator
 - [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks
 - [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification
 - [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr
 - [Ayce45/skills-workflow-artifacts](https://github.com/Ayce45/skills-workflow-artifacts) - Exercise: Work with Workflow Artifacts
-- [Ayce45/DuoSplit](https://github.com/Ayce45/DuoSplit) - Minimalist PWA for splitting expenses between two people, no account, no server, offline-first.
 </details>
 
 <details>
