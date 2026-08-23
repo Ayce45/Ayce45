@@ -27,7 +27,7 @@
 - [ueberdosis/tiptap](https://github.com/ueberdosis/tiptap) - The headless rich text editor framework for web artisans. (1 month ago)
 - [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (2 months ago)
 - [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (3 months ago)
-- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (3 months ago)
+- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (4 months ago)
 </details>
 
 <details>
