@@ -23,11 +23,11 @@
   <summary>I'm currently working on 👷</summary>
   
 
+- [AnshulJ999/SyncLyrics](https://github.com/AnshulJ999/SyncLyrics) - A real-time synced lyrics app. Cross-platform support (including Home Assistant). Runs as a server that can be displayed on any device via a webpage. Optimized for tablet dashboards.  (1 day ago)
 - [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (1 week ago)
 - [ueberdosis/tiptap](https://github.com/ueberdosis/tiptap) - The headless rich text editor framework for web artisans. (1 month ago)
 - [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (2 months ago)
 - [Ayce45/joiesducode-tv-extension](https://github.com/Ayce45/joiesducode-tv-extension) - Chrome extension that displays the latest/random meme on the lesjoiesducode.fr (3 months ago)
-- [beeper/themes](https://github.com/beeper/themes) - Custom CSS for Beeper Desktop by the community (4 months ago)
 </details>
 
 <details>
@@ -47,7 +47,7 @@
 
 - [dailydotdev/awesome-developer-essentials](https://github.com/dailydotdev/awesome-developer-essentials) - A curated list of tools, platforms, browser extensions and resources for staying informed, productive, and growing as a software developer. (1 month ago)
 - [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (4 months ago)
-- [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (8 months ago)
+- [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (9 months ago)
 - [briacdev/shadcn-icon-picker](https://github.com/briacdev/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (10 months ago)
 - [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (10 months ago)
 </details>
