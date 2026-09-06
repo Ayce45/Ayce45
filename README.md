@@ -23,7 +23,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [AnshulJ999/SyncLyrics](https://github.com/AnshulJ999/SyncLyrics) - A real-time synced lyrics app. Cross-platform support (including Home Assistant). Runs as a server that can be displayed on any device via a webpage. Optimized for tablet dashboards.  (1 week ago)
+- [AnshulJ999/SyncLyrics](https://github.com/AnshulJ999/SyncLyrics) - A real-time synced lyrics app. Cross-platform support (including Home Assistant). Runs as a server that can be displayed on any device via a webpage. Optimized for tablet dashboards.  (2 weeks ago)
 - [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (3 weeks ago)
 - [ueberdosis/tiptap](https://github.com/ueberdosis/tiptap) - The headless rich text editor framework for web artisans. (2 months ago)
 - [Ayce45/claude-fleet](https://github.com/Ayce45/claude-fleet) - GNOME top-bar indicator for active Claude Code sessions (working/waiting/idle), driven by Claude Code hooks (2 months ago)
