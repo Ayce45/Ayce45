@@ -1,0 +1,17 @@
+<settings>
+    <setting propertyKey="@Properties.backendUrl" title="URL du backend (https://...)">
+        <settingConfig type="alphaNumeric" />
+    </setting>
+    <setting propertyKey="@Properties.pairToken" title="Token d'appairage (POST /auth/pair)">
+        <settingConfig type="alphaNumeric" />
+    </setting>
+    <setting propertyKey="@Properties.autoStartRest" title="Lancer le repos automatiquement">
+        <settingConfig type="boolean" />
+    </setting>
+    <setting propertyKey="@Properties.vibrateOnRestEnd" title="Vibrer en fin de repos">
+        <settingConfig type="boolean" />
+    </setting>
+    <setting propertyKey="@Properties.weightStepKg" title="Pas de charge (kg)">
+        <settingConfig type="numeric" />
+    </setting>
+</settings>

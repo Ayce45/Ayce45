@@ -81,3 +81,19 @@ def test_history(client):
     sessions = r.json()
     assert len(sessions) == 2
     assert sessions[0]["exercises"]
+
+
+def test_results_accepts_watch_payload(client, program_raw):
+    """Payload tel que l'app Connect IQ l'envoie : horodatages epoch (entiers), champs nuls omis."""
+    sid = program_raw["workoutSessions"][0]["id"]
+    body = {
+        "workout_id": sid, "date": "2026-09-30", "device": "garmin-006-B4315-00",
+        "started_at": 1790722186, "finished_at": 1790725000, "fit_saved": True,
+        "exercises": [
+            {"position": 1, "name": "Bike", "physical_activity_id": "", "sets": [{"duration_s": 180, "completed_at": 1790722400}]},
+            {"position": 2, "name": "Leg press", "physical_activity_id": "x", "sets": [{"reps": 10, "weight_kg": 80.0, "rest_s": 45, "completed_at": 1790722500}, {"skipped": True}]},
+        ],
+    }
+    r = client.post(f"/workout/{sid}/results", json=body, headers=ADMIN)
+    assert r.status_code == 200, r.text
+    assert r.json()["sets"] == 3

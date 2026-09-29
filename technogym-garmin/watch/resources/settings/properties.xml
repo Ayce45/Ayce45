@@ -1,0 +1,7 @@
+<properties>
+    <property id="backendUrl" type="string">http://127.0.0.1:8000</property>
+    <property id="pairToken" type="string"></property>
+    <property id="autoStartRest" type="boolean">true</property>
+    <property id="vibrateOnRestEnd" type="boolean">true</property>
+    <property id="weightStepKg" type="float">2.5</property>
+</properties>

@@ -1,0 +1,28 @@
+<strings>
+    <string id="AppName">TG Muscu</string>
+    <string id="Loading">Chargement...</string>
+    <string id="NoWorkout">Aucune seance</string>
+    <string id="NoToken">Token manquant : reglages de l'app dans Garmin Connect</string>
+    <string id="Offline">Hors ligne, seance en cache</string>
+    <string id="Start">Demarrer</string>
+    <string id="Refresh">Actualiser</string>
+    <string id="SendPending">Envoyer resultats</string>
+    <string id="Exercises">Exercices</string>
+    <string id="Set">Serie</string>
+    <string id="Rest">Repos</string>
+    <string id="Skip">Passer</string>
+    <string id="Undo">Annuler derniere serie</string>
+    <string id="SkipExercise">Passer l'exercice</string>
+    <string id="Finish">Terminer la seance</string>
+    <string id="Discard">Abandonner sans sauver</string>
+    <string id="Summary">Resume</string>
+    <string id="Saved">Activite sauvee</string>
+    <string id="Sent">Resultats envoyes</string>
+    <string id="SendFailed">Envoi echoue, garde en attente</string>
+    <string id="Reps">reps</string>
+    <string id="Kg">kg</string>
+    <string id="Sec">s</string>
+    <string id="Confirm">OK</string>
+    <string id="Cancel">Retour</string>
+    <string id="Done">Fait</string>
+</strings>

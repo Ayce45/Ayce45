@@ -161,7 +161,7 @@ class SetResult(BaseModel):
     weight_kg: float | None = None
     duration_s: int | None = None
     rest_s: int | None = None
-    completed_at: str | None = None
+    completed_at: str | int | None = None
     skipped: bool = False
 
 
@@ -176,8 +176,8 @@ class WorkoutResults(BaseModel):
     workout_id: str = ""
     date: str = ""
     device: str = ""
-    started_at: str | None = None
-    finished_at: str | None = None
+    started_at: str | int | None = None
+    finished_at: str | int | None = None
     fit_saved: bool | None = None
     exercises: list[ExerciseResult] = Field(default_factory=list)
 

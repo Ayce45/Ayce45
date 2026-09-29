@@ -52,3 +52,24 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
 * Le catalogue d'exercices Garmin est lu depuis `https://connect.garmin.com/web-data/exercises/Exercises.json`
   (1531 exercices, 47 categories) et fige dans `app/garmin/garmin_exercises.json` pour valider le
   mapping hors ligne.
+
+## 2026-09-29 : app Connect IQ
+
+* Type device app, Monkey C, API minimale 3.2 (Menu2, Application.Storage, Activity.SPORT_TRAINING).
+  64 appareils declares (Forerunner, Fenix, Epix, Enduro, Venu, Vivoactive recents) ; l'utilisateur n'a
+  pas indique son modele, le simulateur a ete teste en fr965 et la compilation verifiee sur 7 familles.
+* Pas de SDK Manager graphique sous Linux : SDK 9.2.0 depuis `sdks.json`, appareils et polices via un
+  script qui rejoue le flux d'authentification du SDK Manager (idee reprise de `jeansch/ciqw`), avec les
+  identifiants Garmin du `.env`. Documente dans `docs/connectiq.md`.
+* Simulateur sur Ubuntu 24.04 : les libs webkit2gtk 4.0 (libsoup2) n'existent plus ; on extrait celles
+  d'Ubuntu 22.04 dans `/usr/local/lib/ciq-compat` plutot que de changer de distribution. Xvfb + xdotool
+  pour piloter sans ecran.
+* Enregistrement FIT : sport Training / Strength, un lap par serie, developer fields de lap reps / charge /
+  exercice (le SDK ne sait pas ecrire les messages FIT Set). Sauvegarde FIT avant tout envoi reseau ;
+  envoi en echec = seance mise en attente dans Storage (5 max) et renvoyee au prochain lancement.
+* Blocs cardio et etirements integres comme compte a rebours (duree cible, puissance / niveau affiches)
+  plutot qu'ignores : la seance de la montre suit l'ordre exact du programme Technogym.
+* Le token d'appairage est envoye en en-tete `X-Pair-Token` et en query `?token=` (certains firmwares
+  filtrent les en-tetes personnalises). Le backend accepte les deux.
+* Le backend accepte des horodatages entiers (epoch) dans les resultats : c'est ce que la montre produit
+  sans bibliotheque de formatage ISO ; decouvert par le premier envoi reel depuis le simulateur (422).
