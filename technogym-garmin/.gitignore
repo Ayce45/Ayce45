@@ -13,3 +13,7 @@ scratch/
 watch/keys/
 resources-sim/
 monkey-sim.jungle
+
+# binaires livres (rebuild : watch/build.sh)
+!watch/dist/*.prg
+!watch/dist/*.iq

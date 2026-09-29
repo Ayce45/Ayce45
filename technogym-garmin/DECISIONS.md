@@ -73,3 +73,10 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   filtrent les en-tetes personnalises). Le backend accepte les deux.
 * Le backend accepte des horodatages entiers (epoch) dans les resultats : c'est ce que la montre produit
   sans bibliotheque de formatage ISO ; decouvert par le premier envoi reel depuis le simulateur (422).
+
+## 2026-09-29 : binaires livres
+
+* `watch/dist/` contient le `.iq` multi-appareils et des `.prg` debug pour 7 modeles, commites malgre leur
+  taille (2,5 Mo) : sans la chaine de compilation, c'est le seul moyen de sideloader l'app depuis le depot.
+  Ils sont signes par la cle developpeur generee dans cette session (`watch/keys/`, non versionnee) ;
+  regenerer la cle et recompiler pour reprendre la main sur la signature.

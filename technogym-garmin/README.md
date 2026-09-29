@@ -171,3 +171,8 @@ dans `docs/screenshots/`).
    `/workout/{id}/results` et `/history`).
 6. Glance / widget "seance du jour" et complication, publication eventuelle sur le store Connect IQ.
 7. Ecouter les changements de programme (coach) pour re-pousser le workout Garmin dans la journee.
+
+## Binaires prets a sideloader
+
+`watch/dist/tgmuscu.iq` (tous les appareils) et `watch/dist/tgmuscu-<modele>.prg` (fr965, fr265, venu3,
+vivoactive5, fenix7, epix2pro47mm, fenix843mm). Pour un autre modele : `cd watch && ./build.sh -d <id>`.
