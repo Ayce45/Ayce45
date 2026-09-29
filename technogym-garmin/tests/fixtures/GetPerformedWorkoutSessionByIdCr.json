@@ -1,0 +1,2912 @@
+{
+ "data": {
+  "isFromTgCoach": false,
+  "id": "00000000-0000-4000-8000-000000000028",
+  "sessionType": "Generic",
+  "displayName": "Programme d'entraînement de Utilisateur - Séance 3",
+  "name": "Programme d'entraînement de Utilisateur - Séance 3",
+  "physicalActivitiesGroups": [],
+  "extData": {
+   "mwc_workout_image": "https://cdnmedia.mywellness.com/training_program/wstp.jpg",
+   "mwc_client_application": "UnitySelf",
+   "mwc_full_workout_id": "W-78a84e2e9a0649c2bba72eaea9ab4ad9-TU-d3e61ee7d04a44519aa39645305a38a7-F-bcfb214b52a34b2bab00f9d198abc266",
+   "workoutType": "UserTrainingProgramWorkout"
+  },
+  "tpName": "Programme d'entraînement de Utilisateur",
+  "workoutEfficacy": 57,
+  "workoutEfficacyQuality": "Discreto",
+  "workoutEfficacyDescription": "Vous avez effectué un entraînement intense",
+  "physicalActivitiesCounter": 6,
+  "physicalActivitiesGroupedCounter": 6,
+  "workoutSessionStatus": "None",
+  "displayDuration": "40 minutes",
+  "displayDurationDone": "39 minutes",
+  "displayDurationShort": "40 min.",
+  "displayDurationDoneShort": "39 min.",
+  "displayCaloriesShort": "429 kcal",
+  "displayCaloriesDoneShort": "371 kcal",
+  "displayMoveShort": "816 MOVEs",
+  "displayMoveDoneShort": "662 MOVEs",
+  "startedInFacilityId": "00000000-0000-4000-8000-000000000002",
+  "idCr": 1146,
+  "startedOn": "2026-09-29 15:22:31 +02:00",
+  "closedOn": "2026-09-29",
+  "userWorkoutSessionId": "00000000-0000-4000-8000-000000000028",
+  "physicalActivities": [
+   {
+    "onlyTrackManually": false,
+    "equipmentCode": 13,
+    "physicalActivityCode": 3,
+    "targetType": "Duration",
+    "hasAdjustments": false,
+    "hasStructure": false,
+    "position": 1,
+    "estimatedDuration": 900,
+    "estimatedCalories": 122,
+    "estimatedMove": 231,
+    "isCardio": true,
+    "progress": 9161,
+    "status": "Done",
+    "hasBeenDonePartially": false,
+    "physicalActivityId": "00000000-0000-4000-8000-000000000012",
+    "physicalActivityType": "CardioPerConstWatt",
+    "physicalActivityShortName": "Exercice Personnalisé par temps",
+    "physicalActivityName": "Exercice Personnalisé par temps",
+    "equipmentName": "Bike",
+    "linkedEquipmentCodeOnWSKey": [
+     10,
+     45,
+     33,
+     1120,
+     47,
+     376,
+     1121,
+     1,
+     1125,
+     259,
+     1124,
+     1164,
+     1002,
+     1122,
+     1146,
+     34,
+     13,
+     1076,
+     1123,
+     31,
+     2034
+    ],
+    "pictureThumbUrl": "http://cdnmedia.mywellness.com/physical_activities/00000000-0000-4000-8000-000000000005/images/m188.jpg",
+    "pictureUrl": "<redacted>",
+    "videoUrl": "https://cdnmedia.mywellness.com/physical_activities/00000000-0000-4000-8000-000000000005/videos/m51524.f4v",
+    "muscles": [
+     {
+      "muscleType": "LowerBody",
+      "muscleName": "Membres inférieurs"
+     }
+    ],
+    "minStep": 1,
+    "maxStep": 30,
+    "displayDuration": "15 minutes",
+    "displayDurationDone": "15 minutes",
+    "displayDurationShort": "15 min.",
+    "displayDurationDoneShort": "15 min.",
+    "displayCaloriesShort": "122 kcal",
+    "displayCaloriesDoneShort": "120 kcal",
+    "displayMoveShort": "231 MOVEs",
+    "displayMoveDoneShort": "227 MOVEs",
+    "canEditWorkloads": true,
+    "canDeletePrescribed": false,
+    "canDeletePerformed": true,
+    "equipmentType": "UprightBike",
+    "targets": [
+     "Duration"
+    ],
+    "displayPrescibedPhysicalActivity": {
+     "availableStrategies": [],
+     "target": "Duration",
+     "availableTargets": [
+      {
+       "physicalProperty": "Duration",
+       "name": "Duration",
+       "displayName": "Durée",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "00:00",
+       "numberOfDecimals": 2,
+       "measurementUnitFormat": "FrmtTimeShort",
+       "formattedValue": "00:00 min",
+       "unitOfMeasure": "Minute",
+       "unitOfMeasureShortString": "min"
+      }
+     ],
+     "stepPropertyName": "Phase",
+     "stepCanBeMultiTarget": false,
+     "constraints": [
+      {
+       "physicalProperty": "Duration",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 0.08333,
+        "min": 0.25,
+        "max": 120.0
+       },
+       "measurementUnitFormat": "FrmtTimeShort",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "Power",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 10.0,
+        "max": 500.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      }
+     ],
+     "properties": [],
+     "executionProperties": [],
+     "steps": [
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 180.0,
+         "displayValue": 3.0,
+         "formattedDisplayValue": "03:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "03:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Power",
+         "name": "Power",
+         "displayName": "Puissance",
+         "value": 86.0,
+         "displayValue": 86.0,
+         "formattedDisplayValue": "86",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "86 watt",
+         "unitOfMeasure": "Watt",
+         "unitOfMeasureShortString": "watt",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 180.0,
+         "displayValue": 3.0,
+         "formattedDisplayValue": "03:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "03:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Power",
+         "name": "Power",
+         "displayName": "Puissance",
+         "value": 102.0,
+         "displayValue": 102.0,
+         "formattedDisplayValue": "102",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "102 watt",
+         "unitOfMeasure": "Watt",
+         "unitOfMeasureShortString": "watt",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 180.0,
+         "displayValue": 3.0,
+         "formattedDisplayValue": "03:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "03:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Power",
+         "name": "Power",
+         "displayName": "Puissance",
+         "value": 118.0,
+         "displayValue": 118.0,
+         "formattedDisplayValue": "118",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "118 watt",
+         "unitOfMeasure": "Watt",
+         "unitOfMeasureShortString": "watt",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 180.0,
+         "displayValue": 3.0,
+         "formattedDisplayValue": "03:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "03:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Power",
+         "name": "Power",
+         "displayName": "Puissance",
+         "value": 102.0,
+         "displayValue": 102.0,
+         "formattedDisplayValue": "102",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "102 watt",
+         "unitOfMeasure": "Watt",
+         "unitOfMeasureShortString": "watt",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 180.0,
+         "displayValue": 3.0,
+         "formattedDisplayValue": "03:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "03:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Power",
+         "name": "Power",
+         "displayName": "Puissance",
+         "value": 86.0,
+         "displayValue": 86.0,
+         "formattedDisplayValue": "86",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "86 watt",
+         "unitOfMeasure": "Watt",
+         "unitOfMeasureShortString": "watt",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      }
+     ],
+     "userReferenceValues": []
+    },
+    "analyticsId": "6abbbf5273012b7f8e0eaeb0",
+    "performedPhysicalActivity": {
+     "analiticsId": "6abbbf5273012b7f8e0eaeb0",
+     "extData": {
+      "race_profile_id": "",
+      "race_id": "",
+      "mwc_client_application": "VisioWow"
+     },
+     "id": "00000000-0000-4000-8000-000000000117",
+     "name": "Exercice Personnalisé par temps",
+     "shortName": "Exercice Personnalisé par temps",
+     "idCr": 1146,
+     "facilityId": "00000000-0000-4000-8000-000000000002",
+     "position": 1,
+     "doneAs": "Done",
+     "physicalActivity": "Exercice Personnalisé par temps",
+     "physicalActivityType": "CardioPerConstWatt",
+     "doneOn": "2026-09-29 15:38:26 +02:00",
+     "manuallyDone": false,
+     "data": {
+      "constraints": [
+       {
+        "physicalProperty": "HDistance",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 0.001,
+         "min": 0.0,
+         "max": 64.0
+        },
+        "measurementUnitFormat": "FrmtSingle2Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "AvgPower",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 30.0,
+         "max": 500.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Duration",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 0.01667,
+         "min": 0.01667,
+         "max": 533.33333
+        },
+        "measurementUnitFormat": "FrmtTimeShort",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Calories",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "WattMaxHr",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 0.0,
+         "max": 700.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Mets",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 5200.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Move",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "AvgHr",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 0.0,
+         "max": 220.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "MaxHr",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 220.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "MetsMin",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 5200.0
+        },
+        "measurementUnitFormat": "FrmtSingle1Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       }
+      ],
+      "data": [
+       {
+        "physicalProperty": "ExerciseCompliance",
+        "name": "ExerciseCompliance",
+        "displayName": "Conformité",
+        "value": 98.0,
+        "displayValue": 98.0,
+        "formattedDisplayValue": "98",
+        "numberOfDecimals": 0,
+        "measurementUnitFormat": "FrmtNumber",
+        "formattedValue": "98 %",
+        "unitOfMeasure": "Percent",
+        "unitOfMeasureShortString": "%"
+       },
+       {
+        "physicalProperty": "Duration",
+        "name": "Duration",
+        "displayName": "Durée",
+        "value": 900.0,
+        "displayValue": 15.0,
+        "formattedDisplayValue": "15:00",
+        "numberOfDecimals": 2,
+        "measurementUnitFormat": "FrmtTimeShort",
+        "formattedValue": "15:00 min",
+        "unitOfMeasure": "Minute",
+        "unitOfMeasureShortString": "min"
+       },
+       {
+        "physicalProperty": "HDistance",
+        "name": "HDistance",
+        "displayName": "Distance",
+        "value": 7440.0,
+        "displayValue": 7.44,
+        "formattedDisplayValue": "7,44",
+        "numberOfDecimals": 2,
+        "measurementUnitFormat": "FrmtSingle2Digit",
+        "formattedValue": "7,44 km",
+        "unitOfMeasure": "Km",
+        "unitOfMeasureShortString": "km"
+       },
+       {
+        "physicalProperty": "Calories",
+        "name": "Calories",
+        "displayName": "Calories",
+        "value": 120.0,
+        "displayValue": 120.0,
+        "formattedDisplayValue": "120",
+        "numberOfDecimals": 0,
+        "measurementUnitFormat": "FrmtNumber",
+        "formattedValue": "120 kcal",
+        "unitOfMeasure": "Kcal",
+        "unitOfMeasureShortString": "kcal"
+       },
+       {
+        "physicalProperty": "Move",
+        "name": "Move",
+        "displayName": "MOVEs",
+        "value": 227.0,
+        "displayValue": 227.0,
+        "formattedDisplayValue": "227",
+        "numberOfDecimals": 0,
+        "measurementUnitFormat": "FrmtNumber",
+        "formattedValue": "227 MOVEs",
+        "unitOfMeasure": "Move",
+        "unitOfMeasureShortString": "MOVEs"
+       },
+       {
+        "physicalProperty": "AvgPower",
+        "name": "AvgPower",
+        "displayName": "Puissance moyen",
+        "value": 97.786667,
+        "displayValue": 98.0,
+        "formattedDisplayValue": "98",
+        "numberOfDecimals": 0,
+        "measurementUnitFormat": "FrmtNumber",
+        "formattedValue": "98 watt",
+        "unitOfMeasure": "Watt",
+        "unitOfMeasureShortString": "watt"
+       },
+       {
+        "physicalProperty": "AvgSpeed",
+        "name": "AvgSpeed",
+        "displayName": "Vitesse moyenne",
+        "value": 29.76,
+        "displayValue": 29.8,
+        "formattedDisplayValue": "29,8",
+        "numberOfDecimals": 1,
+        "measurementUnitFormat": "FrmtSingle1Digit",
+        "formattedValue": "29,8 km/h",
+        "unitOfMeasure": "Km_h",
+        "unitOfMeasureShortString": "km/h"
+       }
+      ],
+      "steps": [
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       }
+      ]
+     },
+     "pictureUrl": "<redacted>",
+     "nAttr": 1002,
+     "nEser": 3,
+     "progress": 9085
+    },
+    "contextType": "Default"
+   },
+   {
+    "onlyTrackManually": false,
+    "equipmentCode": 1013,
+    "physicalActivityCode": 7,
+    "targetType": "Duration",
+    "hasAdjustments": false,
+    "hasStructure": false,
+    "position": 2,
+    "estimatedDuration": 900,
+    "estimatedCalories": 201,
+    "estimatedMove": 383,
+    "isCardio": true,
+    "progress": 50473,
+    "status": "Done",
+    "hasBeenDonePartially": false,
+    "physicalActivityId": "00000000-0000-4000-8000-000000000025",
+    "physicalActivityType": "CardioGoalTraining",
+    "physicalActivityShortName": "Exercice avec objectif temps",
+    "physicalActivityName": "Exercice avec objectif temps",
+    "equipmentName": "Climb",
+    "linkedEquipmentCodeOnWSKey": [
+     1145,
+     1116,
+     1011,
+     1114,
+     1119,
+     1118,
+     1115,
+     1012,
+     1013,
+     1117,
+     1226,
+     2036
+    ],
+    "pictureThumbUrl": "https://cmsmedia.mywellness.com/5bf51e0109ee93b5aef82c77/exercise/all/climb_excite_freemode/climb_excite_freemode.jpg",
+    "pictureUrl": "<redacted>",
+    "videoUrl": "https://cdnmedia.mywellness.com/physical_activities/00000000-0000-4000-8000-000000000005/videos/m51505.f4v",
+    "muscles": [
+     {
+      "muscleType": "LowerBody",
+      "muscleName": "Membres inférieurs"
+     }
+    ],
+    "minStep": 1,
+    "maxStep": 30,
+    "displayDuration": "15 minutes",
+    "displayDurationDone": "15 minutes",
+    "displayDurationShort": "15 min.",
+    "displayDurationDoneShort": "15 min.",
+    "displayCaloriesShort": "201 kcal",
+    "displayCaloriesDoneShort": "201 kcal",
+    "displayMoveShort": "383 MOVEs",
+    "displayMoveDoneShort": "339 MOVEs",
+    "canEditWorkloads": true,
+    "canDeletePrescribed": false,
+    "canDeletePerformed": true,
+    "equipmentType": "Climb",
+    "targets": [
+     "Duration"
+    ],
+    "displayPrescibedPhysicalActivity": {
+     "availableStrategies": [],
+     "target": "Duration",
+     "availableTargets": [
+      {
+       "physicalProperty": "Duration",
+       "name": "Duration",
+       "displayName": "Durée",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "00:00",
+       "numberOfDecimals": 2,
+       "measurementUnitFormat": "FrmtTimeShort",
+       "formattedValue": "00:00 min",
+       "unitOfMeasure": "Minute",
+       "unitOfMeasureShortString": "min"
+      }
+     ],
+     "stepPropertyName": "Phase",
+     "stepCanBeMultiTarget": false,
+     "constraints": [
+      {
+       "physicalProperty": "Duration",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 0.08333,
+        "min": 0.25,
+        "max": 120.0
+       },
+       "measurementUnitFormat": "FrmtTimeShort",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "Level",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 30.0
+       },
+       "isReadOnly": false,
+       "visibility": "Visible"
+      }
+     ],
+     "properties": [],
+     "executionProperties": [],
+     "steps": [
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 9.0,
+         "displayValue": 9.0,
+         "formattedDisplayValue": "9",
+         "numberOfDecimals": 0,
+         "formattedValue": "9",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "formattedValue": "10",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 12.0,
+         "displayValue": 12.0,
+         "formattedDisplayValue": "12",
+         "numberOfDecimals": 0,
+         "formattedValue": "12",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 9.0,
+         "displayValue": 9.0,
+         "formattedDisplayValue": "9",
+         "numberOfDecimals": 0,
+         "formattedValue": "9",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "formattedValue": "10",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 12.0,
+         "displayValue": 12.0,
+         "formattedDisplayValue": "12",
+         "numberOfDecimals": 0,
+         "formattedValue": "12",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 9.0,
+         "displayValue": 9.0,
+         "formattedDisplayValue": "9",
+         "numberOfDecimals": 0,
+         "formattedValue": "9",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "formattedValue": "10",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 12.0,
+         "displayValue": 12.0,
+         "formattedDisplayValue": "12",
+         "numberOfDecimals": 0,
+         "formattedValue": "12",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 9.0,
+         "displayValue": 9.0,
+         "formattedDisplayValue": "9",
+         "numberOfDecimals": 0,
+         "formattedValue": "9",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "formattedValue": "10",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 12.0,
+         "displayValue": 12.0,
+         "formattedDisplayValue": "12",
+         "numberOfDecimals": 0,
+         "formattedValue": "12",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 9.0,
+         "displayValue": 9.0,
+         "formattedDisplayValue": "9",
+         "numberOfDecimals": 0,
+         "formattedValue": "9",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "formattedValue": "10",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 60.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "01:00",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtTimeShort",
+         "formattedValue": "01:00 min",
+         "unitOfMeasure": "Minute",
+         "unitOfMeasureShortString": "min",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "Level",
+         "name": "Level",
+         "displayName": "Niveau",
+         "value": 12.0,
+         "displayValue": 12.0,
+         "formattedDisplayValue": "12",
+         "numberOfDecimals": 0,
+         "formattedValue": "12",
+         "unitOfMeasure": "Number",
+         "unitOfMeasureShortString": "",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      }
+     ],
+     "userReferenceValues": []
+    },
+    "analyticsId": "6abbc3930f50d2d09ef9af63",
+    "performedPhysicalActivity": {
+     "analiticsId": "6abbc3930f50d2d09ef9af63",
+     "extData": {
+      "mwc_training_id": "00000000-0000-4000-8000-000000000118",
+      "race_profile_id": "",
+      "race_id": "",
+      "mwc_so_version": "10.17.0.298",
+      "mwc_training_package_name": "com.technogym.android.visiowow.training.goaltime",
+      "mwc_client_application": "UnityCoach"
+     },
+     "id": "00000000-0000-4000-8000-000000000119",
+     "name": "Exercice avec objectif temps",
+     "shortName": "Exercice avec objectif temps",
+     "idCr": 1146,
+     "facilityId": "00000000-0000-4000-8000-000000000002",
+     "position": 2,
+     "doneAs": "Done",
+     "physicalActivity": "Exercice avec objectif temps",
+     "physicalActivityType": "CardioGoalTraining",
+     "doneOn": "2026-09-29 15:56:35 +02:00",
+     "manuallyDone": false,
+     "data": {
+      "constraints": [
+       {
+        "physicalProperty": "Floors",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 0.1,
+         "min": 0.0,
+         "max": 6500.0
+        },
+        "measurementUnitFormat": "FrmtSingle1Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Level",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 0.0,
+         "max": 30.0
+        },
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Duration",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 0.01667,
+         "min": 0.01667,
+         "max": 533.33333
+        },
+        "measurementUnitFormat": "FrmtTimeShort",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Calories",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Mets",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 5200.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Move",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "MetsMin",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 5200.0
+        },
+        "measurementUnitFormat": "FrmtSingle1Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "AvgHr",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 0.0,
+         "max": 220.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       }
+      ],
+      "data": [
+       {
+        "physicalProperty": "Duration",
+        "name": "Duration",
+        "displayName": "Durée",
+        "value": 900.0,
+        "displayValue": 15.0,
+        "formattedDisplayValue": "15:00",
+        "numberOfDecimals": 2,
+        "measurementUnitFormat": "FrmtTimeShort",
+        "formattedValue": "15:00 min",
+        "unitOfMeasure": "Minute",
+        "unitOfMeasureShortString": "min"
+       },
+       {
+        "physicalProperty": "Level",
+        "name": "Level",
+        "displayName": "Niveau",
+        "value": 10.33,
+        "displayValue": 10.0,
+        "formattedDisplayValue": "10,33",
+        "numberOfDecimals": 0,
+        "formattedValue": "10,33",
+        "unitOfMeasure": "Number",
+        "unitOfMeasureShortString": ""
+       },
+       {
+        "physicalProperty": "Floors",
+        "name": "Floors",
+        "displayName": "Étages",
+        "value": 200.0,
+        "displayValue": 62.5,
+        "formattedDisplayValue": "62,5",
+        "numberOfDecimals": 1,
+        "measurementUnitFormat": "FrmtSingle1Digit",
+        "formattedValue": "62,5 étages",
+        "unitOfMeasure": "Floors",
+        "unitOfMeasureShortString": "étages"
+       },
+       {
+        "physicalProperty": "Calories",
+        "name": "Calories",
+        "displayName": "Calories",
+        "value": 201.0,
+        "displayValue": 201.0,
+        "formattedDisplayValue": "201",
+        "numberOfDecimals": 0,
+        "measurementUnitFormat": "FrmtNumber",
+        "formattedValue": "201 kcal",
+        "unitOfMeasure": "Kcal",
+        "unitOfMeasureShortString": "kcal"
+       },
+       {
+        "physicalProperty": "Move",
+        "name": "Move",
+        "displayName": "MOVEs",
+        "value": 339.0,
+        "displayValue": 339.0,
+        "formattedDisplayValue": "339",
+        "numberOfDecimals": 0,
+        "measurementUnitFormat": "FrmtNumber",
+        "formattedValue": "339 MOVEs",
+        "unitOfMeasure": "Move",
+        "unitOfMeasureShortString": "MOVEs"
+       }
+      ],
+      "steps": [
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       },
+       {
+        "data": []
+       }
+      ]
+     },
+     "pictureUrl": "<redacted>",
+     "nAttr": 1011,
+     "nEser": 7,
+     "progress": 50449
+    },
+    "contextType": "Default"
+   },
+   {
+    "onlyTrackManually": false,
+    "equipmentCode": 173,
+    "physicalActivityCode": 2,
+    "targetType": "IsoReps",
+    "hasAdjustments": true,
+    "hasStructure": false,
+    "position": 3,
+    "estimatedDuration": 300,
+    "estimatedCalories": 56,
+    "estimatedMove": 106,
+    "isCardio": false,
+    "progress": 20066,
+    "status": "ToDo",
+    "hasBeenDonePartially": false,
+    "physicalActivityId": "00000000-0000-4000-8000-000000000006",
+    "physicalActivityType": "StrengthLoad",
+    "physicalActivityShortName": "Extension des jambes",
+    "physicalActivityName": "Leg press Sel: Extension des jambes",
+    "equipmentName": "Leg press Sel",
+    "linkedEquipmentCodeOnWSKey": [
+     173
+    ],
+    "pictureThumbUrl": "https://cmsmedia.mywellness.com/5bf51e0109ee93b5aef82c77/exercise_cms/all/m725/20260129_151629/m725_thumb.jpg",
+    "pictureUrl": "<redacted>",
+    "videoUrl": "https://cmsmedia.mywellness.com/5bf51e0109ee93b5aef82c77/exercise/all/m725/m725.mp4",
+    "muscles": [
+     {
+      "muscleType": "Quadriceps",
+      "muscleName": "Quadriceps"
+     },
+     {
+      "muscleType": "Gluteus",
+      "muscleName": "Fessiers"
+     },
+     {
+      "muscleType": "Hamstrings",
+      "muscleName": "Ischio-jambiers"
+     }
+    ],
+    "minStep": 1,
+    "maxStep": 10,
+    "displayDuration": "5 minutes",
+    "displayDurationDone": "",
+    "displayDurationShort": "5 min.",
+    "displayDurationDoneShort": "",
+    "displayCaloriesShort": "56 kcal",
+    "displayCaloriesDoneShort": "",
+    "displayMoveShort": "106 MOVEs",
+    "displayMoveDoneShort": "",
+    "canEditWorkloads": true,
+    "canDeletePrescribed": false,
+    "canDeletePerformed": false,
+    "equipmentType": "SelectorizedLegPress",
+    "targets": [
+     "IsoReps",
+     "Duration"
+    ],
+    "displayPrescibedPhysicalActivity": {
+     "availableStrategies": [],
+     "target": "IsoReps",
+     "availableTargets": [
+      {
+       "physicalProperty": "IsoReps",
+       "name": "IsoReps",
+       "displayName": "Répétitions",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "0",
+       "numberOfDecimals": 0,
+       "measurementUnitFormat": "FrmtNumber",
+       "formattedValue": "0 reps",
+       "unitOfMeasure": "Reps",
+       "unitOfMeasureShortString": "reps"
+      },
+      {
+       "physicalProperty": "Duration",
+       "name": "Duration",
+       "displayName": "Durée",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "0",
+       "numberOfDecimals": 0,
+       "measurementUnitFormat": "FrmtNumber",
+       "formattedValue": "0 sec",
+       "unitOfMeasure": "Sec",
+       "unitOfMeasureShortString": "sec"
+      }
+     ],
+     "stepPropertyName": "Série",
+     "stepCanBeMultiTarget": false,
+     "constraints": [
+      {
+       "physicalProperty": "IsoReps",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 30.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "IsoWeight",
+       "constraintType": "WeightStack",
+       "weightStackConstraint": {
+        "id": 1,
+        "inverseLoad": false,
+        "canSetZeroLoad": false,
+        "additionalWeight": 0.0,
+        "minWeight": 5.0,
+        "maxWeight": 250.0,
+        "plates": [
+         {
+          "from": 1,
+          "to": 2,
+          "weight": 5.0,
+          "numberOfPlates": 2,
+          "minWeight": 5.0,
+          "maxWeight": 10.0
+         },
+         {
+          "from": 3,
+          "to": 26,
+          "weight": 10.0,
+          "numberOfPlates": 24,
+          "minWeight": 20.0,
+          "maxWeight": 250.0
+         }
+        ],
+        "levelOrPlatesUnitOfMeasure": "Kg"
+       },
+       "measurementUnitFormat": "FrmtSingle2Digit",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "RestTime",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 240.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      }
+     ],
+     "properties": [],
+     "executionProperties": [],
+     "steps": [
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "10 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 80.0,
+         "displayValue": 80.0,
+         "formattedDisplayValue": "80",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "80 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 45.0,
+         "displayValue": 45.0,
+         "formattedDisplayValue": "45",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "45 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "10 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 80.0,
+         "displayValue": 80.0,
+         "formattedDisplayValue": "80",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "80 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 45.0,
+         "displayValue": 45.0,
+         "formattedDisplayValue": "45",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "45 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "10 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 80.0,
+         "displayValue": 80.0,
+         "formattedDisplayValue": "80",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "80 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 45.0,
+         "displayValue": 45.0,
+         "formattedDisplayValue": "45",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "45 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 10.0,
+         "displayValue": 10.0,
+         "formattedDisplayValue": "10",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "10 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 80.0,
+         "displayValue": 80.0,
+         "formattedDisplayValue": "80",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "80 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 45.0,
+         "displayValue": 45.0,
+         "formattedDisplayValue": "45",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "45 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      }
+     ],
+     "userReferenceValues": [],
+     "extData": {
+      "mwc_default_rep_duration": "3"
+     }
+    },
+    "contextType": "Default"
+   },
+   {
+    "onlyTrackManually": false,
+    "equipmentCode": 216,
+    "physicalActivityCode": 1,
+    "targetType": "IsoReps",
+    "hasAdjustments": true,
+    "hasStructure": false,
+    "position": 4,
+    "estimatedDuration": 240,
+    "estimatedCalories": 46,
+    "estimatedMove": 88,
+    "isCardio": false,
+    "progress": 20483,
+    "status": "Done",
+    "hasBeenDonePartially": false,
+    "physicalActivityId": "00000000-0000-4000-8000-000000000011",
+    "physicalActivityType": "StrengthLoad",
+    "physicalActivityShortName": "Flexion du buste",
+    "physicalActivityName": "Flexion du buste",
+    "equipmentName": "Total abdominal Sel",
+    "linkedEquipmentCodeOnWSKey": [
+     216
+    ],
+    "pictureThumbUrl": "http://cdnmedia.mywellness.com/physical_activities/00000000-0000-4000-8000-000000000005/images/m857.jpg",
+    "pictureUrl": "<redacted>",
+    "videoUrl": "https://cdnmedia.mywellness.com/physical_activities/00000000-0000-4000-8000-000000000005/videos/m857.f4v",
+    "muscles": [
+     {
+      "muscleType": "Abdominals",
+      "muscleName": "Abdominaux"
+     }
+    ],
+    "minStep": 1,
+    "maxStep": 10,
+    "displayDuration": "4 minutes",
+    "displayDurationDone": "7 minutes",
+    "displayDurationShort": "4 min.",
+    "displayDurationDoneShort": "7 min.",
+    "displayCaloriesShort": "46 kcal",
+    "displayCaloriesDoneShort": "46 kcal",
+    "displayMoveShort": "88 MOVEs",
+    "displayMoveDoneShort": "88 MOVEs",
+    "canEditWorkloads": true,
+    "canDeletePrescribed": false,
+    "canDeletePerformed": true,
+    "equipmentType": "SelectorizedTotalAbdominal",
+    "targets": [
+     "IsoReps",
+     "Duration"
+    ],
+    "displayPrescibedPhysicalActivity": {
+     "availableStrategies": [],
+     "target": "IsoReps",
+     "availableTargets": [
+      {
+       "physicalProperty": "IsoReps",
+       "name": "IsoReps",
+       "displayName": "Répétitions",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "0",
+       "numberOfDecimals": 0,
+       "measurementUnitFormat": "FrmtNumber",
+       "formattedValue": "0 reps",
+       "unitOfMeasure": "Reps",
+       "unitOfMeasureShortString": "reps"
+      },
+      {
+       "physicalProperty": "Duration",
+       "name": "Duration",
+       "displayName": "Durée",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "0",
+       "numberOfDecimals": 0,
+       "measurementUnitFormat": "FrmtNumber",
+       "formattedValue": "0 sec",
+       "unitOfMeasure": "Sec",
+       "unitOfMeasureShortString": "sec"
+      }
+     ],
+     "stepPropertyName": "Série",
+     "stepCanBeMultiTarget": false,
+     "constraints": [
+      {
+       "physicalProperty": "IsoReps",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 30.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "IsoWeight",
+       "constraintType": "WeightStack",
+       "weightStackConstraint": {
+        "id": 1,
+        "inverseLoad": false,
+        "canSetZeroLoad": false,
+        "additionalWeight": 2.5,
+        "minWeight": 2.5,
+        "maxWeight": 127.5,
+        "plates": [
+         {
+          "from": 1,
+          "to": 2,
+          "weight": 2.5,
+          "numberOfPlates": 2,
+          "minWeight": 2.5,
+          "maxWeight": 5.0
+         },
+         {
+          "from": 3,
+          "to": 26,
+          "weight": 5.0,
+          "numberOfPlates": 24,
+          "minWeight": 10.0,
+          "maxWeight": 125.0
+         }
+        ],
+        "levelOrPlatesUnitOfMeasure": "Kg"
+       },
+       "measurementUnitFormat": "FrmtSingle2Digit",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "RestTime",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 240.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      }
+     ],
+     "properties": [],
+     "executionProperties": [],
+     "steps": [
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 15.0,
+         "displayValue": 15.0,
+         "formattedDisplayValue": "15",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "15 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 40.0,
+         "displayValue": 40.0,
+         "formattedDisplayValue": "40",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "40 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 30.0,
+         "displayValue": 30.0,
+         "formattedDisplayValue": "30",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "30 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 15.0,
+         "displayValue": 15.0,
+         "formattedDisplayValue": "15",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "15 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 40.0,
+         "displayValue": 40.0,
+         "formattedDisplayValue": "40",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "40 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 30.0,
+         "displayValue": 30.0,
+         "formattedDisplayValue": "30",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "30 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 15.0,
+         "displayValue": 15.0,
+         "formattedDisplayValue": "15",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "15 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 40.0,
+         "displayValue": 40.0,
+         "formattedDisplayValue": "40",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "40 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 30.0,
+         "displayValue": 30.0,
+         "formattedDisplayValue": "30",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "30 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      },
+      {
+       "properties": [
+        {
+         "physicalProperty": "IsoReps",
+         "name": "IsoReps",
+         "displayName": "Répétitions",
+         "value": 15.0,
+         "displayValue": 15.0,
+         "formattedDisplayValue": "15",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "15 reps",
+         "unitOfMeasure": "Reps",
+         "unitOfMeasureShortString": "reps",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "IsoWeight",
+         "name": "IsoWeight",
+         "displayName": "Charge de travail",
+         "value": 40.0,
+         "displayValue": 40.0,
+         "formattedDisplayValue": "40",
+         "numberOfDecimals": 2,
+         "measurementUnitFormat": "FrmtSingle2Digit",
+         "formattedValue": "40 kg",
+         "unitOfMeasure": "Kg",
+         "unitOfMeasureShortString": "kg",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 30.0,
+         "displayValue": 30.0,
+         "formattedDisplayValue": "30",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "30 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      }
+     ],
+     "userReferenceValues": [],
+     "extData": {
+      "mwc_default_rep_duration": "2"
+     }
+    },
+    "performedPhysicalActivity": {
+     "extData": {
+      "mwc_client_application": "UnityStrength"
+     },
+     "id": "00000000-0000-4000-8000-000000000120",
+     "name": "Flexion du buste",
+     "shortName": "Flexion du buste",
+     "idCr": 1146,
+     "facilityId": "00000000-0000-4000-8000-000000000002",
+     "position": 4,
+     "doneAs": "Done",
+     "physicalActivity": "Flexion du buste",
+     "physicalActivityType": "StrengthLoad",
+     "doneOn": "2026-09-29 16:06:38 +02:00",
+     "manuallyDone": false,
+     "data": {
+      "constraints": [
+       {
+        "physicalProperty": "Duration",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 255.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Move",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 0.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "MetsMin",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 5200.0
+        },
+        "measurementUnitFormat": "FrmtSingle1Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Calories",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 0.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "TotalIsoWeight",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 0.01,
+         "min": 0.0,
+         "max": 150000.0
+        },
+        "measurementUnitFormat": "FrmtSingle2Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Rm1",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 0.01,
+         "min": 0.0,
+         "max": 150000.0
+        },
+        "measurementUnitFormat": "FrmtSingle2Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "IsoReps",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 30.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "RestTime",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 240.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "IsoWeight",
+        "constraintType": "WeightStack",
+        "weightStackConstraint": {
+         "id": 1,
+         "inverseLoad": false,
+         "canSetZeroLoad": false,
+         "additionalWeight": 2.5,
+         "minWeight": 2.5,
+         "maxWeight": 127.5,
+         "plates": [
+          {
+           "from": 1,
+           "to": 2,
+           "weight": 2.5,
+           "numberOfPlates": 2,
+           "minWeight": 2.5,
+           "maxWeight": 5.0
+          },
+          {
+           "from": 3,
+           "to": 26,
+           "weight": 5.0,
+           "numberOfPlates": 24,
+           "minWeight": 10.0,
+           "maxWeight": 125.0
+          }
+         ],
+         "levelOrPlatesUnitOfMeasure": "Kg"
+        },
+        "measurementUnitFormat": "FrmtSingle2Digit",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       }
+      ],
+      "data": [],
+      "steps": [
+       {
+        "data": [
+         {
+          "physicalProperty": "IsoReps",
+          "name": "IsoReps",
+          "displayName": "Répétitions",
+          "value": 15.0,
+          "displayValue": 15.0,
+          "formattedDisplayValue": "15",
+          "numberOfDecimals": 0,
+          "measurementUnitFormat": "FrmtNumber",
+          "formattedValue": "15 reps",
+          "unitOfMeasure": "Reps",
+          "unitOfMeasureShortString": "reps"
+         },
+         {
+          "physicalProperty": "IsoWeight",
+          "name": "IsoWeight",
+          "displayName": "Charge de travail",
+          "value": 40.0,
+          "displayValue": 40.0,
+          "formattedDisplayValue": "40",
+          "numberOfDecimals": 2,
+          "measurementUnitFormat": "FrmtSingle2Digit",
+          "formattedValue": "40 kg",
+          "unitOfMeasure": "Kg",
+          "unitOfMeasureShortString": "kg"
+         }
+        ]
+       },
+       {
+        "data": [
+         {
+          "physicalProperty": "IsoReps",
+          "name": "IsoReps",
+          "displayName": "Répétitions",
+          "value": 15.0,
+          "displayValue": 15.0,
+          "formattedDisplayValue": "15",
+          "numberOfDecimals": 0,
+          "measurementUnitFormat": "FrmtNumber",
+          "formattedValue": "15 reps",
+          "unitOfMeasure": "Reps",
+          "unitOfMeasureShortString": "reps"
+         },
+         {
+          "physicalProperty": "IsoWeight",
+          "name": "IsoWeight",
+          "displayName": "Charge de travail",
+          "value": 40.0,
+          "displayValue": 40.0,
+          "formattedDisplayValue": "40",
+          "numberOfDecimals": 2,
+          "measurementUnitFormat": "FrmtSingle2Digit",
+          "formattedValue": "40 kg",
+          "unitOfMeasure": "Kg",
+          "unitOfMeasureShortString": "kg"
+         }
+        ]
+       },
+       {
+        "data": [
+         {
+          "physicalProperty": "IsoReps",
+          "name": "IsoReps",
+          "displayName": "Répétitions",
+          "value": 15.0,
+          "displayValue": 15.0,
+          "formattedDisplayValue": "15",
+          "numberOfDecimals": 0,
+          "measurementUnitFormat": "FrmtNumber",
+          "formattedValue": "15 reps",
+          "unitOfMeasure": "Reps",
+          "unitOfMeasureShortString": "reps"
+         },
+         {
+          "physicalProperty": "IsoWeight",
+          "name": "IsoWeight",
+          "displayName": "Charge de travail",
+          "value": 40.0,
+          "displayValue": 40.0,
+          "formattedDisplayValue": "40",
+          "numberOfDecimals": 2,
+          "measurementUnitFormat": "FrmtSingle2Digit",
+          "formattedValue": "40 kg",
+          "unitOfMeasure": "Kg",
+          "unitOfMeasureShortString": "kg"
+         }
+        ]
+       },
+       {
+        "data": [
+         {
+          "physicalProperty": "IsoReps",
+          "name": "IsoReps",
+          "displayName": "Répétitions",
+          "value": 15.0,
+          "displayValue": 15.0,
+          "formattedDisplayValue": "15",
+          "numberOfDecimals": 0,
+          "measurementUnitFormat": "FrmtNumber",
+          "formattedValue": "15 reps",
+          "unitOfMeasure": "Reps",
+          "unitOfMeasureShortString": "reps"
+         },
+         {
+          "physicalProperty": "IsoWeight",
+          "name": "IsoWeight",
+          "displayName": "Charge de travail",
+          "value": 40.0,
+          "displayValue": 40.0,
+          "formattedDisplayValue": "40",
+          "numberOfDecimals": 2,
+          "measurementUnitFormat": "FrmtSingle2Digit",
+          "formattedValue": "40 kg",
+          "unitOfMeasure": "Kg",
+          "unitOfMeasureShortString": "kg"
+         }
+        ]
+       }
+      ]
+     },
+     "pictureUrl": "<redacted>",
+     "nAttr": 216,
+     "nEser": 1,
+     "progress": 20483
+    },
+    "contextType": "Default"
+   },
+   {
+    "onlyTrackManually": true,
+    "equipmentCode": 25000,
+    "physicalActivityCode": 117,
+    "targetType": "Duration",
+    "hasAdjustments": false,
+    "hasStructure": false,
+    "position": 5,
+    "estimatedDuration": 31,
+    "estimatedCalories": 2,
+    "estimatedMove": 4,
+    "isCardio": false,
+    "progress": 3204,
+    "status": "Done",
+    "hasBeenDonePartially": false,
+    "physicalActivityId": "00000000-0000-4000-8000-000000000029",
+    "physicalActivityType": "Stretching",
+    "physicalActivityShortName": "Obliques debout - inclinaison du buste avec 1 bras en haut",
+    "physicalActivityName": "Obliques debout - inclinaison du buste avec 1 bras en haut",
+    "equipmentName": "Étirement",
+    "linkedEquipmentCodeOnWSKey": [
+     25000
+    ],
+    "pictureThumbUrl": "https://cmsmedia.mywellness.com/5bf51e0109ee93b5aef82c77/exercise_cms/all/m037/20250310_164214/m037.jpg",
+    "pictureUrl": "<redacted>",
+    "videoUrl": "https://cmsmedia.mywellness.com/5bf51e0109ee93b5aef82c77/exercise_cms/all/m037/20250725_1453/m037.mp4",
+    "guideMeText": "Stand with feet shoulder width apart, arms at sides. Extend the right arm overhead and slowly flex laterally to the left, reaching the left arm toward the ground until a stretch is felt in the right side. To deepen the stretch, continue to reach through the extended arm past vertical and toward to the opposite side. Be sure to keep the shoulders square and not to rotate through the hips. Hold the stretch for the desired duration.",
+    "muscles": [
+     {
+      "muscleType": "LateralsBack",
+      "muscleName": "Upper Back"
+     },
+     {
+      "muscleType": "Oblique",
+      "muscleName": "Obliques"
+     }
+    ],
+    "minStep": 1,
+    "maxStep": 10,
+    "displayDuration": "1 minutes",
+    "displayDurationDone": "1 minutes",
+    "displayDurationShort": "1 min.",
+    "displayDurationDoneShort": "1 min.",
+    "displayCaloriesShort": "2 kcal",
+    "displayCaloriesDoneShort": "2 kcal",
+    "displayMoveShort": "4 MOVEs",
+    "displayMoveDoneShort": "4 MOVEs",
+    "canEditWorkloads": true,
+    "canDeletePrescribed": false,
+    "canDeletePerformed": true,
+    "equipmentType": "NoEquipmentMobilityAndFlexibility",
+    "targets": [
+     "Duration"
+    ],
+    "displayPrescibedPhysicalActivity": {
+     "availableStrategies": [],
+     "target": "Duration",
+     "availableTargets": [
+      {
+       "physicalProperty": "Duration",
+       "name": "Duration",
+       "displayName": "Durée",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "0",
+       "numberOfDecimals": 0,
+       "measurementUnitFormat": "FrmtNumber",
+       "formattedValue": "0 sec",
+       "unitOfMeasure": "Sec",
+       "unitOfMeasureShortString": "sec"
+      }
+     ],
+     "stepPropertyName": "Série",
+     "stepCanBeMultiTarget": false,
+     "constraints": [
+      {
+       "physicalProperty": "Duration",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 255.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "RestTime",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 240.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      }
+     ],
+     "properties": [],
+     "executionProperties": [],
+     "steps": [
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 30.0,
+         "displayValue": 30.0,
+         "formattedDisplayValue": "30",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "30 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 1.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "1",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "1 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      }
+     ],
+     "userReferenceValues": []
+    },
+    "performedPhysicalActivity": {
+     "extData": {
+      "mwc_client_application": "UnitySelf"
+     },
+     "id": "00000000-0000-4000-8000-000000000121",
+     "name": "Obliques debout - inclinaison du buste avec 1 bras en haut",
+     "shortName": "Obliques debout - inclinaison du buste avec 1 bras en haut",
+     "idCr": 1146,
+     "facilityId": "00000000-0000-4000-8000-000000000002",
+     "position": 5,
+     "doneAs": "Done",
+     "physicalActivity": "Obliques debout - inclinaison du buste avec 1 bras en haut",
+     "physicalActivityType": "Stretching",
+     "doneOn": "2026-09-29 16:15:43 +02:00",
+     "manuallyDone": true,
+     "data": {
+      "constraints": [
+       {
+        "physicalProperty": "Calories",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Duration",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 255.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Move",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "RestTime",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 240.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       }
+      ],
+      "data": [],
+      "steps": [
+       {
+        "data": [
+         {
+          "physicalProperty": "Duration",
+          "name": "Duration",
+          "displayName": "Durée",
+          "value": 30.0,
+          "displayValue": 30.0,
+          "formattedDisplayValue": "30",
+          "numberOfDecimals": 0,
+          "measurementUnitFormat": "FrmtNumber",
+          "formattedValue": "30 sec",
+          "unitOfMeasure": "Sec",
+          "unitOfMeasureShortString": "sec"
+         }
+        ]
+       }
+      ]
+     },
+     "pictureUrl": "<redacted>",
+     "nAttr": 25000,
+     "nEser": 117,
+     "progress": 3204
+    },
+    "contextType": "Default"
+   },
+   {
+    "onlyTrackManually": true,
+    "equipmentCode": 25000,
+    "physicalActivityCode": 411,
+    "targetType": "Duration",
+    "hasAdjustments": false,
+    "hasStructure": false,
+    "position": 6,
+    "estimatedDuration": 31,
+    "estimatedCalories": 2,
+    "estimatedMove": 4,
+    "isCardio": false,
+    "progress": 22373,
+    "status": "Done",
+    "hasBeenDonePartially": false,
+    "physicalActivityId": "00000000-0000-4000-8000-000000000030",
+    "physicalActivityType": "Stretching",
+    "physicalActivityShortName": "Position de l'enfant",
+    "physicalActivityName": "Position de l'enfant",
+    "equipmentName": "Étirement",
+    "linkedEquipmentCodeOnWSKey": [
+     25000
+    ],
+    "pictureThumbUrl": "https://cmsmedia.mywellness.com/5bf51e0109ee93b5aef82c77/exercise_cms/all/m2588/20250310_170934/m2588.jpg",
+    "pictureUrl": "<redacted>",
+    "videoUrl": "https://cmsmedia.mywellness.com/5bf51e0109ee93b5aef82c77/exercise_cms/all/m2588/20250725_1453/m2588.mp4",
+    "guideMeText": "Start in a table top position with the wrists under the shoulders and the knees under the hips. Sink the hips back towards the heels. Lower your body onto your thighs as you extend your arms out in front. Relax the muscles of your neck as you release your forehead towards the floor.",
+    "muscles": [
+     {
+      "muscleType": "LowerBack",
+      "muscleName": "Lombaires"
+     },
+     {
+      "muscleType": "Paravertebrals",
+      "muscleName": "Muscles paravertébraux"
+     }
+    ],
+    "minStep": 1,
+    "maxStep": 10,
+    "displayDuration": "1 minutes",
+    "displayDurationDone": "1 minutes",
+    "displayDurationShort": "1 min.",
+    "displayDurationDoneShort": "1 min.",
+    "displayCaloriesShort": "2 kcal",
+    "displayCaloriesDoneShort": "2 kcal",
+    "displayMoveShort": "4 MOVEs",
+    "displayMoveDoneShort": "4 MOVEs",
+    "canEditWorkloads": true,
+    "canDeletePrescribed": false,
+    "canDeletePerformed": true,
+    "equipmentType": "NoEquipmentMobilityAndFlexibility",
+    "targets": [
+     "Duration"
+    ],
+    "displayPrescibedPhysicalActivity": {
+     "availableStrategies": [],
+     "target": "Duration",
+     "availableTargets": [
+      {
+       "physicalProperty": "Duration",
+       "name": "Duration",
+       "displayName": "Durée",
+       "value": 0.0,
+       "displayValue": 0.0,
+       "formattedDisplayValue": "0",
+       "numberOfDecimals": 0,
+       "measurementUnitFormat": "FrmtNumber",
+       "formattedValue": "0 sec",
+       "unitOfMeasure": "Sec",
+       "unitOfMeasureShortString": "sec"
+      }
+     ],
+     "stepPropertyName": "Série",
+     "stepCanBeMultiTarget": false,
+     "constraints": [
+      {
+       "physicalProperty": "Duration",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 255.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      },
+      {
+       "physicalProperty": "RestTime",
+       "constraintType": "DiscreteRange",
+       "discreteRange": {
+        "step": 1.0,
+        "min": 1.0,
+        "max": 240.0
+       },
+       "measurementUnitFormat": "FrmtNumber",
+       "isReadOnly": false,
+       "visibility": "Visible"
+      }
+     ],
+     "properties": [],
+     "executionProperties": [],
+     "steps": [
+      {
+       "properties": [
+        {
+         "physicalProperty": "Duration",
+         "name": "Duration",
+         "displayName": "Durée",
+         "value": 30.0,
+         "displayValue": 30.0,
+         "formattedDisplayValue": "30",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "30 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        },
+        {
+         "physicalProperty": "RestTime",
+         "name": "RestTime",
+         "displayName": "Récupération",
+         "value": 1.0,
+         "displayValue": 1.0,
+         "formattedDisplayValue": "1",
+         "numberOfDecimals": 0,
+         "measurementUnitFormat": "FrmtNumber",
+         "formattedValue": "1 sec",
+         "unitOfMeasure": "Sec",
+         "unitOfMeasureShortString": "sec",
+         "isCalculated": false
+        }
+       ],
+       "executionProperties": []
+      }
+     ],
+     "userReferenceValues": []
+    },
+    "performedPhysicalActivity": {
+     "extData": {
+      "mwc_client_application": "UnitySelf"
+     },
+     "id": "00000000-0000-4000-8000-000000000122",
+     "name": "Position de l'enfant",
+     "shortName": "Position de l'enfant",
+     "idCr": 1146,
+     "facilityId": "00000000-0000-4000-8000-000000000002",
+     "position": 6,
+     "doneAs": "Done",
+     "physicalActivity": "Position de l'enfant",
+     "physicalActivityType": "Stretching",
+     "doneOn": "2026-09-29 16:15:45 +02:00",
+     "manuallyDone": true,
+     "data": {
+      "constraints": [
+       {
+        "physicalProperty": "Calories",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Duration",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 255.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "Move",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 65535.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       },
+       {
+        "physicalProperty": "RestTime",
+        "constraintType": "DiscreteRange",
+        "discreteRange": {
+         "step": 1.0,
+         "min": 1.0,
+         "max": 240.0
+        },
+        "measurementUnitFormat": "FrmtNumber",
+        "isReadOnly": false,
+        "visibility": "Visible"
+       }
+      ],
+      "data": [],
+      "steps": [
+       {
+        "data": [
+         {
+          "physicalProperty": "Duration",
+          "name": "Duration",
+          "displayName": "Durée",
+          "value": 30.0,
+          "displayValue": 30.0,
+          "formattedDisplayValue": "30",
+          "numberOfDecimals": 0,
+          "measurementUnitFormat": "FrmtNumber",
+          "formattedValue": "30 sec",
+          "unitOfMeasure": "Sec",
+          "unitOfMeasureShortString": "sec"
+         }
+        ]
+       }
+      ]
+     },
+     "pictureUrl": "<redacted>",
+     "nAttr": 25000,
+     "nEser": 411,
+     "progress": 22373
+    },
+    "contextType": "Default"
+   }
+  ],
+  "physicalActivitiesToUpdateForManualProgression": [],
+  "muscleScores": [
+   {
+    "score": 566,
+    "muscleType": "LowerBody",
+    "muscleName": "Membres inférieurs"
+   },
+   {
+    "score": 88,
+    "muscleType": "Abdominals",
+    "muscleName": "Abdominaux"
+   },
+   {
+    "score": 2,
+    "muscleType": "LateralsBack",
+    "muscleName": "Upper Back"
+   },
+   {
+    "score": 2,
+    "muscleType": "Oblique",
+    "muscleName": "Obliques"
+   },
+   {
+    "score": 3,
+    "muscleType": "LowerBack",
+    "muscleName": "Lombaires"
+   },
+   {
+    "score": 1,
+    "muscleType": "Paravertebrals",
+    "muscleName": "Muscles paravertébraux"
+   }
+  ],
+  "doneSummary": [
+   {
+    "physicalProperty": "Calories",
+    "name": "Calories",
+    "displayName": "Calories",
+    "value": 371.0,
+    "displayValue": 371.0,
+    "formattedDisplayValue": "371",
+    "numberOfDecimals": 0,
+    "measurementUnitFormat": "FrmtNumber",
+    "formattedValue": "371 kcal",
+    "unitOfMeasure": "Kcal",
+    "unitOfMeasureShortString": "kcal"
+   },
+   {
+    "physicalProperty": "Move",
+    "name": "Move",
+    "displayName": "MOVEs",
+    "value": 662.0,
+    "displayValue": 662.0,
+    "formattedDisplayValue": "662",
+    "numberOfDecimals": 0,
+    "measurementUnitFormat": "FrmtNumber",
+    "formattedValue": "662 MOVEs",
+    "unitOfMeasure": "Move",
+    "unitOfMeasureShortString": "MOVEs"
+   }
+  ]
+ }
+}

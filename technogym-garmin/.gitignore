@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+*.prg
+*.prg.debug.xml
+*.iq
+watch/bin/
+scratch/
+.garth/
