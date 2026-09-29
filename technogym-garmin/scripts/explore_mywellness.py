@@ -60,10 +60,11 @@ def anonymize(obj: Any, uuid_map: dict[str, str]) -> Any:
     if isinstance(obj, dict):
         out = {}
         for k, v in obj.items():
+            key = anonymize(k, uuid_map) if isinstance(k, str) else k
             if k in SENSITIVE_KEYS:
-                out[k] = "<redacted>"
+                out[key] = "<redacted>"
             else:
-                out[k] = anonymize(v, uuid_map)
+                out[key] = anonymize(v, uuid_map)
         return out
     if isinstance(obj, list):
         return [anonymize(x, uuid_map) for x in obj]

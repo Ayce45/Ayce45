@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: .
+    container_name: technogym-garmin-backend
+    env_file: .env
+    environment:
+      # le job APScheduler tourne dans le processus du backend (push Garmin a PUSH_HOUR, fuseau TZ)
+      DATABASE_PATH: /srv/data/backend.sqlite3
+      GARTH_HOME: /srv/data/garth
+      BACKEND_HOST: 0.0.0.0
+      BACKEND_PORT: "8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/srv/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health').status==200 else 1)"]
+      interval: 1m
+      timeout: 10s
+      retries: 3

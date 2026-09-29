@@ -180,3 +180,8 @@ class WorkoutResults(BaseModel):
     finished_at: str | None = None
     fit_saved: bool | None = None
     exercises: list[ExerciseResult] = Field(default_factory=list)
+
+
+def partition_iso(p: Any) -> str:
+    s = str(p or "")
+    return f"{s[:4]}-{s[4:6]}-{s[6:8]}" if len(s) == 8 and s.isdigit() else s
