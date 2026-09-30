@@ -26,6 +26,7 @@ log = logging.getLogger(__name__)
 
 CORE_URL = "https://core.mywellness.com"
 SERVICES_URL = "https://services.mywellness.com"
+WORKOUT_URL = "https://workout.mywellness.com"  # API "workout" de l'app mobile (seance courante)
 APP_ID = "EC1D38D7-D359-48D0-A60C-D8C0B8FB9DF9"
 APP_NAME = "enduserweb"
 APP_VERSION = "1.0"
@@ -282,6 +283,30 @@ class MywellnessClient:
 
     def current_workout_session(self) -> dict[str, Any]:
         return self.post_action(CURRENT_WORKOUT_SESSION, {}) or {}
+
+    def current_workout(self) -> dict[str, Any]:
+        """GET workout.mywellness.com/v2/enduser/workout/current : ce que l'app mobile interroge.
+
+        Repond {"hasCurrentWorkout": false} hors seance ; pendant une seance ouverte sur une machine
+        ou un kiosque, la seance courante (voir docs/live-poc.md). Appel leger, sans facilityUrl.
+        """
+        self.ensure_login()
+        for attempt in (1, 2):
+            r = self._http.get(f"{WORKOUT_URL}/v2/enduser/workout/current")
+            if r.status_code in (401, 403) and attempt == 1:
+                self.login()
+                continue
+            try:
+                r.raise_for_status()
+                body = r.json()
+            except httpx.HTTPStatusError as exc:
+                raise MywellnessError(str(exc)) from exc
+            except ValueError as exc:
+                raise MywellnessError("Reponse non JSON de workout/current") from exc
+            if isinstance(body, dict) and body.get("errors"):
+                raise MywellnessError(f"workout/current: {_errors_text(body)}")
+            return body.get("data") if isinstance(body, dict) and "data" in body else body
+        raise MywellnessError("unreachable")
 
     def movergy(self) -> int | None:
         return (self.post_action(MY_MOVERGY, {}) or {}).get("movergy")

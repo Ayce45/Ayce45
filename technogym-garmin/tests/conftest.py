@@ -59,6 +59,9 @@ class FakeMywellness(mw.MywellnessClient):
     def login(self) -> mw.UserInfo:  # type: ignore[override]
         return self._user
 
+    def current_workout(self) -> dict[str, Any]:  # type: ignore[override]
+        return {"hasCurrentWorkout": False}
+
     def post_action(self, action: str, content: dict[str, Any] | None = None, facility_url: str | None = None) -> Any:  # type: ignore[override]
         self.calls.append(action)
         content = content or {}

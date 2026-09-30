@@ -110,6 +110,14 @@ Le token d'appairage se passe en en-tete `X-Pair-Token` ou en query `?token=`. L
 sont prevus pour un backend local ; derriere un domaine public, protegez-les (reverse proxy avec auth) ou
 desactivez-les.
 
+## POC live : lire ce que font les machines, sans y toucher
+
+Verifie (`docs/live-poc.md`) : les machines Technogym ecrivent chaque exercice dans le cloud a la fin de
+l'exercice (series, charges, heure, console d'origine), et l'app mobile ne fait que relire ce cloud sur
+notification push. Le backend lit les memes donnees avec ton compte : `GET /workout/{id}/live` et
+`python scripts/poc_live.py` (poll 15 s, affiche les changements). A lancer pendant ta prochaine seance
+pour mesurer la latence reelle et voir la seance courante ouverte.
+
 ## Etat de l'ecriture Mywellness (montre -> Technogym)
 
 Les actions existent et leur format est connu (voir `docs/mywellness-api.md`) : `StartWorkoutSession`,

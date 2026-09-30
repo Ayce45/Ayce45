@@ -23,6 +23,7 @@ Sources de depart :
 | Login | `POST https://core.mywellness.com/v2/enduser/authentication/login` |
 | Donnees | `POST https://services.mywellness.com/{facilityUrl}/Training/User/{userId}/<Action>` |
 | Analytique cardio | `POST https://services.mywellness.com/{facilityUrl}/Training/CardioLog/{analyticsId}/Details` |
+| Seance courante (app mobile) | `GET https://workout.mywellness.com/v2/enduser/workout/current` -> `{"hasCurrentWorkout": false}` hors seance |
 
 En-tetes envoyes sur toutes les requetes (sans eux : `ClientApplicationNotTrusted`) :
 
@@ -127,6 +128,16 @@ Il faut un appel par exercice (10 a 11 par seance) ; le backend met le resultat 
 ### `GetCurrentWorkoutSession`
 
 `{}` -> `{"hasCurrentWorkout": false}` ou la seance en cours si une seance a ete demarree.
+
+## Live : ce que l'app mobile fait pendant une seance
+
+Analyse de l'APK Mywellness 6.7.12 (voir `docs/live-poc.md`) : l'app se rafraichit sur notifications push
+OneSignal dont les topics `LoginDoneOnEquipment`, `StartWorkoutSession`, `StartExerciseOnEquipment`,
+`EndExerciseOnEquipment`, `ExerciseDoneOnEquipment`, `ExercisesHasBeenSaved`, `CloseWorkoutSession`, puis
+appelle `GetCurrentWorkoutSession` (meme action que ci-dessus) et `workout.mywellness.com/v2/enduser/workout/current`.
+Sans push, rafraichissement au plus toutes les 10 minutes. Pas de canal temps reel vers les machines :
+les donnees passent par le cloud, exercice par exercice, avec `doneOn` et la console d'origine
+(`extData.mwc_client_application` : VisioWow, UnityCoach, UnityStrength, UnitySelf).
 
 ## Ecriture : tracking manuel (existe)
 

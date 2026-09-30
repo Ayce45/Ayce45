@@ -1,0 +1,114 @@
+# POC : lire une seance Technogym en direct, sans toucher aux machines
+
+Question : quand je m'entraine sur les machines de la salle, puis-je recuperer en direct, depuis mon
+compte Mywellness, ce que les machines enregistrent (exercice en cours, exercices termines, series,
+charges) pour l'afficher sur la montre ?
+
+Reponse courte : **oui, a l'echelle de l'exercice.** Chaque machine envoie au cloud Technogym le debut
+et la fin de chaque exercice (avec ses series reelles) ; l'app mobile Mywellness ne fait rien d'autre
+qu'interroger ce cloud. Le backend de ce projet lit exactement les memes donnees avec le compte
+utilisateur. Ce qui n'existe pas cote cloud : le detail serie par serie pendant l'exercice (il arrive
+d'un bloc a la fin de l'exercice).
+
+## 1. Ce que l'app mobile fait vraiment (analyse de l'APK Mywellness 6.7.12)
+
+APK `com.technogym.mywellness` (aptoide, md5 `22094891ce6c8b53e443433162e51a2d`), 4 fichiers dex,
+129 054 chaines, analyse avec androguard (chaines, references croisees, decompilation ciblee).
+
+**Comment l'app apprend qu'un exercice a ete fait sur une machine : par notification push.**
+L'enum `PushNotificationTopics` liste les evenements que le cloud Technogym pousse au telephone
+(OneSignal / Firebase). Ceux qui concernent la seance en salle :
+
+| Topic push | Sens |
+| --- | --- |
+| `LoginDoneOnEquipment` | l'utilisateur s'est identifie sur une machine (badge NFC, QR, app) |
+| `StartWorkoutSession` | une seance performee est ouverte (machine, kiosque Unity Self ou app) |
+| `StartExerciseOnEquipment` | un exercice demarre sur une machine |
+| `EndExerciseOnEquipment` | l'exercice se termine sur la machine |
+| `ExerciseDoneOnEquipment` | l'exercice est enregistre (series, charges) dans la seance |
+| `ExercisesHasBeenSaved` | des exercices ont ete sauvegardes |
+| `CloseWorkoutSession` | la seance est fermee |
+
+A la reception, l'ecran d'accueil (`CurrentWorkoutFragment`) recoit l'evenement
+`RefreshCurrentWorkout` et recharge la seance courante. Sans push, il ne recharge que toutes les
+10 minutes (`CurrentWorkoutLastUpdate` + 10 min, methode `c0`) ou au retour au premier plan.
+
+**Ce qu'il appelle pour recharger** (decompilation de `tk.g.i`) :
+`POST services.mywellness.com/{facilityUrl}/Training/User/{userId}/GetCurrentWorkoutSession`,
+c'est a dire la meme action que celle utilisee par ce projet. Le client "workout" de l'app appelle
+aussi `GET https://workout.mywellness.com/v2/enduser/workout/current` (modele
+`CurrentWorkoutSession(hasCurrentWorkout=...)`), verifie sur le compte : `{"hasCurrentWorkout": false}`
+hors seance, avec le meme jeton Bearer et les en-tetes `X-MWAPPS`.
+
+**Ce que l'app ne fait pas** : aucun canal temps reel vers les machines. SignalR n'est utilise que
+pour la messagerie avec le coach (`RealTimeMessenger`). Le Bluetooth sert au capteur cardio
+(`BleHeartRateService`) et a la connexion a certains equipements (`EquipmentConnectionService`, scan
+BLE) ; le NFC HCE (`UnityNfcHceService`) sert a se connecter sur la console Unity. Rien de tout cela
+n'est necessaire pour lire les resultats : ils transitent par le cloud.
+
+Consequence pour nous : on ne recoit pas les push OneSignal (ils sont adresses a l'app), mais on peut
+interroger le cloud a la frequence voulue. Le poll de 15 a 20 s du backend / de la montre fait le meme
+travail que le push, avec au plus 20 s de retard.
+
+## 2. Ce que le cloud expose pendant une seance (verifie sur le compte)
+
+Seance du 2026-09-29 (Seance 3, faite en salle, sans aucune intervention de ce projet) relue avec
+`scripts/poc_live.py --once --day 2026-09-29` :
+
+```
+seance du jour idCr=1146 Programme ... - Seance 3 debut=2026-09-29 15:22:31 +02:00 fermee='2026-09-29' faits=5/6
+   pos 1 Exercice Personnalise par temps : Done fait a 15:38:26 via VisioWow
+   pos 2 Exercice avec objectif temps     : Done fait a 15:56:35 via UnityCoach
+   pos 3 Leg press Sel                    : ToDo
+   pos 4 Flexion du buste                 : Done fait a 16:06:38 via UnityStrength  [{IsoReps 15, IsoWeight 40} x4]
+   pos 5 Obliques debout                  : Done fait a 16:15:43 via UnitySelf      [{Duration 30}]
+   pos 6 Position de l'enfant             : Done fait a 16:15:45 via UnitySelf      [{Duration 30}]
+```
+
+Lecture :
+
+* la seance performee (`idCr`) est creee a l'ouverture (15:22, kiosque `UnitySelf`) : elle apparait
+  dans `ActivityHistory` du jour des ce moment, avant tout exercice ;
+* chaque exercice porte l'heure de fin `doneOn` et la console d'origine (`mwc_client_application` :
+  `VisioWow` = console du velo, `UnityCoach` = console du Climb, `UnityStrength` = console de la machine
+  de musculation, `UnitySelf` = kiosque / app) : l'entree est ecrite par la machine a la fin de
+  l'exercice, pas a la fermeture de la seance ;
+* pour la musculation, les series reelles (reps, charge) sont dans `performedPhysicalActivity.data.steps` ;
+* pour le cardio, les series sont vides mais `CardioLog/{analyticsId}/Details` donne les courbes par
+  seconde (682 echantillons Power / Rpm / HDistance pour le velo) des la fin de l'exercice ;
+* un exercice non fait reste `ToDo` : la montre sait qu'il reste a faire (poids libres par exemple).
+
+## 3. Le POC
+
+`scripts/poc_live.py` (lecture seule) interroge toutes les 15 s :
+
+1. `GetCurrentWorkoutSession` et `workout/current` : une seance est-elle ouverte ;
+2. `ActivityHistory` du jour : l'`idCr` de la seance performee ;
+3. `GetPerformedWorkoutSessionByIdCr` : statut et series de chaque exercice ;
+
+et affiche uniquement les changements (`NOUVELLE seance`, `exercice pos 4 : ToDo -> Done via
+UnityStrength series=[...]`, `seance fermee`). Journal complet dans `scratch/poc_live_log.jsonl`.
+
+```
+python scripts/poc_live.py                 # a lancer sur le telephone / PC pendant la seance
+python scripts/poc_live.py --once --day 2026-09-29   # rejeu d'une seance passee
+```
+
+Le backend fait la meme chose pour la montre : `GET /workout/{id}/live` (service `app/mywellness/live.py`,
+cache 15 s), interroge par l'app Connect IQ au demarrage, a chaque ecran de serie et toutes les 20 s.
+
+## 4. Verifie / pas verifie
+
+| | Etat |
+| --- | --- |
+| Les machines ecrivent chaque exercice dans le cloud a la fin de l'exercice, avec series et charges | **verifie** (horodatages `doneOn` et consoles d'origine de la seance du 29/09) |
+| L'app mobile lit ces donnees par `GetCurrentWorkoutSession` et se rafraichit sur push | **verifie** (decompilation) |
+| Le backend lit les memes donnees avec le compte utilisateur | **verifie** (`poc_live.py`, `/workout/{id}/live`) |
+| Latence machine -> cloud pendant une seance reelle | **a mesurer** en salle avec `poc_live.py` (attendu : quelques secondes a une minute) |
+| Contenu de `GetCurrentWorkoutSession` pendant une seance ouverte (exercice en cours ?) | **a observer** en salle : hors seance il repond `hasCurrentWorkout: false` ; les topics `StartExerciseOnEquipment` laissent penser que l'exercice en cours y figure |
+| Detail serie par serie pendant l'exercice | **non disponible** cote cloud (les series arrivent avec `ExerciseDoneOnEquipment`) |
+
+Prochaine seance en salle : lancer `python scripts/poc_live.py` avant de badger sur la premiere
+machine et me transmettre `scratch/poc_live_log.jsonl`. Il contiendra la forme exacte de la seance
+courante et la latence reelle, ce qui permettra d'affiner l'ecran "Machine : fait" de la montre
+(par exemple afficher l'exercice en cours des `StartExerciseOnEquipment`).

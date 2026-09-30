@@ -105,3 +105,16 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   utilisateur Mywellness et id de salle, non secrets) ; la reecriture d'historique a ete refusee par le
   mode automatique, la commande est donnee dans le README.
 * `TODAY_OVERRIDE` (date forcee) ajoute pour rejouer dans le simulateur une seance deja faite sur machines.
+
+## 2026-09-30 : POC lecture live (sans acces aux machines)
+
+* L'utilisateur n'a pas la main sur les machines : le compagnon doit fonctionner en lisant ce que
+  Technogym publie. Verification par analyse de l'APK Mywellness (chaines + decompilation androguard) :
+  l'app mobile elle-meme ne parle pas aux machines pour les resultats, elle recoit des push OneSignal
+  (`StartExerciseOnEquipment`, `ExerciseDoneOnEquipment`, ...) et relit `GetCurrentWorkoutSession`.
+  Notre poll de 15 a 20 s remplace le push. Details et preuves horodatees dans `docs/live-poc.md`.
+* Ajout de `GET workout.mywellness.com/v2/enduser/workout/current` (endpoint du client "workout" de
+  l'app) dans le client et dans `/workout/{id}/live` (`has_current_workout`, `current`).
+* `scripts/poc_live.py` : poll lecture seule, affiche les changements, journal JSONL ; a lancer en salle
+  pour mesurer la latence reelle et capturer la forme de la seance courante ouverte.
+* L'APK et ses chaines restent hors depot (`scratch/`).

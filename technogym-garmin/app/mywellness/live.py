@@ -38,6 +38,8 @@ class LiveExercise(BaseModel):
 class LiveState(BaseModel):
     workout_id: str
     date: str
+    has_current_workout: bool | None = None   # workout.mywellness.com/v2/enduser/workout/current
+    current: dict | None = None               # seance courante brute si une machine / kiosque l'a ouverte
     session_found: bool = False
     id_cr: int | None = None
     started_on: str = ""
@@ -71,6 +73,13 @@ class LiveService:
         st = LiveState(workout_id=workout_id, date=day.isoformat(), fetched_at=int(time.time()))
         if self._client is None:
             return st
+        try:
+            cur = self._client.current_workout()
+            st.has_current_workout = bool(cur.get("hasCurrentWorkout")) if isinstance(cur, dict) else None
+            if st.has_current_workout:
+                st.current = cur
+        except mw.MywellnessError:
+            st.has_current_workout = None
         items = self._client.activity_history(day, day)
         item = next((i for i in items if str(i.get("userWorkoutSessionId")) == workout_id and partition_iso(i.get("partitionDate")) == day.isoformat()), None)
         if item is None or item.get("idCr") in (None, ""):
