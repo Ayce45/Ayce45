@@ -332,3 +332,8 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   d'appoint ; l'echelle vient du B2B (clubs equipes Technogym) ou d'un partenariat Technogym.
 * Decision : avant toute monetisation, demander un accord Enterprise API a Technogym et publier une politique de
   confidentialite du relais ; beta gratuite d'abord, payant ensuite, dossier B2B a 2 000 utilisateurs.
+* Suite (meme jour) : l'utilisateur tranche pour une app gratuite avec limitations, sans API Entreprise pour
+  l'instant, mesurer qui paie, puis proposer a Technogym. Consequences : freemium en une seule app via l'essai
+  Connect IQ (illimite en duree, limite en fonctions), gratuit = direct, FC, MOVEs, liste, fiche ; payant 4,99 EUR
+  = exercice libre, derniere fois et records, charge et disques, fin de seance. Prealables : politique de
+  confidentialite, telemetrie anonyme, message pour les comptes sans mot de passe (Apple, Google, Facebook).

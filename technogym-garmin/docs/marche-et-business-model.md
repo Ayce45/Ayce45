@@ -180,19 +180,27 @@ nulle.
 * Publicite ou sponsoring : incompatible avec une montre et un public payant.
 * Vente de donnees : hors de question, et contraire au positionnement "le relais ne conserve rien".
 
-## 5. Recommandation
+## 5. Strategie retenue (30 septembre 2026)
 
-1. **Legitimer l'acces** : demander un accord Enterprise API a Technogym au titre de partenaire developpeur
-   (formulaire au representant local : nom du logiciel, scenario d'integration, contact). Meme si la reponse
-   tarde, la demande documente la bonne foi. En parallele, publier une politique de confidentialite pour le
-   relais (identifiants transmis, jamais stockes, hebergement Cloudflare, journaux desactives).
-2. **Beta publique gratuite sur le store** (3 a 6 mois) : objectif 500 a 2 000 utilisateurs, recueil de
-   retention (seances par semaine) et d'avis. Canaux : forums Garmin (les fils "Technogym vers Garmin Connect"),
-   Reddit r/Garmin et r/technogym, les salles frequentees, la fiche store optimisee sur "Technogym".
-3. **Passage au payant** a 4,99 EUR avec essai gratuit 14 jours, en gardant la lecture du direct gratuite si la
-   base est petite (la valeur percue est dans l'exercice libre, l'historique et les records).
-4. **Dossier B2B et Technogym** a 2 000 utilisateurs : retention, NPS, captures reelles, cette analyse.
-   Premiers rendez-vous avec deux ou trois clubs premium equipes Technogym, puis Technogym.
+Decision de l'utilisateur : pas d'API Entreprise pour l'instant, une app entierement gratuite avec des
+limitations, mesurer qui paie, puis proposer le produit a Technogym.
+
+1. **Freemium en une seule app** : app declaree payante sur le store avec un essai que l'app controle, illimite
+   dans le temps mais limite en fonctions. Gratuit : suivi en direct, FC, MOVEs, liste, fiche (ce qui prouve
+   l'usage). Payant, 4,99 EUR une fois via Garmin Pay : exercice libre avec compteur, derniere fois et records,
+   charge et disques, ecran de fin avec volume et fermeture de seance (ce qui prouve la volonte de payer).
+2. **Prealables a la soumission** : politique de confidentialite du relais, telemetrie anonyme (Cloudflare
+   Analytics Engine : utilisateurs actifs par hash, seances suivies par semaine, retention 30 et 90 jours,
+   conversion), message clair pour les comptes Technogym crees via Apple, Google ou Facebook, qui n'ont pas de
+   mot de passe et ne peuvent pas se connecter tant que l'API privee est utilisee.
+3. **Beta gratuite totale** 2 a 3 mois sur le store, canaux : forums Garmin, Reddit, salles frequentees. Puis
+   activation du palier payant avec essai.
+4. **Dossier Technogym** a partir de 1 000 a 2 000 utilisateurs actifs : retention, conversion, avis, pays,
+   cette analyse. Deux issues realistes : partenariat (Spotter entre dans le programme partenaires et obtient un
+   acces API legitime) ou petit rachat. Sans traction forte, ce ne sera pas une sortie.
+5. **Etre pret a basculer sur l'API Entreprise** en quelques jours (relais deja isole de la montre), parce que la
+   premiere question de Technogym portera sur l'acces aux donnees. Relais open source, aucune conservation,
+   fiche store honnete.
 
 ## 6. Risques
 
