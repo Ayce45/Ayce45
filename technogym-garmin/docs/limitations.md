@@ -40,6 +40,16 @@
 * **Telechargement des appareils Connect IQ** : `watch/tools/fetch_devices.py` reproduit le flux du SDK
   Manager (client `CIQ_SDK_MANAGER`) ; meme fragilite que ci-dessus.
 
+## Mode live (machines -> montre)
+
+* La montre voit un exercice "fait sur machine" quand la machine Technogym l'a envoye a Mywellness, c'est
+  a dire a la fin de l'exercice (pas serie par serie) et avec le delai de synchronisation du cloud
+  Technogym, observe entre quelques secondes et une minute. Le poll est toutes les 20 s.
+* Les blocs cardio machine ne remontent pas de series detaillees (duree / puissance sont dans les
+  analytics CardioLog, pas dans les steps) : la montre affiche "Machine : fait" sans detail.
+* Si la seance n'a pas ete ouverte sur une machine (que des poids libres), `session_found` est faux : la
+  montre fonctionne en mode autonome et l'ecriture vers Mywellness ouvre la seance elle-meme.
+
 ## Choix de la seance du jour
 
 Le programme est "cyclique" : `workoutSessionStatus = Suggested` cote Technogym, sinon la seance qui

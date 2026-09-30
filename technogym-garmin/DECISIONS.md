@@ -80,3 +80,28 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   taille (2,5 Mo) : sans la chaine de compilation, c'est le seul moyen de sideloader l'app depuis le depot.
   Ils sont signes par la cle developpeur generee dans cette session (`watch/keys/`, non versionnee) ;
   regenerer la cle et recompiler pour reprendre la main sur la signature.
+
+## 2026-09-30 : recadrage en deux produits
+
+* **Appli de synchro** : page web servie par le backend (`GET /`), identifiants Mywellness et Garmin saisis
+  dans le navigateur, bouton unique. Les identifiants ne sont plus requis dans `.env` (reste possible pour
+  le job planifie) ; "se souvenir" les ecrit dans `data/credentials.json` (600, gitignore). Choix d'une page
+  web locale plutot que d'un executable : zero dependance graphique, meme code que l'API, fonctionne en
+  Docker. La synchro cree un workout Garmin par seance du programme (`TG Seance N`, remplace les anciens
+  du meme nom) et planifie la seance du jour.
+* **Compagnon live bidirectionnel** : nouvel endpoint `GET /workout/{id}/live` (etat de la seance
+  performee du jour : exercices faits sur machine, series reelles). La montre l'interroge au demarrage,
+  a chaque ecran de serie et toutes les 20 s : un exercice enregistre par une machine Technogym est marque
+  `[M]`, l'ecran propose "Machine : fait, OK = suivant", ses series machine sont reprises dans les
+  resultats (source `machine`). Sens montre -> Technogym : `writeback.py` reutilise la seance performee du
+  jour si les machines l'ont deja ouverte (sinon `StartWorkoutSession`), ecrit chaque exercice saisi sur la
+  montre avec `manuallyDone: true` et le format `GenericPhysicalActivityDataVO`, puis ferme la seance.
+* L'ecriture reelle vers Mywellness n'a pas pu etre testee ici : l'environnement a refuse l'action
+  (ecriture sur un systeme externe). `scripts/test_writeback.py` est fourni pour la faire soi-meme sur une
+  serie identifiable (1 rep, 5 kg), avec tentative de suppression. `MYWELLNESS_WRITEBACK` reste a 0 tant
+  que ce test n'a pas confirme le format.
+* Anonymisation : les identifiants compacts (UUID sans tirets dans `mwc_full_workout_id`) et le prenom
+  ont ete retires des fixtures et de la doc. Ils restent dans l'historique git des premiers commits (id
+  utilisateur Mywellness et id de salle, non secrets) ; la reecriture d'historique a ete refusee par le
+  mode automatique, la commande est donnee dans le README.
+* `TODAY_OVERRIDE` (date forcee) ajoute pour rejouer dans le simulateur une seance deja faite sur machines.

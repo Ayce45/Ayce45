@@ -62,6 +62,7 @@ module Flow {
             }
             var label = (i + 1) + ". " + Model.exerciseTitle(ex);
             if (Model.exerciseDone(i)) { label = "[x] " + label; }
+            else if (Model.machineDone(ex)) { label = "[M] " + label; }
             else if (i == Model.exIndex && Model.inProgress) { label = "> " + label; }
             menu.addItem(new WatchUi.MenuItem(label, sub, i, null));
         }

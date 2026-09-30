@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     program_override_path: Path | None = None
     # Cache du programme prescrit (secondes)
     program_cache_ttl: int = 300
+    # Debug / demo : force la date du jour (YYYY-MM-DD) pour /workout/today et le job
+    today_override: str = ""
 
 
 @lru_cache

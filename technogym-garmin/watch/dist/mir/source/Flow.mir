@@ -1,0 +1,1126 @@
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [WatchUi,2,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 5; @symbol_moduledef = [Flow,5,7,11]; ]
+module Flow {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 5; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 8; @symbol_functiondef = [showCurrent,8,13,24]; @symbol_param<0> = [transition,8,25,35]; @symbol_param<0>_type<0> = [SlideType,8,39,48]; @symbol_param<1> = [push,8,50,54]; @symbol_param<1>_type<0> = [Boolean,8,58,65]; ]
+    function showCurrent(transition as SlideType, push as Boolean) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_8_75_30_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 9 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_8_75_30_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_8_75_30_4_stop" ]
+        %view.1 = local;
+        symbol [ view %view.1 9 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 10 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_8_75_30_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_8_75_30_4_stop" ]
+        %delegate.2 = local;
+        symbol [ delegate %delegate.2 10 12 20 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 11 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_8_24_8_if_stmt:
+        symbol [ Model %tmp.2 11 12 17 ];
+        %tmp.2 = getv ? :Model;
+        symbol [ exIndex %tmp.3 11 18 25 ];
+        %tmp.3 = getv %tmp.2 :exIndex;
+        symbol [ Model %tmp.5 11 29 34 ];
+        %tmp.5 = getv ? :Model;
+        symbol [ exerciseCount %tmp.6 11 35 48 ];
+        %tmp.6 = getv function %tmp.5 :exerciseCount;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = gte %tmp.3 %tmp.7;
+        bf %tmp.8 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_8_24_8_if_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_8_24_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_52_14_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 12 12 ]
+        symbol [ SummaryView %tmp.12 12 23 34 ];
+        %tmp.12 = getv ? :SummaryView;
+        %tmp.9 = newc %tmp.12 ();
+        lputv %view.1 %tmp.9;
+        symbol [ view %view.1 12 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 13 12 ]
+        symbol [ SummaryDelegate %tmp.16 13 27 42 ];
+        %tmp.16 = getv ? :SummaryDelegate;
+        %tmp.17 = lgetv %view.1;
+        symbol [ view %tmp.17 13 43 47 ];
+        %tmp.13 = newc %tmp.16 (%tmp.17);
+        lputv %delegate.2 %tmp.13;
+        symbol [ delegate %delegate.2 13 12 20 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_52_14_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_8_24_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_8_24_8_if_else_false:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_14_15_24_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 15 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_14_15_24_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_14_15_24_8_stop" ]
+        %ex.3 = local;
+        symbol [ ex %ex.3 15 16 18 ];
+        symbol [ Model %tmp.19 15 21 26 ];
+        %tmp.19 = getv ? :Model;
+        symbol [ currentExercise %tmp.20 15 27 42 ];
+        %tmp.20 = getv function %tmp.19 :currentExercise;
+        %tmp.21 = invoke %tmp.19 %tmp.20();
+        lputv %ex.3 %tmp.21;
+        symbol [ ex %ex.3 15 16 18 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 16 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_14_15_24_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_14_15_24_8_stop" ]
+        %kind.4 = local;
+        symbol [ kind %kind.4 16 16 20 ];
+        symbol [ Model %tmp.23 16 23 28 ];
+        %tmp.23 = getv ? :Model;
+        symbol [ exerciseKind %tmp.24 16 29 41 ];
+        %tmp.24 = getv function %tmp.23 :exerciseKind;
+        %tmp.25 = lgetv %ex.3;
+        symbol [ ex %tmp.25 16 42 44 ];
+        %tmp.26 = invoke %tmp.23 %tmp.24(%tmp.25);
+        lputv %kind.4 %tmp.26;
+        symbol [ kind %kind.4 16 16 20 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 17 12 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_12_23_12_if_stmt:
+        %tmp.27 = lgetv %kind.4;
+        symbol [ kind %tmp.27 17 16 20 ];
+        symbol [ equals %tmp.28 17 21 27 ];
+        %tmp.28 = getv function %tmp.27 :equals;
+        %tmp.29 = "strength";
+        %tmp.30 = invoke %tmp.27 %tmp.28(%tmp.29);
+        bf %tmp.30 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_12_23_12_if_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_12_23_12_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_41_20_12_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 18 16 ]
+        symbol [ SetView %tmp.34 18 27 34 ];
+        %tmp.34 = getv ? :SetView;
+        %tmp.31 = newc %tmp.34 ();
+        lputv %view.1 %tmp.31;
+        symbol [ view %view.1 18 16 20 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 19 16 ]
+        symbol [ SetDelegate %tmp.38 19 31 42 ];
+        %tmp.38 = getv ? :SetDelegate;
+        %tmp.39 = lgetv %view.1;
+        symbol [ view %tmp.39 19 43 47 ];
+        %tmp.35 = newc %tmp.38 (%tmp.39);
+        lputv %delegate.2 %tmp.35;
+        symbol [ delegate %delegate.2 19 16 24 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_41_20_12_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_12_23_12_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_12_23_12_if_else_false:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_20_19_23_12_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 21 16 ]
+        symbol [ TimedSetView %tmp.43 21 27 39 ];
+        %tmp.43 = getv ? :TimedSetView;
+        %tmp.40 = newc %tmp.43 ();
+        lputv %view.1 %tmp.40;
+        symbol [ view %view.1 21 16 20 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 22 16 ]
+        symbol [ TimedSetDelegate %tmp.47 22 31 47 ];
+        %tmp.47 = getv ? :TimedSetDelegate;
+        %tmp.48 = lgetv %view.1;
+        symbol [ view %tmp.48 22 48 52 ];
+        %tmp.44 = newc %tmp.47 (%tmp.48);
+        lputv %delegate.2 %tmp.44;
+        symbol [ delegate %delegate.2 22 16 24 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_20_19_23_12_stop:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_17_12_23_12_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_14_15_24_8_stop:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_11_8_24_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 25 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_8_29_8_if_stmt:
+        %tmp.49 = lgetv %push;
+        symbol [ push %tmp.49 25 12 16 ];
+        bf %tmp.49 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_8_29_8_if_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_8_29_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_18_27_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 26 12 ]
+        symbol [ WatchUi %tmp.50 26 12 19 ];
+        %tmp.50 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.51 26 20 28 ];
+        %tmp.51 = getv function %tmp.50 :pushView;
+        %tmp.52 = lgetv %view.1;
+        symbol [ view %tmp.52 26 29 33 ];
+        %tmp.53 = lgetv %delegate.2;
+        symbol [ delegate %tmp.53 26 35 43 ];
+        %tmp.54 = lgetv %transition;
+        symbol [ transition %tmp.54 26 45 55 ];
+        invoke %tmp.50 %tmp.51(%tmp.52, %tmp.53, %tmp.54);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_18_27_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_8_29_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_8_29_8_if_else_false:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_27_15_29_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 28 12 ]
+        symbol [ WatchUi %tmp.55 28 12 19 ];
+        %tmp.55 = getm $.Toybox.WatchUi;
+        symbol [ switchToView %tmp.56 28 20 32 ];
+        %tmp.56 = getv function %tmp.55 :switchToView;
+        %tmp.57 = lgetv %view.1;
+        symbol [ view %tmp.57 28 33 37 ];
+        %tmp.58 = lgetv %delegate.2;
+        symbol [ delegate %tmp.58 28 39 47 ];
+        %tmp.59 = lgetv %transition;
+        symbol [ transition %tmp.59 28 49 59 ];
+        invoke %tmp.55 %tmp.56(%tmp.57, %tmp.58, %tmp.59);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_27_15_29_8_stop:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_25_8_29_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_8_75_30_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 33; @symbol_functiondef = [afterSet,33,13,21]; @symbol_param<0> = [finished,33,22,30]; @symbol_param<0>_type<0> = [Boolean,33,34,41]; @symbol_param<1> = [restSeconds,33,43,54]; @symbol_param<1>_type<0> = [Number,33,58,64]; ]
+    function afterSet(finished as Boolean, restSeconds as Number) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_33_74_45_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 34 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_8_38_8_if_stmt:
+        %tmp.1 = lgetv %finished;
+        symbol [ finished %tmp.1 34 12 20 ];
+        bf %tmp.1 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_8_38_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_8_38_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_22_38_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 35 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_22_38_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_22_38_8_stop" ]
+        %sv.1 = local;
+        symbol [ sv %sv.1 35 16 18 ];
+        symbol [ SummaryView %tmp.5 35 25 36 ];
+        %tmp.5 = getv ? :SummaryView;
+        %tmp.2 = newc %tmp.5 ();
+        lputv %sv.1 %tmp.2;
+        symbol [ sv %sv.1 35 16 18 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 36 12 ]
+        symbol [ WatchUi %tmp.6 36 12 19 ];
+        %tmp.6 = getm $.Toybox.WatchUi;
+        symbol [ switchToView %tmp.7 36 20 32 ];
+        %tmp.7 = getv function %tmp.6 :switchToView;
+        %tmp.8 = lgetv %sv.1;
+        symbol [ sv %tmp.8 36 33 35 ];
+        symbol [ SummaryDelegate %tmp.12 36 41 56 ];
+        %tmp.12 = getv ? :SummaryDelegate;
+        %tmp.13 = lgetv %sv.1;
+        symbol [ sv %tmp.13 36 57 59 ];
+        %tmp.9 = newc %tmp.12 (%tmp.13);
+        symbol [ WatchUi %tmp.14 36 62 69 ];
+        %tmp.14 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.15 36 70 80 ];
+        %tmp.15 = getv %tmp.14 :SLIDE_LEFT;
+        invoke %tmp.6 %tmp.7(%tmp.8, %tmp.9, %tmp.15);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 37 12 ]
+        ret ?;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_22_38_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_8_38_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_34_8_38_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 39 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_8_44_8_if_stmt:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_12_39_37_begin:
+        %tmp.16 = lgetv %restSeconds;
+        symbol [ restSeconds %tmp.16 39 12 23 ];
+        %tmp.17 = 1;
+        %tmp.18 = gt %tmp.16 %tmp.17;
+        bf %tmp.18 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_8_44_8_if_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_31_39_37_true:
+        symbol [ Model %tmp.20 39 31 36 ];
+        %tmp.20 = getv ? :Model;
+        symbol [ autoStartRest %tmp.21 39 37 50 ];
+        %tmp.21 = getv %tmp.20 :autoStartRest;
+        push %tmp.21;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_31_39_37_end:
+        %tmp.22 = phi [%tmp.18 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_12_39_37_begin] [%tmp.21 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_31_39_37_true] [%tmp.22 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_31_39_37_end];
+        bf %tmp.22 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_8_44_8_if_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_8_44_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_52_42_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 40 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_52_42_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_52_42_8_stop" ]
+        %rv.2 = local;
+        symbol [ rv %rv.2 40 16 18 ];
+        symbol [ RestView %tmp.26 40 25 33 ];
+        %tmp.26 = getv ? :RestView;
+        %tmp.27 = lgetv %restSeconds;
+        symbol [ restSeconds %tmp.27 40 34 45 ];
+        %tmp.23 = newc %tmp.26 (%tmp.27);
+        lputv %rv.2 %tmp.23;
+        symbol [ rv %rv.2 40 16 18 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 41 12 ]
+        symbol [ WatchUi %tmp.28 41 12 19 ];
+        %tmp.28 = getm $.Toybox.WatchUi;
+        symbol [ switchToView %tmp.29 41 20 32 ];
+        %tmp.29 = getv function %tmp.28 :switchToView;
+        %tmp.30 = lgetv %rv.2;
+        symbol [ rv %tmp.30 41 33 35 ];
+        symbol [ RestDelegate %tmp.34 41 41 53 ];
+        %tmp.34 = getv ? :RestDelegate;
+        %tmp.35 = lgetv %rv.2;
+        symbol [ rv %tmp.35 41 54 56 ];
+        %tmp.31 = newc %tmp.34 (%tmp.35);
+        symbol [ WatchUi %tmp.36 41 59 66 ];
+        %tmp.36 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.37 41 67 77 ];
+        %tmp.37 = getv %tmp.36 :SLIDE_LEFT;
+        invoke %tmp.28 %tmp.29(%tmp.30, %tmp.31, %tmp.37);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_52_42_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_8_44_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_8_44_8_if_else_false:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_42_15_44_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 43 12 ]
+        %tmp.38 = self;
+        symbol [ showCurrent %tmp.39 43 12 23 ];
+        %tmp.39 = getv function %tmp.38 :showCurrent;
+        symbol [ WatchUi %tmp.40 43 24 31 ];
+        %tmp.40 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.41 43 32 42 ];
+        %tmp.41 = getv %tmp.40 :SLIDE_LEFT;
+        %tmp.42 = false;
+        invoke %tmp.38 %tmp.39(%tmp.41, %tmp.42);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_42_15_44_8_stop:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_39_8_44_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_33_74_45_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 47; @symbol_functiondef = [showExerciseList,47,13,29]; ]
+    function showExerciseList() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_47_40_70_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 48 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_47_40_70_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_47_40_70_4_stop" ]
+        %menu.1 = local;
+        symbol [ menu %menu.1 48 12 16 ];
+        symbol [ WatchUi %tmp.3 48 23 30 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ Menu2 %tmp.4 48 31 36 ];
+        %tmp.4 = getv function ? %tmp.3 :Menu2;
+        %tmp.5 = newd 1;
+        %tmp.7 = const :title;
+        symbol [ title %tmp.7 48 40 45 const ];
+        symbol [ WatchUi %tmp.8 48 49 56 ];
+        %tmp.8 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.9 48 57 69 ];
+        %tmp.9 = getv function %tmp.8 :loadResource;
+        symbol [ Rez %tmp.11 48 70 73 ];
+        %tmp.11 = getv ? :Rez;
+        symbol [ Strings %tmp.12 48 74 81 ];
+        %tmp.12 = getv %tmp.11 :Strings;
+        symbol [ Exercises %tmp.13 48 82 91 ];
+        %tmp.13 = getv %tmp.12 :Exercises;
+        %tmp.14 = invoke %tmp.8 %tmp.9(%tmp.13);
+        %tmp.15 = as %tmp.14 String;
+        symbol [ String %tmp.15 48 96 102 ];
+        %tmp.16 = dup %tmp.5;
+        %tmp.17 = aputv %tmp.16 %tmp.7 %tmp.15;
+        %tmp.1 = newc %tmp.4 (%tmp.17);
+        lputv %menu.1 %tmp.1;
+        symbol [ menu %menu.1 48 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 49 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_47_40_70_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_47_40_70_4_stop" ]
+        %exs.2 = local;
+        symbol [ exs %exs.2 49 12 15 ];
+        symbol [ Model %tmp.19 49 18 23 ];
+        %tmp.19 = getv ? :Model;
+        symbol [ exercises %tmp.20 49 24 33 ];
+        %tmp.20 = getv function %tmp.19 :exercises;
+        %tmp.21 = invoke %tmp.19 %tmp.20();
+        lputv %exs.2 %tmp.21;
+        symbol [ exs %exs.2 49 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 50 8 ]
+        for @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_test @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_incr @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_init:
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_begin" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_end" ]
+        %i.3 = local;
+        symbol [ i %i.3 50 17 18 ];
+        %tmp.22 = 0;
+        lputv %i.3 %tmp.22;
+        symbol [ i %i.3 50 17 18 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_test:
+        %tmp.23 = lgetv %i.3;
+        symbol [ i %tmp.23 50 24 25 ];
+        %tmp.24 = lgetv %exs.2;
+        symbol [ exs %tmp.24 50 28 31 ];
+        symbol [ size %tmp.25 50 32 36 ];
+        %tmp.25 = getv function %tmp.24 :size;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        %tmp.27 = lt %tmp.23 %tmp.26;
+        bf %tmp.27 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_begin:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 51 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_stop" ]
+        %ex.4 = local;
+        symbol [ ex %ex.4 51 16 18 ];
+        %tmp.28 = lgetv %exs.2;
+        symbol [ exs %tmp.28 51 21 24 ];
+        %tmp.29 = lgetv %i.3;
+        symbol [ i %tmp.29 51 25 26 ];
+        %tmp.30 = agetv %tmp.28 %tmp.29;
+        %tmp.31 = as %tmp.30 Dictionary;
+        symbol [ Dictionary %tmp.31 51 31 41 ];
+        lputv %ex.4 %tmp.31;
+        symbol [ ex %ex.4 51 16 18 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 52 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_stop" ]
+        %sets.5 = local;
+        symbol [ sets %sets.5 52 16 20 ];
+        symbol [ Model %tmp.33 52 23 28 ];
+        %tmp.33 = getv ? :Model;
+        symbol [ setsOf %tmp.34 52 29 35 ];
+        %tmp.34 = getv function %tmp.33 :setsOf;
+        %tmp.35 = lgetv %ex.4;
+        symbol [ ex %tmp.35 52 36 38 ];
+        %tmp.36 = invoke %tmp.33 %tmp.34(%tmp.35);
+        lputv %sets.5 %tmp.36;
+        symbol [ sets %sets.5 52 16 20 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 53 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_stop" ]
+        %sub.6 = local;
+        symbol [ sub %sub.6 53 16 19 ];
+        %tmp.37 = lgetv %sets.5;
+        symbol [ sets %tmp.37 53 22 26 ];
+        symbol [ size %tmp.38 53 27 31 ];
+        %tmp.38 = getv function %tmp.37 :size;
+        %tmp.39 = invoke %tmp.37 %tmp.38();
+        %tmp.40 = " x ";
+        %tmp.41 = add %tmp.39 %tmp.40;
+        lputv %sub.6 %tmp.41;
+        symbol [ sub %sub.6 53 16 19 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 54 12 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_12_62_12_if_stmt:
+        %tmp.42 = lgetv %sets.5;
+        symbol [ sets %tmp.42 54 16 20 ];
+        symbol [ size %tmp.43 54 21 25 ];
+        %tmp.43 = getv function %tmp.42 :size;
+        %tmp.44 = invoke %tmp.42 %tmp.43();
+        %tmp.45 = 0;
+        %tmp.46 = gt %tmp.44 %tmp.45;
+        bf %tmp.46 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_12_62_12_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_12_62_12_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_33_62_12_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 55 16 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_33_62_12_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_33_62_12_stop" ]
+        %s0.7 = local;
+        symbol [ s0 %s0.7 55 20 22 ];
+        %tmp.47 = lgetv %sets.5;
+        symbol [ sets %tmp.47 55 25 29 ];
+        %tmp.48 = 0;
+        %tmp.49 = agetv %tmp.47 %tmp.48;
+        %tmp.50 = as %tmp.49 Dictionary;
+        symbol [ Dictionary %tmp.50 55 36 46 ];
+        lputv %s0.7 %tmp.50;
+        symbol [ s0 %s0.7 55 20 22 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 56 16 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_16_61_16_if_stmt:
+        %tmp.51 = lgetv %s0.7;
+        symbol [ s0 %tmp.51 56 20 22 ];
+        symbol [ hasKey %tmp.52 56 23 29 ];
+        %tmp.52 = getv function %tmp.51 :hasKey;
+        %tmp.53 = "reps";
+        %tmp.54 = invoke %tmp.51 %tmp.52(%tmp.53);
+        bf %tmp.54 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_16_61_16_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_16_61_16_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_39_59_16_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 57 20 ]
+        %tmp.55 = lgetv %sub.6;
+        symbol [ sub %tmp.55 57 20 23 ];
+        %tmp.56 = lgetv %s0.7;
+        symbol [ s0 %tmp.56 57 27 29 ];
+        %tmp.57 = "reps";
+        %tmp.58 = agetv %tmp.56 %tmp.57;
+        symbol [ toString %tmp.59 57 38 46 ];
+        %tmp.59 = getv function %tmp.58 :toString;
+        %tmp.60 = invoke %tmp.58 %tmp.59();
+        %tmp.61 = add %tmp.55 %tmp.60;
+        lputv %sub.6 %tmp.61;
+        symbol [ sub %sub.6 57 20 23 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 58 20 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_58_20_58_114_if_stmt:
+        %tmp.62 = lgetv %s0.7;
+        symbol [ s0 %tmp.62 58 24 26 ];
+        symbol [ hasKey %tmp.63 58 27 33 ];
+        %tmp.63 = getv function %tmp.62 :hasKey;
+        %tmp.64 = "weight_kg";
+        %tmp.65 = invoke %tmp.62 %tmp.63(%tmp.64);
+        bf %tmp.65 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_58_20_58_114_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_58_20_58_114_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_58_48_58_114_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 58 50 ]
+        %tmp.66 = lgetv %sub.6;
+        symbol [ sub %tmp.66 58 50 53 ];
+        %tmp.67 = " @ ";
+        symbol [ Ui %tmp.69 58 65 67 ];
+        %tmp.69 = getv ? :Ui;
+        symbol [ fmtKg %tmp.70 58 68 73 ];
+        %tmp.70 = getv function %tmp.69 :fmtKg;
+        symbol [ Model %tmp.72 58 74 79 ];
+        %tmp.72 = getv ? :Model;
+        symbol [ num %tmp.73 58 80 83 ];
+        %tmp.73 = getv function %tmp.72 :num;
+        %tmp.74 = lgetv %s0.7;
+        symbol [ s0 %tmp.74 58 84 86 ];
+        %tmp.75 = "weight_kg";
+        %tmp.76 = 0;
+        %tmp.77 = invoke %tmp.72 %tmp.73(%tmp.74, %tmp.75, %tmp.76);
+        %tmp.78 = invoke %tmp.69 %tmp.70(%tmp.77);
+        %tmp.79 = add %tmp.67 %tmp.78;
+        %tmp.80 = " kg";
+        %tmp.81 = add %tmp.79 %tmp.80;
+        %tmp.82 = add %tmp.66 %tmp.81;
+        lputv %sub.6 %tmp.82;
+        symbol [ sub %sub.6 58 50 53 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_58_48_58_114_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_58_20_58_114_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_58_20_58_114_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_39_59_16_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_16_61_16_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_16_61_16_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 59 23 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_59_23_61_16_if_stmt:
+        %tmp.83 = lgetv %s0.7;
+        symbol [ s0 %tmp.83 59 27 29 ];
+        symbol [ hasKey %tmp.84 59 30 36 ];
+        %tmp.84 = getv function %tmp.83 :hasKey;
+        %tmp.85 = "duration_s";
+        %tmp.86 = invoke %tmp.83 %tmp.84(%tmp.85);
+        bf %tmp.86 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_59_23_61_16_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_59_23_61_16_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_59_52_61_16_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 60 20 ]
+        %tmp.87 = lgetv %sub.6;
+        symbol [ sub %tmp.87 60 20 23 ];
+        %tmp.88 = lgetv %s0.7;
+        symbol [ s0 %tmp.88 60 27 29 ];
+        %tmp.89 = "duration_s";
+        %tmp.90 = agetv %tmp.88 %tmp.89;
+        symbol [ toString %tmp.91 60 44 52 ];
+        %tmp.91 = getv function %tmp.90 :toString;
+        %tmp.92 = invoke %tmp.90 %tmp.91();
+        %tmp.93 = " s";
+        %tmp.94 = add %tmp.92 %tmp.93;
+        %tmp.95 = add %tmp.87 %tmp.94;
+        lputv %sub.6 %tmp.95;
+        symbol [ sub %sub.6 60 20 23 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_59_52_61_16_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_59_23_61_16_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_59_23_61_16_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_56_16_61_16_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_33_62_12_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_12_62_12_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_54_12_62_12_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 63 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_stop" ]
+        %label.8 = local;
+        symbol [ label %label.8 63 16 21 ];
+        %tmp.96 = lgetv %i.3;
+        symbol [ i %tmp.96 63 25 26 ];
+        %tmp.97 = 1;
+        %tmp.98 = add %tmp.96 %tmp.97;
+        %tmp.99 = ". ";
+        %tmp.100 = add %tmp.98 %tmp.99;
+        symbol [ Model %tmp.102 63 41 46 ];
+        %tmp.102 = getv ? :Model;
+        symbol [ exerciseTitle %tmp.103 63 47 60 ];
+        %tmp.103 = getv function %tmp.102 :exerciseTitle;
+        %tmp.104 = lgetv %ex.4;
+        symbol [ ex %tmp.104 63 61 63 ];
+        %tmp.105 = invoke %tmp.102 %tmp.103(%tmp.104);
+        %tmp.106 = add %tmp.100 %tmp.105;
+        lputv %label.8 %tmp.106;
+        symbol [ label %label.8 63 16 21 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 64 12 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_12_66_85_if_stmt:
+        symbol [ Model %tmp.108 64 16 21 ];
+        %tmp.108 = getv ? :Model;
+        symbol [ exerciseDone %tmp.109 64 22 34 ];
+        %tmp.109 = getv function %tmp.108 :exerciseDone;
+        %tmp.110 = lgetv %i.3;
+        symbol [ i %tmp.110 64 35 36 ];
+        %tmp.111 = invoke %tmp.108 %tmp.109(%tmp.110);
+        bf %tmp.111 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_12_66_85_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_12_66_85_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_39_64_65_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 64 41 ]
+        %tmp.112 = "[x] ";
+        %tmp.113 = lgetv %label.8;
+        symbol [ label %tmp.113 64 58 63 ];
+        %tmp.114 = add %tmp.112 %tmp.113;
+        lputv %label.8 %tmp.114;
+        symbol [ label %label.8 64 41 46 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_39_64_65_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_12_66_85_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_12_66_85_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 65 17 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_17_66_85_if_stmt:
+        symbol [ Model %tmp.116 65 21 26 ];
+        %tmp.116 = getv ? :Model;
+        symbol [ machineDone %tmp.117 65 27 38 ];
+        %tmp.117 = getv function %tmp.116 :machineDone;
+        %tmp.118 = lgetv %ex.4;
+        symbol [ ex %tmp.118 65 39 41 ];
+        %tmp.119 = invoke %tmp.116 %tmp.117(%tmp.118);
+        bf %tmp.119 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_17_66_85_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_17_66_85_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_44_65_70_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 65 46 ]
+        %tmp.120 = "[M] ";
+        %tmp.121 = lgetv %label.8;
+        symbol [ label %tmp.121 65 63 68 ];
+        %tmp.122 = add %tmp.120 %tmp.121;
+        lputv %label.8 %tmp.122;
+        symbol [ label %label.8 65 46 51 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_44_65_70_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_17_66_85_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_17_66_85_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 66 17 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_17_66_85_if_stmt:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_21_66_49_begin:
+        %tmp.123 = lgetv %i.3;
+        symbol [ i %tmp.123 66 21 22 ];
+        symbol [ Model %tmp.125 66 26 31 ];
+        %tmp.125 = getv ? :Model;
+        symbol [ exIndex %tmp.126 66 32 39 ];
+        %tmp.126 = getv %tmp.125 :exIndex;
+        %tmp.127 = eq %tmp.123 %tmp.126;
+        bf %tmp.127 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_17_66_85_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_43_66_49_true:
+        symbol [ Model %tmp.129 66 43 48 ];
+        %tmp.129 = getv ? :Model;
+        symbol [ inProgress %tmp.130 66 49 59 ];
+        %tmp.130 = getv %tmp.129 :inProgress;
+        push %tmp.130;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_43_66_49_end:
+        %tmp.131 = phi [%tmp.127 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_21_66_49_begin] [%tmp.130 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_43_66_49_true] [%tmp.131 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_43_66_49_end];
+        bf %tmp.131 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_17_66_85_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_17_66_85_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_61_66_85_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 66 63 ]
+        %tmp.132 = "> ";
+        %tmp.133 = lgetv %label.8;
+        symbol [ label %tmp.133 66 78 83 ];
+        %tmp.134 = add %tmp.132 %tmp.133;
+        lputv %label.8 %tmp.134;
+        symbol [ label %label.8 66 63 68 ];
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_61_66_85_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_17_66_85_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_66_17_66_85_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_65_17_66_85_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_64_12_66_85_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 67 12 ]
+        %tmp.135 = lgetv %menu.1;
+        symbol [ menu %tmp.135 67 12 16 ];
+        symbol [ addItem %tmp.136 67 17 24 ];
+        %tmp.136 = getv function %tmp.135 :addItem;
+        symbol [ WatchUi %tmp.139 67 29 36 ];
+        %tmp.139 = getm $.Toybox.WatchUi;
+        symbol [ MenuItem %tmp.140 67 37 45 ];
+        %tmp.140 = getv function ? %tmp.139 :MenuItem;
+        %tmp.141 = lgetv %label.8;
+        symbol [ label %tmp.141 67 46 51 ];
+        %tmp.142 = lgetv %sub.6;
+        symbol [ sub %tmp.142 67 53 56 ];
+        %tmp.143 = lgetv %i.3;
+        symbol [ i %tmp.143 67 58 59 ];
+        %tmp.144 = null;
+        %tmp.137 = newc %tmp.140 (%tmp.141, %tmp.142, %tmp.143, %tmp.144);
+        invoke %tmp.135 %tmp.136(%tmp.137);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_45_68_8_stop:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_incr:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 50 ]
+        %tmp.147 = lgetv %i.3;
+        symbol [ i %tmp.147 50 40 41 ];
+        %tmp.148 = add %tmp.147 1;
+        lputv %i.3 %tmp.148;
+        symbol [ i %i.3 50 40 41 ];
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_test;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_50_8_68_8_for_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 69 8 ]
+        symbol [ WatchUi %tmp.149 69 8 15 ];
+        %tmp.149 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.150 69 16 24 ];
+        %tmp.150 = getv function %tmp.149 :pushView;
+        %tmp.151 = lgetv %menu.1;
+        symbol [ menu %tmp.151 69 25 29 ];
+        symbol [ ExerciseListDelegate %tmp.155 69 35 55 ];
+        %tmp.155 = getv ? :ExerciseListDelegate;
+        %tmp.152 = newc %tmp.155 ();
+        symbol [ WatchUi %tmp.156 69 59 66 ];
+        %tmp.156 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_UP %tmp.157 69 67 75 ];
+        %tmp.157 = getv %tmp.156 :SLIDE_UP;
+        invoke %tmp.149 %tmp.150(%tmp.151, %tmp.152, %tmp.157);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_47_40_70_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 72; @symbol_functiondef = [showWorkoutMenu,72,13,28]; ]
+    function showWorkoutMenu() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_72_39_80_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 73 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_72_39_80_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_72_39_80_4_stop" ]
+        %menu.1 = local;
+        symbol [ menu %menu.1 73 12 16 ];
+        symbol [ WatchUi %tmp.3 73 23 30 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ Menu2 %tmp.4 73 31 36 ];
+        %tmp.4 = getv function ? %tmp.3 :Menu2;
+        %tmp.5 = newd 1;
+        %tmp.7 = const :title;
+        symbol [ title %tmp.7 73 40 45 const ];
+        symbol [ Model %tmp.9 73 49 54 ];
+        %tmp.9 = getv ? :Model;
+        symbol [ exerciseTitle %tmp.10 73 55 68 ];
+        %tmp.10 = getv function %tmp.9 :exerciseTitle;
+        symbol [ Model %tmp.12 73 69 74 ];
+        %tmp.12 = getv ? :Model;
+        symbol [ currentExercise %tmp.13 73 75 90 ];
+        %tmp.13 = getv function %tmp.12 :currentExercise;
+        %tmp.14 = invoke %tmp.12 %tmp.13();
+        %tmp.15 = invoke %tmp.9 %tmp.10(%tmp.14);
+        %tmp.16 = dup %tmp.5;
+        %tmp.17 = aputv %tmp.16 %tmp.7 %tmp.15;
+        %tmp.1 = newc %tmp.4 (%tmp.17);
+        lputv %menu.1 %tmp.1;
+        symbol [ menu %menu.1 73 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 74 8 ]
+        %tmp.18 = lgetv %menu.1;
+        symbol [ menu %tmp.18 74 8 12 ];
+        symbol [ addItem %tmp.19 74 13 20 ];
+        %tmp.19 = getv function %tmp.18 :addItem;
+        symbol [ WatchUi %tmp.22 74 25 32 ];
+        %tmp.22 = getm $.Toybox.WatchUi;
+        symbol [ MenuItem %tmp.23 74 33 41 ];
+        %tmp.23 = getv function ? %tmp.22 :MenuItem;
+        symbol [ WatchUi %tmp.24 74 42 49 ];
+        %tmp.24 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.25 74 50 62 ];
+        %tmp.25 = getv function %tmp.24 :loadResource;
+        symbol [ Rez %tmp.27 74 63 66 ];
+        %tmp.27 = getv ? :Rez;
+        symbol [ Strings %tmp.28 74 67 74 ];
+        %tmp.28 = getv %tmp.27 :Strings;
+        symbol [ Undo %tmp.29 74 75 79 ];
+        %tmp.29 = getv %tmp.28 :Undo;
+        %tmp.30 = invoke %tmp.24 %tmp.25(%tmp.29);
+        %tmp.31 = as %tmp.30 String;
+        symbol [ String %tmp.31 74 84 90 ];
+        %tmp.32 = null;
+        %tmp.34 = const :undo;
+        symbol [ undo %tmp.34 74 99 103 const ];
+        %tmp.35 = null;
+        %tmp.20 = newc %tmp.23 (%tmp.31, %tmp.32, %tmp.34, %tmp.35);
+        invoke %tmp.18 %tmp.19(%tmp.20);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 75 8 ]
+        %tmp.36 = lgetv %menu.1;
+        symbol [ menu %tmp.36 75 8 12 ];
+        symbol [ addItem %tmp.37 75 13 20 ];
+        %tmp.37 = getv function %tmp.36 :addItem;
+        symbol [ WatchUi %tmp.40 75 25 32 ];
+        %tmp.40 = getm $.Toybox.WatchUi;
+        symbol [ MenuItem %tmp.41 75 33 41 ];
+        %tmp.41 = getv function ? %tmp.40 :MenuItem;
+        symbol [ WatchUi %tmp.42 75 42 49 ];
+        %tmp.42 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.43 75 50 62 ];
+        %tmp.43 = getv function %tmp.42 :loadResource;
+        symbol [ Rez %tmp.45 75 63 66 ];
+        %tmp.45 = getv ? :Rez;
+        symbol [ Strings %tmp.46 75 67 74 ];
+        %tmp.46 = getv %tmp.45 :Strings;
+        symbol [ SkipExercise %tmp.47 75 75 87 ];
+        %tmp.47 = getv %tmp.46 :SkipExercise;
+        %tmp.48 = invoke %tmp.42 %tmp.43(%tmp.47);
+        %tmp.49 = as %tmp.48 String;
+        symbol [ String %tmp.49 75 92 98 ];
+        %tmp.50 = null;
+        %tmp.52 = const :skipEx;
+        symbol [ skipEx %tmp.52 75 107 113 const ];
+        %tmp.53 = null;
+        %tmp.38 = newc %tmp.41 (%tmp.49, %tmp.50, %tmp.52, %tmp.53);
+        invoke %tmp.36 %tmp.37(%tmp.38);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 76 8 ]
+        %tmp.54 = lgetv %menu.1;
+        symbol [ menu %tmp.54 76 8 12 ];
+        symbol [ addItem %tmp.55 76 13 20 ];
+        %tmp.55 = getv function %tmp.54 :addItem;
+        symbol [ WatchUi %tmp.58 76 25 32 ];
+        %tmp.58 = getm $.Toybox.WatchUi;
+        symbol [ MenuItem %tmp.59 76 33 41 ];
+        %tmp.59 = getv function ? %tmp.58 :MenuItem;
+        symbol [ WatchUi %tmp.60 76 42 49 ];
+        %tmp.60 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.61 76 50 62 ];
+        %tmp.61 = getv function %tmp.60 :loadResource;
+        symbol [ Rez %tmp.63 76 63 66 ];
+        %tmp.63 = getv ? :Rez;
+        symbol [ Strings %tmp.64 76 67 74 ];
+        %tmp.64 = getv %tmp.63 :Strings;
+        symbol [ Exercises %tmp.65 76 75 84 ];
+        %tmp.65 = getv %tmp.64 :Exercises;
+        %tmp.66 = invoke %tmp.60 %tmp.61(%tmp.65);
+        %tmp.67 = as %tmp.66 String;
+        symbol [ String %tmp.67 76 89 95 ];
+        %tmp.68 = null;
+        %tmp.70 = const :list;
+        symbol [ list %tmp.70 76 104 108 const ];
+        %tmp.71 = null;
+        %tmp.56 = newc %tmp.59 (%tmp.67, %tmp.68, %tmp.70, %tmp.71);
+        invoke %tmp.54 %tmp.55(%tmp.56);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 77 8 ]
+        %tmp.72 = lgetv %menu.1;
+        symbol [ menu %tmp.72 77 8 12 ];
+        symbol [ addItem %tmp.73 77 13 20 ];
+        %tmp.73 = getv function %tmp.72 :addItem;
+        symbol [ WatchUi %tmp.76 77 25 32 ];
+        %tmp.76 = getm $.Toybox.WatchUi;
+        symbol [ MenuItem %tmp.77 77 33 41 ];
+        %tmp.77 = getv function ? %tmp.76 :MenuItem;
+        symbol [ WatchUi %tmp.78 77 42 49 ];
+        %tmp.78 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.79 77 50 62 ];
+        %tmp.79 = getv function %tmp.78 :loadResource;
+        symbol [ Rez %tmp.81 77 63 66 ];
+        %tmp.81 = getv ? :Rez;
+        symbol [ Strings %tmp.82 77 67 74 ];
+        %tmp.82 = getv %tmp.81 :Strings;
+        symbol [ Finish %tmp.83 77 75 81 ];
+        %tmp.83 = getv %tmp.82 :Finish;
+        %tmp.84 = invoke %tmp.78 %tmp.79(%tmp.83);
+        %tmp.85 = as %tmp.84 String;
+        symbol [ String %tmp.85 77 86 92 ];
+        %tmp.86 = null;
+        %tmp.88 = const :finish;
+        symbol [ finish %tmp.88 77 101 107 const ];
+        %tmp.89 = null;
+        %tmp.74 = newc %tmp.77 (%tmp.85, %tmp.86, %tmp.88, %tmp.89);
+        invoke %tmp.72 %tmp.73(%tmp.74);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 78 8 ]
+        %tmp.90 = lgetv %menu.1;
+        symbol [ menu %tmp.90 78 8 12 ];
+        symbol [ addItem %tmp.91 78 13 20 ];
+        %tmp.91 = getv function %tmp.90 :addItem;
+        symbol [ WatchUi %tmp.94 78 25 32 ];
+        %tmp.94 = getm $.Toybox.WatchUi;
+        symbol [ MenuItem %tmp.95 78 33 41 ];
+        %tmp.95 = getv function ? %tmp.94 :MenuItem;
+        symbol [ WatchUi %tmp.96 78 42 49 ];
+        %tmp.96 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.97 78 50 62 ];
+        %tmp.97 = getv function %tmp.96 :loadResource;
+        symbol [ Rez %tmp.99 78 63 66 ];
+        %tmp.99 = getv ? :Rez;
+        symbol [ Strings %tmp.100 78 67 74 ];
+        %tmp.100 = getv %tmp.99 :Strings;
+        symbol [ Discard %tmp.101 78 75 82 ];
+        %tmp.101 = getv %tmp.100 :Discard;
+        %tmp.102 = invoke %tmp.96 %tmp.97(%tmp.101);
+        %tmp.103 = as %tmp.102 String;
+        symbol [ String %tmp.103 78 87 93 ];
+        %tmp.104 = null;
+        %tmp.106 = const :discard;
+        symbol [ discard %tmp.106 78 102 109 const ];
+        %tmp.107 = null;
+        %tmp.92 = newc %tmp.95 (%tmp.103, %tmp.104, %tmp.106, %tmp.107);
+        invoke %tmp.90 %tmp.91(%tmp.92);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 79 8 ]
+        symbol [ WatchUi %tmp.108 79 8 15 ];
+        %tmp.108 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.109 79 16 24 ];
+        %tmp.109 = getv function %tmp.108 :pushView;
+        %tmp.110 = lgetv %menu.1;
+        symbol [ menu %tmp.110 79 25 29 ];
+        symbol [ WorkoutMenuDelegate %tmp.114 79 35 54 ];
+        %tmp.114 = getv ? :WorkoutMenuDelegate;
+        %tmp.111 = newc %tmp.114 ();
+        symbol [ WatchUi %tmp.115 79 58 65 ];
+        %tmp.115 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_UP %tmp.116 79 66 74 ];
+        %tmp.116 = getv %tmp.115 :SLIDE_UP;
+        invoke %tmp.108 %tmp.109(%tmp.110, %tmp.111, %tmp.116);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_72_39_80_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 83; @symbol_classdef = [ExerciseListDelegate,83,6,26]; @symbol_extends<0> = [WatchUi,83,35,42]; @symbol_extends<1> = [Menu2InputDelegate,83,43,61]; ]
+class ExerciseListDelegate extends WatchUi.Menu2InputDelegate {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 83; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 83; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 85; @symbol_functiondef = [initialize,85,13,23]; ]
+    function initialize() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_85_26_87_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 86 8 ]
+        symbol [ Menu2InputDelegate %tmp.2 86 8 26 ];
+        %tmp.2 = getv ? :Menu2InputDelegate;
+        symbol [ initialize %tmp.3 86 27 37 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_85_26_87_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 89; @symbol_functiondef = [onSelect,89,13,21]; @symbol_param<0> = [item,89,22,26]; @symbol_param<0>_type<0> = [MenuItem,89,30,38]; ]
+    function onSelect(item as MenuItem) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_89_48_96_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 90 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_89_48_96_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_89_48_96_4_stop" ]
+        %id.1 = local;
+        symbol [ id %id.1 90 12 14 ];
+        %tmp.1 = lgetv %item;
+        symbol [ item %tmp.1 90 17 21 ];
+        symbol [ getId %tmp.2 90 22 27 ];
+        %tmp.2 = getv function %tmp.1 :getId;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %id.1 %tmp.3;
+        symbol [ id %id.1 90 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 91 8 ]
+        symbol [ WatchUi %tmp.4 91 8 15 ];
+        %tmp.4 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.5 91 16 23 ];
+        %tmp.5 = getv function %tmp.4 :popView;
+        symbol [ WatchUi %tmp.6 91 24 31 ];
+        %tmp.6 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_DOWN %tmp.7 91 32 42 ];
+        %tmp.7 = getv %tmp.6 :SLIDE_DOWN;
+        invoke %tmp.4 %tmp.5(%tmp.7);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 92 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_8_95_8_if_stmt:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_12_92_42_begin:
+        %tmp.8 = lgetv %id.1;
+        symbol [ id %tmp.8 92 12 14 ];
+        symbol [ Number %tmp.10 92 26 32 ];
+        %tmp.10 = getv ? :Number;
+        %tmp.11 = isa %tmp.8 %tmp.10;
+        bf %tmp.11 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_8_95_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_36_92_42_true:
+        symbol [ Model %tmp.13 92 36 41 ];
+        %tmp.13 = getv ? :Model;
+        symbol [ inProgress %tmp.14 92 42 52 ];
+        %tmp.14 = getv %tmp.13 :inProgress;
+        push %tmp.14;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_36_92_42_end:
+        %tmp.15 = phi [%tmp.11 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_12_92_42_begin] [%tmp.14 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_36_92_42_true] [%tmp.15 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_36_92_42_end];
+        bf %tmp.15 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_8_95_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_8_95_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_54_95_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 93 12 ]
+        symbol [ Model %tmp.17 93 12 17 ];
+        %tmp.17 = getv ? :Model;
+        symbol [ jumpTo %tmp.18 93 18 24 ];
+        %tmp.18 = getv function %tmp.17 :jumpTo;
+        %tmp.19 = lgetv %id.1;
+        symbol [ id %tmp.19 93 25 27 ];
+        %tmp.20 = as %tmp.19 { (Number) };
+        %tmp.21 = as %tmp.20 Number;
+        symbol [ Number %tmp.21 93 31 37 ];
+        invoke %tmp.17 %tmp.18(%tmp.21);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 94 12 ]
+        symbol [ Flow %tmp.23 94 12 16 ];
+        %tmp.23 = getv ? :Flow;
+        symbol [ showCurrent %tmp.24 94 17 28 ];
+        %tmp.24 = getv function %tmp.23 :showCurrent;
+        symbol [ WatchUi %tmp.25 94 29 36 ];
+        %tmp.25 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.26 94 37 47 ];
+        %tmp.26 = getv %tmp.25 :SLIDE_LEFT;
+        %tmp.27 = false;
+        invoke %tmp.23 %tmp.24(%tmp.26, %tmp.27);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_54_95_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_8_95_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_92_8_95_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_89_48_96_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 99; @symbol_classdef = [WorkoutMenuDelegate,99,6,25]; @symbol_extends<0> = [WatchUi,99,34,41]; @symbol_extends<1> = [Menu2InputDelegate,99,42,60]; ]
+class WorkoutMenuDelegate extends WatchUi.Menu2InputDelegate {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 99; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 99; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 101; @symbol_functiondef = [initialize,101,13,23]; ]
+    function initialize() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_101_26_103_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 102 8 ]
+        symbol [ Menu2InputDelegate %tmp.2 102 8 26 ];
+        %tmp.2 = getv ? :Menu2InputDelegate;
+        symbol [ initialize %tmp.3 102 27 37 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_101_26_103_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 105; @symbol_functiondef = [onSelect,105,13,21]; @symbol_param<0> = [item,105,22,26]; @symbol_param<0>_type<0> = [MenuItem,105,30,38]; ]
+    function onSelect(item as MenuItem) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_105_48_124_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 106 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_105_48_124_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_105_48_124_4_stop" ]
+        %id.1 = local;
+        symbol [ id %id.1 106 12 14 ];
+        %tmp.1 = lgetv %item;
+        symbol [ item %tmp.1 106 17 21 ];
+        symbol [ getId %tmp.2 106 22 27 ];
+        %tmp.2 = getv function %tmp.1 :getId;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %id.1 %tmp.3;
+        symbol [ id %id.1 106 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 107 8 ]
+        symbol [ WatchUi %tmp.4 107 8 15 ];
+        %tmp.4 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.5 107 16 23 ];
+        %tmp.5 = getv function %tmp.4 :popView;
+        symbol [ WatchUi %tmp.6 107 24 31 ];
+        %tmp.6 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_DOWN %tmp.7 107 32 42 ];
+        %tmp.7 = getv %tmp.6 :SLIDE_DOWN;
+        invoke %tmp.4 %tmp.5(%tmp.7);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 108 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_8_123_8_if_stmt:
+        %tmp.8 = lgetv %id.1;
+        symbol [ id %tmp.8 108 12 14 ];
+        %tmp.10 = const :undo;
+        symbol [ undo %tmp.10 108 19 23 const ];
+        %tmp.11 = eq %tmp.8 %tmp.10;
+        bf %tmp.11 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_8_123_8_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_8_123_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_25_111_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 109 12 ]
+        symbol [ Model %tmp.13 109 12 17 ];
+        %tmp.13 = getv ? :Model;
+        symbol [ undoLast %tmp.14 109 18 26 ];
+        %tmp.14 = getv function %tmp.13 :undoLast;
+        invoke %tmp.13 %tmp.14();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 110 12 ]
+        symbol [ Flow %tmp.16 110 12 16 ];
+        %tmp.16 = getv ? :Flow;
+        symbol [ showCurrent %tmp.17 110 17 28 ];
+        %tmp.17 = getv function %tmp.16 :showCurrent;
+        symbol [ WatchUi %tmp.18 110 29 36 ];
+        %tmp.18 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.19 110 37 48 ];
+        %tmp.19 = getv %tmp.18 :SLIDE_RIGHT;
+        %tmp.20 = false;
+        invoke %tmp.16 %tmp.17(%tmp.19, %tmp.20);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_25_111_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_8_123_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_8_123_8_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 111 15 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_15_123_8_if_stmt:
+        %tmp.21 = lgetv %id.1;
+        symbol [ id %tmp.21 111 19 21 ];
+        %tmp.23 = const :skipEx;
+        symbol [ skipEx %tmp.23 111 26 32 const ];
+        %tmp.24 = eq %tmp.21 %tmp.23;
+        bf %tmp.24 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_15_123_8_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_15_123_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_34_114_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 112 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_34_114_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_34_114_8_stop" ]
+        %finished.2 = local;
+        symbol [ finished %finished.2 112 16 24 ];
+        symbol [ Model %tmp.26 112 27 32 ];
+        %tmp.26 = getv ? :Model;
+        symbol [ skipExercise %tmp.27 112 33 45 ];
+        %tmp.27 = getv function %tmp.26 :skipExercise;
+        %tmp.28 = invoke %tmp.26 %tmp.27();
+        lputv %finished.2 %tmp.28;
+        symbol [ finished %finished.2 112 16 24 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 113 12 ]
+        symbol [ Flow %tmp.30 113 12 16 ];
+        %tmp.30 = getv ? :Flow;
+        symbol [ afterSet %tmp.31 113 17 25 ];
+        %tmp.31 = getv function %tmp.30 :afterSet;
+        %tmp.32 = lgetv %finished.2;
+        symbol [ finished %tmp.32 113 26 34 ];
+        %tmp.33 = 0;
+        invoke %tmp.30 %tmp.31(%tmp.32, %tmp.33);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_34_114_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_15_123_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_15_123_8_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 114 15 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_15_123_8_if_stmt:
+        %tmp.34 = lgetv %id.1;
+        symbol [ id %tmp.34 114 19 21 ];
+        %tmp.36 = const :list;
+        symbol [ list %tmp.36 114 26 30 const ];
+        %tmp.37 = eq %tmp.34 %tmp.36;
+        bf %tmp.37 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_15_123_8_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_15_123_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_32_116_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 115 12 ]
+        symbol [ Flow %tmp.39 115 12 16 ];
+        %tmp.39 = getv ? :Flow;
+        symbol [ showExerciseList %tmp.40 115 17 33 ];
+        %tmp.40 = getv function %tmp.39 :showExerciseList;
+        invoke %tmp.39 %tmp.40();
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_32_116_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_15_123_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_15_123_8_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 116 15 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_15_123_8_if_stmt:
+        %tmp.41 = lgetv %id.1;
+        symbol [ id %tmp.41 116 19 21 ];
+        %tmp.43 = const :finish;
+        symbol [ finish %tmp.43 116 26 32 const ];
+        %tmp.44 = eq %tmp.41 %tmp.43;
+        bf %tmp.44 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_15_123_8_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_15_123_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_34_119_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 117 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_34_119_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_34_119_8_stop" ]
+        %sv.3 = local;
+        symbol [ sv %sv.3 117 16 18 ];
+        symbol [ SummaryView %tmp.48 117 25 36 ];
+        %tmp.48 = getv ? :SummaryView;
+        %tmp.45 = newc %tmp.48 ();
+        lputv %sv.3 %tmp.45;
+        symbol [ sv %sv.3 117 16 18 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 118 12 ]
+        symbol [ WatchUi %tmp.49 118 12 19 ];
+        %tmp.49 = getm $.Toybox.WatchUi;
+        symbol [ switchToView %tmp.50 118 20 32 ];
+        %tmp.50 = getv function %tmp.49 :switchToView;
+        %tmp.51 = lgetv %sv.3;
+        symbol [ sv %tmp.51 118 33 35 ];
+        symbol [ SummaryDelegate %tmp.55 118 41 56 ];
+        %tmp.55 = getv ? :SummaryDelegate;
+        %tmp.56 = lgetv %sv.3;
+        symbol [ sv %tmp.56 118 57 59 ];
+        %tmp.52 = newc %tmp.55 (%tmp.56);
+        symbol [ WatchUi %tmp.57 118 62 69 ];
+        %tmp.57 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.58 118 70 80 ];
+        %tmp.58 = getv %tmp.57 :SLIDE_LEFT;
+        invoke %tmp.49 %tmp.50(%tmp.51, %tmp.52, %tmp.58);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_34_119_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_15_123_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_15_123_8_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 119 15 ]
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_119_15_123_8_if_stmt:
+        %tmp.59 = lgetv %id.1;
+        symbol [ id %tmp.59 119 19 21 ];
+        %tmp.61 = const :discard;
+        symbol [ discard %tmp.61 119 26 33 const ];
+        %tmp.62 = eq %tmp.59 %tmp.61;
+        bf %tmp.62 @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_119_15_123_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_119_15_123_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_119_35_123_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 120 12 ]
+        symbol [ Recording %tmp.64 120 12 21 ];
+        %tmp.64 = getv ? :Recording;
+        symbol [ discard %tmp.65 120 22 29 ];
+        %tmp.65 = getv function %tmp.64 :discard;
+        invoke %tmp.64 %tmp.65();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 121 12 ]
+        symbol [ Model %tmp.67 121 12 17 ];
+        %tmp.67 = getv ? :Model;
+        symbol [ resetProgress %tmp.68 121 18 31 ];
+        %tmp.68 = getv function %tmp.67 :resetProgress;
+        invoke %tmp.67 %tmp.68();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc" 122 12 ]
+        symbol [ WatchUi %tmp.69 122 12 19 ];
+        %tmp.69 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.70 122 20 27 ];
+        %tmp.70 = getv function %tmp.69 :popView;
+        symbol [ WatchUi %tmp.71 122 28 35 ];
+        %tmp.71 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.72 122 36 47 ];
+        %tmp.72 = getv %tmp.71 :SLIDE_RIGHT;
+        invoke %tmp.69 %tmp.70(%tmp.72);
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_119_35_123_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_119_15_123_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_119_15_123_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_116_15_123_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_114_15_123_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_111_15_123_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_108_8_123_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_Flow_mc_105_48_124_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/Flow.mc"; @line = 1; ]
+<init> {
+}

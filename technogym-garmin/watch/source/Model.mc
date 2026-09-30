@@ -297,6 +297,87 @@ module Model {
         return false;
     }
 
+    // ------------------------------------------------------------------ live (machines -> montre)
+    var live as Dictionary? = null;          // reponse GET /workout/{id}/live
+    var liveAt as Number = 0;
+
+    // Fusionne l'etat des machines. Retourne true si un exercice vient d'etre marque fait par une machine.
+    function applyLive(data as Dictionary) as Boolean {
+        var before = machineDoneCount();
+        live = data;
+        liveAt = Time.now().value();
+        return machineDoneCount() > before;
+    }
+
+    function liveExercise(position as Number) as Dictionary? {
+        if (live == null || !(live as Dictionary).hasKey("exercises")) { return null; }
+        var exs = (live as Dictionary)["exercises"] as Array;
+        for (var i = 0; i < exs.size(); i++) {
+            var e = exs[i] as Dictionary;
+            if (num(e, "position", -1) == position) { return e; }
+        }
+        return null;
+    }
+
+    function machineDone(ex as Dictionary?) as Boolean {
+        if (ex == null) { return false; }
+        var le = liveExercise(num(ex, "position", -1).toNumber());
+        return le != null && le.hasKey("status") && (le["status"] as String).equals("done");
+    }
+
+    function machineDoneCount() as Number {
+        var n = 0;
+        var exs = exercises();
+        for (var i = 0; i < exs.size(); i++) {
+            if (machineDone(exs[i] as Dictionary)) { n++; }
+        }
+        return n;
+    }
+
+    // Texte court des series enregistrees par la machine ("10x80 10x80 10x80").
+    function machineSetsText(ex as Dictionary?) as String {
+        if (ex == null) { return ""; }
+        var le = liveExercise(num(ex, "position", -1).toNumber());
+        if (le == null || !le.hasKey("sets")) { return ""; }
+        var sets = le["sets"] as Array;
+        var out = "";
+        for (var i = 0; i < sets.size() && i < 6; i++) {
+            var st = sets[i] as Dictionary;
+            var part = "";
+            if (st.hasKey("reps")) { part = st["reps"].toString(); }
+            if (st.hasKey("weight_kg")) { part += "x" + num(st, "weight_kg", 0).toNumber(); }
+            if (part.length() == 0 && st.hasKey("duration_s")) { part = st["duration_s"].toString() + "s"; }
+            if (part.length() > 0) { out += (out.length() > 0 ? " " : "") + part; }
+        }
+        return out;
+    }
+
+    // Copie les series machine de l'exercice courant dans les resultats (source machine) et avance.
+    function acceptMachineExercise() as Boolean {
+        var ex = currentExercise();
+        if (ex == null) { return true; }
+        var le = liveExercise(num(ex, "position", -1).toNumber());
+        var r = _resultFor(ex);
+        var sets = [] as Array;
+        if (le != null && le.hasKey("sets")) {
+            var ls = le["sets"] as Array;
+            for (var i = 0; i < ls.size(); i++) {
+                var st = ls[i] as Dictionary;
+                var entry = {"source" => "machine"} as Dictionary;
+                if (st.hasKey("reps")) { entry["reps"] = st["reps"]; }
+                if (st.hasKey("weight_kg")) { entry["weight_kg"] = st["weight_kg"]; }
+                if (st.hasKey("duration_s")) { entry["duration_s"] = st["duration_s"]; }
+                sets.add(entry);
+            }
+        }
+        r["sets"] = sets;
+        r["source"] = "machine";
+        setIndex = 0;
+        exIndex++;
+        persistSession();
+        return exIndex >= exerciseCount();
+    }
+
     // ------------------------------------------------------------------ resultats
     function buildResultsPayload(fitSaved as Boolean) as Dictionary {
         var w = workout as Dictionary;

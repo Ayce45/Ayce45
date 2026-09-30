@@ -179,10 +179,20 @@ class TimedSetView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             dc.drawText(cx, h * 0.56, Graphics.FONT_LARGE, target, Graphics.TEXT_JUSTIFY_CENTER);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.72, Graphics.FONT_TINY, extra, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.70, Graphics.FONT_TINY, extra, Graphics.TEXT_JUSTIFY_CENTER);
         }
-        dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, h * 0.86, Graphics.FONT_XTINY, "OK = lancer", Graphics.TEXT_JUSTIFY_CENTER);
+        if (Model.machineDone(ex)) {
+            dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, "Machine : fait", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.87, Graphics.FONT_XTINY, "OK = suivant", Graphics.TEXT_JUSTIFY_CENTER);
+        } else {
+            dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(cx, h * 0.86, Graphics.FONT_XTINY, "OK = lancer", Graphics.TEXT_JUSTIFY_CENTER);
+        }
+    }
+
+    function onShowLive() as Void {
+        Net.fetchLive(null);
     }
 
     function startCountdown() as Void {
@@ -202,6 +212,7 @@ class TimedSetView extends WatchUi.View {
 
     function onShow() as Void {
         if (countdown != null) { (countdown as CountdownView).onShow(); }
+        Net.fetchLive(null);
     }
 
     function onBlockDone() as Void {
@@ -232,6 +243,11 @@ class TimedSetDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onSelect() as Boolean {
+        if (view.countdown == null && Model.machineDone(Model.currentExercise())) {
+            var finished = Model.acceptMachineExercise();
+            Flow.afterSet(finished, 0);
+            return true;
+        }
         if (view.countdown == null) {
             view.startCountdown();
         } else {

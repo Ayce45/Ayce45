@@ -1,0 +1,2109 @@
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Graphics,1,14,22]; ]
+import Toybox.Graphics;
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Lang,2,14,18]; ]
+import Toybox.Lang;
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Timer,3,14,19]; ]
+import Toybox.Timer;
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 4; @symbol_importdef<0> = [Toybox,4,7,13]; @symbol_importdef<1> = [WatchUi,4,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 5; @symbol_importdef<0> = [Toybox,5,7,13]; @symbol_importdef<1> = [Time,5,14,18]; ]
+import Toybox.Time;
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 8; @symbol_classdef = [CountdownView,8,6,19]; @symbol_extends<0> = [WatchUi,8,28,35]; @symbol_extends<1> = [View,8,36,40]; ]
+class CountdownView extends WatchUi.View {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 8; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 8; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 10; @position = 8; @symbol_vardef = [total,10,8,13]; @symbol_type<0> = [Number,10,17,23]; ]
+    var total as Number;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 11; @position = 8; @symbol_vardef = [remaining,11,8,17]; @symbol_type<0> = [Number,11,21,27]; ]
+    var remaining as Number;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 12; @position = 8; @symbol_vardef = [timer,12,8,13]; @symbol_type<0> = [Timer,12,17,22]; @symbol_type<1> = [Timer,12,23,28]; ]
+    var timer as Timer.Timer;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 13; @position = 8; @symbol_vardef = [running,13,8,15]; @symbol_type<0> = [Boolean,13,19,26]; ]
+    var running as Boolean = false;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 14; @position = 8; @symbol_vardef = [title,14,8,13]; @symbol_type<0> = [String,14,17,23]; ]
+    var title as String;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 15; @position = 8; @symbol_vardef = [subtitle,15,8,16]; @symbol_type<0> = [String,15,20,26]; ]
+    var subtitle as String;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 16; @position = 8; @symbol_vardef = [color,16,8,13]; @symbol_type<0> = [ColorType,16,17,26]; ]
+    var color as ColorType;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 17; @position = 8; @symbol_vardef = [endAt,17,8,13]; @symbol_type<0> = [Number,17,17,23]; ]
+    var endAt as Number = 0;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 18; @position = 8; @symbol_vardef = [onFinish,18,8,16]; @symbol_type<0> = [Method,18,20,26]; ]
+    var onFinish as Method or Null;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 20; @symbol_functiondef = [initialize,20,13,23]; @symbol_param<0> = [seconds,20,24,31]; @symbol_param<0>_type<0> = [Number,20,35,41]; @symbol_param<1> = [t,20,43,44]; @symbol_param<1>_type<0> = [String,20,48,54]; @symbol_param<2> = [sub,20,56,59]; @symbol_param<2>_type<0> = [String,20,63,69]; @symbol_param<3> = [c,20,71,72]; @symbol_param<3>_type<0> = [ColorType,20,76,85]; ]
+    function initialize(seconds as Number, t as String, sub as String, c as ColorType) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_20_87_28_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 21 8 ]
+        symbol [ View %tmp.2 21 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 21 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 22 8 ]
+        %tmp.4 = lgetv %seconds;
+        symbol [ seconds %tmp.4 22 16 23 ];
+        symbol [ total ? 22 8 13 ];
+        putv self :total %tmp.4;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 23 8 ]
+        %tmp.5 = lgetv %seconds;
+        symbol [ seconds %tmp.5 23 20 27 ];
+        symbol [ remaining ? 23 8 17 ];
+        putv self :remaining %tmp.5;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 24 8 ]
+        %tmp.6 = lgetv %t;
+        symbol [ t %tmp.6 24 16 17 ];
+        symbol [ title ? 24 8 13 ];
+        putv self :title %tmp.6;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 25 8 ]
+        %tmp.7 = lgetv %sub;
+        symbol [ sub %tmp.7 25 19 22 ];
+        symbol [ subtitle ? 25 8 16 ];
+        putv self :subtitle %tmp.7;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 26 8 ]
+        %tmp.8 = lgetv %c;
+        symbol [ c %tmp.8 26 16 17 ];
+        symbol [ color ? 26 8 13 ];
+        putv self :color %tmp.8;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 27 8 ]
+        symbol [ Timer %tmp.11 27 20 25 ];
+        %tmp.11 = getm $.Toybox.Timer;
+        symbol [ Timer %tmp.12 27 26 31 ];
+        %tmp.12 = getv function ? %tmp.11 :Timer;
+        %tmp.9 = newc %tmp.12 ();
+        symbol [ timer ? 27 8 13 ];
+        putv self :timer %tmp.9;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_20_87_28_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 30; @symbol_functiondef = [onShow,30,13,19]; ]
+    function onShow() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_30_30_36_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 31 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_31_8_34_8_if_stmt:
+        symbol [ running %tmp.2 31 13 20 ];
+        %tmp.2 = getv ? :running;
+        %tmp.3 = not %tmp.2;
+        bf %tmp.3 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_31_8_34_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_31_8_34_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_31_22_34_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 32 12 ]
+        symbol [ Time %tmp.4 32 20 24 ];
+        %tmp.4 = getm $.Toybox.Time;
+        symbol [ now %tmp.5 32 25 28 ];
+        %tmp.5 = getv function %tmp.4 :now;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        symbol [ value %tmp.7 32 31 36 ];
+        %tmp.7 = getv function %tmp.6 :value;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        symbol [ remaining %tmp.10 32 41 50 ];
+        %tmp.10 = getv ? :remaining;
+        %tmp.11 = add %tmp.8 %tmp.10;
+        symbol [ endAt ? 32 12 17 ];
+        putv self :endAt %tmp.11;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 33 12 ]
+        %tmp.12 = true;
+        symbol [ running ? 33 12 19 ];
+        putv self :running %tmp.12;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_31_22_34_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_31_8_34_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_31_8_34_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 35 8 ]
+        symbol [ timer %tmp.14 35 8 13 ];
+        %tmp.14 = getv ? :timer;
+        symbol [ start %tmp.15 35 14 19 ];
+        %tmp.15 = getv function %tmp.14 :start;
+        %tmp.16 = self;
+        symbol [ method %tmp.17 35 20 26 ];
+        %tmp.17 = getv function %tmp.16 :method;
+        %tmp.19 = const :onTick;
+        symbol [ onTick %tmp.19 35 28 34 const ];
+        %tmp.20 = invoke %tmp.16 %tmp.17(%tmp.19);
+        %tmp.21 = 1000;
+        %tmp.22 = true;
+        invoke %tmp.14 %tmp.15(%tmp.20, %tmp.21, %tmp.22);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_30_30_36_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 38; @symbol_functiondef = [onHide,38,13,19]; ]
+    function onHide() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_38_30_40_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 39 8 ]
+        symbol [ timer %tmp.2 39 8 13 ];
+        %tmp.2 = getv ? :timer;
+        symbol [ stop %tmp.3 39 14 18 ];
+        %tmp.3 = getv function %tmp.2 :stop;
+        invoke %tmp.2 %tmp.3();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_38_30_40_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 42; @symbol_functiondef = [onTick,42,13,19]; ]
+    function onTick() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_42_30_53_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 43 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_43_8_43_32_if_stmt:
+        symbol [ running %tmp.2 43 13 20 ];
+        %tmp.2 = getv ? :running;
+        %tmp.3 = not %tmp.2;
+        bf %tmp.3 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_43_8_43_32_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_43_8_43_32_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_43_22_43_32_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 43 24 ]
+        ret ?;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_43_22_43_32_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_43_8_43_32_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_43_8_43_32_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 44 8 ]
+        symbol [ endAt %tmp.5 44 20 25 ];
+        %tmp.5 = getv ? :endAt;
+        symbol [ Time %tmp.6 44 28 32 ];
+        %tmp.6 = getm $.Toybox.Time;
+        symbol [ now %tmp.7 44 33 36 ];
+        %tmp.7 = getv function %tmp.6 :now;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        symbol [ value %tmp.9 44 39 44 ];
+        %tmp.9 = getv function %tmp.8 :value;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        %tmp.11 = sub %tmp.5 %tmp.10;
+        symbol [ remaining ? 44 8 17 ];
+        putv self :remaining %tmp.11;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 45 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_45_8_51_8_if_stmt:
+        symbol [ remaining %tmp.13 45 12 21 ];
+        %tmp.13 = getv ? :remaining;
+        %tmp.14 = 0;
+        %tmp.15 = lte %tmp.13 %tmp.14;
+        bf %tmp.15 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_45_8_51_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_45_8_51_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_45_28_51_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 46 12 ]
+        %tmp.16 = 0;
+        symbol [ remaining ? 46 12 21 ];
+        putv self :remaining %tmp.16;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 47 12 ]
+        %tmp.17 = false;
+        symbol [ running ? 47 12 19 ];
+        putv self :running %tmp.17;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 48 12 ]
+        symbol [ timer %tmp.19 48 12 17 ];
+        %tmp.19 = getv ? :timer;
+        symbol [ stop %tmp.20 48 18 22 ];
+        %tmp.20 = getv function %tmp.19 :stop;
+        invoke %tmp.19 %tmp.20();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 49 12 ]
+        symbol [ Recording %tmp.22 49 12 21 ];
+        %tmp.22 = getv ? :Recording;
+        symbol [ vibrate %tmp.23 49 22 29 ];
+        %tmp.23 = getv function %tmp.22 :vibrate;
+        %tmp.24 = true;
+        invoke %tmp.22 %tmp.23(%tmp.24);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 50 12 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_50_12_50_67_if_stmt:
+        symbol [ onFinish %tmp.26 50 16 24 ];
+        %tmp.26 = getv ? :onFinish;
+        %tmp.27 = null;
+        %tmp.28 = ne %tmp.26 %tmp.27;
+        bf %tmp.28 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_50_12_50_67_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_50_12_50_67_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_50_34_50_67_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 50 36 ]
+        symbol [ onFinish %tmp.30 50 37 45 ];
+        %tmp.30 = getv ? :onFinish;
+        %tmp.31 = as %tmp.30 { (!Null) };
+        %tmp.32 = as %tmp.31 Method;
+        symbol [ Method %tmp.32 50 49 55 ];
+        symbol [ invoke %tmp.33 50 57 63 ];
+        %tmp.33 = getv function %tmp.32 :invoke;
+        invoke %tmp.32 %tmp.33();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_50_34_50_67_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_50_12_50_67_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_50_12_50_67_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_45_28_51_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_45_8_51_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_45_8_51_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 52 8 ]
+        symbol [ WatchUi %tmp.34 52 8 15 ];
+        %tmp.34 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.35 52 16 29 ];
+        %tmp.35 = getv function %tmp.34 :requestUpdate;
+        invoke %tmp.34 %tmp.35();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_42_30_53_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 55; @symbol_functiondef = [addSeconds,55,13,23]; @symbol_param<0> = [n,55,24,25]; @symbol_param<0>_type<0> = [Number,55,29,35]; ]
+    function addSeconds(n as Number) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_55_45_60_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 56 8 ]
+        symbol [ endAt %tmp.1 56 8 13 ];
+        %tmp.1 = getv self :endAt;
+        %tmp.2 = lgetv %n;
+        symbol [ n %tmp.2 56 17 18 ];
+        %tmp.3 = add %tmp.1 %tmp.2;
+        symbol [ endAt ? 56 8 13 ];
+        putv self :endAt dup %tmp.3;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 57 8 ]
+        symbol [ endAt %tmp.5 57 20 25 ];
+        %tmp.5 = getv ? :endAt;
+        symbol [ Time %tmp.6 57 28 32 ];
+        %tmp.6 = getm $.Toybox.Time;
+        symbol [ now %tmp.7 57 33 36 ];
+        %tmp.7 = getv function %tmp.6 :now;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        symbol [ value %tmp.9 57 39 44 ];
+        %tmp.9 = getv function %tmp.8 :value;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        %tmp.11 = sub %tmp.5 %tmp.10;
+        symbol [ remaining ? 57 8 17 ];
+        putv self :remaining %tmp.11;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 58 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_58_8_58_44_if_stmt:
+        symbol [ remaining %tmp.13 58 12 21 ];
+        %tmp.13 = getv ? :remaining;
+        %tmp.14 = 0;
+        %tmp.15 = lt %tmp.13 %tmp.14;
+        bf %tmp.15 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_58_8_58_44_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_58_8_58_44_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_58_27_58_44_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 58 29 ]
+        %tmp.16 = 0;
+        symbol [ remaining ? 58 29 38 ];
+        putv self :remaining %tmp.16;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_58_27_58_44_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_58_8_58_44_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_58_8_58_44_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 59 8 ]
+        symbol [ WatchUi %tmp.17 59 8 15 ];
+        %tmp.17 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.18 59 16 29 ];
+        %tmp.18 = getv function %tmp.17 :requestUpdate;
+        invoke %tmp.17 %tmp.18();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_55_45_60_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 62; @symbol_functiondef = [onUpdate,62,13,21]; @symbol_param<0> = [dc,62,22,24]; @symbol_param<0>_type<0> = [Dc,62,28,30]; ]
+    function onUpdate(dc as Dc) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 63 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 63 8 10 ];
+        symbol [ setColor %tmp.2 63 11 19 ];
+        %tmp.2 = getv function %tmp.1 :setColor;
+        symbol [ Graphics %tmp.3 63 20 28 ];
+        %tmp.3 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.4 63 29 40 ];
+        %tmp.4 = getv %tmp.3 :COLOR_BLACK;
+        symbol [ Graphics %tmp.5 63 42 50 ];
+        %tmp.5 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.6 63 51 62 ];
+        %tmp.6 = getv %tmp.5 :COLOR_BLACK;
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.6);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 64 8 ]
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 64 8 10 ];
+        symbol [ clear %tmp.8 64 11 16 ];
+        %tmp.8 = getv function %tmp.7 :clear;
+        invoke %tmp.7 %tmp.8();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 65 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_stop" ]
+        %w.1 = local;
+        symbol [ w %w.1 65 12 13 ];
+        %tmp.9 = lgetv %dc;
+        symbol [ dc %tmp.9 65 16 18 ];
+        symbol [ getWidth %tmp.10 65 19 27 ];
+        %tmp.10 = getv function %tmp.9 :getWidth;
+        %tmp.11 = invoke %tmp.9 %tmp.10();
+        lputv %w.1 %tmp.11;
+        symbol [ w %w.1 65 12 13 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 66 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_stop" ]
+        %h.2 = local;
+        symbol [ h %h.2 66 12 13 ];
+        %tmp.12 = lgetv %dc;
+        symbol [ dc %tmp.12 66 16 18 ];
+        symbol [ getHeight %tmp.13 66 19 28 ];
+        %tmp.13 = getv function %tmp.12 :getHeight;
+        %tmp.14 = invoke %tmp.12 %tmp.13();
+        lputv %h.2 %tmp.14;
+        symbol [ h %h.2 66 12 13 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 67 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_stop" ]
+        %cx.3 = local;
+        symbol [ cx %cx.3 67 12 14 ];
+        %tmp.15 = lgetv %w.1;
+        symbol [ w %tmp.15 67 17 18 ];
+        %tmp.16 = 2;
+        %tmp.17 = div %tmp.15 %tmp.16;
+        lputv %cx.3 %tmp.17;
+        symbol [ cx %cx.3 67 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 68 8 ]
+        %tmp.18 = lgetv %dc;
+        symbol [ dc %tmp.18 68 8 10 ];
+        symbol [ setColor %tmp.19 68 11 19 ];
+        %tmp.19 = getv function %tmp.18 :setColor;
+        symbol [ color %tmp.21 68 20 25 ];
+        %tmp.21 = getv ? :color;
+        symbol [ Graphics %tmp.22 68 27 35 ];
+        %tmp.22 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.23 68 36 53 ];
+        %tmp.23 = getv %tmp.22 :COLOR_TRANSPARENT;
+        invoke %tmp.18 %tmp.19(%tmp.21, %tmp.23);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 69 8 ]
+        %tmp.24 = lgetv %dc;
+        symbol [ dc %tmp.24 69 8 10 ];
+        symbol [ drawText %tmp.25 69 11 19 ];
+        %tmp.25 = getv function %tmp.24 :drawText;
+        %tmp.26 = lgetv %cx.3;
+        symbol [ cx %tmp.26 69 20 22 ];
+        %tmp.27 = lgetv %h.2;
+        symbol [ h %tmp.27 69 24 25 ];
+        %tmp.28 = 0.14;
+        %tmp.29 = mul %tmp.27 %tmp.28;
+        symbol [ Graphics %tmp.30 69 34 42 ];
+        %tmp.30 = getm $.Toybox.Graphics;
+        symbol [ FONT_SMALL %tmp.31 69 43 53 ];
+        %tmp.31 = getv %tmp.30 :FONT_SMALL;
+        symbol [ title %tmp.33 69 55 60 ];
+        %tmp.33 = getv ? :title;
+        symbol [ Graphics %tmp.34 69 62 70 ];
+        %tmp.34 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.35 69 71 90 ];
+        %tmp.35 = getv %tmp.34 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.24 %tmp.25(%tmp.26, %tmp.29, %tmp.31, %tmp.33, %tmp.35);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 70 8 ]
+        %tmp.36 = lgetv %dc;
+        symbol [ dc %tmp.36 70 8 10 ];
+        symbol [ setColor %tmp.37 70 11 19 ];
+        %tmp.37 = getv function %tmp.36 :setColor;
+        symbol [ Graphics %tmp.38 70 20 28 ];
+        %tmp.38 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.39 70 29 40 ];
+        %tmp.39 = getv %tmp.38 :COLOR_WHITE;
+        symbol [ Graphics %tmp.40 70 42 50 ];
+        %tmp.40 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.41 70 51 68 ];
+        %tmp.41 = getv %tmp.40 :COLOR_TRANSPARENT;
+        invoke %tmp.36 %tmp.37(%tmp.39, %tmp.41);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 71 8 ]
+        %tmp.42 = lgetv %dc;
+        symbol [ dc %tmp.42 71 8 10 ];
+        symbol [ drawText %tmp.43 71 11 19 ];
+        %tmp.43 = getv function %tmp.42 :drawText;
+        %tmp.44 = lgetv %cx.3;
+        symbol [ cx %tmp.44 71 20 22 ];
+        %tmp.45 = lgetv %h.2;
+        symbol [ h %tmp.45 71 24 25 ];
+        %tmp.46 = 0.30;
+        %tmp.47 = mul %tmp.45 %tmp.46;
+        symbol [ Graphics %tmp.48 71 34 42 ];
+        %tmp.48 = getm $.Toybox.Graphics;
+        symbol [ FONT_NUMBER_HOT %tmp.49 71 43 58 ];
+        %tmp.49 = getv %tmp.48 :FONT_NUMBER_HOT;
+        symbol [ Ui %tmp.51 71 60 62 ];
+        %tmp.51 = getv ? :Ui;
+        symbol [ fmtClock %tmp.52 71 63 71 ];
+        %tmp.52 = getv function %tmp.51 :fmtClock;
+        symbol [ remaining %tmp.54 71 72 81 ];
+        %tmp.54 = getv ? :remaining;
+        %tmp.55 = invoke %tmp.51 %tmp.52(%tmp.54);
+        symbol [ Graphics %tmp.56 71 84 92 ];
+        %tmp.56 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.57 71 93 112 ];
+        %tmp.57 = getv %tmp.56 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.42 %tmp.43(%tmp.44, %tmp.47, %tmp.49, %tmp.55, %tmp.57);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 72 8 ]
+        %tmp.58 = lgetv %dc;
+        symbol [ dc %tmp.58 72 8 10 ];
+        symbol [ setColor %tmp.59 72 11 19 ];
+        %tmp.59 = getv function %tmp.58 :setColor;
+        symbol [ Graphics %tmp.60 72 20 28 ];
+        %tmp.60 = getm $.Toybox.Graphics;
+        symbol [ COLOR_LT_GRAY %tmp.61 72 29 42 ];
+        %tmp.61 = getv %tmp.60 :COLOR_LT_GRAY;
+        symbol [ Graphics %tmp.62 72 44 52 ];
+        %tmp.62 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.63 72 53 70 ];
+        %tmp.63 = getv %tmp.62 :COLOR_TRANSPARENT;
+        invoke %tmp.58 %tmp.59(%tmp.61, %tmp.63);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 73 8 ]
+        symbol [ Ui %tmp.65 73 8 10 ];
+        %tmp.65 = getv ? :Ui;
+        symbol [ drawWrapped %tmp.66 73 11 22 ];
+        %tmp.66 = getv function %tmp.65 :drawWrapped;
+        %tmp.67 = lgetv %dc;
+        symbol [ dc %tmp.67 73 23 25 ];
+        %tmp.68 = lgetv %cx.3;
+        symbol [ cx %tmp.68 73 27 29 ];
+        %tmp.69 = lgetv %h.2;
+        symbol [ h %tmp.69 73 31 32 ];
+        %tmp.70 = 0.66;
+        %tmp.71 = mul %tmp.69 %tmp.70;
+        %tmp.72 = lgetv %w.1;
+        symbol [ w %tmp.72 73 41 42 ];
+        %tmp.73 = 0.84;
+        %tmp.74 = mul %tmp.72 %tmp.73;
+        symbol [ Graphics %tmp.75 73 51 59 ];
+        %tmp.75 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.76 73 60 70 ];
+        %tmp.76 = getv %tmp.75 :FONT_XTINY;
+        symbol [ subtitle %tmp.78 73 72 80 ];
+        %tmp.78 = getv ? :subtitle;
+        %tmp.79 = 2;
+        invoke %tmp.65 %tmp.66(%tmp.67, %tmp.68, %tmp.71, %tmp.74, %tmp.76, %tmp.78, %tmp.79);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 74 8 ]
+        symbol [ Ui %tmp.81 74 8 10 ];
+        %tmp.81 = getv ? :Ui;
+        symbol [ drawProgressArc %tmp.82 74 11 26 ];
+        %tmp.82 = getv function %tmp.81 :drawProgressArc;
+        %tmp.83 = lgetv %dc;
+        symbol [ dc %tmp.83 74 27 29 ];
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_begin:
+        symbol [ total %tmp.85 74 31 36 ];
+        %tmp.85 = getv ? :total;
+        %tmp.86 = 0;
+        %tmp.87 = gt %tmp.85 %tmp.86;
+        bf %tmp.87 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_true:
+        symbol [ total %tmp.89 74 44 49 ];
+        %tmp.89 = getv ? :total;
+        symbol [ remaining %tmp.91 74 52 61 ];
+        %tmp.91 = getv ? :remaining;
+        %tmp.92 = sub %tmp.89 %tmp.91;
+        symbol [ toFloat %tmp.93 74 63 70 ];
+        %tmp.93 = getv function %tmp.92 :toFloat;
+        %tmp.94 = invoke %tmp.92 %tmp.93();
+        symbol [ total %tmp.96 74 75 80 ];
+        %tmp.96 = getv ? :total;
+        %tmp.97 = div %tmp.94 %tmp.96;
+        push %tmp.97;
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_else_false:
+        %tmp.98 = 1.0;
+        push %tmp.98;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_end:
+        %tmp.99 = phi [%tmp.87 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_begin] [%tmp.97 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_true] [%tmp.98 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_else_false] [%tmp.99 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_74_31_74_83_end];
+        symbol [ color %tmp.101 74 88 93 ];
+        %tmp.101 = getv ? :color;
+        invoke %tmp.81 %tmp.82(%tmp.83, %tmp.99, %tmp.101);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_62_40_75_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 79; @symbol_classdef = [RestView,79,6,14]; @symbol_extends<0> = [CountdownView,79,23,36]; ]
+class RestView extends CountdownView {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 79; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 79; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 81; @symbol_functiondef = [initialize,81,13,23]; @symbol_param<0> = [seconds,81,24,31]; @symbol_param<0>_type<0> = [Number,81,35,41]; ]
+    function initialize(seconds as Number) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 82 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_stop" ]
+        %next.1 = local;
+        symbol [ next %next.1 82 12 16 ];
+        symbol [ Model %tmp.2 82 19 24 ];
+        %tmp.2 = getv ? :Model;
+        symbol [ currentExercise %tmp.3 82 25 40 ];
+        %tmp.3 = getv function %tmp.2 :currentExercise;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        lputv %next.1 %tmp.4;
+        symbol [ next %next.1 82 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 83 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_stop" ]
+        %set.2 = local;
+        symbol [ set %set.2 83 12 15 ];
+        symbol [ Model %tmp.6 83 18 23 ];
+        %tmp.6 = getv ? :Model;
+        symbol [ currentSet %tmp.7 83 24 34 ];
+        %tmp.7 = getv function %tmp.6 :currentSet;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        lputv %set.2 %tmp.8;
+        symbol [ set %set.2 83 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 84 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_stop" ]
+        %sub.3 = local;
+        symbol [ sub %sub.3 84 12 15 ];
+        symbol [ Model %tmp.10 84 18 23 ];
+        %tmp.10 = getv ? :Model;
+        symbol [ exerciseTitle %tmp.11 84 24 37 ];
+        %tmp.11 = getv function %tmp.10 :exerciseTitle;
+        %tmp.12 = lgetv %next.1;
+        symbol [ next %tmp.12 84 38 42 ];
+        %tmp.13 = invoke %tmp.10 %tmp.11(%tmp.12);
+        lputv %sub.3 %tmp.13;
+        symbol [ sub %sub.3 84 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 85 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_8_89_8_if_stmt:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_12_85_44_begin:
+        %tmp.14 = lgetv %set.2;
+        symbol [ set %tmp.14 85 12 15 ];
+        %tmp.15 = null;
+        %tmp.16 = ne %tmp.14 %tmp.15;
+        bf %tmp.16 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_8_89_8_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_27_85_44_true:
+        %tmp.17 = lgetv %set.2;
+        symbol [ set %tmp.17 85 27 30 ];
+        %tmp.18 = as %tmp.17 { (!Null) };
+        symbol [ hasKey %tmp.19 85 31 37 ];
+        %tmp.19 = getv function %tmp.18 :hasKey;
+        %tmp.20 = "reps";
+        %tmp.21 = invoke %tmp.18 %tmp.19(%tmp.20);
+        push %tmp.21;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_27_85_44_end:
+        %tmp.22 = phi [%tmp.16 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_12_85_44_begin] [%tmp.21 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_27_85_44_true] [%tmp.22 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_27_85_44_end];
+        bf %tmp.22 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_8_89_8_if_false;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_8_89_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_47_87_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 86 12 ]
+        %tmp.23 = lgetv %sub.3;
+        symbol [ sub %tmp.23 86 12 15 ];
+        %tmp.24 = " : ";
+        %tmp.25 = lgetv %set.2;
+        symbol [ set %tmp.25 86 27 30 ];
+        %tmp.26 = as %tmp.25 { (!Null) };
+        %tmp.27 = "reps";
+        %tmp.28 = agetv %tmp.26 %tmp.27;
+        symbol [ toString %tmp.29 86 39 47 ];
+        %tmp.29 = getv function %tmp.28 :toString;
+        %tmp.30 = invoke %tmp.28 %tmp.29();
+        %tmp.31 = add %tmp.24 %tmp.30;
+        %tmp.32 = " x ";
+        %tmp.33 = add %tmp.31 %tmp.32;
+        symbol [ Ui %tmp.35 86 60 62 ];
+        %tmp.35 = getv ? :Ui;
+        symbol [ fmtKg %tmp.36 86 63 68 ];
+        %tmp.36 = getv function %tmp.35 :fmtKg;
+        symbol [ Model %tmp.38 86 69 74 ];
+        %tmp.38 = getv ? :Model;
+        symbol [ num %tmp.39 86 75 78 ];
+        %tmp.39 = getv function %tmp.38 :num;
+        %tmp.40 = lgetv %set.2;
+        symbol [ set %tmp.40 86 79 82 ];
+        %tmp.41 = as %tmp.40 { (!Null) };
+        %tmp.42 = "weight_kg";
+        %tmp.43 = 0;
+        %tmp.44 = invoke %tmp.38 %tmp.39(%tmp.41, %tmp.42, %tmp.43);
+        %tmp.45 = invoke %tmp.35 %tmp.36(%tmp.44);
+        %tmp.46 = add %tmp.33 %tmp.45;
+        %tmp.47 = " kg";
+        %tmp.48 = add %tmp.46 %tmp.47;
+        %tmp.49 = add %tmp.23 %tmp.48;
+        lputv %sub.3 %tmp.49;
+        symbol [ sub %sub.3 86 12 15 ];
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_47_87_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_8_89_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_8_89_8_if_false:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 87 15 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_15_89_8_if_stmt:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_19_87_57_begin:
+        %tmp.50 = lgetv %set.2;
+        symbol [ set %tmp.50 87 19 22 ];
+        %tmp.51 = null;
+        %tmp.52 = ne %tmp.50 %tmp.51;
+        bf %tmp.52 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_15_89_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_34_87_57_true:
+        %tmp.53 = lgetv %set.2;
+        symbol [ set %tmp.53 87 34 37 ];
+        %tmp.54 = as %tmp.53 { (!Null) };
+        symbol [ hasKey %tmp.55 87 38 44 ];
+        %tmp.55 = getv function %tmp.54 :hasKey;
+        %tmp.56 = "duration_s";
+        %tmp.57 = invoke %tmp.54 %tmp.55(%tmp.56);
+        push %tmp.57;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_34_87_57_end:
+        %tmp.58 = phi [%tmp.52 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_19_87_57_begin] [%tmp.57 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_34_87_57_true] [%tmp.58 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_34_87_57_end];
+        bf %tmp.58 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_15_89_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_15_89_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_60_89_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 88 12 ]
+        %tmp.59 = lgetv %sub.3;
+        symbol [ sub %tmp.59 88 12 15 ];
+        %tmp.60 = " : ";
+        %tmp.61 = lgetv %set.2;
+        symbol [ set %tmp.61 88 27 30 ];
+        %tmp.62 = as %tmp.61 { (!Null) };
+        %tmp.63 = "duration_s";
+        %tmp.64 = agetv %tmp.62 %tmp.63;
+        symbol [ toString %tmp.65 88 45 53 ];
+        %tmp.65 = getv function %tmp.64 :toString;
+        %tmp.66 = invoke %tmp.64 %tmp.65();
+        %tmp.67 = add %tmp.60 %tmp.66;
+        %tmp.68 = " s";
+        %tmp.69 = add %tmp.67 %tmp.68;
+        %tmp.70 = add %tmp.59 %tmp.69;
+        lputv %sub.3 %tmp.70;
+        symbol [ sub %sub.3 88 12 15 ];
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_60_89_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_15_89_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_87_15_89_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_85_8_89_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 90 8 ]
+        symbol [ CountdownView %tmp.72 90 8 21 ];
+        %tmp.72 = getv ? :CountdownView;
+        symbol [ initialize %tmp.73 90 22 32 ];
+        %tmp.73 = getv function %tmp.72 :initialize;
+        %tmp.74 = lgetv %seconds;
+        symbol [ seconds %tmp.74 90 33 40 ];
+        symbol [ WatchUi %tmp.75 90 42 49 ];
+        %tmp.75 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.76 90 50 62 ];
+        %tmp.76 = getv function %tmp.75 :loadResource;
+        symbol [ Rez %tmp.78 90 63 66 ];
+        %tmp.78 = getv ? :Rez;
+        symbol [ Strings %tmp.79 90 67 74 ];
+        %tmp.79 = getv %tmp.78 :Strings;
+        symbol [ Rest %tmp.80 90 75 79 ];
+        %tmp.80 = getv %tmp.79 :Rest;
+        %tmp.81 = invoke %tmp.75 %tmp.76(%tmp.80);
+        %tmp.82 = as %tmp.81 String;
+        symbol [ String %tmp.82 90 84 90 ];
+        %tmp.83 = "Suite : ";
+        %tmp.84 = lgetv %sub.3;
+        symbol [ sub %tmp.84 90 105 108 ];
+        %tmp.85 = add %tmp.83 %tmp.84;
+        symbol [ Graphics %tmp.86 90 110 118 ];
+        %tmp.86 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLUE %tmp.87 90 119 129 ];
+        %tmp.87 = getv %tmp.86 :COLOR_BLUE;
+        invoke %tmp.72 %tmp.73(%tmp.74, %tmp.82, %tmp.85, %tmp.87);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 91 8 ]
+        %tmp.88 = self;
+        symbol [ method %tmp.89 91 19 25 ];
+        %tmp.89 = getv function %tmp.88 :method;
+        %tmp.91 = const :goNext;
+        symbol [ goNext %tmp.91 91 27 33 const ];
+        %tmp.92 = invoke %tmp.88 %tmp.89(%tmp.91);
+        symbol [ onFinish ? 91 8 16 ];
+        putv self :onFinish %tmp.92;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_81_43_92_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 94; @symbol_functiondef = [goNext,94,13,19]; ]
+    function goNext() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_94_30_96_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 95 8 ]
+        symbol [ Flow %tmp.2 95 8 12 ];
+        %tmp.2 = getv ? :Flow;
+        symbol [ showCurrent %tmp.3 95 13 24 ];
+        %tmp.3 = getv function %tmp.2 :showCurrent;
+        symbol [ WatchUi %tmp.4 95 25 32 ];
+        %tmp.4 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.5 95 33 43 ];
+        %tmp.5 = getv %tmp.4 :SLIDE_LEFT;
+        %tmp.6 = false;
+        invoke %tmp.2 %tmp.3(%tmp.5, %tmp.6);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_94_30_96_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 99; @symbol_classdef = [RestDelegate,99,6,18]; @symbol_extends<0> = [WatchUi,99,27,34]; @symbol_extends<1> = [BehaviorDelegate,99,35,51]; ]
+class RestDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 99; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 99; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 101; @position = 8; @symbol_vardef = [view,101,8,12]; @symbol_type<0> = [RestView,101,16,24]; ]
+    var view as RestView;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 103; @symbol_functiondef = [initialize,103,13,23]; @symbol_param<0> = [v,103,24,25]; @symbol_param<0>_type<0> = [RestView,103,29,37]; ]
+    function initialize(v as RestView) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_103_39_106_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 104 8 ]
+        symbol [ BehaviorDelegate %tmp.2 104 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 104 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 105 8 ]
+        %tmp.4 = lgetv %v;
+        symbol [ v %tmp.4 105 15 16 ];
+        symbol [ view ? 105 8 12 ];
+        putv self :view %tmp.4;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_103_39_106_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 108; @symbol_functiondef = [onSelect,108,13,21]; @symbol_return<0> = [Boolean,108,27,34]; ]
+    function onSelect() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_108_35_113_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 109 8 ]
+        symbol [ view %tmp.1 109 8 12 ];
+        %tmp.1 = getv self :view;
+        %tmp.2 = false;
+        symbol [ running ? 109 13 20 ];
+        putv %tmp.1 :running %tmp.2;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 110 8 ]
+        symbol [ view %tmp.4 110 8 12 ];
+        %tmp.4 = getv ? :view;
+        symbol [ timer %tmp.5 110 13 18 ];
+        %tmp.5 = getv %tmp.4 :timer;
+        symbol [ stop %tmp.6 110 19 23 ];
+        %tmp.6 = getv function %tmp.5 :stop;
+        invoke %tmp.5 %tmp.6();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 111 8 ]
+        symbol [ Flow %tmp.8 111 8 12 ];
+        %tmp.8 = getv ? :Flow;
+        symbol [ showCurrent %tmp.9 111 13 24 ];
+        %tmp.9 = getv function %tmp.8 :showCurrent;
+        symbol [ WatchUi %tmp.10 111 25 32 ];
+        %tmp.10 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_LEFT %tmp.11 111 33 43 ];
+        %tmp.11 = getv %tmp.10 :SLIDE_LEFT;
+        %tmp.12 = false;
+        invoke %tmp.8 %tmp.9(%tmp.11, %tmp.12);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 112 8 ]
+        %tmp.13 = true;
+        ret %tmp.13;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_108_35_113_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 115; @symbol_functiondef = [onTap,115,13,18]; @symbol_param<0> = [evt,115,19,22]; @symbol_param<0>_type<0> = [ClickEvent,115,26,36]; @symbol_return<0> = [Boolean,115,41,48]; ]
+    function onTap(evt as ClickEvent) as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_115_49_117_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 116 8 ]
+        %tmp.1 = self;
+        symbol [ onSelect %tmp.2 116 15 23 ];
+        %tmp.2 = getv function %tmp.1 :onSelect;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        ret %tmp.3;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_115_49_117_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 119; @symbol_functiondef = [onPreviousPage,119,13,27]; @symbol_return<0> = [Boolean,119,33,40]; ]
+    function onPreviousPage() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_119_41_122_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 120 8 ]
+        symbol [ view %tmp.2 120 8 12 ];
+        %tmp.2 = getv ? :view;
+        symbol [ addSeconds %tmp.3 120 13 23 ];
+        %tmp.3 = getv function %tmp.2 :addSeconds;
+        %tmp.4 = 15;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 121 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_119_41_122_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 124; @symbol_functiondef = [onNextPage,124,13,23]; @symbol_return<0> = [Boolean,124,29,36]; ]
+    function onNextPage() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_124_37_127_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 125 8 ]
+        symbol [ view %tmp.2 125 8 12 ];
+        %tmp.2 = getv ? :view;
+        symbol [ addSeconds %tmp.3 125 13 23 ];
+        %tmp.3 = getv function %tmp.2 :addSeconds;
+        %tmp.4 = -15;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 126 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_124_37_127_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 129; @symbol_functiondef = [onMenu,129,13,19]; @symbol_return<0> = [Boolean,129,25,32]; ]
+    function onMenu() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_129_33_132_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 130 8 ]
+        symbol [ Flow %tmp.2 130 8 12 ];
+        %tmp.2 = getv ? :Flow;
+        symbol [ showWorkoutMenu %tmp.3 130 13 28 ];
+        %tmp.3 = getv function %tmp.2 :showWorkoutMenu;
+        invoke %tmp.2 %tmp.3();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 131 8 ]
+        %tmp.4 = true;
+        ret %tmp.4;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_129_33_132_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 134; @symbol_functiondef = [onBack,134,13,19]; @symbol_return<0> = [Boolean,134,25,32]; ]
+    function onBack() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_134_33_137_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 135 8 ]
+        symbol [ WatchUi %tmp.1 135 8 15 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.2 135 16 23 ];
+        %tmp.2 = getv function %tmp.1 :popView;
+        symbol [ WatchUi %tmp.3 135 24 31 ];
+        %tmp.3 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.4 135 32 43 ];
+        %tmp.4 = getv %tmp.3 :SLIDE_RIGHT;
+        invoke %tmp.1 %tmp.2(%tmp.4);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 136 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_134_33_137_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 141; @symbol_classdef = [TimedSetView,141,6,18]; @symbol_extends<0> = [WatchUi,141,27,34]; @symbol_extends<1> = [View,141,35,39]; ]
+class TimedSetView extends WatchUi.View {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 141; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 141; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 143; @position = 8; @symbol_vardef = [countdown,143,8,17]; @symbol_type<0> = [CountdownView,143,21,34]; ]
+    var countdown as CountdownView or Null = null;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 144; @position = 8; @symbol_vardef = [started,144,8,15]; @symbol_type<0> = [Boolean,144,19,26]; ]
+    var started as Boolean = false;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 146; @symbol_functiondef = [initialize,146,13,23]; ]
+    function initialize() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_146_26_148_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 147 8 ]
+        symbol [ View %tmp.2 147 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 147 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_146_26_148_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 150; @symbol_functiondef = [onUpdate,150,13,21]; @symbol_param<0> = [dc,150,22,24]; @symbol_param<0>_type<0> = [Dc,150,28,30]; ]
+    function onUpdate(dc as Dc) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 151 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_151_8_154_8_if_stmt:
+        symbol [ countdown %tmp.2 151 12 21 ];
+        %tmp.2 = getv ? :countdown;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_151_8_154_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_151_8_154_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_151_31_154_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 152 12 ]
+        symbol [ countdown %tmp.6 152 13 22 ];
+        %tmp.6 = getv ? :countdown;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        %tmp.8 = as %tmp.7 CountdownView;
+        symbol [ CountdownView %tmp.8 152 26 39 ];
+        symbol [ onUpdate %tmp.9 152 41 49 ];
+        %tmp.9 = getv function %tmp.8 :onUpdate;
+        %tmp.10 = lgetv %dc;
+        symbol [ dc %tmp.10 152 50 52 ];
+        invoke %tmp.8 %tmp.9(%tmp.10);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 153 12 ]
+        ret ?;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_151_31_154_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_151_8_154_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_151_8_154_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 155 8 ]
+        %tmp.11 = lgetv %dc;
+        symbol [ dc %tmp.11 155 8 10 ];
+        symbol [ setColor %tmp.12 155 11 19 ];
+        %tmp.12 = getv function %tmp.11 :setColor;
+        symbol [ Graphics %tmp.13 155 20 28 ];
+        %tmp.13 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.14 155 29 40 ];
+        %tmp.14 = getv %tmp.13 :COLOR_BLACK;
+        symbol [ Graphics %tmp.15 155 42 50 ];
+        %tmp.15 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.16 155 51 62 ];
+        %tmp.16 = getv %tmp.15 :COLOR_BLACK;
+        invoke %tmp.11 %tmp.12(%tmp.14, %tmp.16);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 156 8 ]
+        %tmp.17 = lgetv %dc;
+        symbol [ dc %tmp.17 156 8 10 ];
+        symbol [ clear %tmp.18 156 11 16 ];
+        %tmp.18 = getv function %tmp.17 :clear;
+        invoke %tmp.17 %tmp.18();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 157 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %w.1 = local;
+        symbol [ w %w.1 157 12 13 ];
+        %tmp.19 = lgetv %dc;
+        symbol [ dc %tmp.19 157 16 18 ];
+        symbol [ getWidth %tmp.20 157 19 27 ];
+        %tmp.20 = getv function %tmp.19 :getWidth;
+        %tmp.21 = invoke %tmp.19 %tmp.20();
+        lputv %w.1 %tmp.21;
+        symbol [ w %w.1 157 12 13 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 158 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %h.2 = local;
+        symbol [ h %h.2 158 12 13 ];
+        %tmp.22 = lgetv %dc;
+        symbol [ dc %tmp.22 158 16 18 ];
+        symbol [ getHeight %tmp.23 158 19 28 ];
+        %tmp.23 = getv function %tmp.22 :getHeight;
+        %tmp.24 = invoke %tmp.22 %tmp.23();
+        lputv %h.2 %tmp.24;
+        symbol [ h %h.2 158 12 13 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 159 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %cx.3 = local;
+        symbol [ cx %cx.3 159 12 14 ];
+        %tmp.25 = lgetv %w.1;
+        symbol [ w %tmp.25 159 17 18 ];
+        %tmp.26 = 2;
+        %tmp.27 = div %tmp.25 %tmp.26;
+        lputv %cx.3 %tmp.27;
+        symbol [ cx %cx.3 159 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 160 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %ex.4 = local;
+        symbol [ ex %ex.4 160 12 14 ];
+        symbol [ Model %tmp.29 160 17 22 ];
+        %tmp.29 = getv ? :Model;
+        symbol [ currentExercise %tmp.30 160 23 38 ];
+        %tmp.30 = getv function %tmp.29 :currentExercise;
+        %tmp.31 = invoke %tmp.29 %tmp.30();
+        lputv %ex.4 %tmp.31;
+        symbol [ ex %ex.4 160 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 161 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %set.5 = local;
+        symbol [ set %set.5 161 12 15 ];
+        symbol [ Model %tmp.33 161 18 23 ];
+        %tmp.33 = getv ? :Model;
+        symbol [ currentSet %tmp.34 161 24 34 ];
+        %tmp.34 = getv function %tmp.33 :currentSet;
+        %tmp.35 = invoke %tmp.33 %tmp.34();
+        lputv %set.5 %tmp.35;
+        symbol [ set %set.5 161 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 162 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %sets.6 = local;
+        symbol [ sets %sets.6 162 12 16 ];
+        symbol [ Model %tmp.37 162 19 24 ];
+        %tmp.37 = getv ? :Model;
+        symbol [ setsOf %tmp.38 162 25 31 ];
+        %tmp.38 = getv function %tmp.37 :setsOf;
+        %tmp.39 = lgetv %ex.4;
+        symbol [ ex %tmp.39 162 32 34 ];
+        %tmp.40 = invoke %tmp.37 %tmp.38(%tmp.39);
+        lputv %sets.6 %tmp.40;
+        symbol [ sets %sets.6 162 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 163 8 ]
+        %tmp.41 = lgetv %dc;
+        symbol [ dc %tmp.41 163 8 10 ];
+        symbol [ setColor %tmp.42 163 11 19 ];
+        %tmp.42 = getv function %tmp.41 :setColor;
+        symbol [ Graphics %tmp.43 163 20 28 ];
+        %tmp.43 = getm $.Toybox.Graphics;
+        symbol [ COLOR_LT_GRAY %tmp.44 163 29 42 ];
+        %tmp.44 = getv %tmp.43 :COLOR_LT_GRAY;
+        symbol [ Graphics %tmp.45 163 44 52 ];
+        %tmp.45 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.46 163 53 70 ];
+        %tmp.46 = getv %tmp.45 :COLOR_TRANSPARENT;
+        invoke %tmp.41 %tmp.42(%tmp.44, %tmp.46);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 164 8 ]
+        %tmp.47 = lgetv %dc;
+        symbol [ dc %tmp.47 164 8 10 ];
+        symbol [ drawText %tmp.48 164 11 19 ];
+        %tmp.48 = getv function %tmp.47 :drawText;
+        %tmp.49 = lgetv %cx.3;
+        symbol [ cx %tmp.49 164 20 22 ];
+        %tmp.50 = lgetv %h.2;
+        symbol [ h %tmp.50 164 24 25 ];
+        %tmp.51 = 0.08;
+        %tmp.52 = mul %tmp.50 %tmp.51;
+        symbol [ Graphics %tmp.53 164 34 42 ];
+        %tmp.53 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.54 164 43 53 ];
+        %tmp.54 = getv %tmp.53 :FONT_XTINY;
+        symbol [ Model %tmp.56 164 56 61 ];
+        %tmp.56 = getv ? :Model;
+        symbol [ exIndex %tmp.57 164 62 69 ];
+        %tmp.57 = getv %tmp.56 :exIndex;
+        %tmp.58 = 1;
+        %tmp.59 = add %tmp.57 %tmp.58;
+        %tmp.60 = "/";
+        %tmp.61 = add %tmp.59 %tmp.60;
+        symbol [ Model %tmp.63 164 83 88 ];
+        %tmp.63 = getv ? :Model;
+        symbol [ exerciseCount %tmp.64 164 89 102 ];
+        %tmp.64 = getv function %tmp.63 :exerciseCount;
+        %tmp.65 = invoke %tmp.63 %tmp.64();
+        %tmp.66 = add %tmp.61 %tmp.65;
+        symbol [ Graphics %tmp.67 164 106 114 ];
+        %tmp.67 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.68 164 115 134 ];
+        %tmp.68 = getv %tmp.67 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.47 %tmp.48(%tmp.49, %tmp.52, %tmp.54, %tmp.66, %tmp.68);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 165 8 ]
+        %tmp.69 = lgetv %dc;
+        symbol [ dc %tmp.69 165 8 10 ];
+        symbol [ setColor %tmp.70 165 11 19 ];
+        %tmp.70 = getv function %tmp.69 :setColor;
+        symbol [ Graphics %tmp.71 165 20 28 ];
+        %tmp.71 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.72 165 29 40 ];
+        %tmp.72 = getv %tmp.71 :COLOR_WHITE;
+        symbol [ Graphics %tmp.73 165 42 50 ];
+        %tmp.73 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.74 165 51 68 ];
+        %tmp.74 = getv %tmp.73 :COLOR_TRANSPARENT;
+        invoke %tmp.69 %tmp.70(%tmp.72, %tmp.74);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 166 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %th.7 = local;
+        symbol [ th %th.7 166 12 14 ];
+        symbol [ Ui %tmp.76 166 17 19 ];
+        %tmp.76 = getv ? :Ui;
+        symbol [ drawWrapped %tmp.77 166 20 31 ];
+        %tmp.77 = getv function %tmp.76 :drawWrapped;
+        %tmp.78 = lgetv %dc;
+        symbol [ dc %tmp.78 166 32 34 ];
+        %tmp.79 = lgetv %cx.3;
+        symbol [ cx %tmp.79 166 36 38 ];
+        %tmp.80 = lgetv %h.2;
+        symbol [ h %tmp.80 166 40 41 ];
+        %tmp.81 = 0.15;
+        %tmp.82 = mul %tmp.80 %tmp.81;
+        %tmp.83 = lgetv %w.1;
+        symbol [ w %tmp.83 166 50 51 ];
+        %tmp.84 = 0.84;
+        %tmp.85 = mul %tmp.83 %tmp.84;
+        symbol [ Graphics %tmp.86 166 60 68 ];
+        %tmp.86 = getm $.Toybox.Graphics;
+        symbol [ FONT_SMALL %tmp.87 166 69 79 ];
+        %tmp.87 = getv %tmp.86 :FONT_SMALL;
+        symbol [ Model %tmp.89 166 81 86 ];
+        %tmp.89 = getv ? :Model;
+        symbol [ exerciseTitle %tmp.90 166 87 100 ];
+        %tmp.90 = getv function %tmp.89 :exerciseTitle;
+        %tmp.91 = lgetv %ex.4;
+        symbol [ ex %tmp.91 166 101 103 ];
+        %tmp.92 = invoke %tmp.89 %tmp.90(%tmp.91);
+        %tmp.93 = 2;
+        %tmp.94 = invoke %tmp.76 %tmp.77(%tmp.78, %tmp.79, %tmp.82, %tmp.85, %tmp.87, %tmp.92, %tmp.93);
+        lputv %th.7 %tmp.94;
+        symbol [ th %th.7 166 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 167 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_8_170_8_if_stmt:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_12_167_47_begin:
+        %tmp.95 = lgetv %ex.4;
+        symbol [ ex %tmp.95 167 12 14 ];
+        %tmp.96 = null;
+        %tmp.97 = ne %tmp.95 %tmp.96;
+        bf %tmp.97 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_8_170_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_26_167_47_true:
+        %tmp.98 = lgetv %ex.4;
+        symbol [ ex %tmp.98 167 26 28 ];
+        %tmp.99 = as %tmp.98 { (!Null) };
+        symbol [ hasKey %tmp.100 167 29 35 ];
+        %tmp.100 = getv function %tmp.99 :hasKey;
+        %tmp.101 = "equipment";
+        %tmp.102 = invoke %tmp.99 %tmp.100(%tmp.101);
+        push %tmp.102;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_26_167_47_end:
+        %tmp.103 = phi [%tmp.97 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_12_167_47_begin] [%tmp.102 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_26_167_47_true] [%tmp.103 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_26_167_47_end];
+        bf %tmp.103 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_8_170_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_8_170_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_50_170_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 168 12 ]
+        %tmp.104 = lgetv %dc;
+        symbol [ dc %tmp.104 168 12 14 ];
+        symbol [ setColor %tmp.105 168 15 23 ];
+        %tmp.105 = getv function %tmp.104 :setColor;
+        symbol [ Graphics %tmp.106 168 24 32 ];
+        %tmp.106 = getm $.Toybox.Graphics;
+        symbol [ COLOR_DK_GRAY %tmp.107 168 33 46 ];
+        %tmp.107 = getv %tmp.106 :COLOR_DK_GRAY;
+        symbol [ Graphics %tmp.108 168 48 56 ];
+        %tmp.108 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.109 168 57 74 ];
+        %tmp.109 = getv %tmp.108 :COLOR_TRANSPARENT;
+        invoke %tmp.104 %tmp.105(%tmp.107, %tmp.109);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 169 12 ]
+        %tmp.110 = lgetv %dc;
+        symbol [ dc %tmp.110 169 12 14 ];
+        symbol [ drawText %tmp.111 169 15 23 ];
+        %tmp.111 = getv function %tmp.110 :drawText;
+        %tmp.112 = lgetv %cx.3;
+        symbol [ cx %tmp.112 169 24 26 ];
+        %tmp.113 = lgetv %h.2;
+        symbol [ h %tmp.113 169 28 29 ];
+        %tmp.114 = 0.15;
+        %tmp.115 = mul %tmp.113 %tmp.114;
+        %tmp.116 = lgetv %th.7;
+        symbol [ th %tmp.116 169 39 41 ];
+        %tmp.117 = add %tmp.115 %tmp.116;
+        symbol [ Graphics %tmp.118 169 43 51 ];
+        %tmp.118 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.119 169 52 62 ];
+        %tmp.119 = getv %tmp.118 :FONT_XTINY;
+        %tmp.120 = lgetv %ex.4;
+        symbol [ ex %tmp.120 169 64 66 ];
+        %tmp.121 = as %tmp.120 { (!Null) };
+        %tmp.122 = "equipment";
+        %tmp.123 = agetv %tmp.121 %tmp.122;
+        %tmp.124 = as %tmp.123 String;
+        symbol [ String %tmp.124 169 83 89 ];
+        symbol [ Graphics %tmp.125 169 91 99 ];
+        %tmp.125 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.126 169 100 119 ];
+        %tmp.126 = getv %tmp.125 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.110 %tmp.111(%tmp.112, %tmp.117, %tmp.119, %tmp.124, %tmp.126);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_50_170_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_8_170_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_167_8_170_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 171 8 ]
+        %tmp.127 = lgetv %dc;
+        symbol [ dc %tmp.127 171 8 10 ];
+        symbol [ setColor %tmp.128 171 11 19 ];
+        %tmp.128 = getv function %tmp.127 :setColor;
+        symbol [ Graphics %tmp.129 171 20 28 ];
+        %tmp.129 = getm $.Toybox.Graphics;
+        symbol [ COLOR_GREEN %tmp.130 171 29 40 ];
+        %tmp.130 = getv %tmp.129 :COLOR_GREEN;
+        symbol [ Graphics %tmp.131 171 42 50 ];
+        %tmp.131 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.132 171 51 68 ];
+        %tmp.132 = getv %tmp.131 :COLOR_TRANSPARENT;
+        invoke %tmp.127 %tmp.128(%tmp.130, %tmp.132);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 172 8 ]
+        %tmp.133 = lgetv %dc;
+        symbol [ dc %tmp.133 172 8 10 ];
+        symbol [ drawText %tmp.134 172 11 19 ];
+        %tmp.134 = getv function %tmp.133 :drawText;
+        %tmp.135 = lgetv %cx.3;
+        symbol [ cx %tmp.135 172 20 22 ];
+        %tmp.136 = lgetv %h.2;
+        symbol [ h %tmp.136 172 24 25 ];
+        %tmp.137 = 0.47;
+        %tmp.138 = mul %tmp.136 %tmp.137;
+        symbol [ Graphics %tmp.139 172 34 42 ];
+        %tmp.139 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.140 172 43 52 ];
+        %tmp.140 = getv %tmp.139 :FONT_TINY;
+        %tmp.141 = "Bloc ";
+        symbol [ Model %tmp.143 172 65 70 ];
+        %tmp.143 = getv ? :Model;
+        symbol [ setIndex %tmp.144 172 71 79 ];
+        %tmp.144 = getv %tmp.143 :setIndex;
+        %tmp.145 = 1;
+        %tmp.146 = add %tmp.144 %tmp.145;
+        %tmp.147 = add %tmp.141 %tmp.146;
+        %tmp.148 = "/";
+        %tmp.149 = add %tmp.147 %tmp.148;
+        %tmp.150 = lgetv %sets.6;
+        symbol [ sets %tmp.150 172 93 97 ];
+        symbol [ size %tmp.151 172 98 102 ];
+        %tmp.151 = getv function %tmp.150 :size;
+        %tmp.152 = invoke %tmp.150 %tmp.151();
+        %tmp.153 = add %tmp.149 %tmp.152;
+        symbol [ Graphics %tmp.154 172 106 114 ];
+        %tmp.154 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.155 172 115 134 ];
+        %tmp.155 = getv %tmp.154 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.133 %tmp.134(%tmp.135, %tmp.138, %tmp.140, %tmp.153, %tmp.155);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 173 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop" ]
+        %target.8 = local;
+        symbol [ target %target.8 173 12 18 ];
+        %tmp.156 = "";
+        lputv %target.8 %tmp.156;
+        symbol [ target %target.8 173 12 18 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 174 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_8_183_8_if_stmt:
+        %tmp.157 = lgetv %set.5;
+        symbol [ set %tmp.157 174 12 15 ];
+        %tmp.158 = null;
+        %tmp.159 = ne %tmp.157 %tmp.158;
+        bf %tmp.159 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_8_183_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_8_183_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_25_183_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 175 12 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_175_12_175_110_if_stmt:
+        %tmp.160 = lgetv %set.5;
+        symbol [ set %tmp.160 175 16 19 ];
+        %tmp.161 = as %tmp.160 { (!Null) };
+        symbol [ hasKey %tmp.162 175 20 26 ];
+        %tmp.162 = getv function %tmp.161 :hasKey;
+        %tmp.163 = "duration_s";
+        %tmp.164 = invoke %tmp.161 %tmp.162(%tmp.163);
+        bf %tmp.164 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_175_12_175_110_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_175_12_175_110_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_175_42_175_110_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 175 44 ]
+        symbol [ Ui %tmp.166 175 53 55 ];
+        %tmp.166 = getv ? :Ui;
+        symbol [ fmtClock %tmp.167 175 56 64 ];
+        %tmp.167 = getv function %tmp.166 :fmtClock;
+        symbol [ Model %tmp.169 175 65 70 ];
+        %tmp.169 = getv ? :Model;
+        symbol [ num %tmp.170 175 71 74 ];
+        %tmp.170 = getv function %tmp.169 :num;
+        %tmp.171 = lgetv %set.5;
+        symbol [ set %tmp.171 175 75 78 ];
+        %tmp.172 = as %tmp.171 { (!Null) };
+        %tmp.173 = "duration_s";
+        %tmp.174 = 0;
+        %tmp.175 = invoke %tmp.169 %tmp.170(%tmp.172, %tmp.173, %tmp.174);
+        symbol [ toNumber %tmp.176 175 97 105 ];
+        %tmp.176 = getv function %tmp.175 :toNumber;
+        %tmp.177 = invoke %tmp.175 %tmp.176();
+        %tmp.178 = invoke %tmp.166 %tmp.167(%tmp.177);
+        lputv %target.8 %tmp.178;
+        symbol [ target %target.8 175 44 50 ];
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_175_42_175_110_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_175_12_175_110_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_175_12_175_110_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 176 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_25_183_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_25_183_8_stop" ]
+        %extra.9 = local;
+        symbol [ extra %extra.9 176 16 21 ];
+        %tmp.179 = "";
+        lputv %extra.9 %tmp.179;
+        symbol [ extra %extra.9 176 16 21 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 177 12 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_177_12_177_96_if_stmt:
+        %tmp.180 = lgetv %set.5;
+        symbol [ set %tmp.180 177 16 19 ];
+        %tmp.181 = as %tmp.180 { (!Null) };
+        symbol [ hasKey %tmp.182 177 20 26 ];
+        %tmp.182 = getv function %tmp.181 :hasKey;
+        %tmp.183 = "power_w";
+        %tmp.184 = invoke %tmp.181 %tmp.182(%tmp.183);
+        bf %tmp.184 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_177_12_177_96_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_177_12_177_96_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_177_39_177_96_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 177 41 ]
+        symbol [ Ui %tmp.186 177 49 51 ];
+        %tmp.186 = getv ? :Ui;
+        symbol [ fmtKg %tmp.187 177 52 57 ];
+        %tmp.187 = getv function %tmp.186 :fmtKg;
+        symbol [ Model %tmp.189 177 58 63 ];
+        %tmp.189 = getv ? :Model;
+        symbol [ num %tmp.190 177 64 67 ];
+        %tmp.190 = getv function %tmp.189 :num;
+        %tmp.191 = lgetv %set.5;
+        symbol [ set %tmp.191 177 68 71 ];
+        %tmp.192 = as %tmp.191 { (!Null) };
+        %tmp.193 = "power_w";
+        %tmp.194 = 0;
+        %tmp.195 = invoke %tmp.189 %tmp.190(%tmp.192, %tmp.193, %tmp.194);
+        %tmp.196 = invoke %tmp.186 %tmp.187(%tmp.195);
+        %tmp.197 = " W";
+        %tmp.198 = add %tmp.196 %tmp.197;
+        lputv %extra.9 %tmp.198;
+        symbol [ extra %extra.9 177 41 46 ];
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_177_39_177_96_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_177_12_177_96_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_177_12_177_96_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 178 12 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_178_12_178_97_if_stmt:
+        %tmp.199 = lgetv %set.5;
+        symbol [ set %tmp.199 178 16 19 ];
+        %tmp.200 = as %tmp.199 { (!Null) };
+        symbol [ hasKey %tmp.201 178 20 26 ];
+        %tmp.201 = getv function %tmp.200 :hasKey;
+        %tmp.202 = "level";
+        %tmp.203 = invoke %tmp.200 %tmp.201(%tmp.202);
+        bf %tmp.203 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_178_12_178_97_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_178_12_178_97_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_178_37_178_97_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 178 39 ]
+        %tmp.204 = "niveau ";
+        symbol [ Ui %tmp.206 178 59 61 ];
+        %tmp.206 = getv ? :Ui;
+        symbol [ fmtKg %tmp.207 178 62 67 ];
+        %tmp.207 = getv function %tmp.206 :fmtKg;
+        symbol [ Model %tmp.209 178 68 73 ];
+        %tmp.209 = getv ? :Model;
+        symbol [ num %tmp.210 178 74 77 ];
+        %tmp.210 = getv function %tmp.209 :num;
+        %tmp.211 = lgetv %set.5;
+        symbol [ set %tmp.211 178 78 81 ];
+        %tmp.212 = as %tmp.211 { (!Null) };
+        %tmp.213 = "level";
+        %tmp.214 = 0;
+        %tmp.215 = invoke %tmp.209 %tmp.210(%tmp.212, %tmp.213, %tmp.214);
+        %tmp.216 = invoke %tmp.206 %tmp.207(%tmp.215);
+        %tmp.217 = add %tmp.204 %tmp.216;
+        lputv %extra.9 %tmp.217;
+        symbol [ extra %extra.9 178 39 44 ];
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_178_37_178_97_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_178_12_178_97_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_178_12_178_97_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 179 12 ]
+        %tmp.218 = lgetv %dc;
+        symbol [ dc %tmp.218 179 12 14 ];
+        symbol [ setColor %tmp.219 179 15 23 ];
+        %tmp.219 = getv function %tmp.218 :setColor;
+        symbol [ Graphics %tmp.220 179 24 32 ];
+        %tmp.220 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.221 179 33 44 ];
+        %tmp.221 = getv %tmp.220 :COLOR_WHITE;
+        symbol [ Graphics %tmp.222 179 46 54 ];
+        %tmp.222 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.223 179 55 72 ];
+        %tmp.223 = getv %tmp.222 :COLOR_TRANSPARENT;
+        invoke %tmp.218 %tmp.219(%tmp.221, %tmp.223);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 180 12 ]
+        %tmp.224 = lgetv %dc;
+        symbol [ dc %tmp.224 180 12 14 ];
+        symbol [ drawText %tmp.225 180 15 23 ];
+        %tmp.225 = getv function %tmp.224 :drawText;
+        %tmp.226 = lgetv %cx.3;
+        symbol [ cx %tmp.226 180 24 26 ];
+        %tmp.227 = lgetv %h.2;
+        symbol [ h %tmp.227 180 28 29 ];
+        %tmp.228 = 0.56;
+        %tmp.229 = mul %tmp.227 %tmp.228;
+        symbol [ Graphics %tmp.230 180 38 46 ];
+        %tmp.230 = getm $.Toybox.Graphics;
+        symbol [ FONT_LARGE %tmp.231 180 47 57 ];
+        %tmp.231 = getv %tmp.230 :FONT_LARGE;
+        %tmp.232 = lgetv %target.8;
+        symbol [ target %tmp.232 180 59 65 ];
+        symbol [ Graphics %tmp.233 180 67 75 ];
+        %tmp.233 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.234 180 76 95 ];
+        %tmp.234 = getv %tmp.233 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.224 %tmp.225(%tmp.226, %tmp.229, %tmp.231, %tmp.232, %tmp.234);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 181 12 ]
+        %tmp.235 = lgetv %dc;
+        symbol [ dc %tmp.235 181 12 14 ];
+        symbol [ setColor %tmp.236 181 15 23 ];
+        %tmp.236 = getv function %tmp.235 :setColor;
+        symbol [ Graphics %tmp.237 181 24 32 ];
+        %tmp.237 = getm $.Toybox.Graphics;
+        symbol [ COLOR_LT_GRAY %tmp.238 181 33 46 ];
+        %tmp.238 = getv %tmp.237 :COLOR_LT_GRAY;
+        symbol [ Graphics %tmp.239 181 48 56 ];
+        %tmp.239 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.240 181 57 74 ];
+        %tmp.240 = getv %tmp.239 :COLOR_TRANSPARENT;
+        invoke %tmp.235 %tmp.236(%tmp.238, %tmp.240);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 182 12 ]
+        %tmp.241 = lgetv %dc;
+        symbol [ dc %tmp.241 182 12 14 ];
+        symbol [ drawText %tmp.242 182 15 23 ];
+        %tmp.242 = getv function %tmp.241 :drawText;
+        %tmp.243 = lgetv %cx.3;
+        symbol [ cx %tmp.243 182 24 26 ];
+        %tmp.244 = lgetv %h.2;
+        symbol [ h %tmp.244 182 28 29 ];
+        %tmp.245 = 0.70;
+        %tmp.246 = mul %tmp.244 %tmp.245;
+        symbol [ Graphics %tmp.247 182 38 46 ];
+        %tmp.247 = getm $.Toybox.Graphics;
+        symbol [ FONT_TINY %tmp.248 182 47 56 ];
+        %tmp.248 = getv %tmp.247 :FONT_TINY;
+        %tmp.249 = lgetv %extra.9;
+        symbol [ extra %tmp.249 182 58 63 ];
+        symbol [ Graphics %tmp.250 182 65 73 ];
+        %tmp.250 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.251 182 74 93 ];
+        %tmp.251 = getv %tmp.250 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.241 %tmp.242(%tmp.243, %tmp.246, %tmp.248, %tmp.249, %tmp.251);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_25_183_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_8_183_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_174_8_183_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 184 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_8_191_8_if_stmt:
+        symbol [ Model %tmp.253 184 12 17 ];
+        %tmp.253 = getv ? :Model;
+        symbol [ machineDone %tmp.254 184 18 29 ];
+        %tmp.254 = getv function %tmp.253 :machineDone;
+        %tmp.255 = lgetv %ex.4;
+        symbol [ ex %tmp.255 184 30 32 ];
+        %tmp.256 = invoke %tmp.253 %tmp.254(%tmp.255);
+        bf %tmp.256 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_8_191_8_if_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_8_191_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_35_188_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 185 12 ]
+        %tmp.257 = lgetv %dc;
+        symbol [ dc %tmp.257 185 12 14 ];
+        symbol [ setColor %tmp.258 185 15 23 ];
+        %tmp.258 = getv function %tmp.257 :setColor;
+        symbol [ Graphics %tmp.259 185 24 32 ];
+        %tmp.259 = getm $.Toybox.Graphics;
+        symbol [ COLOR_GREEN %tmp.260 185 33 44 ];
+        %tmp.260 = getv %tmp.259 :COLOR_GREEN;
+        symbol [ Graphics %tmp.261 185 46 54 ];
+        %tmp.261 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.262 185 55 72 ];
+        %tmp.262 = getv %tmp.261 :COLOR_TRANSPARENT;
+        invoke %tmp.257 %tmp.258(%tmp.260, %tmp.262);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 186 12 ]
+        %tmp.263 = lgetv %dc;
+        symbol [ dc %tmp.263 186 12 14 ];
+        symbol [ drawText %tmp.264 186 15 23 ];
+        %tmp.264 = getv function %tmp.263 :drawText;
+        %tmp.265 = lgetv %cx.3;
+        symbol [ cx %tmp.265 186 24 26 ];
+        %tmp.266 = lgetv %h.2;
+        symbol [ h %tmp.266 186 28 29 ];
+        %tmp.267 = 0.80;
+        %tmp.268 = mul %tmp.266 %tmp.267;
+        symbol [ Graphics %tmp.269 186 38 46 ];
+        %tmp.269 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.270 186 47 57 ];
+        %tmp.270 = getv %tmp.269 :FONT_XTINY;
+        %tmp.271 = "Machine : fait";
+        symbol [ Graphics %tmp.272 186 77 85 ];
+        %tmp.272 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.273 186 86 105 ];
+        %tmp.273 = getv %tmp.272 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.263 %tmp.264(%tmp.265, %tmp.268, %tmp.270, %tmp.271, %tmp.273);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 187 12 ]
+        %tmp.274 = lgetv %dc;
+        symbol [ dc %tmp.274 187 12 14 ];
+        symbol [ drawText %tmp.275 187 15 23 ];
+        %tmp.275 = getv function %tmp.274 :drawText;
+        %tmp.276 = lgetv %cx.3;
+        symbol [ cx %tmp.276 187 24 26 ];
+        %tmp.277 = lgetv %h.2;
+        symbol [ h %tmp.277 187 28 29 ];
+        %tmp.278 = 0.87;
+        %tmp.279 = mul %tmp.277 %tmp.278;
+        symbol [ Graphics %tmp.280 187 38 46 ];
+        %tmp.280 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.281 187 47 57 ];
+        %tmp.281 = getv %tmp.280 :FONT_XTINY;
+        %tmp.282 = "OK = suivant";
+        symbol [ Graphics %tmp.283 187 75 83 ];
+        %tmp.283 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.284 187 84 103 ];
+        %tmp.284 = getv %tmp.283 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.274 %tmp.275(%tmp.276, %tmp.279, %tmp.281, %tmp.282, %tmp.284);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_35_188_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_8_191_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_8_191_8_if_else_false:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_188_15_191_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 189 12 ]
+        %tmp.285 = lgetv %dc;
+        symbol [ dc %tmp.285 189 12 14 ];
+        symbol [ setColor %tmp.286 189 15 23 ];
+        %tmp.286 = getv function %tmp.285 :setColor;
+        symbol [ Graphics %tmp.287 189 24 32 ];
+        %tmp.287 = getm $.Toybox.Graphics;
+        symbol [ COLOR_DK_GRAY %tmp.288 189 33 46 ];
+        %tmp.288 = getv %tmp.287 :COLOR_DK_GRAY;
+        symbol [ Graphics %tmp.289 189 48 56 ];
+        %tmp.289 = getm $.Toybox.Graphics;
+        symbol [ COLOR_TRANSPARENT %tmp.290 189 57 74 ];
+        %tmp.290 = getv %tmp.289 :COLOR_TRANSPARENT;
+        invoke %tmp.285 %tmp.286(%tmp.288, %tmp.290);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 190 12 ]
+        %tmp.291 = lgetv %dc;
+        symbol [ dc %tmp.291 190 12 14 ];
+        symbol [ drawText %tmp.292 190 15 23 ];
+        %tmp.292 = getv function %tmp.291 :drawText;
+        %tmp.293 = lgetv %cx.3;
+        symbol [ cx %tmp.293 190 24 26 ];
+        %tmp.294 = lgetv %h.2;
+        symbol [ h %tmp.294 190 28 29 ];
+        %tmp.295 = 0.86;
+        %tmp.296 = mul %tmp.294 %tmp.295;
+        symbol [ Graphics %tmp.297 190 38 46 ];
+        %tmp.297 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.298 190 47 57 ];
+        %tmp.298 = getv %tmp.297 :FONT_XTINY;
+        %tmp.299 = "OK = lancer";
+        symbol [ Graphics %tmp.300 190 74 82 ];
+        %tmp.300 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.301 190 83 102 ];
+        %tmp.301 = getv %tmp.300 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.291 %tmp.292(%tmp.293, %tmp.296, %tmp.298, %tmp.299, %tmp.301);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_188_15_191_8_stop:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_184_8_191_8_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_150_40_192_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 194; @symbol_functiondef = [onShowLive,194,13,23]; ]
+    function onShowLive() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_194_34_196_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 195 8 ]
+        symbol [ Net %tmp.2 195 8 11 ];
+        %tmp.2 = getv ? :Net;
+        symbol [ fetchLive %tmp.3 195 12 21 ];
+        %tmp.3 = getv function %tmp.2 :fetchLive;
+        %tmp.4 = null;
+        invoke %tmp.2 %tmp.3(%tmp.4);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_194_34_196_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 198; @symbol_functiondef = [startCountdown,198,13,27]; ]
+    function startCountdown() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 199 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_stop" ]
+        %set.1 = local;
+        symbol [ set %set.1 199 12 15 ];
+        symbol [ Model %tmp.2 199 18 23 ];
+        %tmp.2 = getv ? :Model;
+        symbol [ currentSet %tmp.3 199 24 34 ];
+        %tmp.3 = getv function %tmp.2 :currentSet;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        lputv %set.1 %tmp.4;
+        symbol [ set %set.1 199 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 200 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_stop" ]
+        %secs.2 = local;
+        symbol [ secs %secs.2 200 12 16 ];
+        symbol [ Model %tmp.6 200 19 24 ];
+        %tmp.6 = getv ? :Model;
+        symbol [ num %tmp.7 200 25 28 ];
+        %tmp.7 = getv function %tmp.6 :num;
+        %tmp.8 = lgetv %set.1;
+        symbol [ set %tmp.8 200 29 32 ];
+        %tmp.9 = "duration_s";
+        %tmp.10 = 60;
+        %tmp.11 = invoke %tmp.6 %tmp.7(%tmp.8, %tmp.9, %tmp.10);
+        symbol [ toNumber %tmp.12 200 52 60 ];
+        %tmp.12 = getv function %tmp.11 :toNumber;
+        %tmp.13 = invoke %tmp.11 %tmp.12();
+        lputv %secs.2 %tmp.13;
+        symbol [ secs %secs.2 200 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 201 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_stop" ]
+        %sub.3 = local;
+        symbol [ sub %sub.3 201 12 15 ];
+        symbol [ Model %tmp.15 201 18 23 ];
+        %tmp.15 = getv ? :Model;
+        symbol [ exerciseTitle %tmp.16 201 24 37 ];
+        %tmp.16 = getv function %tmp.15 :exerciseTitle;
+        symbol [ Model %tmp.18 201 38 43 ];
+        %tmp.18 = getv ? :Model;
+        symbol [ currentExercise %tmp.19 201 44 59 ];
+        %tmp.19 = getv function %tmp.18 :currentExercise;
+        %tmp.20 = invoke %tmp.18 %tmp.19();
+        %tmp.21 = invoke %tmp.15 %tmp.16(%tmp.20);
+        lputv %sub.3 %tmp.21;
+        symbol [ sub %sub.3 201 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 202 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_stop" ]
+        %cd.4 = local;
+        symbol [ cd %cd.4 202 12 14 ];
+        symbol [ CountdownView %tmp.25 202 21 34 ];
+        %tmp.25 = getv ? :CountdownView;
+        %tmp.26 = lgetv %secs.2;
+        symbol [ secs %tmp.26 202 35 39 ];
+        %tmp.27 = "Bloc ";
+        symbol [ Model %tmp.29 202 52 57 ];
+        %tmp.29 = getv ? :Model;
+        symbol [ setIndex %tmp.30 202 58 66 ];
+        %tmp.30 = getv %tmp.29 :setIndex;
+        %tmp.31 = 1;
+        %tmp.32 = add %tmp.30 %tmp.31;
+        %tmp.33 = add %tmp.27 %tmp.32;
+        %tmp.34 = lgetv %sub.3;
+        symbol [ sub %tmp.34 202 73 76 ];
+        symbol [ Graphics %tmp.35 202 78 86 ];
+        %tmp.35 = getm $.Toybox.Graphics;
+        symbol [ COLOR_GREEN %tmp.36 202 87 98 ];
+        %tmp.36 = getv %tmp.35 :COLOR_GREEN;
+        %tmp.22 = newc %tmp.25 (%tmp.26, %tmp.33, %tmp.34, %tmp.36);
+        lputv %cd.4 %tmp.22;
+        symbol [ cd %cd.4 202 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 203 8 ]
+        %tmp.37 = lgetv %cd.4;
+        symbol [ cd %tmp.37 203 8 10 ];
+        %tmp.38 = self;
+        symbol [ method %tmp.39 203 22 28 ];
+        %tmp.39 = getv function %tmp.38 :method;
+        %tmp.41 = const :onBlockDone;
+        symbol [ onBlockDone %tmp.41 203 30 41 const ];
+        %tmp.42 = invoke %tmp.38 %tmp.39(%tmp.41);
+        symbol [ onFinish ? 203 11 19 ];
+        putv %tmp.37 :onFinish %tmp.42;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 204 8 ]
+        %tmp.43 = lgetv %cd.4;
+        symbol [ cd %tmp.43 204 20 22 ];
+        symbol [ countdown ? 204 8 17 ];
+        putv self :countdown %tmp.43;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 205 8 ]
+        %tmp.44 = lgetv %cd.4;
+        symbol [ cd %tmp.44 205 8 10 ];
+        symbol [ onShow %tmp.45 205 11 17 ];
+        %tmp.45 = getv function %tmp.44 :onShow;
+        invoke %tmp.44 %tmp.45();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 206 8 ]
+        symbol [ WatchUi %tmp.46 206 8 15 ];
+        %tmp.46 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.47 206 16 29 ];
+        %tmp.47 = getv function %tmp.46 :requestUpdate;
+        invoke %tmp.46 %tmp.47();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_198_38_207_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 209; @symbol_functiondef = [onHide,209,13,19]; ]
+    function onHide() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_209_30_211_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 210 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_210_8_210_72_if_stmt:
+        symbol [ countdown %tmp.2 210 12 21 ];
+        %tmp.2 = getv ? :countdown;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_210_8_210_72_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_210_8_210_72_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_210_31_210_72_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 210 33 ]
+        symbol [ countdown %tmp.6 210 34 43 ];
+        %tmp.6 = getv ? :countdown;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        %tmp.8 = as %tmp.7 CountdownView;
+        symbol [ CountdownView %tmp.8 210 47 60 ];
+        symbol [ onHide %tmp.9 210 62 68 ];
+        %tmp.9 = getv function %tmp.8 :onHide;
+        invoke %tmp.8 %tmp.9();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_210_31_210_72_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_210_8_210_72_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_210_8_210_72_if_end:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_209_30_211_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 213; @symbol_functiondef = [onShow,213,13,19]; ]
+    function onShow() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_213_30_216_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 214 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_214_8_214_72_if_stmt:
+        symbol [ countdown %tmp.2 214 12 21 ];
+        %tmp.2 = getv ? :countdown;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_214_8_214_72_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_214_8_214_72_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_214_31_214_72_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 214 33 ]
+        symbol [ countdown %tmp.6 214 34 43 ];
+        %tmp.6 = getv ? :countdown;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        %tmp.8 = as %tmp.7 CountdownView;
+        symbol [ CountdownView %tmp.8 214 47 60 ];
+        symbol [ onShow %tmp.9 214 62 68 ];
+        %tmp.9 = getv function %tmp.8 :onShow;
+        invoke %tmp.8 %tmp.9();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_214_31_214_72_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_214_8_214_72_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_214_8_214_72_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 215 8 ]
+        symbol [ Net %tmp.11 215 8 11 ];
+        %tmp.11 = getv ? :Net;
+        symbol [ fetchLive %tmp.12 215 12 21 ];
+        %tmp.12 = getv function %tmp.11 :fetchLive;
+        %tmp.13 = null;
+        invoke %tmp.11 %tmp.12(%tmp.13);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_213_30_216_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 218; @symbol_functiondef = [onBlockDone,218,13,24]; ]
+    function onBlockDone() as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_218_35_220_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 219 8 ]
+        %tmp.1 = self;
+        symbol [ finishBlock %tmp.2 219 8 19 ];
+        %tmp.2 = getv function %tmp.1 :finishBlock;
+        %tmp.3 = false;
+        invoke %tmp.1 %tmp.2(%tmp.3);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_218_35_220_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 222; @symbol_functiondef = [finishBlock,222,13,24]; @symbol_param<0> = [skipped,222,25,32]; @symbol_param<0>_type<0> = [Boolean,222,36,43]; ]
+    function finishBlock(skipped as Boolean) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 223 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_stop" ]
+        %set.1 = local;
+        symbol [ set %set.1 223 12 15 ];
+        symbol [ Model %tmp.2 223 18 23 ];
+        %tmp.2 = getv ? :Model;
+        symbol [ currentSet %tmp.3 223 24 34 ];
+        %tmp.3 = getv function %tmp.2 :currentSet;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        lputv %set.1 %tmp.4;
+        symbol [ set %set.1 223 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 224 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_stop" ]
+        %ex.2 = local;
+        symbol [ ex %ex.2 224 12 14 ];
+        symbol [ Model %tmp.6 224 17 22 ];
+        %tmp.6 = getv ? :Model;
+        symbol [ currentExercise %tmp.7 224 23 38 ];
+        %tmp.7 = getv function %tmp.6 :currentExercise;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        lputv %ex.2 %tmp.8;
+        symbol [ ex %ex.2 224 12 14 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 225 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_stop" ]
+        %dur.3 = local;
+        symbol [ dur %dur.3 225 12 15 ];
+        symbol [ Model %tmp.10 225 18 23 ];
+        %tmp.10 = getv ? :Model;
+        symbol [ num %tmp.11 225 24 27 ];
+        %tmp.11 = getv function %tmp.10 :num;
+        %tmp.12 = lgetv %set.1;
+        symbol [ set %tmp.12 225 28 31 ];
+        %tmp.13 = "duration_s";
+        %tmp.14 = 0;
+        %tmp.15 = invoke %tmp.10 %tmp.11(%tmp.12, %tmp.13, %tmp.14);
+        symbol [ toNumber %tmp.16 225 50 58 ];
+        %tmp.16 = getv function %tmp.15 :toNumber;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        lputv %dur.3 %tmp.17;
+        symbol [ dur %dur.3 225 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 226 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_stop" ]
+        %rest.4 = local;
+        symbol [ rest %rest.4 226 12 16 ];
+        symbol [ Model %tmp.19 226 19 24 ];
+        %tmp.19 = getv ? :Model;
+        symbol [ num %tmp.20 226 25 28 ];
+        %tmp.20 = getv function %tmp.19 :num;
+        %tmp.21 = lgetv %set.1;
+        symbol [ set %tmp.21 226 29 32 ];
+        %tmp.22 = "rest_s";
+        %tmp.23 = 0;
+        %tmp.24 = invoke %tmp.19 %tmp.20(%tmp.21, %tmp.22, %tmp.23);
+        symbol [ toNumber %tmp.25 226 47 55 ];
+        %tmp.25 = getv function %tmp.24 :toNumber;
+        %tmp.26 = invoke %tmp.24 %tmp.25();
+        lputv %rest.4 %tmp.26;
+        symbol [ rest %rest.4 226 12 16 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 227 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_stop" ]
+        %pos.5 = local;
+        symbol [ pos %pos.5 227 12 15 ];
+        symbol [ Model %tmp.28 227 18 23 ];
+        %tmp.28 = getv ? :Model;
+        symbol [ num %tmp.29 227 24 27 ];
+        %tmp.29 = getv function %tmp.28 :num;
+        %tmp.30 = lgetv %ex.2;
+        symbol [ ex %tmp.30 227 28 30 ];
+        %tmp.31 = "position";
+        %tmp.32 = 0;
+        %tmp.33 = invoke %tmp.28 %tmp.29(%tmp.30, %tmp.31, %tmp.32);
+        symbol [ toNumber %tmp.34 227 47 55 ];
+        %tmp.34 = getv function %tmp.33 :toNumber;
+        %tmp.35 = invoke %tmp.33 %tmp.34();
+        lputv %pos.5 %tmp.35;
+        symbol [ pos %pos.5 227 12 15 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 228 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_228_8_228_72_if_stmt:
+        symbol [ countdown %tmp.37 228 12 21 ];
+        %tmp.37 = getv ? :countdown;
+        %tmp.38 = null;
+        %tmp.39 = ne %tmp.37 %tmp.38;
+        bf %tmp.39 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_228_8_228_72_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_228_8_228_72_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_228_31_228_72_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 228 33 ]
+        symbol [ countdown %tmp.41 228 34 43 ];
+        %tmp.41 = getv ? :countdown;
+        %tmp.42 = as %tmp.41 { (!Null) };
+        %tmp.43 = as %tmp.42 CountdownView;
+        symbol [ CountdownView %tmp.43 228 47 60 ];
+        symbol [ onHide %tmp.44 228 62 68 ];
+        %tmp.44 = getv function %tmp.43 :onHide;
+        invoke %tmp.43 %tmp.44();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_228_31_228_72_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_228_8_228_72_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_228_8_228_72_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 229 8 ]
+        %tmp.45 = null;
+        symbol [ countdown ? 229 8 17 ];
+        putv self :countdown %tmp.45;
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 230 8 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_stop" ]
+        %finished.6 = local;
+        symbol [ finished %finished.6 230 12 20 ];
+        symbol [ Model %tmp.47 230 23 28 ];
+        %tmp.47 = getv ? :Model;
+        symbol [ recordSet %tmp.48 230 29 38 ];
+        %tmp.48 = getv function %tmp.47 :recordSet;
+        %tmp.49 = null;
+        %tmp.50 = null;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_begin:
+        %tmp.51 = lgetv %skipped;
+        symbol [ skipped %tmp.51 230 51 58 ];
+        bf %tmp.51 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_true:
+        %tmp.52 = null;
+        push %tmp.52;
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_else_false:
+        %tmp.53 = lgetv %dur.3;
+        symbol [ dur %tmp.53 230 68 71 ];
+        push %tmp.53;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_end:
+        %tmp.54 = phi [%tmp.51 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_begin] [%tmp.52 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_true] [%tmp.53 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_else_false] [%tmp.54 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_230_51_230_68_end];
+        %tmp.55 = lgetv %skipped;
+        symbol [ skipped %tmp.55 230 73 80 ];
+        %tmp.56 = invoke %tmp.47 %tmp.48(%tmp.49, %tmp.50, %tmp.54, %tmp.55);
+        lputv %finished.6 %tmp.56;
+        symbol [ finished %finished.6 230 12 20 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 231 8 ]
+        symbol [ Recording %tmp.58 231 8 17 ];
+        %tmp.58 = getv ? :Recording;
+        symbol [ lap %tmp.59 231 18 21 ];
+        %tmp.59 = getv function %tmp.58 :lap;
+        %tmp.60 = lgetv %pos.5;
+        symbol [ pos %tmp.60 231 22 25 ];
+        %tmp.61 = null;
+        %tmp.62 = null;
+        invoke %tmp.58 %tmp.59(%tmp.60, %tmp.61, %tmp.62);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 232 8 ]
+        symbol [ Flow %tmp.64 232 8 12 ];
+        %tmp.64 = getv ? :Flow;
+        symbol [ afterSet %tmp.65 232 13 21 ];
+        %tmp.65 = getv function %tmp.64 :afterSet;
+        %tmp.66 = lgetv %finished.6;
+        symbol [ finished %tmp.66 232 22 30 ];
+        %tmp.67 = lgetv %rest.4;
+        symbol [ rest %tmp.67 232 32 36 ];
+        invoke %tmp.64 %tmp.65(%tmp.66, %tmp.67);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_222_53_233_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 236; @symbol_classdef = [TimedSetDelegate,236,6,22]; @symbol_extends<0> = [WatchUi,236,31,38]; @symbol_extends<1> = [BehaviorDelegate,236,39,55]; ]
+class TimedSetDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 236; ]
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 236; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 238; @position = 8; @symbol_vardef = [view,238,8,12]; @symbol_type<0> = [TimedSetView,238,16,28]; ]
+    var view as TimedSetView;
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 240; @symbol_functiondef = [initialize,240,13,23]; @symbol_param<0> = [v,240,24,25]; @symbol_param<0>_type<0> = [TimedSetView,240,29,41]; ]
+    function initialize(v as TimedSetView) as Void {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_240_43_243_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 241 8 ]
+        symbol [ BehaviorDelegate %tmp.2 241 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 241 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 242 8 ]
+        %tmp.4 = lgetv %v;
+        symbol [ v %tmp.4 242 15 16 ];
+        symbol [ view ? 242 8 12 ];
+        putv self :view %tmp.4;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_240_43_243_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 245; @symbol_functiondef = [onSelect,245,13,21]; @symbol_return<0> = [Boolean,245,27,34]; ]
+    function onSelect() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_245_35_258_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 246 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_8_250_8_if_stmt:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_12_246_79_begin:
+        symbol [ view %tmp.2 246 12 16 ];
+        %tmp.2 = getv ? :view;
+        symbol [ countdown %tmp.3 246 17 26 ];
+        %tmp.3 = getv %tmp.2 :countdown;
+        %tmp.4 = null;
+        %tmp.5 = eq %tmp.3 %tmp.4;
+        bf %tmp.5 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_8_250_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_38_246_79_true:
+        symbol [ Model %tmp.7 246 38 43 ];
+        %tmp.7 = getv ? :Model;
+        symbol [ machineDone %tmp.8 246 44 55 ];
+        %tmp.8 = getv function %tmp.7 :machineDone;
+        symbol [ Model %tmp.10 246 56 61 ];
+        %tmp.10 = getv ? :Model;
+        symbol [ currentExercise %tmp.11 246 62 77 ];
+        %tmp.11 = getv function %tmp.10 :currentExercise;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        %tmp.13 = invoke %tmp.7 %tmp.8(%tmp.12);
+        push %tmp.13;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_38_246_79_end:
+        %tmp.14 = phi [%tmp.5 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_12_246_79_begin] [%tmp.13 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_38_246_79_true] [%tmp.14 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_38_246_79_end];
+        bf %tmp.14 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_8_250_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_8_250_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_82_250_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 247 12 ]
+        [ "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_82_250_8_start" "_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_82_250_8_stop" ]
+        %finished.1 = local;
+        symbol [ finished %finished.1 247 16 24 ];
+        symbol [ Model %tmp.16 247 27 32 ];
+        %tmp.16 = getv ? :Model;
+        symbol [ acceptMachineExercise %tmp.17 247 33 54 ];
+        %tmp.17 = getv function %tmp.16 :acceptMachineExercise;
+        %tmp.18 = invoke %tmp.16 %tmp.17();
+        lputv %finished.1 %tmp.18;
+        symbol [ finished %finished.1 247 16 24 ];
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 248 12 ]
+        symbol [ Flow %tmp.20 248 12 16 ];
+        %tmp.20 = getv ? :Flow;
+        symbol [ afterSet %tmp.21 248 17 25 ];
+        %tmp.21 = getv function %tmp.20 :afterSet;
+        %tmp.22 = lgetv %finished.1;
+        symbol [ finished %tmp.22 248 26 34 ];
+        %tmp.23 = 0;
+        invoke %tmp.20 %tmp.21(%tmp.22, %tmp.23);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 249 12 ]
+        %tmp.24 = true;
+        ret %tmp.24;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_82_250_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_8_250_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_246_8_250_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 251 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_8_256_8_if_stmt:
+        symbol [ view %tmp.26 251 12 16 ];
+        %tmp.26 = getv ? :view;
+        symbol [ countdown %tmp.27 251 17 26 ];
+        %tmp.27 = getv %tmp.26 :countdown;
+        %tmp.28 = null;
+        %tmp.29 = eq %tmp.27 %tmp.28;
+        bf %tmp.29 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_8_256_8_if_else_false;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_8_256_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_36_253_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 252 12 ]
+        symbol [ view %tmp.31 252 12 16 ];
+        %tmp.31 = getv ? :view;
+        symbol [ startCountdown %tmp.32 252 17 31 ];
+        %tmp.32 = getv function %tmp.31 :startCountdown;
+        invoke %tmp.31 %tmp.32();
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_36_253_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_8_256_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_8_256_8_if_else_false:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_253_15_256_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 255 12 ]
+        symbol [ view %tmp.34 255 12 16 ];
+        %tmp.34 = getv ? :view;
+        symbol [ finishBlock %tmp.35 255 17 28 ];
+        %tmp.35 = getv function %tmp.34 :finishBlock;
+        %tmp.36 = false;
+        invoke %tmp.34 %tmp.35(%tmp.36);
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_253_15_256_8_stop:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_251_8_256_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 257 8 ]
+        %tmp.37 = true;
+        ret %tmp.37;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_245_35_258_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 260; @symbol_functiondef = [onTap,260,13,18]; @symbol_param<0> = [evt,260,19,22]; @symbol_param<0>_type<0> = [ClickEvent,260,26,36]; @symbol_return<0> = [Boolean,260,41,48]; ]
+    function onTap(evt as ClickEvent) as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_260_49_262_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 261 8 ]
+        %tmp.1 = self;
+        symbol [ onSelect %tmp.2 261 15 23 ];
+        %tmp.2 = getv function %tmp.1 :onSelect;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        ret %tmp.3;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_260_49_262_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 264; @symbol_functiondef = [onPreviousPage,264,13,27]; @symbol_return<0> = [Boolean,264,33,40]; ]
+    function onPreviousPage() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_264_41_267_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 265 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_265_8_265_101_if_stmt:
+        symbol [ view %tmp.2 265 12 16 ];
+        %tmp.2 = getv ? :view;
+        symbol [ countdown %tmp.3 265 17 26 ];
+        %tmp.3 = getv %tmp.2 :countdown;
+        %tmp.4 = null;
+        %tmp.5 = ne %tmp.3 %tmp.4;
+        bf %tmp.5 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_265_8_265_101_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_265_8_265_101_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_265_36_265_101_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 265 38 ]
+        symbol [ view %tmp.7 265 39 43 ];
+        %tmp.7 = getv ? :view;
+        symbol [ countdown %tmp.8 265 44 53 ];
+        %tmp.8 = getv %tmp.7 :countdown;
+        %tmp.9 = as %tmp.8 CountdownView;
+        symbol [ CountdownView %tmp.9 265 57 70 ];
+        symbol [ addSeconds %tmp.10 265 72 82 ];
+        %tmp.10 = getv function %tmp.9 :addSeconds;
+        %tmp.11 = 30;
+        invoke %tmp.9 %tmp.10(%tmp.11);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 265 88 ]
+        %tmp.12 = true;
+        ret %tmp.12;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_265_36_265_101_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_265_8_265_101_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_265_8_265_101_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 266 8 ]
+        %tmp.13 = false;
+        ret %tmp.13;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_264_41_267_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 269; @symbol_functiondef = [onNextPage,269,13,23]; @symbol_return<0> = [Boolean,269,29,36]; ]
+    function onNextPage() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_269_37_273_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 270 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_270_8_270_102_if_stmt:
+        symbol [ view %tmp.2 270 12 16 ];
+        %tmp.2 = getv ? :view;
+        symbol [ countdown %tmp.3 270 17 26 ];
+        %tmp.3 = getv %tmp.2 :countdown;
+        %tmp.4 = null;
+        %tmp.5 = ne %tmp.3 %tmp.4;
+        bf %tmp.5 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_270_8_270_102_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_270_8_270_102_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_270_36_270_102_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 270 38 ]
+        symbol [ view %tmp.7 270 39 43 ];
+        %tmp.7 = getv ? :view;
+        symbol [ countdown %tmp.8 270 44 53 ];
+        %tmp.8 = getv %tmp.7 :countdown;
+        %tmp.9 = as %tmp.8 CountdownView;
+        symbol [ CountdownView %tmp.9 270 57 70 ];
+        symbol [ addSeconds %tmp.10 270 72 82 ];
+        %tmp.10 = getv function %tmp.9 :addSeconds;
+        %tmp.11 = -30;
+        invoke %tmp.9 %tmp.10(%tmp.11);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 270 89 ]
+        %tmp.12 = true;
+        ret %tmp.12;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_270_36_270_102_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_270_8_270_102_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_270_8_270_102_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 271 8 ]
+        symbol [ Flow %tmp.14 271 8 12 ];
+        %tmp.14 = getv ? :Flow;
+        symbol [ showExerciseList %tmp.15 271 13 29 ];
+        %tmp.15 = getv function %tmp.14 :showExerciseList;
+        invoke %tmp.14 %tmp.15();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 272 8 ]
+        %tmp.16 = true;
+        ret %tmp.16;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_269_37_273_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 275; @symbol_functiondef = [onMenu,275,13,19]; @symbol_return<0> = [Boolean,275,25,32]; ]
+    function onMenu() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_275_33_278_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 276 8 ]
+        symbol [ Flow %tmp.2 276 8 12 ];
+        %tmp.2 = getv ? :Flow;
+        symbol [ showWorkoutMenu %tmp.3 276 13 28 ];
+        %tmp.3 = getv function %tmp.2 :showWorkoutMenu;
+        invoke %tmp.2 %tmp.3();
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 277 8 ]
+        %tmp.4 = true;
+        ret %tmp.4;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_275_33_278_4_stop:
+    }
+    [ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 280; @symbol_functiondef = [onBack,280,13,19]; @symbol_return<0> = [Boolean,280,25,32]; ]
+    function onBack() as Boolean {
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_280_33_287_4_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 281 8 ]
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_281_8_284_8_if_stmt:
+        symbol [ view %tmp.2 281 12 16 ];
+        %tmp.2 = getv ? :view;
+        symbol [ countdown %tmp.3 281 17 26 ];
+        %tmp.3 = getv %tmp.2 :countdown;
+        %tmp.4 = null;
+        %tmp.5 = ne %tmp.3 %tmp.4;
+        bf %tmp.5 @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_281_8_284_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_281_8_284_8_if_true:
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_281_36_284_8_start:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 282 12 ]
+        symbol [ view %tmp.7 282 12 16 ];
+        %tmp.7 = getv ? :view;
+        symbol [ finishBlock %tmp.8 282 17 28 ];
+        %tmp.8 = getv function %tmp.7 :finishBlock;
+        %tmp.9 = true;
+        invoke %tmp.7 %tmp.8(%tmp.9);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 283 12 ]
+        %tmp.10 = true;
+        ret %tmp.10;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_281_36_284_8_stop:
+        goto @_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_281_8_284_8_if_end;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_281_8_284_8_if_end:
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 285 8 ]
+        symbol [ WatchUi %tmp.11 285 8 15 ];
+        %tmp.11 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.12 285 16 23 ];
+        %tmp.12 = getv function %tmp.11 :popView;
+        symbol [ WatchUi %tmp.13 285 24 31 ];
+        %tmp.13 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_RIGHT %tmp.14 285 32 43 ];
+        %tmp.14 = getv %tmp.13 :SLIDE_RIGHT;
+        invoke %tmp.11 %tmp.12(%tmp.14);
+[ "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc" 286 8 ]
+        %tmp.15 = true;
+        ret %tmp.15;
+_home_user_Ayce45_technogym_garmin_watch_source_TimedViews_mc_280_33_287_4_stop:
+    }
+}
+[ @file = "/home/user/Ayce45/technogym-garmin/watch/source/TimedViews.mc"; @line = 1; ]
+<init> {
+}

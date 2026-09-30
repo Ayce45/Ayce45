@@ -16,6 +16,7 @@ from app.config import Settings, get_settings
 from app.mywellness import client as mw
 from app.mywellness import history as hist
 from app.mywellness import writeback
+from app.mywellness.live import LiveService, LiveState
 from app.mywellness.models import Workout, WorkoutResults
 from app.mywellness.program import ProgramService
 from app.api.storage import Storage
@@ -28,6 +29,8 @@ class AppState:
     storage: Storage
     mywellness: mw.MywellnessClient | None
     program: ProgramService
+    live: Any = None
+    ui: Any = None
     garmin: Any = None
     scheduler: Any = None
 
@@ -44,6 +47,7 @@ def build_state(settings: Settings | None = None, mywellness_client: mw.Mywellne
     else:
         st.mywellness = None
     st.program = ProgramService(st.mywellness, cache_ttl=s.program_cache_ttl, override_path=s.program_override_path)
+    st.live = LiveService(st.mywellness)
     return st
 
 
@@ -66,6 +70,11 @@ def create_app(state: AppState | None = None, with_scheduler: bool = True) -> Fa
 
     app = FastAPI(title="Technogym vers Garmin", version="0.1.0", lifespan=lifespan)
     app.state.ctx = st
+
+    # interface web de synchronisation (identifiants saisis dans le navigateur)
+    from app.api import ui as _ui
+
+    st.ui = _ui.attach(app, st.settings.database_path.parent)
 
     # ------------------------------------------------------------- securite
     def require_admin(x_admin_token: str | None = Header(default=None)) -> None:
@@ -126,6 +135,8 @@ def create_app(state: AppState | None = None, with_scheduler: bool = True) -> Fa
 
     @app.get("/workout/today", response_model=Workout, response_model_exclude_none=True, dependencies=[Depends(require_pair_or_admin)])
     def workout_today(day: date | None = None) -> Workout:
+        if day is None and st.settings.today_override:
+            day = date.fromisoformat(st.settings.today_override)
         return st.program.today(day)
 
     @app.get("/workout/all", response_model=list[Workout], response_model_exclude_none=True, dependencies=[Depends(require_pair_or_admin)])
@@ -154,6 +165,11 @@ def create_app(state: AppState | None = None, with_scheduler: bool = True) -> Fa
             st.storage.set_results_sync(rid, sync_status, detail)
         sets = sum(len(e.sets) for e in body.exercises)
         return {"id": rid, "stored": True, "sets": sets, "mywellness": sync_status, "detail": detail}
+
+    @app.get("/workout/{workout_id}/live", response_model=LiveState, response_model_exclude_none=True, dependencies=[Depends(require_pair_or_admin)])
+    def workout_live(workout_id: str, day: date | None = None) -> LiveState:
+        """Ce que les machines Technogym ont deja enregistre aujourd'hui pour cette seance (poll de la montre)."""
+        return st.live.state(workout_id, day)
 
     @app.get("/workout/{workout_id}/results", dependencies=[Depends(require_pair_or_admin)])
     def list_results(workout_id: str, limit: int = 20) -> list[dict[str, Any]]:

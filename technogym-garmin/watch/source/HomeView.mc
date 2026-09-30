@@ -110,6 +110,7 @@ class HomeDelegate extends WatchUi.BehaviorDelegate {
             // reprise apres redemarrage de l'app : nouvelle activite FIT
             Recording.start(Model.workoutTitle());
         }
+        Net.fetchLive(null);
         Flow.showCurrent(WatchUi.SLIDE_LEFT, true);
         return true;
     }

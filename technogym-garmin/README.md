@@ -1,178 +1,153 @@
 # Technogym (Mywellness) vers Garmin
 
-Passerelle qui met le programme prescrit dans Mywellness (Technogym) sur une montre Garmin, avec deux
-modes complementaires et un backend commun :
+Deux produits, un backend commun :
 
-1. **Mode natif** : la seance du jour est convertie en workout structure Garmin (exercices, series,
-   charges, repos) et poussee dans Garmin Connect chaque matin a 6h. La montre la suit nativement.
-2. **Mode live** : une app Connect IQ ("TG Muscu") affiche la seance du jour, guide serie par serie
-   (cible reps / charge, repos avec vibration, blocs cardio a duree), enregistre une activite FIT
-   Strength et renvoie les series reellement faites au backend.
+1. **Appli de synchro.** Tu lances le backend, une page web te demande tes identifiants Technogym et
+   Garmin, tu cliques : chaque seance de ton programme Mywellness devient un workout structure Garmin
+   Connect (exercices, series, charges, repos), la seance du jour est planifiee sur le calendrier. Un job
+   peut refaire ce push chaque matin a 6h.
+2. **Compagnon de seance sur la montre (app Connect IQ "TG Muscu").** Seance du jour sur la montre,
+   guidage serie par serie (cible reps / charge, repos avec vibration, blocs cardio a duree), activite FIT
+   Strength. Bidirectionnel via le backend : ce que tu fais sur les machines Technogym apparait sur la
+   montre en cours de seance, et ce que tu saisis sur la montre (poids libres) est renvoye au backend puis,
+   une fois active, ecrit dans Mywellness.
 
-| | |
+| Synchro | Montre |
 | --- | --- |
-| ![accueil](docs/screenshots/01-accueil.png) | ![serie](docs/screenshots/05-serie-cible.png) |
-| ![saisie](docs/screenshots/06-saisie-reps-charge.png) | ![repos](docs/screenshots/07-repos.png) |
+| ![page synchro](docs/screenshots/11-page-synchro.png) | ![serie](docs/screenshots/05-serie-cible.png) ![live](docs/screenshots/12-live-machines.png) |
 
-Captures du simulateur Connect IQ (Forerunner 965) branche sur le backend local et la vraie seance
-Mywellness du 2026-09-29.
+Captures reelles : page servie par le backend, simulateur Connect IQ (Forerunner 965) branche sur le
+backend local et la vraie seance Mywellness. `[M]` = exercice deja enregistre par une machine Technogym.
+
+## Securite des identifiants
+
+* Aucun identifiant, mot de passe ou jeton n'est dans le depot : `.env`, `data/` (jetons Garmin,
+  `credentials.json`, SQLite) et `watch/keys/` sont gitignores. Les fixtures de test sont des reponses
+  reelles anonymisees (UUID renumerotes, noms retires).
+* Les identifiants ne sont envoyes qu'a `core.mywellness.com` / `services.mywellness.com` et
+  `sso.garmin.com` / `connectapi.garmin.com`.
+* Le depot est public : ne mets jamais tes identifiants dans un fichier versionne. Pour effacer aussi
+  l'historique des premiers commits (qui contiennent un id utilisateur Mywellness et un id de salle, non
+  secrets) : `git rebase -i <commit de base>` puis squash, ou `git filter-repo`, puis `git push --force-with-lease`.
+
+## 1. Appli de synchro
+
+```
+cd technogym-garmin
+uv venv .venv && . .venv/bin/activate && uv pip install -e ".[dev]"   # ou pip install -e .
+python run.py --open        # ouvre http://127.0.0.1:8000
+```
+
+Saisis les identifiants, coche "se souvenir" si tu veux qu'ils soient gardes sur cet ordinateur
+(`data/credentials.json`, droits 600), clique **Synchroniser vers Garmin**. Resultat : un lien par workout
+cree (`TG Seance 1`, `TG Seance 2`, ...), la seance du jour marquee "planifiee aujourd'hui", et les exercices
+sans equivalent Garmin signales. Relancer la synchro remplace les workouts du meme nom.
+
+Execution reelle du 2026-09-30 : 3 workouts crees en 22 s (Seance 1 : 39 steps, Seance 2 : 25, Seance 3 :
+24), Seance 1 planifiee, aucun exercice sans correspondance.
+
+Sans interface (serveur, Docker) : identifiants dans `.env` et `POST /garmin/push-today` ou le job
+APScheduler (`PUSH_HOUR`, `TZ`).
+
+## 2. Compagnon de seance sur la montre
+
+Parcours : accueil (seance du jour, cache si hors ligne) -> START -> pour chaque exercice : serie cible
+`10 reps x 80 kg`, START = fait, saisie reps puis charge (UP / DOWN, START), repos 45 s avec vibration
+-> serie suivante. Blocs cardio / etirements : compte a rebours de la duree cible. Appui long UP : menu
+(annuler la derniere serie, passer l'exercice, liste des exercices, terminer, abandonner). Fin : resume,
+START = sauvegarde FIT **puis** envoi des resultats ; en echec, mise en attente et renvoi automatique.
+
+Live : au demarrage, a chaque ecran de serie et toutes les 20 s, la montre demande au backend l'etat de la
+seance du jour cote Technogym. Un exercice termine sur une machine passe en `[M]` dans la liste, l'ecran
+affiche "Machine : fait" avec les series enregistrees et START passe au suivant en reprenant ces series.
+Les exercices faits hors machine (poids libres) sont saisis sur la montre et envoyes au backend
+(`POST /workout/{id}/results`) ; avec `MYWELLNESS_WRITEBACK=1` le backend les ecrit dans Mywellness dans la
+seance du jour (voir "Etat de l'ecriture Mywellness").
+
+Installation : `docs/connectiq.md` (compilation, simulateur, sideload). Binaires prets :
+`watch/dist/tgmuscu.iq` (tous appareils) et `watch/dist/tgmuscu-<modele>.prg` (fr965, fr265, venu3,
+vivoactive5, fenix7, epix2pro47mm, fenix843mm). Appairage : `POST /auth/pair` puis `backendUrl` (https
+obligatoire sur une vraie montre) et `pairToken` dans les reglages de l'app via Garmin Connect Mobile.
 
 ## Architecture
 
 ```
-Mywellness (API privee)  <--  app/mywellness  -->  FastAPI (app/api)  -->  app/garmin  -->  Garmin Connect
-   programme prescrit           client, cache        /workout/today          conversion         workout structure
-   historique                   selection du jour    /workout/{id}/results   push + planif      (job 6h)
-   ecriture (experimental)      writeback            /history, /auth/pair
-                                                          ^
-                                                          |  HTTPS via le telephone (BLE)
-                                                     watch/ (Connect IQ, Monkey C)
+Mywellness (API privee)  <->  app/mywellness  ->  FastAPI (app/api)   ->  app/garmin  ->  Garmin Connect
+   programme prescrit          client, cache      GET  /  (page synchro)    conversion       workouts + planif
+   seance performee du jour    live, writeback    GET  /workout/today       push (job 6h)
+   ecriture manuelle                              GET  /workout/{id}/live
+                                                  POST /workout/{id}/results
+                                                       ^  HTTPS via le telephone (BLE)
+                                                  watch/ (Connect IQ, Monkey C)
 ```
 
-* `app/mywellness/` : client HTTP (login `core.mywellness.com`, actions `services.mywellness.com`),
-  modeles, service programme (seance du jour, cache, secours YAML), historique, writeback.
-* `app/garmin/` : client `garminconnect`, mapping exercices (`exercise_map.json` valide contre le
-  catalogue Garmin `garmin_exercises.json`), conversion, push + planification.
-* `app/api/` : FastAPI + SQLite (tokens d'appairage, resultats de seance, journal des push).
-* `app/jobs/` : APScheduler, push quotidien.
-* `watch/` : app Connect IQ, scripts `build.sh`, `run-sim.sh`, `tools/fetch_devices.py`.
-* `docs/` : `mywellness-api.md` (reco API), `connectiq.md` (compilation, simulateur, sideload),
-  `limitations.md`, `garmin-push-capture.json` (reponse reelle du premier push).
+* `app/mywellness/` : client HTTP, modeles, service programme (seance du jour, cache, secours YAML),
+  historique, `live.py` (etat machines), `writeback.py` (montre -> Mywellness).
+* `app/garmin/` : client `garminconnect`, mapping exercices valide contre le catalogue Garmin, conversion,
+  push + planification.
+* `app/api/` : FastAPI, page web de synchro (`ui.py`), SQLite (tokens d'appairage, resultats, journal).
+* `app/jobs/` : APScheduler, push quotidien.  `watch/` : app Connect IQ et outils de build.
+* `docs/` : `mywellness-api.md`, `connectiq.md`, `limitations.md`, `garmin-push-capture.json`, captures.
 * `DECISIONS.md` : journal des choix faits sans consultation.
-
-## Installation du backend (local)
-
-Prerequis : Python 3.11, `uv` (ou pip).
-
-```
-cd technogym-garmin
-cp .env.example .env            # renseigner MYWELLNESS_* et GARMIN_*, choisir un ADMIN_TOKEN
-uv venv .venv && . .venv/bin/activate
-uv pip install -e ".[dev]"
-python run.py                   # http://127.0.0.1:8000, docs Swagger sur /docs
-```
-
-Verifications :
-
-```
-curl -s localhost:8000/health
-curl -s localhost:8000/workout/today -H "X-Admin-Token: $ADMIN_TOKEN" | python -m json.tool
-PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q          # 20 tests sur des reponses Mywellness reelles anonymisees
-python scripts/explore_mywellness.py                 # reconnaissance complete de l'API (sortie humaine)
-```
-
-Le premier appel Garmin fait un login complet (5 strategies, empreinte TLS tournante) puis persiste les
-jetons dans `data/garmin_tokens.json`. Si le compte Garmin a la MFA, lancer une fois
-`python -c "from app.api.main import build_state; from app.garmin.push import garmin_client; garmin_client(build_state()).api"`
-en interactif pour saisir le code.
 
 ## Endpoints
 
 | Methode | Route | Auth | Role |
 | --- | --- | --- | --- |
+| GET | `/` | aucune (local) | page web de synchronisation |
+| POST | `/ui/sync` | aucune (local) | synchronisation depuis la page (formulaire) |
 | GET | `/health` | aucune | etat |
-| POST | `/auth/pair` | `X-Admin-Token` | genere un token d'appairage pour la montre (`{"label": "fr965"}`) |
-| GET | `/auth/pair` | admin | liste des tokens (tronques) |
-| GET | `/workout/today` | pair ou admin | seance du jour au format simplifie (`?day=YYYY-MM-DD` optionnel) |
-| GET | `/workout/all` | pair ou admin | toutes les seances du programme |
-| GET | `/workout/{id}` | pair ou admin | une seance par id Mywellness |
-| POST | `/workout/{id}/results` | pair ou admin | series reellement faites (montre -> backend) |
+| POST | `/auth/pair` | `X-Admin-Token` | token d'appairage pour la montre |
+| GET | `/workout/today` | pair ou admin | seance du jour (`?day=` optionnel) |
+| GET | `/workout/all`, `/workout/{id}` | pair ou admin | seances du programme |
+| GET | `/workout/{id}/live` | pair ou admin | etat Technogym de la seance du jour (machines) |
+| POST | `/workout/{id}/results` | pair ou admin | series faites (montre -> backend, puis Mywellness si active) |
 | GET | `/workout/{id}/results` | pair ou admin | resultats stockes |
-| GET | `/history` | pair ou admin | historique Mywellness (`?days=30&limit=20&details=true`) |
-| GET | `/history/{idCr}` | pair ou admin | une seance performee avec ses series |
-| POST | `/garmin/push-today` | admin | conversion + push + planification du workout du jour |
-| GET | `/garmin/last-push` | admin | dernier push enregistre |
+| GET | `/history`, `/history/{idCr}` | pair ou admin | historique Mywellness |
+| POST | `/garmin/push-today` | admin | push + planification du workout du jour |
 
-Le token d'appairage se passe en en-tete `X-Pair-Token` ou en query `?token=`. Tant qu'aucun token
-n'existe et qu'`ADMIN_TOKEN` est vide, les lectures sont ouvertes pour tester en local.
+Le token d'appairage se passe en en-tete `X-Pair-Token` ou en query `?token=`. La page web et `/ui/*`
+sont prevus pour un backend local ; derriere un domaine public, protegez-les (reverse proxy avec auth) ou
+desactivez-les.
 
-Format de `GET /workout/today` (champs nuls omis) :
+## Etat de l'ecriture Mywellness (montre -> Technogym)
 
-```json
-{ "id": "78a84e2e-...", "date": "2026-09-29", "name": "Séance 3", "program_name": "Programme d'entraînement",
-  "exercises": [
-    { "position": 3, "name": "Leg press Sel: Extension des jambes", "short_name": "Extension des jambes",
-      "equipment": "Leg press Sel", "kind": "strength", "rep_duration_s": 3,
-      "sets": [ { "reps": 10, "weight_kg": 80.0, "rest_s": 45 }, { "reps": 10, "weight_kg": 80.0, "rest_s": 45 } ] },
-    { "position": 1, "name": "Bike: Exercice Personnalisé", "kind": "cardio",
-      "sets": [ { "duration_s": 180, "power_w": 86.0 } ] }
-  ] }
-```
-
-## Appairage de la montre
-
-1. `curl -X POST localhost:8000/auth/pair -H "X-Admin-Token: $ADMIN_TOKEN" -H 'content-type: application/json' -d '{"label":"ma montre"}'`
-2. Dans Garmin Connect Mobile : appareil > Applications Connect IQ > TG Muscu > Parametres :
-   `backendUrl` (https) et `pairToken` (la valeur renvoyee).
-3. Lancer l'app : la seance du jour s'affiche, START pour demarrer.
-
-## Sideload de l'app sur la montre
-
-Resume (details, prerequis SDK et simulateur dans `docs/connectiq.md`) :
+Les actions existent et leur format est connu (voir `docs/mywellness-api.md`) : `StartWorkoutSession`,
+`SavePerformedPhysicalActivity` (objet `GenericPhysicalActivityDataVO`, `manuallyDone: true`),
+`CloseWorkoutSession`. Le code est en place (`app/mywellness/writeback.py`) et teste sur un client factice,
+mais la premiere ecriture reelle sur ton compte n'a pas ete executee dans la session de developpement.
+Pour valider :
 
 ```
-.venv/bin/python watch/tools/fetch_devices.py     # appareils + polices Connect IQ (login Garmin du .env)
-cd watch && ./build.sh --iq                       # bin/tgmuscu.iq (release, 64 appareils)
-./build.sh -d fr965                               # ou un .prg pour votre modele
+python scripts/test_writeback.py --list
+python scripts/test_writeback.py --idcr <idCr> --day 2026-09-29 --position 3     # 1 rep, 5 kg, puis tentative de suppression
 ```
 
-Copier le `.prg` de votre modele (ou le `.iq`) dans `GARMIN/Apps/` de la montre branchee en USB, puis
-configurer les reglages via Garmin Connect Mobile. La montre exige du **https** pour le backend.
+Si la relecture montre la serie et que la suppression fonctionne, mettre `MYWELLNESS_WRITEBACK=1`.
 
-## Deploiement du backend
+## Deploiement
+
+`cp .env.example .env` puis `docker compose up -d --build` : port 8000, job planifie dans le meme processus,
+donnees dans `./data`. Reverse proxy TLS obligatoire devant pour la montre (Caddy, Traefik, Cloudflare
+Tunnel). Le `docker build` n'a pas ete execute dans l'environnement de developpement (pas de demon).
+
+## Tests et verification
 
 ```
-cp .env.example .env    # remplir
-docker compose up -d --build
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q      # 25 tests sur des reponses Mywellness reelles anonymisees
+python scripts/explore_mywellness.py             # reconnaissance de l'API avec ton compte
 ```
 
-Le conteneur expose le port 8000 et lance le job APScheduler dans le meme processus : push du workout du
-jour vers Garmin Connect tous les jours a `PUSH_HOUR` (6) dans le fuseau `TZ` (Europe/Paris). Donnees
-persistantes dans `./data` (SQLite, jetons Garmin). Mettre un reverse proxy TLS devant (Caddy, Traefik,
-Cloudflare Tunnel) : la montre refuse l'http. Le `docker build` n'a pas pu etre execute dans
-l'environnement de cette session (pas de demon Docker) ; le Dockerfile est standard (`python:3.11-slim`).
-
-Le push manuel reste disponible : `curl -X POST localhost:8000/garmin/push-today -H "X-Admin-Token: ..."`.
-La reponse contient l'id du workout Garmin, l'URL `connect.garmin.com/modern/workout/<id>`, la
-planification et le rapport de mapping par exercice. Premier push reel : `docs/garmin-push-capture.json`
-(workout 1714662540 "TG Séance 3 2026-09-29", 24 steps, planifie le 2026-09-29).
-
-## Mode live : parcours sur la montre
-
-Accueil (seance du jour, cache si hors ligne) -> START -> pour chaque exercice : serie cible
-`10 reps x 80 kg`, START = fait, saisie reps puis charge (UP / DOWN, START), repos 45 s avec vibration
--> serie suivante. Blocs cardio / etirements : compte a rebours de la duree cible. Appui long UP : menu
-(annuler la derniere serie, passer l'exercice, liste des exercices, terminer, abandonner). Fin : resume,
-START = sauvegarde FIT **puis** envoi des resultats ; en echec, mise en attente et renvoi automatique au
-prochain lancement. Le `.prg` a ete teste dans le simulateur fr965 sur ce parcours complet (captures
-dans `docs/screenshots/`).
-
-## Ce qui a ete reellement execute dans cette session
-
-* Login Mywellness, programme prescrit (3 seances, 27 exercices avec series / charges / repos),
-  historique et derniere seance performee : `scripts/explore_mywellness.py`, fixtures dans `tests/fixtures/`.
-* Backend local : `GET /workout/today` renvoie la vraie seance ; `POST /workout/{id}/results` depuis le
-  simulateur ; 20 tests pytest verts.
-* Garmin Connect : login, creation et planification du workout Strength du jour, relecture verifiee
-  (categories, exercices, charges kg, groupes de repetitions, repos).
-* Connect IQ : SDK 9.2.0 et 64 appareils installes en ligne de commande, `.prg` compiles pour 7 familles,
-  `.iq` multi-appareils, parcours complet dans le simulateur fr965 avec le backend local.
+Ce qui a ete reellement execute : login Mywellness et lecture du programme (3 seances, 27 exercices) ;
+backend local servant la vraie seance ; push et planification de workouts dans Garmin Connect (job et page
+web) ; app Connect IQ compilee pour 64 appareils et testee dans le simulateur fr965 sur le parcours complet,
+y compris la reprise d'un envoi en attente et le mode live sur la seance faite la veille sur machines.
 
 ## Prochaines etapes
 
-1. Tester sur la vraie montre (modele a confirmer) : lisibilite, tactile, taille de reponse, HTTPS.
-2. Activer `MYWELLNESS_WRITEBACK=1` sur une seance test et verifier dans l'app Mywellness le format
-   attendu de `summaryData` ; ajuster `app/mywellness/writeback.py`.
-3. Exposer le backend en https (Caddy + nom de domaine, ou Cloudflare Tunnel) et documenter l'URL dans
-   les reglages de l'app.
-4. Enrichir `exercise_map.json` au fil des programmes (le rapport de mapping du push signale les
-   `fallback`), et ajouter les machines Technogym absentes.
-5. Progression : proposer sur la montre la charge de la derniere seance reussie (donnees deja dans
-   `/workout/{id}/results` et `/history`).
-6. Glance / widget "seance du jour" et complication, publication eventuelle sur le store Connect IQ.
-7. Ecouter les changements de programme (coach) pour re-pousser le workout Garmin dans la journee.
-
-## Binaires prets a sideloader
-
-`watch/dist/tgmuscu.iq` (tous les appareils) et `watch/dist/tgmuscu-<modele>.prg` (fr965, fr265, venu3,
-vivoactive5, fenix7, epix2pro47mm, fenix843mm). Pour un autre modele : `cd watch && ./build.sh -d <id>`.
+1. Valider l'ecriture Mywellness avec `scripts/test_writeback.py`, puis activer `MYWELLNESS_WRITEBACK=1`.
+2. Tester sur la vraie montre (modele a confirmer) : lisibilite, tactile, HTTPS.
+3. Exposer le backend en https (Caddy ou Cloudflare Tunnel) pour la montre.
+4. Progression : proposer la charge de la derniere seance reussie sur la montre.
+5. Enrichir `exercise_map.json` au fil des programmes (rapport de mapping dans la synchro).
+6. Glance "seance du jour", publication eventuelle sur le store Connect IQ.

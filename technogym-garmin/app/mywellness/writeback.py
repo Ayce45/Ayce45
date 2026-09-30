@@ -1,12 +1,21 @@
-"""Retour des resultats vers Mywellness (experimental, desactive par defaut).
+"""Retour des resultats vers Mywellness (montre -> Technogym), pour les exercices faits hors machine.
 
-Flux deduit des signatures d'erreur des actions (docs/mywellness-api.md) :
-  1. StartWorkoutSession {userWorkoutSessionId}          -> seance performee (idCr, partitionDate)
-  2. SavePerformedPhysicalActivity {...} par exercice    -> series faites
-  3. CloseWorkoutSession {idCr, partitionDate}
+Flux :
+  1. seance performee du jour deja ouverte par les machines (ActivityHistory + idCr) ; sinon
+     StartWorkoutSession {userWorkoutSessionId} l'ouvre (retour : idCr, partitionDate)
+  2. SavePerformedPhysicalActivity par exercice saisi sur la montre
+  3. CloseWorkoutSession {idCr, partitionDate} si la montre indique la fin de seance
 
-Le format exact de summaryData n'a pas pu etre confirme sans polluer l'historique de l'utilisateur.
-Toute erreur est capturee et renvoyee sous forme de texte : les resultats restent stockes en local.
+Format de SavePerformedPhysicalActivity (deduit des messages d'erreur du serveur, voir docs/mywellness-api.md) :
+  facilityUrl, physicalActivityId (ou equipmentCode + physicalActivityCode + targetType), idCr, partitionDate,
+  position, userWorkoutSessionId, manuallyDone, summaryData = GenericPhysicalActivityDataVO :
+  {"steps": [{"data": [{"physicalProperty": "IsoReps", "value": 10}, {"physicalProperty": "IsoWeight", "value": 80}]}],
+   "data": []}
+  Un summaryData vide repond {"result": "ExerciseDataNotValid", "wasOnline": false}.
+
+Le test en conditions reelles n'a pas ete execute dans la session de developpement (ecriture sur le compte
+de l'utilisateur non autorisee par l'environnement) : scripts/test_writeback.py permet de le faire soi-meme
+sur une seule serie identifiable. Toute erreur est renvoyee sous forme de texte, les resultats restent en local.
 """
 
 from __future__ import annotations
@@ -16,63 +25,98 @@ from datetime import date
 from typing import Any
 
 from app.mywellness import client as mw
-from app.mywellness.models import Workout, WorkoutResults
+from app.mywellness.models import Workout, WorkoutResults, partition_iso
 
 log = logging.getLogger(__name__)
 
 
-def _steps_payload(sets: list[Any]) -> list[dict[str, Any]]:
+def steps_payload(sets: list[Any]) -> list[dict[str, Any]]:
     steps = []
     for s in sets:
-        if s.skipped:
+        if getattr(s, "skipped", False):
             continue
         data = []
-        if s.reps is not None:
+        if getattr(s, "reps", None) is not None:
             data.append({"physicalProperty": "IsoReps", "value": s.reps})
-        if s.weight_kg is not None:
+        if getattr(s, "weight_kg", None) is not None:
             data.append({"physicalProperty": "IsoWeight", "value": s.weight_kg})
-        if s.duration_s is not None:
+        if getattr(s, "duration_s", None) is not None:
             data.append({"physicalProperty": "Duration", "value": s.duration_s})
-        if s.rest_s is not None:
+        if getattr(s, "rest_s", None) is not None:
             data.append({"physicalProperty": "RestTime", "value": s.rest_s})
-        steps.append({"data": data})
+        if data:
+            steps.append({"data": data})
     return steps
 
 
-def push_results(client: mw.MywellnessClient, workout: Workout, results: WorkoutResults, facility_id: str | None = None) -> tuple[str, str]:
-    """Retourne (statut, detail). statut = ok | partial | error."""
-    try:
-        started = client.start_workout_session(workout.id, facility_id)
-    except mw.MywellnessError as exc:
-        return "error", f"StartWorkoutSession: {exc}"
-    if started.get("notFound"):
-        return "error", "StartWorkoutSession: seance inconnue"
-    id_cr = started.get("idCr") or (started.get("workoutSession") or {}).get("idCr")
-    partition = started.get("partitionDate") or (started.get("workoutSession") or {}).get("partitionDate") or date.today().strftime("%Y%m%d")
-    errors: list[str] = []
+def find_open_session(client: mw.MywellnessClient, workout_id: str, day: date) -> tuple[int, str, str | None] | None:
+    """(idCr, partitionDate, facilityId) de la seance performee du jour pour cette seance prescrite."""
+    for item in client.activity_history(day, day):
+        if str(item.get("userWorkoutSessionId")) == workout_id and partition_iso(item.get("partitionDate")) == day.isoformat():
+            return int(item["idCr"]), str(item["partitionDate"]), item.get("facilityId")
+    return None
+
+
+def push_results(
+    client: mw.MywellnessClient,
+    workout: Workout,
+    results: WorkoutResults,
+    facility_id: str | None = None,
+    close: bool = True,
+    only_positions: set[int] | None = None,
+) -> tuple[str, str]:
+    """Retourne (statut, detail). statut = ok | partial | error | nothing."""
+    day = date.fromisoformat(results.date) if results.date else date.today()
     by_pos = {e.position: e for e in workout.exercises}
-    for ex in results.exercises:
+    todo = [ex for ex in results.exercises if steps_payload(ex.sets) and (only_positions is None or ex.position in only_positions)]
+    if not todo:
+        return "nothing", "aucune serie a ecrire"
+
+    opened = find_open_session(client, workout.id, day)
+    if opened is None:
+        try:
+            started = client.start_workout_session(workout.id, facility_id)
+        except mw.MywellnessError as exc:
+            return "error", f"StartWorkoutSession: {exc}"
+        if started.get("notFound"):
+            return "error", "StartWorkoutSession: seance inconnue"
+        ws = started.get("workoutSession") or started
+        id_cr = ws.get("idCr")
+        partition = str(ws.get("partitionDate") or day.strftime("%Y%m%d"))
+        fac_id = facility_id
+    else:
+        id_cr, partition, fac_id = opened
+        fac_id = facility_id or fac_id
+
+    errors: list[str] = []
+    written = 0
+    for ex in todo:
         target = by_pos.get(ex.position)
-        steps = _steps_payload(ex.sets)
-        if not steps:
-            continue
         payload: dict[str, Any] = {
             "idCr": id_cr,
             "partitionDate": partition,
             "position": ex.position,
             "physicalActivityId": ex.physical_activity_id or (target.physical_activity_id if target else ""),
             "userWorkoutSessionId": workout.id,
-            "summaryData": {"steps": steps},
+            "manuallyDone": True,
+            "summaryData": {"steps": steps_payload(ex.sets), "data": []},
         }
         try:
-            client.save_performed_physical_activity(payload, facility_id)
+            res = client.save_performed_physical_activity(payload, fac_id) or {}
+            if isinstance(res, dict) and str(res.get("result", "")).lower() not in ("", "success", "ok", "saved"):
+                errors.append(f"pos {ex.position}: {res.get('result')}")
+            else:
+                written += 1
         except mw.MywellnessError as exc:
             errors.append(f"pos {ex.position}: {exc}")
-    try:
-        client.close_workout_session(id_cr, str(partition), facility_id)
-    except mw.MywellnessError as exc:
-        errors.append(f"CloseWorkoutSession: {exc}")
-    if not errors:
-        return "ok", f"idCr={id_cr} partitionDate={partition}"
-    status = "partial" if len(errors) < max(1, len(results.exercises)) else "error"
-    return status, "; ".join(errors)
+    if close:
+        try:
+            client.close_workout_session(id_cr, partition, fac_id)
+        except mw.MywellnessError as exc:
+            errors.append(f"CloseWorkoutSession: {exc}")
+    detail = f"idCr={id_cr} partitionDate={partition} exercices ecrits={written}/{len(todo)}"
+    if errors:
+        detail += "; " + "; ".join(errors)
+    if written == 0:
+        return "error", detail
+    return ("partial" if errors else "ok"), detail

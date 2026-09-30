@@ -144,8 +144,14 @@ l'app mobile quand on coche un exercice fait "a la main". Signatures relevees a 
 | `UpdateUserWorkoutSessionPhysicalActivity`, `ReplaceUserWorkoutSessionPhysicalActivity`, `DeleteUserWorkoutSessionPhysicalActivity` | Mandatory data | edition du programme |
 | `SaveUserTrainingProgram`, `SaveGoal` | Mandatory data | edition du programme / objectif |
 
-Le format exact de `summaryData` n'est pas verifiable sans creer une vraie seance dans l'historique
-de l'utilisateur. Le backend implemente donc le retour vers Mywellness derriere un drapeau
+Sondes complementaires du 2026-09-30 (sans creation de donnees) : `summaryData` est desserialise dans le
+type serveur `Technogym.MWApps.Training.ValueObject.PhysicalActivity.GenericPhysicalActivityDataVO`, le meme
+objet que `performedPhysicalActivity.data` en lecture (`{"constraints": [], "data": [], "steps": [{"data":
+[{"physicalProperty": "IsoReps", "value": 10}, {"physicalProperty": "IsoWeight", "value": 80}]}]}`). Un
+`summaryData` vide repond `{"result": "ExerciseDataNotValid", "wasOnline": false, "equipmentFacilityId": ...}`
+: `wasOnline: false` designe le tracking manuel. `MarkPhysicalActivityAsDone {"position": n}` sans seance
+repond 200 sans effet. L'ecriture reelle (creation d'une serie) n'a pas ete executee dans la session de
+developpement : `scripts/test_writeback.py` le fait sur une serie identifiable, avec tentative de suppression. Le backend implemente donc le retour vers Mywellness derriere un drapeau
 (`MYWELLNESS_WRITEBACK=1`, desactive par defaut) avec le flux `StartWorkoutSession` ->
 `SavePerformedPhysicalActivity` (une entree par exercice, `summaryData.steps` au format
 `{physicalProperty, value}` identique a celui lu dans `performedPhysicalActivity.data.steps`) ->

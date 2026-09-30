@@ -17,9 +17,12 @@ class SetView extends WatchUi.View {
         shownAt = Time.now().value();
     }
 
+    var ticks as Number = 0;
+
     function onShow() as Void {
         shownAt = Time.now().value();
         timer.start(method(:onTick), 1000, true);
+        Net.fetchLive(method(:onLive));
     }
 
     function onHide() as Void {
@@ -27,6 +30,14 @@ class SetView extends WatchUi.View {
     }
 
     function onTick() as Void {
+        ticks++;
+        // toutes les 20 s : l'exercice a-t-il ete enregistre par une machine Technogym ?
+        if (ticks % 20 == 0) { Net.fetchLive(method(:onLive)); }
+        WatchUi.requestUpdate();
+    }
+
+    function onLive(ok as Boolean, changed as Boolean) as Void {
+        if (changed && Model.machineDone(Model.currentExercise())) { Recording.vibrate(false); }
         WatchUi.requestUpdate();
     }
 
@@ -62,8 +73,15 @@ class SetView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(cx, h * 0.56, Graphics.FONT_LARGE, target, Graphics.TEXT_JUSTIFY_CENTER);
 
-        dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, h * 0.76, Graphics.FONT_TINY, Ui.fmtClock(Time.now().value() - shownAt), Graphics.TEXT_JUSTIFY_CENTER);
+        if (Model.machineDone(ex)) {
+            dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
+            var mt = Model.machineSetsText(ex);
+            dc.drawText(cx, h * 0.72, Graphics.FONT_XTINY, "Machine : fait" + (mt.length() > 0 ? " " + mt : ""), Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, "OK = suivant", Graphics.TEXT_JUSTIFY_CENTER);
+        } else {
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(cx, h * 0.76, Graphics.FONT_TINY, Ui.fmtClock(Time.now().value() - shownAt), Graphics.TEXT_JUSTIFY_CENTER);
+        }
 
         var done = Model.doneSetsCount();
         var total = 0;
@@ -91,6 +109,12 @@ class SetDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function openInput() as Boolean {
+        if (Model.machineDone(Model.currentExercise())) {
+            // la machine Technogym a deja enregistre cet exercice : on reprend ses series et on avance
+            var finished = Model.acceptMachineExercise();
+            Flow.afterSet(finished, 0);
+            return true;
+        }
         var set = Model.currentSet();
         var reps = Model.num(set, "reps", 10).toNumber();
         var weight = Model.num(set, "weight_kg", 0).toFloat();

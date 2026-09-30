@@ -49,6 +49,42 @@ module Net {
         }
     }
 
+    // Etat live : ce que les machines Technogym ont deja enregistre pour la seance du jour.
+    var liveBusy as Boolean = false;
+
+    function fetchLive(callback as Method?) as Boolean {
+        if (liveBusy || busy || !configured() || Model.workout == null) { return false; }
+        var w = Model.workout as Dictionary;
+        if (!w.hasKey("id")) { return false; }
+        liveBusy = true;
+        onLive = callback;
+        var url = Model.backendUrl + "/workout/" + (w["id"] as String) + "/live";
+        var params = { "token" => Model.pairToken } as Dictionary;
+        if (w.hasKey("date")) { params["day"] = w["date"]; }
+        var options = {
+            :method => Communications.HTTP_REQUEST_METHOD_GET,
+            :headers => _headers(false),
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+        Communications.makeWebRequest(url, params, options, new Lang.Method(Net, :onLiveResponse));
+        return true;
+    }
+
+    var onLive as Method? = null;
+
+    function onLiveResponse(code as Number, data as Dictionary or String or Null) as Void {
+        liveBusy = false;
+        var changed = false;
+        if (code == 200 && data instanceof Dictionary) {
+            changed = Model.applyLive(data as Dictionary);
+            Model.online = true;
+        }
+        var cb = onLive;
+        onLive = null;
+        if (cb != null) { (cb as Method).invoke(code == 200, changed); }
+        WatchUi.requestUpdate();
+    }
+
     var _sending as Dictionary? = null;
 
     function sendResults(payload as Dictionary, callback as Method?) as Boolean {
