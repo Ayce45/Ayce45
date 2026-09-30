@@ -141,12 +141,12 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   envoie au backend, qui ecrit les echantillons `{t, hr}` par exercice dans la seance Technogym (`analitics`).
   L'affichage en direct sur la console d'une machine reste reserve a la diffusion systeme de la montre.
 
-## 2026-09-30 : POC montre "TG Live" (suivi en direct)
+## 2026-09-30 : POC montre "Spotter for Technogym" (suivi en direct)
 
 * Recadrage demande : la seance est pilotee depuis la salle (bornes, machines, app), la montre montre ou on
-  en est. L'app Connect IQ est renommee "TG Live" (c'etait "TG Muscu", nom choisi ici, pas une app
+  en est. L'app Connect IQ est renommee "Spotter for Technogym" (c'etait "TG Muscu", nom choisi ici, pas une app
   existante) et son ecran principal devient l'ecran live ; le mode guide (la montre dicte les series) reste
-  accessible par le menu. Les binaires `watch/dist/tgmuscu*` sont remplaces par `tglive*`.
+  accessible par le menu. Les binaires `watch/dist/tgmuscu*` sont remplaces par `spotter*`.
 * Nouveau `GET /live` sans identifiant de seance : la montre n'a pas a savoir quelle seance est ouverte,
   le backend renvoie la seance courante Technogym telle quelle. `GET /workout/{id}/live` reste pour le
   mode guide.
@@ -164,3 +164,14 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
 * Detail technique : un modele Pydantic declare dans `create_app` n'est pas resolu par FastAPI avec
   `from __future__ import annotations` (le corps devient un parametre de query, 422). Modele remonte au
   niveau module ; un handler journalise desormais le corps des 422 pour voir ce que la montre envoie.
+
+## 2026-09-30 : nom de l'app
+
+* Choix de l'utilisateur : **Spotter for Technogym** ("spotter" = celui qui assure sous la barre). Verification
+  sur le store Connect IQ (API de recherche du store, 4 pages de resultats, locales fr et en) : aucune app
+  nommee Spotter ; les seuls noms proches sont "LARA - Live Flight Radar & Plane Spotter" (aviation), Spotify
+  et "Spotovka" (prix de l'electricite). Aucune app ne contient "Technogym" ni "Mywellness" : la niche est libre.
+* Le nom complet sert au store et a la liste des apps ; la montre affiche "Spotter" (chaine `ShortName`) en
+  en-tete pour gagner de la place. La marque tierce reste hors icone ; la description du store portera la
+  mention "application non officielle, sans lien avec Technogym ni Garmin".
+* Modele de l'utilisateur : Forerunner 955 (`fr955`, deja dans le manifeste) ; un `.prg` dedie est livre.

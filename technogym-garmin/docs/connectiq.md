@@ -1,4 +1,4 @@
-# App Connect IQ "TG Live" : compilation, simulateur, sideload
+# App Connect IQ "Spotter for Technogym" : compilation, simulateur, sideload
 
 Application de type **device app** (Monkey C), dossier `watch/`.
 
@@ -20,7 +20,7 @@ les reps/charges detaillees sont envoyees au backend, pas dans le FIT (voir `doc
 Reprise : la progression (exercice, serie, resultats) est persistee a chaque serie ; si l'app est fermee
 puis relancee, l'accueil indique "En cours : i/n" et START reprend ou l'on en etait (nouvelle activite FIT).
 
-Reglages (Garmin Connect Mobile > appareil > Applications Connect IQ > TG Live > Parametres) :
+Reglages (Garmin Connect Mobile > appareil > Applications Connect IQ > Spotter for Technogym > Parametres) :
 
 | Cle | Role |
 | --- | --- |
@@ -63,9 +63,9 @@ Epix 2, Enduro 3, Venu 2/3/4/Sq2/X1, Vivoactive 4/5/6 (API 3.2 minimum). Ajouter
 
 ```
 cd watch
-./build.sh                 # bin/tglive-fr965.prg (debug, type check gradual)
+./build.sh                 # bin/spotter-fr965.prg (debug, type check gradual)
 ./build.sh -d venu3        # autre appareil
-./build.sh --iq            # bin/tglive.iq : paquet release, tous les appareils du manifest
+./build.sh --iq            # bin/spotter.iq : paquet release, tous les appareils du manifest
 ./build.sh --sim           # variante simulateur (voir plus bas)
 ```
 
@@ -110,10 +110,10 @@ saisie 12 reps / 77.5 kg, repos 45 s, menu, resume, "Resultats envoyes" apres re
 ## Sideload sur la montre
 
 1. `./build.sh --iq` puis brancher la montre en USB (mode transfert de fichiers / MTP).
-2. Copier `watch/bin/tglive.iq` **ou** le `.prg` de votre modele dans `GARMIN/Apps/` de la montre
+2. Copier `watch/bin/spotter.iq` **ou** le `.prg` de votre modele dans `GARMIN/Apps/` de la montre
    (le `.prg` d'un seul appareil suffit ; le `.iq` est l'archive multi-appareils pour le store ou pour un
    sideload via l'outil de votre choix).
-3. Debrancher : l'app "TG Live" apparait dans la liste des activites / applications.
+3. Debrancher : l'app "Spotter for Technogym" apparait dans la liste des activites / applications.
 4. Reglages via Garmin Connect Mobile (l'app doit avoir ete lancee une fois) : `backendUrl` en https et
    `pairToken`. Le telephone doit etre connecte a la montre pour le reseau (BLE -> GCM -> internet).
 

@@ -183,7 +183,7 @@ class LiveDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onSelect() as Boolean {
-        var menu = new WatchUi.Menu2({ :title => Live.hasSession() ? Live.sessionName() : (WatchUi.loadResource(Rez.Strings.AppName) as String) });
+        var menu = new WatchUi.Menu2({ :title => Live.hasSession() ? Live.sessionName() : (WatchUi.loadResource(Rez.Strings.ShortName) as String) });
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.Refresh) as String, null, :refresh, null));
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.FollowCurrent) as String, null, :follow, null));
         if (Model.hasWorkout()) {

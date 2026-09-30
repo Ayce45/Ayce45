@@ -3,7 +3,7 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.System;
 
-// Application Connect IQ "TG Muscu" : compagnon de seance Technogym.
+// Application Connect IQ "Spotter for Technogym" : compagnon de seance Technogym.
 // Au lancement : charge la seance en cache (Application.Storage), puis tente de la rafraichir
 // depuis le backend. Le cache reste utilisable sans reseau.
 class TgApp extends Application.AppBase {

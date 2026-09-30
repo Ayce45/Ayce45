@@ -6,7 +6,7 @@ Deux produits, un backend commun :
    Garmin, tu cliques : chaque seance de ton programme Mywellness devient un workout structure Garmin
    Connect (exercices, series, charges, repos), la seance du jour est planifiee sur le calendrier. Un job
    peut refaire ce push chaque matin a 6h.
-2. **Compagnon de seance sur la montre (app Connect IQ "TG Live").** Seance du jour sur la montre,
+2. **Compagnon de seance sur la montre (app Connect IQ "Spotter for Technogym").** Seance du jour sur la montre,
    guidage serie par serie (cible reps / charge, repos avec vibration, blocs cardio a duree), activite FIT
    Strength. Bidirectionnel via le backend : ce que tu fais sur les machines Technogym apparait sur la
    montre en cours de seance, et ce que tu saisis sur la montre (poids libres) est renvoye au backend puis,
@@ -49,9 +49,9 @@ Execution reelle du 2026-09-30 : 3 workouts crees en 22 s (Seance 1 : 39 steps, 
 Sans interface (serveur, Docker) : identifiants dans `.env` et `POST /garmin/push-today` ou le job
 APScheduler (`PUSH_HOUR`, `TZ`).
 
-## 2. Compagnon de seance sur la montre (app Connect IQ "TG Live")
+## 2. Compagnon de seance sur la montre (app Connect IQ "Spotter for Technogym")
 
-"TG Live" est le nom de **notre** app (elle n'existe pas sur le store Connect IQ) ; elle apparait dans la
+"Spotter for Technogym" est le nom de **notre** app (elle n'existe pas sur le store Connect IQ) ; elle apparait dans la
 liste des activites de la montre comme n'importe quelle app et enregistre une activite Musculation.
 
 **Mode live (par defaut, START sur l'accueil).** La seance est geree comme d'habitude depuis la salle
@@ -80,7 +80,7 @@ Captures (simulateur fr965, rejeu de la seance reelle du 2026-09-30) : `docs/scr
 `15-live-*.png`, `16-live-*.png`.
 
 Installation : `docs/connectiq.md` (compilation, simulateur, sideload). Binaires prets :
-`watch/dist/tglive.iq` (tous appareils) et `watch/dist/tglive-<modele>.prg` (fr965, fr265, venu3,
+`watch/dist/spotter.iq` (tous appareils) et `watch/dist/spotter-<modele>.prg` (fr965, fr265, venu3,
 vivoactive5, fenix7, epix2pro47mm, fenix843mm). Appairage : `POST /auth/pair` puis `backendUrl` (https
 obligatoire sur une vraie montre) et `pairToken` dans les reglages de l'app via Garmin Connect Mobile.
 

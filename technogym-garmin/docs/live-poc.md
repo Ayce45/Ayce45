@@ -126,7 +126,7 @@ Observations :
 ## 5. POC montre : l'ecran live (2026-09-30)
 
 But : je gere ma seance avec les bornes, les machines et l'app ; ma montre me montre ou j'en suis et
-enregistre l'activite (frequence cardiaque). Realise dans `watch/` (app Connect IQ "TG Live", ecran
+enregistre l'activite (frequence cardiaque). Realise dans `watch/` (app Connect IQ "Spotter for Technogym", ecran
 `LiveView`, module `Live`) et teste dans le simulateur fr965 contre le backend :
 
 * backend : `GET /live` renvoie la seance courante Technogym (`GetCurrentWorkoutSession`) sous forme

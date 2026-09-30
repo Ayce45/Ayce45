@@ -1,5 +1,6 @@
 <strings>
-    <string id="AppName">TG Live</string>
+    <string id="AppName">Spotter for Technogym</string>
+    <string id="ShortName">Spotter</string>
     <string id="Loading">Chargement...</string>
     <string id="NoWorkout">Aucune seance</string>
     <string id="NoToken">Token manquant : reglages de l'app dans Garmin Connect</string>

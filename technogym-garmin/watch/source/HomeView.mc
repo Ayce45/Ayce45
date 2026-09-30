@@ -63,7 +63,7 @@ class HomeView extends WatchUi.View {
         var cx = w / 2;
 
         dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, h * 0.12, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.AppName) as String, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(cx, h * 0.12, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.ShortName) as String, Graphics.TEXT_JUSTIFY_CENTER);
 
         if (Live.hasSession()) {
             // une seance est ouverte cote Technogym (borne, machine, app)
@@ -157,7 +157,7 @@ class HomeDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onMenu() as Boolean {
-        var menu = new WatchUi.Menu2({ :title => WatchUi.loadResource(Rez.Strings.AppName) as String });
+        var menu = new WatchUi.Menu2({ :title => WatchUi.loadResource(Rez.Strings.ShortName) as String });
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.Refresh) as String, null, :refresh, null));
         if (Model.hasWorkout()) {
             menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.GuidedMode) as String, WatchUi.loadResource(Rez.Strings.GuidedModeHint) as String, :guided, null));
