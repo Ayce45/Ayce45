@@ -78,7 +78,8 @@ reste dans le menu.
 Captures (simulateur Forerunner 955, rejeu d'une seance reelle) : `docs/screenshots/21-page-exercice-fr955.png`
 a `29-exercice-libre-recuperation-fr955.png`, puis `30-fiche-muscles-fr955.png` a `37-fin-de-seance-menu-fr955.png`
 (carte musculaire, derniere fois, menu de serie, selecteur de charge avec disques, fin de seance). Textes dans le vocabulaire Technogym ; fiche store : `docs/store-listing.md` ;
-marche et business model : `docs/marche-et-business-model.md`.
+marche et business model : `docs/marche-et-business-model.md` ; reprise du projet dans une autre session :
+`docs/HANDOFF.md`.
 
 Gratuit avec limite, complet apres achat, **une seule app** sur le store : "Spotter for Technogym" est declaree
 payante (4,99 EUR) avec essai. La boutique Connect IQ signe l'app verrouillee ou debloquee selon l'achat Garmin
