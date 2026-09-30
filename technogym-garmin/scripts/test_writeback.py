@@ -35,6 +35,7 @@ def main() -> int:
     ap.add_argument("--reps", type=int, default=1)
     ap.add_argument("--weight", type=float, default=5.0)
     ap.add_argument("--no-delete", action="store_true")
+    ap.add_argument("--mode", choices=["save", "mark"], default="save", help="save = series reelles (schema de l'app), mark = MarkPhysicalActivityAsDone")
     args = ap.parse_args()
     s = get_settings()
     c = mw.MywellnessClient(s.mywellness_email, s.mywellness_password)
@@ -53,13 +54,21 @@ def main() -> int:
         print("position introuvable")
         return 1
     print(f"Exercice: {act['physicalActivityName']} status={act['status']}")
-    payload = {
-        "idCr": args.idcr, "partitionDate": partition, "position": args.position,
-        "physicalActivityId": act["physicalActivityId"], "userWorkoutSessionId": raw.get("userWorkoutSessionId"),
-        "manuallyDone": True,
-        "summaryData": {"steps": [{"data": [{"physicalProperty": "IsoReps", "value": args.reps}, {"physicalProperty": "IsoWeight", "value": args.weight}]}], "data": []},
-    }
-    print("SavePerformedPhysicalActivity ->", json.dumps(c.save_performed_physical_activity(payload, fac_id), ensure_ascii=False)[:500])
+    from app.mywellness.models import SetResult
+    from app.mywellness.writeback import summary_data
+
+    if args.mode == "mark":
+        body = {"position": args.position, "userWorkoutSessionId": raw.get("userWorkoutSessionId"), "idCr": args.idcr, "partitionDate": int(partition)}
+        print("MarkPhysicalActivityAsDone ->", json.dumps(c.mark_physical_activity_as_done(body, fac_id), ensure_ascii=False)[:500])
+    else:
+        payload = {
+            "facilityUrl": c.facility_url_for_id(fac_id), "physicalActivityId": act["physicalActivityId"],
+            "idCr": args.idcr, "partitionDate": int(partition), "position": args.position,
+            "userWorkoutSessionId": raw.get("userWorkoutSessionId"), "doneAs": "Done",
+            "summaryData": summary_data([SetResult(reps=args.reps, weight_kg=args.weight)]),
+        }
+        print("payload:", json.dumps(payload, ensure_ascii=False)[:600])
+        print("SavePerformedPhysicalActivity ->", json.dumps(c.save_performed_physical_activity(payload, fac_id), ensure_ascii=False)[:500])
     raw2 = c.performed_session_raw(args.idcr, partition, fac_id)
     act2 = next(a for a in raw2["physicalActivities"] if int(a.get("position") or 0) == args.position)
     pa = act2.get("performedPhysicalActivity") or {}

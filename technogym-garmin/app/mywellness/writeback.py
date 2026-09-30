@@ -25,7 +25,8 @@ Toute erreur est renvoyee sous forme de texte, les resultats restent en local.
 from __future__ import annotations
 
 import logging
-from datetime import date
+import os
+from datetime import date, datetime
 from typing import Any
 
 from app.mywellness import client as mw
@@ -51,6 +52,63 @@ def steps_payload(sets: list[Any]) -> list[dict[str, Any]]:
         if data:
             steps.append({"data": data})
     return steps
+
+
+UM = {"IsoReps": "Reps", "IsoWeight": "Kg", "Duration": "Sec", "RestTime": "Sec", "TotalIsoWeight": "Kg", "Power": "Watt", "Level": "Level"}
+
+
+def prop(name: str, value: Any) -> dict[str, Any]:
+    """GenericPhysicalProperty de l'app : {name, um, value} (additionalWeight optionnel)."""
+    return {"name": name, "um": UM.get(name, ""), "value": value}
+
+
+def summary_data(sets: list[Any], target: str = "IsoReps", hr_samples: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+    """GenericPhysicalActivityData tel que serialise par l'app Mywellness (adaptateurs JSON decompiles) :
+
+        {"target": "IsoReps", "executionMode": ..., "data": [totaux], "stepGroups": [],
+         "steps": [{"position": 1, "stepData": [{"name": "IsoReps", "um": "Reps", "value": 10}, ...]}],
+         "analitics": {...}}
+
+    Les proprietes sont {name, um, value} (pas physicalProperty / value) et les series sont dans
+    steps[].stepData (pas steps[].data). C'est l'absence de stepData qui produisait "Mandatory data".
+    """
+    steps = []
+    total_weight = 0.0
+    total_reps = 0
+    total_duration = 0
+    for i, s in enumerate(sets, start=1):
+        if getattr(s, "skipped", False):
+            continue
+        sd = []
+        reps = getattr(s, "reps", None)
+        weight = getattr(s, "weight_kg", None)
+        dur = getattr(s, "duration_s", None)
+        rest = getattr(s, "rest_s", None)
+        if reps is not None:
+            sd.append(prop("IsoReps", int(reps)))
+            total_reps += int(reps)
+        if weight is not None:
+            sd.append(prop("IsoWeight", float(weight)))
+            if reps is not None:
+                total_weight += int(reps) * float(weight)
+        if dur is not None:
+            sd.append(prop("Duration", int(dur)))
+            total_duration += int(dur)
+        if rest is not None:
+            sd.append(prop("RestTime", int(rest)))
+        if sd:
+            steps.append({"position": len(steps) + 1, "stepData": sd})
+    data = []
+    if total_reps:
+        data.append(prop("IsoReps", total_reps))
+    if total_weight:
+        data.append(prop("TotalIsoWeight", round(total_weight, 2)))
+    if total_duration:
+        data.append(prop("Duration", total_duration))
+    out: dict[str, Any] = {"target": target, "data": data, "stepGroups": [], "steps": steps}
+    if hr_samples:
+        out["analitics"] = {"hr": [{"t": int(h.get("t", 0)), "hr": int(h.get("hr", 0))} for h in hr_samples]}
+    return out
 
 
 def find_open_session(client: mw.MywellnessClient, workout_id: str, day: date) -> tuple[int, str, str | None] | None:
@@ -94,7 +152,30 @@ def push_results(
 
     errors: list[str] = []
     written = 0
+    mode = os.environ.get("MYWELLNESS_WRITEBACK_MODE", "mark")  # mark = MarkPhysicalActivityAsDone (verifie) | save = series reelles
     for ex in todo:
+        if mode == "save":
+            target = by_pos.get(ex.position)
+            payload: dict[str, Any] = {
+                "facilityUrl": client.facility_url_for_id(fac_id),
+                "physicalActivityId": ex.physical_activity_id or (target.physical_activity_id if target else ""),
+                "idCr": id_cr,
+                "partitionDate": int(str(partition)),
+                "position": ex.position,
+                "userWorkoutSessionId": workout.id,
+                "doneAs": "Done",
+                "performedOn": datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %z"),
+                "summaryData": summary_data(ex.sets, "Duration" if (target and target.kind != "strength") else "IsoReps", getattr(ex, "hr_samples", None)),
+            }
+            try:
+                res = client.save_performed_physical_activity(payload, fac_id) or {}
+                if isinstance(res, dict) and str(res.get("result", "")) in ("", "Success", "Saved", "Ok") and not res.get("errors"):
+                    written += 1
+                    continue
+                errors.append(f"pos {ex.position}: SavePerformedPhysicalActivity {res.get('result') or res}")
+            except mw.MywellnessError as exc:
+                errors.append(f"pos {ex.position}: {exc}")
+            # repli : marquer fait avec la prescription
         # Verifie le 2026-09-30 sur une seance ouverte : MarkPhysicalActivityAsDone marque l'exercice fait
         # (statut Done, manuallyDone, series = valeurs prescrites, client "EndUserWebSite"), visible dans
         # l'app et dans GetCurrentWorkoutSession en moins de 5 s. SavePerformedPhysicalActivity (series

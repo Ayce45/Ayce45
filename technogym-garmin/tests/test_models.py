@@ -81,3 +81,16 @@ def test_history_parsing(history_raw, performed_raw):
     assert done.sets[0].reps == 15
     assert done.sets[0].weight_kg == 40.0
     assert done.prescribed_sets[0].rest_s == 30
+
+
+def test_summary_data_matches_app_schema():
+    from app.mywellness.models import SetResult
+    from app.mywellness.writeback import summary_data
+
+    sd = summary_data([SetResult(reps=10, weight_kg=35), SetResult(reps=8, weight_kg=35), SetResult(skipped=True)],
+                      hr_samples=[{"t": 0, "hr": 110}, {"t": 5, "hr": 121}])
+    assert sd["target"] == "IsoReps"
+    assert [s["position"] for s in sd["steps"]] == [1, 2]
+    assert sd["steps"][1]["stepData"] == [{"name": "IsoReps", "um": "Reps", "value": 8}, {"name": "IsoWeight", "um": "Kg", "value": 35.0}]
+    assert {"name": "TotalIsoWeight", "um": "Kg", "value": 630.0} in sd["data"]
+    assert sd["analitics"]["hr"][1] == {"t": 5, "hr": 121}

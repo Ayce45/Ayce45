@@ -128,3 +128,15 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   puis action refusee par le mode automatique) ; les series reelles restent cote backend.
 * `/workout/{id}/live` lit la seance courante (`GetCurrentWorkoutSession`) en priorite : elle contient
   tout pendant la seance, alors que l'historique n'est alimente qu'apres le premier exercice.
+
+## 2026-09-30 : format d'ecriture des series et frequence cardiaque
+
+* Plutot que de deviner le format de `SavePerformedPhysicalActivity` par essais sur le compte, les
+  adaptateurs JSON de l'app Mywellness ont ete decompiles : les series vont dans `summaryData.steps[].stepData`
+  avec des proprietes `{name, um, value}`. `writeback.summary_data` produit ce schema ;
+  `MYWELLNESS_WRITEBACK_MODE=save` l'active (repli automatique sur `MarkPhysicalActivityAsDone`), `mark`
+  reste le defaut tant qu'une ecriture reelle n'a pas ete validee.
+* Frequence cardiaque : Connect IQ ne peut pas emettre en capteur Bluetooth, et l'app Technogym n'embarque
+  pas le SDK mobile Connect IQ (contrairement a QZ). Le chemin retenu : la montre lit le capteur du poignet,
+  envoie au backend, qui ecrit les echantillons `{t, hr}` par exercice dans la seance Technogym (`analitics`).
+  L'affichage en direct sur la console d'une machine reste reserve a la diffusion systeme de la montre.

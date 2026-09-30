@@ -168,6 +168,35 @@ developpement : `scripts/test_writeback.py` le fait sur une serie identifiable, 
 `{physicalProperty, value}` identique a celui lu dans `performedPhysicalActivity.data.steps`) ->
 `CloseWorkoutSession`. Les resultats sont toujours stockes en local (SQLite) quoi qu'il arrive.
 
+## Schema exact de SavePerformedPhysicalActivity (decompile de l'app Mywellness 6.7.12)
+
+Adaptateurs JSON de l'app (`SavePerformedPhysicalActivityInputJsonAdapter`, `GenericPhysicalActivityDataJsonAdapter`,
+`GenericPhysicalActivityStepJsonAdapter`, `GenericPhysicalPropertyJsonAdapter`) :
+
+```
+SavePerformedPhysicalActivityInput :
+  facilityId | (facilityUrl), physicalActivityId | (equipmentCode + physicalActivityCode + targetType),
+  idCr, doneAs, performedOn, name, pictureUrl, strategy, serialNumber, eqToken, token, deviceTypes,
+  createTgsBuffer, inputData, outputBuffer, summaryData, analiticsData, adjustments,
+  updateAdjustmentsIfExisting, suggestedExerciseData, extData
+summaryData (GenericPhysicalActivityData) :
+  target, executionMode, data: [GenericPhysicalProperty], stepGroups, steps: [GenericPhysicalActivityStep], analitics
+GenericPhysicalActivityStep : position, stepData: [GenericPhysicalProperty], notes, userInstructions, extData
+GenericPhysicalProperty     : name, um, value, additionalWeight
+```
+
+Donc une serie s'ecrit `{"position": 1, "stepData": [{"name": "IsoReps", "um": "Reps", "value": 10},
+{"name": "IsoWeight", "um": "Kg", "value": 35}]}` dans `summaryData.steps`, et les totaux dans
+`summaryData.data` (`TotalIsoWeight`, `Duration`...). Les essais du 2026-09-30 avec `steps[].data` et
+`physicalProperty` echouaient ("StepData" requis puis `ExerciseDataNotValid`) : c'est ce schema qui manquait.
+Le constructeur `app/mywellness/writeback.py::summary_data` le produit. La frequence cardiaque par exercice
+passe par `analitics` / `analiticsData` (`hr: [{t, hr}]`), meme forme que celle lue dans `CardioLog/Details`.
+Validation reelle a faire avec `scripts/test_writeback.py --mode save` sur une seance a blanc.
+
+`MarkPhysicalActivityAsDone {"position", "userWorkoutSessionId", "idCr", "partitionDate"}` : **verifie le
+2026-09-30** sur une seance ouverte, marque l'exercice fait avec les series prescrites (`manuallyDone`),
+reponse `{"performedPhysicalActivityId", "physicalActivityId", "doneProperties"}`.
+
 ## Actions testees qui n'existent pas (404)
 
 `GetCurrentTrainingProgram`, `GetTrainingProgram(s)`, `GetPrescribedWorkouts`, `GetPrescription`,
