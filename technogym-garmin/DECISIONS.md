@@ -244,5 +244,5 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   d'expiration a gerer cote montre, et le canal est HTTPS de bout en bout (telephone -> relais). A revoir si
   Technogym propose un jour un OAuth.
 * `/auth/check` ajoute au relais pour verifier les identifiants depuis la montre sans lire la seance.
-* URL par defaut de l'app : `https://spotter-relay.pages.dev` ; l'utilisateur du store n'a que deux champs a
+* URL par defaut de l'app : `https://spotter-b6j.pages.dev` ; l'utilisateur du store n'a que deux champs a
   remplir.

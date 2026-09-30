@@ -84,7 +84,7 @@ utilisateur saisit son identifiant et son mot de passe Technogym dans les reglag
 champ mot de passe), comme pour HassControl ; la montre les envoie au relais a chaque requete (HTTPS, en-tetes
 `X-MW-Email` / `X-MW-Password`), le relais se connecte a Mywellness, garde le jeton en memoire et renvoie la
 seance courante en moins de 8 Ko. Il n'ecrit rien : ni identifiants, ni donnees. Un seul deploiement sert tous
-les utilisateurs de l'app du store ; l'URL par defaut de l'app est `https://spotter-relay.pages.dev`.
+les utilisateurs de l'app du store ; l'URL par defaut de l'app est `https://spotter-b6j.pages.dev`.
 
 Deploiement depuis un telephone : Cloudflare > Workers & Pages > Create > "Upload your static files" > glisser le
 contenu de `relay/spotter-relay-pages.zip` (`_worker.js` + `index.html`), nommer le projet `spotter-relay`.

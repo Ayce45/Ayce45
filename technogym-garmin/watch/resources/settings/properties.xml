@@ -1,5 +1,5 @@
 <properties>
-    <property id="backendUrl" type="string">https://spotter-relay.pages.dev</property>
+    <property id="backendUrl" type="string">https://spotter-b6j.pages.dev</property>
     <property id="mwEmail" type="string"></property>
     <property id="mwPassword" type="string"></property>
     <property id="pairToken" type="string"></property>
