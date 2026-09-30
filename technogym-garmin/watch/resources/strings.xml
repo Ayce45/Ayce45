@@ -1,8 +1,8 @@
 <strings>
     <string id="AppName">Spotter for Technogym</string>
     <string id="ShortName">Spotter</string>
-    <string id="FreeLeft">Gratuit : $1$/$2$ séances</string>
-    <string id="FreeExhausted">Vos $1$ séances gratuites sont utilisées. Spotter Pro (boutique Connect IQ) suit vos séances sans limite.</string>
+    <string id="FreeLeft">Essai : $1$/$2$ séances</string>
+    <string id="FreeExhausted">Vos $1$ séances d'essai sont utilisées. Débloquez Spotter dans la boutique Connect IQ pour suivre vos séances sans limite.</string>
     <string id="ProName">Spotter Pro</string>
     <string id="Loading">Chargement...</string>
     <string id="NoWorkout">Aucune séance d'entraînement</string>

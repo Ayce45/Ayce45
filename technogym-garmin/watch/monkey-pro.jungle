@@ -1,5 +1,5 @@
-# Edition Pro (payante, sans limite de seances) : memes sources, manifeste avec son propre identifiant,
-# resources-pro/ change le nom et la propriete edition.
+# Variante "deux apps" (non retenue par defaut, conservee) : seconde app payante avec son propre identifiant.
+# Chemin retenu : une seule app payante avec essai, l'etat de deblocage venant de la boutique (isTrial()).
 project.manifest = manifest-pro.xml
 base.sourcePath = source
 base.resourcePath = resources;resources-pro

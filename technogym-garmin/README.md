@@ -80,20 +80,21 @@ a `29-exercice-libre-recuperation-fr955.png`, puis `30-fiche-muscles-fr955.png` 
 (carte musculaire, derniere fois, menu de serie, selecteur de charge avec disques, fin de seance). Textes dans le vocabulaire Technogym ; fiche store : `docs/store-listing.md` ;
 marche et business model : `docs/marche-et-business-model.md`.
 
-Gratuit avec limite, complet apres achat. Deux chemins possibles sur le store, memes sources : une seule app
-"payante avec essai" (la boutique Connect IQ signe l'app verrouillee ou debloquee selon l'achat Garmin Pay,
-`AppBase.isTrial()` le dit a l'app ; recommande), ou deux apps (`watch/monkey.jungle` et `watch/monkey-pro.jungle`,
-propriete `edition`) :
+Gratuit avec limite, complet apres achat, **une seule app** sur le store : "Spotter for Technogym" est declaree
+payante (4,99 EUR) avec essai. La boutique Connect IQ signe l'app verrouillee ou debloquee selon l'achat Garmin
+Pay (lie au compte Garmin, toutes ses montres) et `AppBase.isTrial()` le dit a l'app : verrouillee = 10 seances
+Technogym distinctes (identifiant de seance `workout_id`, rouvrir la meme seance ne compte pas ; compteur sur
+l'accueil, message quand le quota est atteint), debloquee = sans limite. Pas de limite en jours. Le compteur
+vit dans le stockage de la montre.
 
-| Edition | Store | Limite | Binaires |
-| --- | --- | --- | --- |
-| Spotter for Technogym | gratuite | 10 seances Technogym distinctes (identifiant de seance `workout_id`, rouvrir la meme seance ne compte pas ; compteur sur l'accueil, message vers Spotter Pro quand le quota est atteint) | `watch/dist/spotter.iq`, `watch/dist/spotter-<modele>.prg` (fr955, fr965, fr265, venu3, vivoactive5, fenix7, epix2pro47mm, fenix843mm) |
-| Spotter Pro for Technogym | payante (4,99 EUR, Garmin Pay) | aucune | `watch/dist/spotter-pro.iq`, `watch/dist/spotter-pro-fr955.prg` |
+Binaires : `watch/dist/spotter.iq` (store) et `watch/dist/spotter-<modele>.prg` (fr955, fr965, fr265, venu3,
+vivoactive5, fenix7, epix2pro47mm, fenix843mm). Hors boutique, `isTrial()` vaut toujours vrai : le binaire perso
+(`monkey-beta.jungle`, meme identifiant que l'app du store, reglages et `edition=pro` dans `resources-beta/`,
+gitignore) est debloque par la propriete. Variante "deux apps" conservee mais non retenue : `monkey-pro.jungle`,
+`manifest-pro.xml`, `resources-pro/` (`./build.sh --pro`).
 
 Installation : `docs/connectiq.md`. Reglages (identifiants Technogym) dans Garmin Connect une fois l'app installee
-depuis le store ; pour un `.prg` sideloade, les reglages sont compiles dans le binaire (`monkey-beta.jungle` =
-Pro + reglages personnels, gitignore). Captures : `docs/screenshots/38-gratuit-quota-atteint-fr955.png`,
-`39-gratuit-compteur-fr955.png`, `40-pro-accueil-fr955.png`.
+depuis le store. Captures : `docs/screenshots/38-gratuit-quota-atteint-fr955.png`, `39-gratuit-compteur-fr955.png`.
 
 ### Backend pour la beta
 

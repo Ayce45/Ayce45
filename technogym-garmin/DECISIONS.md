@@ -368,3 +368,7 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   en seances). Les deux chemins de publication restent ouverts : une seule app "payante avec essai" (recommande,
   une fiche) ou deux apps (manifest-pro.xml conserve).
 * Le compteur de seances gratuites reste local a la montre dans les deux cas.
+* Suite : l'utilisateur retient la version a une seule app payante avec essai. Le binaire perso reprend le
+  manifeste du store (meme identifiant, `edition=pro` dans `resources-beta/`), les binaires de la variante Pro
+  sortent de `dist/`, textes "Essai : n/10 séances" et "Vos 10 séances d'essai sont utilisées. Débloquez Spotter
+  dans la boutique Connect IQ". La variante a deux apps reste dans le depot sans etre le chemin par defaut.
