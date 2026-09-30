@@ -91,6 +91,6 @@ def test_summary_data_matches_app_schema():
                       hr_samples=[{"t": 0, "hr": 110}, {"t": 5, "hr": 121}])
     assert sd["target"] == "IsoReps"
     assert [s["position"] for s in sd["steps"]] == [1, 2]
-    assert sd["steps"][1]["stepData"] == [{"name": "IsoReps", "um": "Reps", "value": 8}, {"name": "IsoWeight", "um": "Kg", "value": 35.0}]
+    assert sd["steps"][1]["stepData"] == [{"name": "IsoReps", "um": "Number", "value": 8}, {"name": "IsoWeight", "um": "Kg", "value": 35.0}]
     assert {"name": "TotalIsoWeight", "um": "Kg", "value": 630.0} in sd["data"]
     assert sd["analitics"]["hr"][1] == {"t": 5, "hr": 121}

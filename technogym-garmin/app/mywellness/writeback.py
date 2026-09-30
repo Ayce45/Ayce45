@@ -54,7 +54,8 @@ def steps_payload(sets: list[Any]) -> list[dict[str, Any]]:
     return steps
 
 
-UM = {"IsoReps": "Reps", "IsoWeight": "Kg", "Duration": "Sec", "RestTime": "Sec", "TotalIsoWeight": "Kg", "Power": "Watt", "Level": "Level"}
+# Unites de l'enum MeasurementUnitTypes de l'app (pas de "Reps" : les repetitions sont en "Number")
+UM = {"IsoReps": "Number", "IsoWeight": "Kg", "Duration": "Sec", "RestTime": "Sec", "TotalIsoWeight": "Kg", "Power": "Watt", "Level": "Number", "Hr": "Bpm", "Calories": "Kcal"}
 
 
 def prop(name: str, value: Any) -> dict[str, Any]:
