@@ -76,7 +76,10 @@ l'activite :
 compte a rebours, resume, sauvegarde FIT puis envoi des resultats (`POST /workout/{id}/results`, mise en
 attente si hors ligne). Les exercices deja faits sur machine y apparaissent `[M]`.
 
-Captures (simulateur fr965, rejeu de la seance reelle du 2026-09-30) : `docs/screenshots/14-live-*.png`,
+Les textes de la montre reprennent le vocabulaire de l'app Technogym (séance d'entraînement, exercices,
+équipement, MOVEs, "Terminé", "À faire") ; la fiche store prete a publier est dans `docs/store-listing.md`.
+
+Captures (simulateurs fr965 et fr955, rejeu de la seance reelle du 2026-09-30) : `docs/screenshots/14-live-*.png`,
 `15-live-*.png`, `16-live-*.png`.
 
 Installation : `docs/connectiq.md` (compilation, simulateur, sideload). Binaires prets :

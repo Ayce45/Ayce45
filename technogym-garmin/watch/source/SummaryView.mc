@@ -29,7 +29,7 @@ class SummaryView extends WatchUi.View {
         dc.drawText(cx, h * 0.54, Graphics.FONT_TINY, Ui.fmtKg(Model.totalVolumeKg()) + " kg souleves", Graphics.TEXT_JUSTIFY_CENTER);
         if (phase == 0) {
             dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, "OK = sauver", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, "OK : enregistrer la séance", Graphics.TEXT_JUSTIFY_CENTER);
         } else {
             dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
             Ui.drawWrapped(dc, cx, h * 0.68, w * 0.86, Graphics.FONT_XTINY, status, 3);

@@ -83,11 +83,11 @@ class LiveView extends WatchUi.View {
         var cx = w / 2;
         var xt = dc.getFontHeight(Graphics.FONT_XTINY);
 
-        // bandeau haut : chrono + progression
+        // bandeau haut (etroit sur ecran rond) : chrono + numero de l'exercice affiche
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
         var head = Ui.fmtClock(Live.elapsedSeconds());
-        if (Live.hasSession()) { head += "   " + Live.doneCount() + "/" + Live.totalCount(); }
-        dc.drawText(cx, h * 0.05, Graphics.FONT_XTINY, head, Graphics.TEXT_JUSTIFY_CENTER);
+        if (Live.hasSession()) { head += "   " + (shownIndex() + 1) + "/" + Live.exercises().size(); }
+        dc.drawText(cx, h * 0.06, Graphics.FONT_XTINY, head, Graphics.TEXT_JUSTIFY_CENTER);
 
         // ligne du bas : evenement / erreur, sinon exercice suivant
         var footer = "";
@@ -107,10 +107,10 @@ class LiveView extends WatchUi.View {
             var i = shownIndex();
             var ex = Live.exerciseAt(i);
             var exs = Live.exercises();
-            // numero + statut
+            // statut de l'exercice (vocabulaire Technogym)
             var stColor = Live.isDone(ex) ? Graphics.COLOR_GREEN : (Live.status(ex).equals("doing") ? Graphics.COLOR_ORANGE : Graphics.COLOR_LT_GRAY);
             dc.setColor(stColor, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.13, Graphics.FONT_XTINY, (i + 1) + "/" + exs.size() + "  " + Live.sourceText(ex), Graphics.TEXT_JUSTIFY_CENTER);
+            Ui.drawWrapped(dc, cx, h * 0.14, w * 0.66, Graphics.FONT_XTINY, Live.sourceText(ex), 1);
             // nom (2 lignes max)
             dc.setColor(flash > 0 && cursor < 0 ? Graphics.COLOR_YELLOW : Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             var y = h * 0.22;
@@ -126,33 +126,41 @@ class LiveView extends WatchUi.View {
             // series (faites si l'exercice est fait, sinon prescrites)
             dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
             Ui.drawWrapped(dc, cx, y, w * 0.86, Graphics.FONT_SMALL, Live.setsText(ex), 1);
+            // progression de la seance + MOVEs
+            var prog = Live.doneCount() + "/" + Live.totalCount() + " " + (WatchUi.loadResource(Rez.Strings.DoneShort) as String);
+            var mv = Live.movesDone();
+            if (mv > 0) { prog += "   " + mv + " " + (WatchUi.loadResource(Rez.Strings.Moves) as String); }
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, h * 0.585, w * 0.90, Graphics.FONT_XTINY, prog, 1);
             // suivant
             if (footer.length() == 0) {
                 for (var k = i + 1; k < exs.size(); k++) {
-                    if (!Live.isDone(exs[k] as Dictionary)) { footer = "Suivant : " + Live.title(exs[k] as Dictionary); break; }
+                    if (!Live.isDone(exs[k] as Dictionary)) { footer = (WatchUi.loadResource(Rez.Strings.NextExercise) as String) + Live.title(exs[k] as Dictionary); break; }
                 }
-                if (footer.length() == 0 && Live.totalCount() > 0 && Live.doneCount() >= Live.totalCount()) { footer = "Seance complete"; }
+                if (footer.length() == 0 && Live.totalCount() > 0 && Live.doneCount() >= Live.totalCount()) { footer = WatchUi.loadResource(Rez.Strings.SessionDone) as String; }
             }
             Ui.drawProgressArc(dc, Live.totalCount() > 0 ? Live.doneCount().toFloat() / Live.totalCount() : 0.0, Graphics.COLOR_GREEN);
         }
-        drawHr(dc, cx, h * 0.72, w, h);
+        drawHr(dc, cx, h * 0.74, w, h);
         if (footer.length() > 0) {
             dc.setColor(footerColor, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.83, w * 0.62, Graphics.FONT_XTINY, footer, 1);
+            Ui.drawWrapped(dc, cx, h * 0.84, w * 0.68, Graphics.FONT_XTINY, footer, 1);
         }
     }
 
     function drawHr(dc as Dc, cx as Number, y as Numeric, w as Number, h as Number) as Void {
         var hr = Live.hr;
         var txt = (hr == null) ? "--" : (hr as Number).toString();
-        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
         var f = Graphics.FONT_NUMBER_MEDIUM;
         var tw = dc.getTextWidthInPixels(txt, f);
-        dc.drawText(cx, y, f, txt, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.drawText(cx + tw / 2 + 6, y, Graphics.FONT_XTINY, "bpm", Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
-        if (Live.hrMax > 0) {
+        var uw = dc.getTextWidthInPixels(" bpm", Graphics.FONT_XTINY);
+        var x0 = cx - (tw + uw) / 2;
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(x0, y, f, txt, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(x0 + tw, y, Graphics.FONT_XTINY, " bpm", Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+        if (Live.hrMax > 0 && w >= 360) {
             dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx - tw / 2 - 6, y, Graphics.FONT_XTINY, "max " + Live.hrMax, Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
+            dc.drawText(x0 - 8, y, Graphics.FONT_XTINY, "max " + Live.hrMax, Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
         }
     }
 }
@@ -189,7 +197,7 @@ class LiveDelegate extends WatchUi.BehaviorDelegate {
         if (Model.hasWorkout()) {
             menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.GuidedMode) as String, WatchUi.loadResource(Rez.Strings.GuidedModeHint) as String, :guided, null));
         }
-        menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.FinishLive) as String, Live.hrAvg() > 0 ? "FC moy " + Live.hrAvg() : null, :finish, null));
+        menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.FinishLive) as String, Live.hrAvg() > 0 ? "FC moyenne " + Live.hrAvg() + " bpm" : null, :finish, null));
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.Discard) as String, null, :discard, null));
         WatchUi.pushView(menu, new LiveMenuDelegate(view), WatchUi.SLIDE_UP);
         return true;
@@ -227,7 +235,7 @@ class LiveMenuDelegate extends WatchUi.Menu2InputDelegate {
             var saved = Recording.save();
             Model.liveMode = false;
             Model.startedAt = 0;
-            view.status = saved ? (WatchUi.loadResource(Rez.Strings.Saved) as String) : "Rien a sauver";
+            view.status = saved ? (WatchUi.loadResource(Rez.Strings.Saved) as String) : "Aucune activité à enregistrer";
             WatchUi.popView(WatchUi.SLIDE_RIGHT);
         } else if (id == :discard) {
             Recording.discard();

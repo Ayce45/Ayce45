@@ -198,17 +198,17 @@ module Net {
     }
 
     function describe(code as Number, data as Dictionary or String or Null) as String {
-        if (code == 401) { return "Token refuse (401)"; }
-        if (code == 404) { return "Seance introuvable (404)"; }
-        if (code == 502 || code == 503) { return "Mywellness indisponible"; }
-        if (code == Communications.BLE_CONNECTION_UNAVAILABLE) { return "Telephone non connecte"; }
-        if (code == Communications.BLE_HOST_TIMEOUT || code == Communications.NETWORK_REQUEST_TIMED_OUT) { return "Delai depasse"; }
-        if (code == Communications.NETWORK_RESPONSE_TOO_LARGE) { return "Reponse trop grande"; }
-        if (code == Communications.INVALID_HTTP_BODY_IN_NETWORK_RESPONSE) { return "Reponse invalide"; }
+        if (code == 401) { return "Compte non reconnu (401)"; }
+        if (code == 404) { return "Séance introuvable (404)"; }
+        if (code == 502 || code == 503) { return "Technogym indisponible"; }
+        if (code == Communications.BLE_CONNECTION_UNAVAILABLE) { return "Téléphone non connecté"; }
+        if (code == Communications.BLE_HOST_TIMEOUT || code == Communications.NETWORK_REQUEST_TIMED_OUT) { return "Délai dépassé"; }
+        if (code == Communications.NETWORK_RESPONSE_TOO_LARGE) { return "Réponse trop grande"; }
+        if (code == Communications.INVALID_HTTP_BODY_IN_NETWORK_RESPONSE) { return "Réponse invalide"; }
         if (code == Communications.SECURE_CONNECTION_REQUIRED) { return "HTTPS requis"; }
         if (data instanceof Dictionary && (data as Dictionary).hasKey("detail")) {
             return (data as Dictionary)["detail"].toString();
         }
-        return "Erreur reseau " + code;
+        return "Erreur réseau " + code;
     }
 }

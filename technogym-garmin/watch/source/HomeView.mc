@@ -72,7 +72,7 @@ class HomeView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             Ui.drawWrapped(dc, cx, h * 0.30, w * 0.82, Graphics.FONT_MEDIUM, Live.sessionName(), 2);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.52, Graphics.FONT_TINY, Live.doneCount() + "/" + Live.totalCount() + " faits", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.52, Graphics.FONT_TINY, Live.doneCount() + "/" + Live.totalCount() + " exercices terminés", Graphics.TEXT_JUSTIFY_CENTER);
             var cur = Live.exerciseAt(Live.currentIndex());
             if (cur != null) {
                 Ui.drawWrapped(dc, cx, h * 0.60, w * 0.80, Graphics.FONT_XTINY, Live.title(cur), 1);
@@ -86,7 +86,7 @@ class HomeView extends WatchUi.View {
             dc.drawText(cx, h * 0.50, Graphics.FONT_XTINY, Model.workoutDate(), Graphics.TEXT_JUSTIFY_CENTER);
             var line = Model.exerciseCount() + " " + (WatchUi.loadResource(Rez.Strings.Exercises) as String).toLower();
             if (Model.inProgress) {
-                line = "En cours : " + (Model.exIndex + 1) + "/" + Model.exerciseCount();
+                line = "Exercice " + (Model.exIndex + 1) + "/" + Model.exerciseCount();
             } else if (Net.configured()) {
                 line = WatchUi.loadResource(Rez.Strings.NoLiveShort) as String;
             }
@@ -104,7 +104,7 @@ class HomeView extends WatchUi.View {
         var pend = Model.pendingCount();
         if (pend > 0) {
             dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.92, Graphics.FONT_XTINY, pend + " en attente", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.92, Graphics.FONT_XTINY, pend + " séance(s) à synchroniser", Graphics.TEXT_JUSTIFY_CENTER);
         }
     }
 }

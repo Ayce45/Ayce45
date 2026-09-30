@@ -10,6 +10,7 @@ module Ui {
         var words = splitWords(text);
         var lines = [] as Array<String>;
         var current = "";
+        var truncated = false;
         for (var i = 0; i < words.size(); i++) {
             var candidate = current.length() == 0 ? words[i] : current + " " + words[i];
             if (dc.getTextWidthInPixels(candidate, font) <= maxWidth || current.length() == 0) {
@@ -17,17 +18,21 @@ module Ui {
             } else {
                 lines.add(current);
                 current = words[i];
-                if (lines.size() >= maxLines) { break; }
+                if (lines.size() >= maxLines) { truncated = true; break; }
             }
         }
         if (current.length() > 0 && lines.size() < maxLines) { lines.add(current); }
         var lh = dc.getFontHeight(font);
         for (var i = 0; i < lines.size(); i++) {
             var line = lines[i];
-            if (i == lines.size() - 1 && i == maxLines - 1) {
-                while (dc.getTextWidthInPixels(line, font) > maxWidth && line.length() > 3) {
-                    line = line.substring(0, line.length() - 2) + ".";
+            if (i == lines.size() - 1 && (truncated || dc.getTextWidthInPixels(line, font) > maxWidth)) {
+                // derniere ligne : on coupe et on signale la suite par des points de suspension
+                var cut = truncated ? line + "..." : line;
+                while (dc.getTextWidthInPixels(cut, font) > maxWidth && line.length() > 2) {
+                    line = line.substring(0, line.length() - 1);
+                    cut = line + "...";
                 }
+                line = cut;
             }
             dc.drawText(cx, y + i * lh, font, line, Graphics.TEXT_JUSTIFY_CENTER);
         }

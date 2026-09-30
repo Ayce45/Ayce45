@@ -76,8 +76,8 @@ class SetView extends WatchUi.View {
         if (Model.machineDone(ex)) {
             dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
             var mt = Model.machineSetsText(ex);
-            dc.drawText(cx, h * 0.72, Graphics.FONT_XTINY, "Machine : fait" + (mt.length() > 0 ? " " + mt : ""), Graphics.TEXT_JUSTIFY_CENTER);
-            dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, "OK = suivant", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.72, Graphics.FONT_XTINY, "Terminé sur l'équipement" + (mt.length() > 0 ? " " + mt : ""), Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, "OK : exercice suivant", Graphics.TEXT_JUSTIFY_CENTER);
         } else {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(cx, h * 0.76, Graphics.FONT_TINY, Ui.fmtClock(Time.now().value() - shownAt), Graphics.TEXT_JUSTIFY_CENTER);
@@ -173,7 +173,7 @@ class SetInputView extends WatchUi.View {
         dc.drawText(cx, h * 0.54 + dc.getFontHeight(Graphics.FONT_NUMBER_MEDIUM), Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.Kg) as String, Graphics.TEXT_JUSTIFY_CENTER);
 
         dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, h * 0.88, Graphics.FONT_XTINY, field == 0 ? "haut/bas puis OK" : "OK = valider", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(cx, h * 0.88, Graphics.FONT_XTINY, field == 0 ? "Haut / bas puis OK" : "OK : valider la série", Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     function adjust(delta as Number) as Void {

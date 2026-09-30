@@ -34,7 +34,7 @@ module Live {
         if (state == null) { return ""; }
         var s = state as Dictionary;
         var n = s.hasKey("name") ? (s["name"] as String) : "";
-        return n.length() > 0 ? n : "Seance";
+        return n.length() > 0 ? n : "Séance";
     }
 
     function exercises() as Array {
@@ -43,6 +43,16 @@ module Live {
     }
 
     function doneCount() as Number { return _num("done_count", 0); }
+
+    // MOVEs (unite d'activite Technogym) deja gagnes sur la seance, d'apres doneMove des exercices faits.
+    function movesDone() as Number {
+        var exs = exercises();
+        var n = 0;
+        for (var i = 0; i < exs.size(); i++) {
+            n += Model.num(exs[i] as Dictionary, "done_move", 0).toNumber();
+        }
+        return n;
+    }
     function totalCount() as Number { return _num("total_count", 0); }
 
     function _num(key as String, dflt as Number) as Number {
@@ -133,10 +143,10 @@ module Live {
         var dev = ex.hasKey("device") ? (ex["device"] as String) : "";
         if (isDone(ex)) {
             var src = ex.hasKey("source") ? (ex["source"] as String) : "";
-            return src.equals("machine") ? "Fait machine" : "Fait";
+            return src.equals("machine") ? "Terminé sur équipement" : "Terminé";
         }
         if (status(ex).equals("doing")) { return "En cours"; }
-        return dev.equals("FullConnected") ? "Connectee" : "A faire";
+        return dev.equals("FullConnected") ? "Équipement connecté" : "À faire";
     }
 
     function elapsedSeconds() as Number {
@@ -157,7 +167,7 @@ module Live {
                 if (state != null) {
                     // pas au premier chargement : c'est un vrai evenement de la salle
                     newlyDone++;
-                    lastEvent = title(e) + " : fait";
+                    lastEvent = title(e) + " : terminé";
                     var sets = e.hasKey("sets") ? (e["sets"] as Array) : [] as Array;
                     var reps = null;
                     var w = null;
@@ -175,7 +185,7 @@ module Live {
         stateAt = Time.now().value();
         lastError = "";
         if (!wasOpen && hasSession()) {
-            lastEvent = "Seance ouverte";
+            lastEvent = "Séance démarrée";
             if (Model.startedAt == 0) { Model.startedAt = Time.now().value(); }
             if (newlyDone == 0 && state != null) { newlyDone = -1; } // signal "ouverture"
         }

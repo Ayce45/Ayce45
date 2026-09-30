@@ -175,3 +175,20 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   en-tete pour gagner de la place. La marque tierce reste hors icone ; la description du store portera la
   mention "application non officielle, sans lien avec Technogym ni Garmin".
 * Modele de l'utilisateur : Forerunner 955 (`fr955`, deja dans le manifeste) ; un `.prg` dedie est livre.
+
+## 2026-09-30 : vocabulaire Technogym sur la montre
+
+* Demande : que l'app parle comme Technogym. Les chaines francaises de l'app mobile ne sont pas dans l'APK
+  recupere (App Bundle, ressources de langue dans un split absent) ; le vocabulaire a donc ete repris de la
+  fiche Play Store et du site technogym.com en francais (seance d'entrainement, exercices, equipement,
+  MOVEs, Wellness Passport, Technogym Coach, "Suivez vos progres") et des libelles renvoyes par l'API en
+  francais (noms d'exercices, "Vous avez demarre une nouvelle seance"). Toutes les chaines de la montre
+  sont passees en francais accentue avec ces mots ("Terminé", "À faire", "Équipement connecté",
+  "Terminé sur équipement", "Séance en cours", "Suivre ma séance", "Mode Coach", "Résultats synchronisés").
+* Les MOVEs (unite Technogym, champ `doneMove` de chaque exercice fait) sont affiches sur l'ecran live.
+* Limite volontaire : pas de logo Technogym, pas de "officiel" ni "by Technogym", mention non officielle
+  dans la fiche store (`docs/store-listing.md`). Le store Connect IQ refuse les apps qui se font passer
+  pour une marque tierce, et l'utilisateur voulait lui-meme la mention "unofficial".
+* Mise en page revue pour l'ecran rond 260 px de la Forerunner 955 : en-tete court (chrono + numero),
+  statut seul, ligne "n/total terminés + MOVEs", FC compacte, pied de page avec points de suspension
+  (`Ui.drawWrapped` signale desormais un texte coupe).

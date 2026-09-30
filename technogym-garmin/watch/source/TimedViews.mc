@@ -169,13 +169,13 @@ class TimedSetView extends WatchUi.View {
             dc.drawText(cx, h * 0.15 + th, Graphics.FONT_XTINY, ex["equipment"] as String, Graphics.TEXT_JUSTIFY_CENTER);
         }
         dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, h * 0.47, Graphics.FONT_TINY, "Bloc " + (Model.setIndex + 1) + "/" + sets.size(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(cx, h * 0.47, Graphics.FONT_TINY, "Série " + (Model.setIndex + 1) + "/" + sets.size(), Graphics.TEXT_JUSTIFY_CENTER);
         var target = "";
         if (set != null) {
             if (set.hasKey("duration_s")) { target = Ui.fmtClock(Model.num(set, "duration_s", 0).toNumber()); }
             var extra = "";
             if (set.hasKey("power_w")) { extra = Ui.fmtKg(Model.num(set, "power_w", 0)) + " W"; }
-            if (set.hasKey("level")) { extra = "niveau " + Ui.fmtKg(Model.num(set, "level", 0)); }
+            if (set.hasKey("level")) { extra = "Niveau " + Ui.fmtKg(Model.num(set, "level", 0)); }
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             dc.drawText(cx, h * 0.56, Graphics.FONT_LARGE, target, Graphics.TEXT_JUSTIFY_CENTER);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
@@ -183,11 +183,11 @@ class TimedSetView extends WatchUi.View {
         }
         if (Model.machineDone(ex)) {
             dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, "Machine : fait", Graphics.TEXT_JUSTIFY_CENTER);
-            dc.drawText(cx, h * 0.87, Graphics.FONT_XTINY, "OK = suivant", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, "Terminé sur l'équipement", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.87, Graphics.FONT_XTINY, "OK : exercice suivant", Graphics.TEXT_JUSTIFY_CENTER);
         } else {
             dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.86, Graphics.FONT_XTINY, "OK = lancer", Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, h * 0.86, Graphics.FONT_XTINY, "OK : démarrer", Graphics.TEXT_JUSTIFY_CENTER);
         }
     }
 
@@ -199,7 +199,7 @@ class TimedSetView extends WatchUi.View {
         var set = Model.currentSet();
         var secs = Model.num(set, "duration_s", 60).toNumber();
         var sub = Model.exerciseTitle(Model.currentExercise());
-        var cd = new CountdownView(secs, "Bloc " + (Model.setIndex + 1), sub, Graphics.COLOR_GREEN);
+        var cd = new CountdownView(secs, "Série " + (Model.setIndex + 1), sub, Graphics.COLOR_GREEN);
         cd.onFinish = method(:onBlockDone);
         countdown = cd;
         cd.onShow();
