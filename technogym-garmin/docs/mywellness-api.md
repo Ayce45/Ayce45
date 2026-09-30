@@ -181,7 +181,7 @@ Extrait de `python scripts/explore_mywellness.py` le 2026-09-29 (identifiants da
 == 1. Login
    utilisateur ok, culture=fr-FR, unites=Metric, salles=2
 == 2. Programme prescrit (GetUserTrainingProgram)
-   "Programme d'entraînement de Evan" assigne le 2026-09-29 17:10:21 +00:00 expire le 2026-12-22
+   "Programme d'entraînement de <prenom>" assigne le 2026-09-29 17:10:21 +00:00 expire le 2026-12-22
    rotation=Cyclical cible/semaine=2
    [1] Séance 1 status=Suggested exercices=10 duree=64 min.
         2. Leg press Sel: Extension des jambes [StrengthLoad] -> IsoReps=10,IsoWeight=80,RestTime=45 (x4)
@@ -192,7 +192,7 @@ Extrait de `python scripts/explore_mywellness.py` le 2026-09-29 (identifiants da
    [3] Séance 3 status=None exercices=6 duree=40 min.
 == 3. Historique (ActivityHistory)
    90 elements sur 90 jours: {'Activity': 82, 'WorkoutSession': 8}
-   - 2026-09-29 Programme d'entraînement de Evan - Séance 3 idCr=1146 exos=5/6
+   - 2026-09-29 Programme d'entraînement de <prenom> - Séance 3 idCr=1146 exos=5/6
 == 4. Signatures des actions d'ecriture
    StartWorkoutSession: The UserWorkoutSessionId field is required.
    SavePerformedPhysicalActivity: FacilityUrl or FacilityId are required; You must specify

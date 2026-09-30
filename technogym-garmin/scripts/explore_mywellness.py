@@ -50,6 +50,7 @@ SENSITIVE_KEYS = {
     "lastUpdateBy", "planAuthor",
 }
 UUID_RE = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", re.I)
+COMPACT_UUID_RE = re.compile(r"(?<![0-9a-f])[0-9a-f]{32}(?![0-9a-f])", re.I)
 
 
 NAME_REPLACEMENTS: dict[str, str] = {}
@@ -76,6 +77,7 @@ def anonymize(obj: Any, uuid_map: dict[str, str]) -> Any:
                 uuid_map[key] = f"00000000-0000-4000-8000-{n:012d}"
             return uuid_map[key]
         out = UUID_RE.sub(repl, obj)
+        out = COMPACT_UUID_RE.sub(lambda m: "0" * 32, out)
         for old, new in NAME_REPLACEMENTS.items():
             if old:
                 out = re.sub(re.escape(old), new, out, flags=re.I)
