@@ -58,6 +58,12 @@ def build_state(settings: Settings | None = None, mywellness_client: mw.Mywellne
     return st
 
 
+class MarkBody(BaseModel):
+    """Exercice a marquer fait (POST /live/mark)."""
+
+    position: int
+
+
 class HrBatch(BaseModel):
     """Lot d'echantillons cardio envoye par la montre (POST /live/hr)."""
 
@@ -223,6 +229,21 @@ def create_app(state: AppState | None = None, with_scheduler: bool = True) -> Fa
         res = st.mywellness.start_workout_session(wid)
         st.live._cache.clear()
         return {"started": not res.get("notFound"), "workout_id": wid, "response": res}
+
+    @app.post("/live/mark", dependencies=[Depends(require_pair_or_admin)])
+    def live_mark(body: MarkBody) -> dict[str, Any]:
+        """Marque un exercice fait dans la seance ouverte (exercice libre termine sur la montre)."""
+        if st.mywellness is None:
+            raise HTTPException(status_code=503, detail="Mywellness non configure")
+        cur = st.live.current()
+        if not cur.has_current_workout or not cur.id_cr:
+            raise HTTPException(status_code=409, detail="Aucune seance ouverte")
+        partition = int(cur.started_on[:10].replace("-", "")) if cur.started_on else int(cur.date.replace("-", ""))
+        res = st.mywellness.mark_physical_activity_as_done(
+            {"position": body.position, "userWorkoutSessionId": cur.workout_id, "idCr": cur.id_cr, "partitionDate": partition}
+        )
+        st.live._cache.clear()
+        return {"marked": True, "response": res}
 
     @app.post("/live/close", dependencies=[Depends(require_pair_or_admin)])
     def live_close() -> dict[str, Any]:

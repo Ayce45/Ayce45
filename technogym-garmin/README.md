@@ -61,8 +61,12 @@ exercices, appui long UP pour le menu, BACK pour sortir.
 | Exercice | chrono, icone d'etat (coche verte = terminé, triangle orange = en cours, cercle gris = à faire, ondes vertes = équipement connecté), nom de l'exercice, séries prescrites ou faites (`4 x 10 x 35 kg`), FC avec coeur colorée par zone, exercice suivant, arc de progression de la séance |
 | Cardio | FC en grand colorée par zone, jauge des 5 zones (celles du profil Garmin), moyenne et max |
 | Séance | grille 4 champs a la Garmin : durée, exercices terminés, MOVEs, kcal remontés par les équipements |
-| Liste (START) | menu natif avec une icone d'etat par exercice, séries en sous-titre ; choisir un exercice ouvre sa fiche |
+| Actions (START) | sur l'exercice affiche, comme le bouton Lap d'une activite : Lancer l'exercice (exercice libre), Récupération (compte a rebours du repos prescrit, vibration), Marquer terminé (ecrit dans la seance Technogym), Fiche, Exercices (liste avec icones d'etat) |
+| Exercice libre | pour les poids libres, etirements et tout exercice fait sans equipement connecte : la montre enchaine les series prescrites. Compteur de repetitions prerempli avec la cible (UP / DOWN pour corriger), charge cible, START = serie faite (lap dans l'activite), puis récupération automatique du repos prescrit par le programme (60 s a defaut) avec vibrations a 3, 2, 1 et a la fin, START = passer. Apres la derniere serie l'exercice est marque terminé dans la seance Technogym (`POST /live/mark`) et la page Exercice passe au suivant |
 | Fiche exercice | visuel Technogym de l'exercice (UP / DOWN : visuel de l'équipement), muscles travaillés, séries ; START = suivre cet exercice. Les vidéos Technogym ne sont pas lisibles sur Connect IQ, seules les images le sont (téléchargées par le téléphone et redimensionnées) |
+
+Titres : l'equipement en grand ("Synchro", "Chest press Sel") et le nom de l'exercice en dessous ; sans equipement,
+la famille ("Étirement", "Cardio", "Poids libres").
 
 La séance est pilotée depuis la salle (bornes, équipements, app Technogym) ; la montre relit `GET /live`
 toutes les 10 s, vibre et pose un lap quand un exercice est validé, et envoie ses pulsations au backend
@@ -104,10 +108,9 @@ La montre ne peut pas parler directement a Technogym (reponses de 100 a 230 Ko, 
 il faut un relais qui se connecte a Mywellness et renvoie les 3 Ko utiles. Options, de la plus simple a la
 plus durable :
 
-1. **GitHub Action `beta-backend`** (`.github/workflows/beta-backend.yml`, bouton "Run workflow" depuis l'app GitHub) :
-   demarre ce backend Python sur un runner pour 3 h et publie l'URL du tunnel dans `beta/backend.txt`, que la
-   montre lit au demarrage (reglage `discoveryUrl`) si `backendUrl` est vide. Voir `beta/README.md`. Banc de
-   test, pas un hebergement.
+1. **Decouverte de l'URL** : si `backendUrl` est vide, la montre lit `beta/backend.txt` sur GitHub (reglage
+   `discoveryUrl`) : une ligne, l'URL du relais. Utile pour un binaire sideloade dont on ne veut pas recompiler
+   les reglages.
 2. **Test perso** : lancer le backend sur son PC (`python run.py`) et l'exposer avec un tunnel Cloudflare sans
    compte : `cloudflared tunnel --url http://localhost:8000` donne une URL `https://xxx.trycloudflare.com`
    valable tant que la commande tourne. Coller cette URL dans les reglages de la montre.

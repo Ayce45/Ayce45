@@ -26,6 +26,7 @@ class LiveSet(BaseModel):
     reps: int | None = None
     weight_kg: float | None = None
     duration_s: int | None = None
+    rest_s: int | None = None      # repos prescrit apres la serie (RestTime)
 
 
 class LiveExercise(BaseModel):
@@ -73,8 +74,10 @@ def _steps_to_sets(steps: list[dict[str, Any]] | None) -> list[LiveSet]:
         reps = v.get("IsoReps", v.get("Reps"))
         weight = v.get("IsoWeight", v.get("Weight"))
         dur = v.get("Duration")
+        rest = v.get("RestTime", v.get("Rest"))
         if reps is not None or weight is not None or dur is not None:
-            out.append(LiveSet(reps=int(reps) if reps is not None else None, weight_kg=weight, duration_s=int(dur) if dur is not None else None))
+            out.append(LiveSet(reps=int(reps) if reps is not None else None, weight_kg=weight, duration_s=int(dur) if dur is not None else None,
+                               rest_s=int(rest) if rest is not None else None))
     return out
 
 

@@ -95,12 +95,13 @@ function stepsToSets(steps) {
     const props = st.properties || st.data || st.stepData || [];
     const v = {};
     for (const p of props) v[p.physicalProperty || p.name] = p.value;
-    const reps = v.IsoReps ?? v.Reps, weight = v.IsoWeight ?? v.Weight, dur = v.Duration;
+    const reps = v.IsoReps ?? v.Reps, weight = v.IsoWeight ?? v.Weight, dur = v.Duration, rest = v.RestTime ?? v.Rest;
     if (reps != null || weight != null || dur != null) {
       const s = {};
       if (reps != null) s.reps = Math.round(Number(reps));
       if (weight != null) s.weight_kg = Number(weight);
       if (dur != null) s.duration_s = Math.round(Number(dur));
+      if (rest != null) s.rest_s = Math.round(Number(rest));
       out.push(s);
     }
   }

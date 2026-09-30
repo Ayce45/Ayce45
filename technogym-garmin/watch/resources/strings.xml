@@ -26,8 +26,8 @@
     <string id="Confirm">OK</string>
     <string id="Cancel">Retour</string>
     <string id="Done">Terminé</string>
-    <string id="Follow">Suivre ma séance</string>
-    <string id="Resume">Reprendre ma séance</string>
+    <string id="Follow">Suivre</string>
+    <string id="Resume">Reprendre</string>
     <string id="LiveOpen">Séance en cours</string>
     <string id="NoLiveSession">Aucune séance en cours. Connectez-vous sur un équipement ou démarrez votre séance dans l'app Technogym.</string>
     <string id="NoLiveShort">Aucune séance en cours</string>
@@ -40,5 +40,17 @@
     <string id="Moves">MOVEs</string>
     <string id="DoneShort">terminés</string>
     <string id="Discovering">Recherche du backend bêta...</string>
-    <string id="ReadyHint">Connectez-vous sur un équipement ou démarrez votre séance dans l'app Technogym, puis START.</string>
+    <string id="ReadyHint">Démarrez votre séance sur un équipement ou dans l'app Technogym</string>
+    <string id="FreeStart">Lancer l'exercice</string>
+    <string id="RestNow">Récupération</string>
+    <string id="MarkDone">Marquer terminé</string>
+    <string id="MarkDoneHintMachine">Sans passer par l'équipement</string>
+    <string id="Sheet">Fiche</string>
+    <string id="SetLabel">SÉRIE</string>
+    <string id="RestLabel">RÉCUPÉRATION</string>
+    <string id="SetDoneHint">START : série faite</string>
+    <string id="SkipRestHint">START : passer</string>
+    <string id="FinishExercise">Terminer l'exercice</string>
+    <string id="Marking">Enregistrement...</string>
+    <string id="ExerciseDone">Exercice terminé</string>
 </strings>

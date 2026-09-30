@@ -214,6 +214,30 @@ module Net {
         }
     }
 
+    // Exercice libre termine sur la montre : POST /live/mark {"position": n} (MarkPhysicalActivityAsDone).
+    var markBusy as Boolean = false;
+    var onMark as Method? = null;
+
+    function markDone(position as Number, callback as Method?) as Boolean {
+        if (markBusy || !configured()) { return false; }
+        markBusy = true;
+        onMark = callback;
+        var options = {
+            :method => Communications.HTTP_REQUEST_METHOD_POST,
+            :headers => _headers(true),
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+        Communications.makeWebRequest(Model.backendUrl + "/live/mark" + (Model.pairToken.length() > 0 ? "?token=" + Model.pairToken : ""), { "position" => position }, options, new Lang.Method(Net, :onMarkResponse));
+        return true;
+    }
+
+    function onMarkResponse(code as Number, data as Dictionary or String or Null) as Void {
+        markBusy = false;
+        var cb = onMark;
+        onMark = null;
+        if (cb != null) { (cb as Method).invoke(code == 200, code == 200 ? "OK" : describe(code, data)); }
+    }
+
     var _sending as Dictionary? = null;
 
     function sendResults(payload as Dictionary, callback as Method?) as Boolean {

@@ -77,47 +77,43 @@ class HomeView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(cx, h * 0.12, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.ShortName) as String, Graphics.TEXT_JUSTIFY_CENTER);
 
+        var y = h * 0.20;
+        var xt = dc.getFontHeight(Graphics.FONT_XTINY);
         if (Live.hasSession()) {
-            // une seance est ouverte cote Technogym (borne, machine, app)
+            // une seance est ouverte cote Technogym (borne, equipement, app)
             dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.22, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.LiveOpen) as String, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(cx, y, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.LiveOpen) as String, Graphics.TEXT_JUSTIFY_CENTER);
+            y += xt;
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.30, w * 0.82, Graphics.FONT_MEDIUM, Live.sessionName(), 2);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.80, Graphics.FONT_MEDIUM, Live.sessionName(), 1);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.52, Graphics.FONT_TINY, Live.doneCount() + "/" + Live.totalCount() + " exercices terminés", Graphics.TEXT_JUSTIFY_CENTER);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.80, Graphics.FONT_XTINY, Live.doneCount() + "/" + Live.totalCount() + " " + (WatchUi.loadResource(Rez.Strings.DoneShort) as String), 1);
             var cur = Live.exerciseAt(Live.currentIndex());
             if (cur != null) {
-                Ui.drawWrapped(dc, cx, h * 0.60, w * 0.80, Graphics.FONT_XTINY, Live.title(cur), 1);
+                y += Ui.drawWrapped(dc, cx, y, w * 0.76, Graphics.FONT_XTINY, Live.fullTitle(cur), 1);
             }
-            dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Model.liveMode ? Rez.Strings.Resume : Rez.Strings.Follow) as String, Graphics.TEXT_JUSTIFY_CENTER);
-        } else if (Model.hasWorkout()) {
+        } else if (Model.hasWorkout() && !Net.hasCredentials()) {
+            // backend perso avec programme : seance du jour
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.28, w * 0.82, Graphics.FONT_MEDIUM, Model.workoutTitle(), 2);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.82, Graphics.FONT_MEDIUM, Model.workoutTitle(), 1);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.50, Graphics.FONT_XTINY, Model.workoutDate(), Graphics.TEXT_JUSTIFY_CENTER);
-            var line = Model.exerciseCount() + " " + (WatchUi.loadResource(Rez.Strings.Exercises) as String).toLower();
-            if (Model.inProgress) {
-                line = "Exercice " + (Model.exIndex + 1) + "/" + Model.exerciseCount();
-            } else if (Net.configured()) {
-                line = WatchUi.loadResource(Rez.Strings.NoLiveShort) as String;
-            }
-            dc.drawText(cx, h * 0.58, Graphics.FONT_TINY, line, Graphics.TEXT_JUSTIFY_CENTER);
-            dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Model.liveMode ? Rez.Strings.Resume : Rez.Strings.Follow) as String, Graphics.TEXT_JUSTIFY_CENTER);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.80, Graphics.FONT_XTINY, Model.workoutDate() + "  " + Model.exerciseCount() + " " + (WatchUi.loadResource(Rez.Strings.Exercises) as String).toLower(), 1);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.76, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.NoLiveShort) as String, 1);
         } else {
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.30, w * 0.80, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.NoLiveShort) as String, 2);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.80, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.NoLiveShort) as String, 1);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.50, w * 0.80, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.ReadyHint) as String, 2);
-            if (Net.configured()) {
-                dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-                dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Model.liveMode ? Rez.Strings.Resume : Rez.Strings.Follow) as String, Graphics.TEXT_JUSTIFY_CENTER);
-            }
+            y += Ui.drawWrapped(dc, cx, y, w * 0.78, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.ReadyHint) as String, 2);
+        }
+        if (Net.configured() || Model.hasWorkout()) {
+            dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
+            var by = y + xt * 0.4;
+            if (by < h * 0.66) { by = h * 0.66; }
+            Ui.drawWrapped(dc, cx, by, w * 0.80, Graphics.FONT_SMALL, WatchUi.loadResource(Model.liveMode ? Rez.Strings.Resume : Rez.Strings.Follow) as String, 1);
         }
         if (status.length() > 0) {
             dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.80, w * 0.85, Graphics.FONT_XTINY, status, 2);
+            Ui.drawWrapped(dc, cx, h * 0.80, w * 0.70, Graphics.FONT_XTINY, status, 1);
         }
         var pend = Model.pendingCount();
         if (pend > 0) {

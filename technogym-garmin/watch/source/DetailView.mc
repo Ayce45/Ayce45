@@ -140,8 +140,7 @@ class DetailDelegate extends WatchUi.BehaviorDelegate {
     function onSelect() as Boolean {
         view.live.cursor = view.index == Live.currentIndex() ? -1 : view.index;
         view.live.page = 0;
-        WatchUi.popView(WatchUi.SLIDE_DOWN);   // fiche
-        WatchUi.popView(WatchUi.SLIDE_DOWN);   // liste
+        WatchUi.popView(WatchUi.SLIDE_DOWN);   // fiche (la liste s'est deja retiree en ouvrant la fiche)
         return true;
     }
 

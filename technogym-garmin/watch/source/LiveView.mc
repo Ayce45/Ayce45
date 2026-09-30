@@ -225,6 +225,15 @@ class LiveView extends WatchUi.View {
         var h = dc.getHeight();
         var cx = w / 2;
         var small = w < 300;
+        if (!Live.hasSession()) {
+            drawTimer(dc, h * 0.085);
+            Icons.circle(dc, cx, h * 0.30, h * 0.06, Graphics.COLOR_DK_GRAY);
+            Icons.link(dc, cx, h * 0.30 - h * 0.02, h * 0.035, Graphics.COLOR_LT_GRAY);
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, h * 0.40, w * 0.78, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.NoLiveSession) as String, 3);
+            drawHrField(dc, cx, h * 0.76, Graphics.FONT_NUMBER_MEDIUM);
+            return;
+        }
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
         Ui.drawWrapped(dc, cx, h * 0.06, w * 0.6, Graphics.FONT_XTINY, Live.hasSession() ? Live.sessionName() : (WatchUi.loadResource(Rez.Strings.NoLiveShort) as String), 1);
         dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
@@ -310,10 +319,36 @@ class LiveDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
-    // START : liste des exercices (icones d'etat), choisir = afficher cet exercice
+    // START : actions sur l'exercice affiche (comme le bouton Lap / Serie des activites Garmin)
     function onSelect() as Boolean {
         var exs = Live.exercises();
         if (exs.size() == 0) { return onMenu(); }
+        var i = view.shownIndex();
+        var ex = Live.exerciseAt(i);
+        var menu = new WatchUi.Menu2({ :title => Live.headline(ex) });
+        var connected = ex != null && ex.hasKey("device") && (ex["device"] as String).equals("FullConnected");
+        if (!Live.isDone(ex)) {
+            menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.FreeStart) as String, Live.setsText(ex), :free, null));
+            menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.RestNow) as String, restHint(ex), :rest, null));
+            menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.MarkDone) as String, connected ? (WatchUi.loadResource(Rez.Strings.MarkDoneHintMachine) as String) : null, :mark, null));
+        }
+        menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.Sheet) as String, null, :sheet, null));
+        menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.Exercises) as String, Live.doneCount() + "/" + Live.totalCount(), :list, null));
+        WatchUi.pushView(menu, new LiveActionDelegate(view, i), WatchUi.SLIDE_UP);
+        return true;
+    }
+
+    function restHint(ex as Dictionary?) as String {
+        if (ex == null || !ex.hasKey("target_sets")) { return "60 s"; }
+        var ts = ex["target_sets"] as Array;
+        if (ts.size() == 0) { return "60 s"; }
+        var r = Model.num(ts[0] as Dictionary, "rest_s", 0).toNumber();
+        return (r > 0 ? r : 60) + " s";
+    }
+
+    // Liste des exercices (icones d'etat), choisir = fiche
+    function showList() as Void {
+        var exs = Live.exercises();
         var menu = new WatchUi.Menu2({ :title => Live.sessionName() });
         var cur = Live.currentIndex();
         for (var i = 0; i < exs.size(); i++) {
@@ -323,7 +358,6 @@ class LiveDelegate extends WatchUi.BehaviorDelegate {
             menu.addItem(new WatchUi.IconMenuItem(Live.fullTitle(ex), sub, i, new StatusIconDrawable(ex, i == cur), null));
         }
         WatchUi.pushView(menu, new LiveListDelegate(view), WatchUi.SLIDE_UP);
-        return true;
     }
 
     // appui long UP : options
@@ -343,6 +377,48 @@ class LiveDelegate extends WatchUi.BehaviorDelegate {
     function onBack() as Boolean {
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
         return true;
+    }
+}
+
+class LiveActionDelegate extends WatchUi.Menu2InputDelegate {
+
+    var view as LiveView;
+    var index as Number;
+
+    function initialize(v as LiveView, i as Number) {
+        Menu2InputDelegate.initialize();
+        view = v;
+        index = i;
+    }
+
+    function onSelect(item as MenuItem) as Void {
+        var id = item.getId();
+        WatchUi.popView(WatchUi.SLIDE_DOWN);
+        if (id == :free) {
+            var fv = new FreeExerciseView(index, view, false);
+            WatchUi.pushView(fv, new FreeExerciseDelegate(fv), WatchUi.SLIDE_UP);
+        } else if (id == :rest) {
+            var rv = new FreeExerciseView(index, view, true);
+            WatchUi.pushView(rv, new FreeExerciseDelegate(rv), WatchUi.SLIDE_UP);
+        } else if (id == :mark) {
+            var ex = Live.exerciseAt(index);
+            var pos = ex != null ? Model.num(ex, "position", 0).toNumber() : 0;
+            view.status = WatchUi.loadResource(Rez.Strings.Marking) as String;
+            if (!Net.markDone(pos, method(:onMarked))) { view.status = "Hors ligne"; }
+        } else if (id == :sheet) {
+            var dv = new DetailView(index, view);
+            WatchUi.pushView(dv, new DetailDelegate(dv), WatchUi.SLIDE_LEFT);
+        } else if (id == :list) {
+            new LiveDelegate(view).showList();
+        }
+        WatchUi.requestUpdate();
+    }
+
+    function onMarked(ok as Boolean, msg as String) as Void {
+        view.status = ok ? (WatchUi.loadResource(Rez.Strings.ExerciseDone) as String) : msg;
+        view.cursor = -1;
+        if (ok) { Recording.vibrate(true); view.poll(); }
+        WatchUi.requestUpdate();
     }
 }
 

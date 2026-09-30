@@ -246,3 +246,26 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
 * `/auth/check` ajoute au relais pour verifier les identifiants depuis la montre sans lire la seance.
 * URL par defaut de l'app : `https://spotter-b6j.pages.dev` ; l'utilisateur du store n'a que deux champs a
   remplir.
+
+## 2026-09-30 : exercice libre, recuperation, retours de la vraie montre
+
+* Premiers retours sur la Forerunner 955 reelle : les polices sont plus hautes que dans le simulateur, les
+  textes fixes se chevauchaient. L'accueil est passe en mise en page mesuree (hauteur rendue par
+  `Ui.drawWrapped`), textes raccourcis ("Suivre", "Reprendre", "n/N terminés"), et la page Séance sans
+  seance affiche le message au lieu d'une grille de zeros.
+* Titres : equipement en grand, exercice en dessous (demande de l'utilisateur) ; sans equipement, la famille
+  Technogym (Étirement, Cardio, Poids libres). Listes en "Équipement · Exercice".
+* Exercice libre (`FreeExerciseView`) : le but de l'app pour les exercices hors equipement. Compteur de
+  repetitions prerempli avec la cible du programme (pas de comptage automatique : Connect IQ n'expose pas le
+  compteur de repetitions de l'activite Musculation de Garmin ; un comptage par accelerometre est possible
+  plus tard mais c'est un projet a part), START = serie faite -> lap FIT, recuperation automatique du repos
+  prescrit (`RestTime` remonte dans `target_sets[].rest_s` par le backend et le relais) avec vibrations,
+  puis exercice marque terminé dans la seance Technogym par `MarkPhysicalActivityAsDone` (`/live/mark`
+  dans le backend et le relais). Les series reelles restent dans le FIT.
+* Fin de recuperation sur equipement : impossible a detecter, le cloud Technogym ne publie les series
+  qu'a la fin de l'exercice (verifie sur la seance test). Compensation : l'action "Récupération" lance le
+  compte a rebours du repos prescrit avec vibration, un appui START par serie.
+* START sur la page Exercice ouvre un menu d'actions (comme le bouton Lap), la liste est dedans ; appui
+  long UP garde le menu general.
+* GitHub Action `beta-backend` retiree a la demande de l'utilisateur (relais Cloudflare deploye par lui).
+  Le fichier `beta/backend.txt` reste pour la decouverte d'URL.
