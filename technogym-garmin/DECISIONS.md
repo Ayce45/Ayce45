@@ -320,3 +320,15 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   bloquait les captures automatiques ; la variante simulateur (`resources-sim`) coupe les visuels par la
   propriete `loadImages`, absente des reglages exposes. Les menus d'appui long se declenchent au clavier
   (touche Menu) et non par un clic long a la souris.
+
+## 2026-09-30 : analyse de marche et business model
+
+* Demande : combien de personnes utilisent Technogym et portent une Garmin, et quel modele economique.
+  Reponse dans `docs/marche-et-business-model.md`, chiffres publics sources (Technogym FY 2024 : 22 M de comptes
+  Mywellness, 100 000 centres ; Garmin : environ 45 M d'utilisateurs Connect, 15 % du marche des montres ;
+  store Connect IQ : 100 000 telechargements pour la meilleure app de musculation).
+* Estimation : 200 000 a 800 000 personnes dans le monde s'entrainent dans une salle Technogym connectee avec une
+  Garmin ; objectif realiste 5 000 a 30 000 installations en trois ans. Vente directe a 4,99 EUR = revenu
+  d'appoint ; l'echelle vient du B2B (clubs equipes Technogym) ou d'un partenariat Technogym.
+* Decision : avant toute monetisation, demander un accord Enterprise API a Technogym et publier une politique de
+  confidentialite du relais ; beta gratuite d'abord, payant ensuite, dossier B2B a 2 000 utilisateurs.
