@@ -70,9 +70,9 @@ def test_results_writeback_flag(client, program_raw, fake_client, monkeypatch):
     assert r.status_code == 200
     assert r.json()["mywellness"] == "ok"
     actions = [a for a, _ in fake_client.written]
-    assert actions == ["StartWorkoutSession", "SavePerformedPhysicalActivity", "CloseWorkoutSession"]
-    saved = fake_client.written[1][1]
-    assert saved["summaryData"]["steps"][0]["data"][0] == {"physicalProperty": "IsoReps", "value": 10}
+    assert actions == ["StartWorkoutSession", "MarkPhysicalActivityAsDone", "CloseWorkoutSession"]
+    marked = fake_client.written[1][1]
+    assert marked["position"] == 2 and marked["idCr"] == 4242 and marked["partitionDate"] == 20260930
 
 
 def test_history(client):

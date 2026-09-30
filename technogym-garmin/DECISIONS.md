@@ -118,3 +118,13 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
 * `scripts/poc_live.py` : poll lecture seule, affiche les changements, journal JSONL ; a lancer en salle
   pour mesurer la latence reelle et capturer la forme de la seance courante ouverte.
 * L'APK et ses chaines restent hors depot (`scratch/`).
+
+## 2026-09-30 : seance test a blanc (depuis le telephone)
+
+* Latences mesurees : ouverture de seance vue en 9 s, exercices valides dans l'app vus en 4 a 11 s (poll 10 s).
+* Le retour montre -> Technogym passe par `MarkPhysicalActivityAsDone` (verifie sur la seance ouverte,
+  a la demande de l'utilisateur) : exercice marque fait avec les series prescrites. La tentative d'ecrire
+  des series reelles via `SavePerformedPhysicalActivity` a ete interrompue (format `stepData` inconnu,
+  puis action refusee par le mode automatique) ; les series reelles restent cote backend.
+* `/workout/{id}/live` lit la seance courante (`GetCurrentWorkoutSession`) en priorite : elle contient
+  tout pendant la seance, alors que l'historique n'est alimente qu'apres le premier exercice.

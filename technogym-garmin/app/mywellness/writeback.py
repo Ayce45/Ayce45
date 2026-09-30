@@ -13,9 +13,13 @@ Format de SavePerformedPhysicalActivity (deduit des messages d'erreur du serveur
    "data": []}
   Un summaryData vide repond {"result": "ExerciseDataNotValid", "wasOnline": false}.
 
-Le test en conditions reelles n'a pas ete execute dans la session de developpement (ecriture sur le compte
-de l'utilisateur non autorisee par l'environnement) : scripts/test_writeback.py permet de le faire soi-meme
-sur une seule serie identifiable. Toute erreur est renvoyee sous forme de texte, les resultats restent en local.
+Etat verifie le 2026-09-30 sur une seance reelle ouverte depuis l'app :
+  * MarkPhysicalActivityAsDone {position, userWorkoutSessionId, idCr, partitionDate} -> exercice Done avec
+    les series prescrites (manuallyDone). C'est la voie utilisee ici.
+  * SavePerformedPhysicalActivity (series reelles) : summaryData.stepData est obligatoire et les proprietes
+    attendent {"name", "um", "value"} ; le format exact des pas n'a pas ete trouve (ExerciseDataNotValid).
+    A poursuivre avec scripts/test_writeback.py. Les series reelles restent stockees cote backend.
+Toute erreur est renvoyee sous forme de texte, les resultats restent en local.
 """
 
 from __future__ import annotations
@@ -91,22 +95,19 @@ def push_results(
     errors: list[str] = []
     written = 0
     for ex in todo:
-        target = by_pos.get(ex.position)
-        payload: dict[str, Any] = {
-            "idCr": id_cr,
-            "partitionDate": partition,
-            "position": ex.position,
-            "physicalActivityId": ex.physical_activity_id or (target.physical_activity_id if target else ""),
-            "userWorkoutSessionId": workout.id,
-            "manuallyDone": True,
-            "summaryData": {"steps": steps_payload(ex.sets), "data": []},
-        }
+        # Verifie le 2026-09-30 sur une seance ouverte : MarkPhysicalActivityAsDone marque l'exercice fait
+        # (statut Done, manuallyDone, series = valeurs prescrites, client "EndUserWebSite"), visible dans
+        # l'app et dans GetCurrentWorkoutSession en moins de 5 s. SavePerformedPhysicalActivity (series
+        # reelles) attend un summaryData.stepData dont le format n'a pas ete trouve (ExerciseDataNotValid).
         try:
-            res = client.save_performed_physical_activity(payload, fac_id) or {}
-            if isinstance(res, dict) and str(res.get("result", "")).lower() not in ("", "success", "ok", "saved"):
-                errors.append(f"pos {ex.position}: {res.get('result')}")
-            else:
+            res = client.mark_physical_activity_as_done(
+                {"position": ex.position, "userWorkoutSessionId": workout.id, "idCr": id_cr, "partitionDate": int(str(partition))},
+                fac_id,
+            ) or {}
+            if isinstance(res, dict) and (res.get("performedPhysicalActivityId") or res.get("physicalActivityId")):
                 written += 1
+            else:
+                errors.append(f"pos {ex.position}: reponse inattendue {str(res)[:80]}")
         except mw.MywellnessError as exc:
             errors.append(f"pos {ex.position}: {exc}")
     if close:

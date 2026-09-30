@@ -84,6 +84,8 @@ class FakeMywellness(mw.MywellnessClient):
             self.written.append((action, content))
             if action == mw.START_WORKOUT_SESSION:
                 return {"idCr": 4242, "partitionDate": "20260930"}
+            if action == mw.MARK_PA_DONE:
+                return {"performedPhysicalActivityId": "perf-1", "physicalActivityId": "pa-1", "doneProperties": []}
             return {"ok": True}
         raise mw.NotFoundError(action)
 

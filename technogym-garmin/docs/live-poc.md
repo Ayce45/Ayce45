@@ -97,15 +97,44 @@ python scripts/poc_live.py --once --day 2026-09-29   # rejeu d'une seance passee
 Le backend fait la meme chose pour la montre : `GET /workout/{id}/live` (service `app/mywellness/live.py`,
 cache 15 s), interroge par l'app Connect IQ au demarrage, a chaque ecran de serie et toutes les 20 s.
 
-## 4. Verifie / pas verifie
+## 4. Resultats de la seance test du 2026-09-30 (a blanc, depuis le telephone)
+
+Poll toutes les 10 s, heures locales (Europe/Paris) :
+
+| Evenement | Heure cote Technogym | Vu par le poll | Latence |
+| --- | --- | --- | --- |
+| Seance 2 ouverte depuis l'app (`TgAppAndroidCoach`, contexte salle) | 10:05:31 | 10:05:40 | 9 s |
+| Exercice 7 (poulie, `Offline`) valide dans l'app, 4 x 10 x 12,5 kg | 10:08:03 | 10:08:14 | 11 s |
+| Exercices 8 et 9 valides dans l'app | 10:08:4x | 10:08:51 | < 10 s |
+| Exercice 4 marque fait **par le backend** (`MarkPhysicalActivityAsDone`) | 10:10:41 | 10:10:45 | 4 s |
+| Exercice 2 marque fait par le backend | 10:11:4x | 10:11:49 | < 10 s |
+
+Observations :
+
+* `GetCurrentWorkoutSession` renvoie, pendant la seance, la seance complete : `idCr`, `startedOn`, et
+  pour chaque exercice `executionStatus` (ToDo / Done), `doneOn`, `doneMove`, `doneCalories`,
+  `doneDuration`, `equipmentConnectedDevice` (`FullConnected` = machine en reseau, `Offline` = poulie,
+  etirement, poids libres), les `steps` prescrits et `currentReferenceValues` (Rm1, Vo2Max estimes).
+  La seance performee n'apparait dans `ActivityHistory` qu'apres le premier exercice fait.
+* Le sens montre -> Technogym fonctionne : `MarkPhysicalActivityAsDone {position, userWorkoutSessionId,
+  idCr, partitionDate}` a marque deux exercices faits dans la seance ouverte, avec les series prescrites,
+  `manuallyDone: true`, client `EndUserWebSite`, visibles dans l'app. `SavePerformedPhysicalActivity`
+  (series reelles differentes de la prescription) exige `summaryData.stepData` et des proprietes
+  `{"name", "um", "value"}` ; le format des pas reste a trouver (`ExerciseDataNotValid`).
+* Le backend `/workout/{id}/live` utilise desormais la seance courante en priorite (avant meme l'historique).
+
+## 5. Verifie / pas verifie
 
 | | Etat |
 | --- | --- |
 | Les machines ecrivent chaque exercice dans le cloud a la fin de l'exercice, avec series et charges | **verifie** (horodatages `doneOn` et consoles d'origine de la seance du 29/09) |
 | L'app mobile lit ces donnees par `GetCurrentWorkoutSession` et se rafraichit sur push | **verifie** (decompilation) |
 | Le backend lit les memes donnees avec le compte utilisateur | **verifie** (`poc_live.py`, `/workout/{id}/live`) |
-| Latence machine -> cloud pendant une seance reelle | **a mesurer** en salle avec `poc_live.py` (attendu : quelques secondes a une minute) |
-| Contenu de `GetCurrentWorkoutSession` pendant une seance ouverte (exercice en cours ?) | **a observer** en salle : hors seance il repond `hasCurrentWorkout: false` ; les topics `StartExerciseOnEquipment` laissent penser que l'exercice en cours y figure |
+| Latence app / backend -> cloud -> poll | **mesuree** : 4 a 11 s avec un poll de 10 s |
+| Latence machine connectee -> cloud | **a mesurer** en salle (la seance test etait a blanc, sans machine) |
+| Contenu de `GetCurrentWorkoutSession` pendant une seance ouverte | **verifie** (seance test du 30/09 : statut, doneOn, type de connexion, series prescrites par exercice) |
+| Ecriture montre -> Technogym (exercice marque fait) | **verifie** (`MarkPhysicalActivityAsDone`, 4 s de latence) |
+| Ecriture de series reelles differentes de la prescription | **pas encore** (format `stepData` inconnu) |
 | Detail serie par serie pendant l'exercice | **non disponible** cote cloud (les series arrivent avec `ExerciseDoneOnEquipment`) |
 
 Prochaine seance en salle : lancer `python scripts/poc_live.py` avant de badger sur la premiere

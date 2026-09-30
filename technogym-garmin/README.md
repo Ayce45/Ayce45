@@ -120,11 +120,11 @@ pour mesurer la latence reelle et voir la seance courante ouverte.
 
 ## Etat de l'ecriture Mywellness (montre -> Technogym)
 
-Les actions existent et leur format est connu (voir `docs/mywellness-api.md`) : `StartWorkoutSession`,
-`SavePerformedPhysicalActivity` (objet `GenericPhysicalActivityDataVO`, `manuallyDone: true`),
-`CloseWorkoutSession`. Le code est en place (`app/mywellness/writeback.py`) et teste sur un client factice,
-mais la premiere ecriture reelle sur ton compte n'a pas ete executee dans la session de developpement.
-Pour valider :
+Verifie le 2026-09-30 sur une seance reelle : `MarkPhysicalActivityAsDone` marque un exercice fait dans
+la seance ouverte (series prescrites, visible dans l'app en 4 s). C'est ce que fait `writeback.py` quand
+`MYWELLNESS_WRITEBACK=1`. L'ecriture de series reelles differentes de la prescription
+(`SavePerformedPhysicalActivity`) attend un `summaryData.stepData` dont le format n'est pas encore trouve ;
+les series reelles saisies sur la montre restent dans le backend. Pour poursuivre :
 
 ```
 python scripts/test_writeback.py --list
