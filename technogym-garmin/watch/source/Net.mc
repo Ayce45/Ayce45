@@ -12,8 +12,20 @@ module Net {
     var busy as Boolean = false;
     var onDone as Method? = null;   // callback(success as Boolean, message as String)
 
+    // Authentification : identifiants Technogym saisis dans Garmin Connect (mode store, envoyes au relais
+    // a chaque requete en HTTPS, jamais stockes par le relais), ou token d'appairage (backend perso).
+    function hasCredentials() as Boolean {
+        return Model.mwEmail.length() > 0 && Model.mwPassword.length() > 0;
+    }
+
     function configured() as Boolean {
-        return Model.backendUrl.length() > 0 && Model.pairToken.length() > 0;
+        return Model.backendUrl.length() > 0 && (hasCredentials() || Model.pairToken.length() > 0);
+    }
+
+    function _query() as Dictionary {
+        var q = {} as Dictionary;
+        if (Model.pairToken.length() > 0) { q["token"] = Model.pairToken; }
+        return q;
     }
 
     // URL du backend non renseignee : on lit le fichier texte publie par la GitHub Action beta
@@ -22,7 +34,7 @@ module Net {
     var discoveryDone as Method? = null;
 
     function needsDiscovery() as Boolean {
-        return Model.backendUrl.length() == 0 && Model.discoveryUrl.length() > 0 && Model.pairToken.length() > 0;
+        return Model.backendUrl.length() == 0 && Model.discoveryUrl.length() > 0 && (hasCredentials() || Model.pairToken.length() > 0);
     }
 
     function discover(callback as Method?) as Boolean {
@@ -64,7 +76,12 @@ module Net {
     }
 
     function _headers(json as Boolean) as Dictionary {
-        var h = { "X-Pair-Token" => Model.pairToken } as Dictionary;
+        var h = {} as Dictionary;
+        if (hasCredentials()) {
+            h["X-MW-Email"] = Model.mwEmail;
+            h["X-MW-Password"] = Model.mwPassword;
+        }
+        if (Model.pairToken.length() > 0) { h["X-Pair-Token"] = Model.pairToken; }
         if (json) { h["Content-Type"] = Communications.REQUEST_CONTENT_TYPE_JSON; }
         return h;
     }
@@ -79,7 +96,7 @@ module Net {
             :headers => _headers(false),
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
         };
-        Communications.makeWebRequest(url, { "token" => Model.pairToken }, options, new Lang.Method(Net, :onWorkout));
+        Communications.makeWebRequest(url, _query(), options, new Lang.Method(Net, :onWorkout));
         return true;
     }
 
@@ -107,7 +124,7 @@ module Net {
         liveBusy = true;
         onLive = callback;
         var url = Model.backendUrl + "/workout/" + (w["id"] as String) + "/live";
-        var params = { "token" => Model.pairToken } as Dictionary;
+        var params = _query();
         if (w.hasKey("date")) { params["day"] = w["date"]; }
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_GET,
@@ -146,7 +163,7 @@ module Net {
             :headers => _headers(false),
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
         };
-        Communications.makeWebRequest(Model.backendUrl + "/live", { "token" => Model.pairToken }, options, new Lang.Method(Net, :onCurrentResponse));
+        Communications.makeWebRequest(Model.backendUrl + "/live", _query(), options, new Lang.Method(Net, :onCurrentResponse));
         return true;
     }
 
@@ -180,7 +197,7 @@ module Net {
             :headers => _headers(true),
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
         };
-        Communications.makeWebRequest(Model.backendUrl + "/live/hr?token=" + Model.pairToken, payload, options, new Lang.Method(Net, :onHrResponse));
+        Communications.makeWebRequest(Model.backendUrl + "/live/hr" + (Model.pairToken.length() > 0 ? "?token=" + Model.pairToken : ""), payload, options, new Lang.Method(Net, :onHrResponse));
         return true;
     }
 
@@ -205,7 +222,7 @@ module Net {
         onDone = callback;
         _sending = payload;
         var wid = payload.hasKey("workout_id") ? payload["workout_id"] as String : "unknown";
-        var url = Model.backendUrl + "/workout/" + wid + "/results?token=" + Model.pairToken;
+        var url = Model.backendUrl + "/workout/" + wid + "/results" + (Model.pairToken.length() > 0 ? "?token=" + Model.pairToken : "");
         var options = {
             :method => Communications.HTTP_REQUEST_METHOD_POST,
             :headers => _headers(true),
@@ -246,7 +263,7 @@ module Net {
     }
 
     function describe(code as Number, data as Dictionary or String or Null) as String {
-        if (code == 401) { return "Compte non reconnu (401)"; }
+        if (code == 401) { return "Identifiants Technogym refusés"; }
         if (code == 404) { return "Séance introuvable (404)"; }
         if (code == 502 || code == 503) { return "Technogym indisponible"; }
         if (code == Communications.BLE_CONNECTION_UNAVAILABLE) { return "Téléphone non connecté"; }

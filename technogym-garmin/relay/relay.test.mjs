@@ -12,5 +12,6 @@ for (const line of lines) {
 console.log("captures :", lines.length, "avec seance :", checked, "| plus grosse reponse compactee :", maxBytes, "octets");
 const env = {};
 const h = await mod.fetch(new Request("https://x/health"), env); console.log("health", h.status, await h.text());
-const u = await mod.fetch(new Request("https://x/live"), { PAIR_TOKEN: "abc" }); console.log("live sans token", u.status);
+const u = await mod.fetch(new Request("https://x/live"), { PAIR_TOKEN: "abc" }); console.log("live sans token ni identifiants", u.status);
+const v = await mod.fetch(new Request("https://x/live", { headers: { "X-MW-Email": "a@b", "X-MW-Password": "x" } }), {}); console.log("live avec identifiants montre (login reel echoue ici) ->", v.status, (await v.text()).slice(0, 80));
 const p = await mod.fetch(new Request("https://x/live/hr?token=abc", { method: "POST", body: JSON.stringify({ samples: [[1, 120], [2, 121]] }) }), { PAIR_TOKEN: "abc", MYWELLNESS_EMAIL: "a", MYWELLNESS_PASSWORD: "b" }); console.log("hr", p.status, await p.text());

@@ -230,3 +230,19 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   n'affiche plus que l'evenement du moment en bas.
 * Le `.prg` personnel (URL du relais et token compiles) n'est pas versionne : `resources-beta/` est ignore
   par git et le binaire est remis directement a l'utilisateur.
+
+## 2026-09-30 : identifiants dans Garmin Connect, relais multi-utilisateur
+
+* Remarque de l'utilisateur : des identifiants dans les secrets Cloudflare ne servent qu'a une personne. Le
+  relais devient multi-utilisateur : la montre envoie l'identifiant et le mot de passe Technogym saisis dans
+  les reglages de l'app (type `password` dans `settings.xml`) en en-tetes `X-MW-Email` / `X-MW-Password` ;
+  le relais se connecte pour cet utilisateur, garde le jeton Mywellness en memoire (cle = SHA-256 des
+  identifiants, 500 utilisateurs max en cache, rien d'ecrit) et le cache `/live` est par utilisateur.
+  Les identifiants valent authentification : plus de token d'appairage dans ce mode. Le mode perso (secrets +
+  token) reste pour les binaires sideloades, car un mot de passe ne doit jamais etre compile dans un `.prg`.
+* Choix "identifiants a chaque requete" plutot que "jeton Mywellness stocke sur la montre" : plus simple, pas
+  d'expiration a gerer cote montre, et le canal est HTTPS de bout en bout (telephone -> relais). A revoir si
+  Technogym propose un jour un OAuth.
+* `/auth/check` ajoute au relais pour verifier les identifiants depuis la montre sans lire la seance.
+* URL par defaut de l'app : `https://spotter-relay.pages.dev` ; l'utilisateur du store n'a que deux champs a
+  remplir.

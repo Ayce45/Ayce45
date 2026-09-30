@@ -8,8 +8,13 @@
 //   POST /live/hr           echantillons cardio de la montre (acceptes, non conserves sans stockage)
 //   POST /live/mark         {"position": n} : marque un exercice fait dans la seance ouverte
 //   GET  /                  page d'accueil (statique)
-// Variables : MYWELLNESS_EMAIL, MYWELLNESS_PASSWORD (secrets), PAIR_TOKEN (secret, attendu dans
-// X-Pair-Token ou ?token=), FACILITY_URL (optionnel : sinon la premiere salle du compte).
+// Deux modes d'authentification :
+//   * multi-utilisateur (store) : la montre envoie les identifiants Technogym saisis dans Garmin Connect,
+//     en-tetes X-MW-Email et X-MW-Password ; le relais se connecte pour cet utilisateur, garde le jeton
+//     Mywellness en memoire (jamais ecrit) et ne stocke aucun identifiant ;
+//   * mono-utilisateur (beta perso) : identifiants dans les secrets du projet (MYWELLNESS_EMAIL,
+//     MYWELLNESS_PASSWORD) et token d'appairage PAIR_TOKEN attendu dans X-Pair-Token ou ?token=.
+// FACILITY_URL (optionnel) : salle a utiliser, sinon la premiere salle du compte.
 
 const CORE = "https://core.mywellness.com";
 const SERVICES = "https://services.mywellness.com";
@@ -21,18 +26,34 @@ const HEADERS = {
   "Accept": "application/json",
 };
 
-// Jeton Mywellness garde en memoire de l'isolat (quelques minutes a quelques heures selon Cloudflare).
-let session = null; // { token, userId, facilityUrl, at }
+// Jetons Mywellness gardes en memoire de l'isolat, par utilisateur (cle = empreinte des identifiants).
+const sessions = new Map(); // key -> { token, userId, facilityUrl, at }
+const liveCaches = new Map(); // key -> { at, body }
 const SESSION_TTL_MS = 6 * 3600 * 1000;
 const LIVE_CACHE_MS = 8000;
-let liveCache = null; // { at, body }
 
-async function login(env) {
-  if (session && Date.now() - session.at < SESSION_TTL_MS) return session;
+async function credKey(creds) {
+  const data = new TextEncoder().encode(`${creds.email}\u0000${creds.password}`);
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+// Identifiants de la requete : ceux envoyes par la montre, sinon ceux du projet (mode perso).
+function credentials(request, env) {
+  const email = request.headers.get("X-MW-Email");
+  const password = request.headers.get("X-MW-Password");
+  if (email && password) return { email, password, source: "watch" };
+  if (env.MYWELLNESS_EMAIL && env.MYWELLNESS_PASSWORD) return { email: env.MYWELLNESS_EMAIL, password: env.MYWELLNESS_PASSWORD, source: "env" };
+  return null;
+}
+
+async function login(env, creds, key) {
+  const cached = sessions.get(key);
+  if (cached && Date.now() - cached.at < SESSION_TTL_MS) return cached;
   const r = await fetch(`${CORE}/v2/enduser/authentication/login`, {
     method: "POST",
     headers: HEADERS,
-    body: JSON.stringify({ username: env.MYWELLNESS_EMAIL, password: env.MYWELLNESS_PASSWORD, keepMeLoggedIn: true }),
+    body: JSON.stringify({ username: creds.email, password: creds.password, keepMeLoggedIn: true }),
   });
   if (!r.ok) throw new Error(`login HTTP ${r.status}`);
   const j = await r.json();
@@ -41,19 +62,24 @@ async function login(env) {
   const userId = d.userContext?.id || d.userId || d.id;
   const facilities = d.userContext?.facilities || d.facilities || [];
   const facilityUrl = env.FACILITY_URL || (facilities[0] && (facilities[0].url || facilities[0].facilityUrl));
-  if (!token || !userId || !facilityUrl) throw new Error("login : reponse inattendue " + JSON.stringify(Object.keys(d)));
-  session = { token, userId, facilityUrl, at: Date.now() };
-  return session;
+  if (!token || !userId || !facilityUrl) {
+    if (r.status === 200 && (j.errors || d.errors)) throw new Error("Identifiants Technogym refuses");
+    throw new Error("login : reponse inattendue " + JSON.stringify(Object.keys(d)));
+  }
+  const s = { token, userId, facilityUrl, at: Date.now() };
+  sessions.set(key, s);
+  if (sessions.size > 500) sessions.delete(sessions.keys().next().value);
+  return s;
 }
 
-async function action(env, name, body, retry = true) {
-  const s = await login(env);
+async function action(env, ctx, name, body, retry = true) {
+  const s = await login(env, ctx.creds, ctx.key);
   const r = await fetch(`${SERVICES}/${s.facilityUrl}/Training/User/${s.userId}/${name}`, {
     method: "POST",
     headers: { ...HEADERS, Authorization: `Bearer ${s.token}` },
     body: JSON.stringify(body || {}),
   });
-  if (r.status === 401 && retry) { session = null; return action(env, name, body, false); }
+  if (r.status === 401 && retry) { sessions.delete(ctx.key); return action(env, ctx, name, body, false); }
   if (!r.ok) throw new Error(`${name} HTTP ${r.status}`);
   const j = await r.json();
   if (j.errors && j.errors.length) throw new Error(`${name} : ${j.errors.map((e) => e.message || e).join(", ")}`);
@@ -141,7 +167,10 @@ function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
 }
 
-function authorized(request, env) {
+// Autorise : identifiants Technogym fournis par la montre (ils valent authentification), ou en mode perso
+// le token d'appairage du projet.
+function authorized(request, env, creds) {
+  if (creds && creds.source === "watch") return true;
   if (!env.PAIR_TOKEN) return false;
   const url = new URL(request.url);
   const t = request.headers.get("X-Pair-Token") || url.searchParams.get("token");
@@ -154,17 +183,27 @@ export default {
     const path = url.pathname.replace(/\/+$/, "") || "/";
     try {
       if (path === "/health") {
-        return json({ status: "ok", relay: "cloudflare", mywellness_configured: !!(env.MYWELLNESS_EMAIL && env.MYWELLNESS_PASSWORD), pair_token_configured: !!env.PAIR_TOKEN });
+        return json({ status: "ok", relay: "cloudflare", modes: ["watch-credentials", ...(env.MYWELLNESS_EMAIL && env.MYWELLNESS_PASSWORD && env.PAIR_TOKEN ? ["pair-token"] : [])], users_cached: sessions.size });
       }
-      if (path === "/live" || path === "/live/hr" || path === "/live/mark") {
-        if (!authorized(request, env)) return json({ detail: "Token d'appairage requis" }, 401);
-        if (!env.MYWELLNESS_EMAIL || !env.MYWELLNESS_PASSWORD) return json({ detail: "Identifiants Technogym non configures (MYWELLNESS_EMAIL / MYWELLNESS_PASSWORD)" }, 503);
+      let ctx = null;
+      if (path === "/live" || path === "/live/hr" || path === "/live/mark" || path === "/auth/check") {
+        const creds = credentials(request, env);
+        if (!authorized(request, env, creds)) return json({ detail: "Identifiants Technogym (X-MW-Email, X-MW-Password) ou token d'appairage requis" }, 401);
+        if (!creds) return json({ detail: "Identifiants Technogym absents" }, 401);
+        ctx = { creds, key: await credKey(creds) };
+      }
+      if (path === "/auth/check" && request.method === "GET") {
+        // verification des identifiants saisis dans Garmin Connect (login seul, rien d'autre)
+        const s = await login(env, ctx.creds, ctx.key);
+        return json({ ok: true, facility: s.facilityUrl });
       }
       if (path === "/live" && request.method === "GET") {
-        if (liveCache && Date.now() - liveCache.at < LIVE_CACHE_MS) return json(liveCache.body);
-        const cur = await action(env, "GetCurrentWorkoutSession", {});
+        const c = liveCaches.get(ctx.key);
+        if (c && Date.now() - c.at < LIVE_CACHE_MS) return json(c.body);
+        const cur = await action(env, ctx, "GetCurrentWorkoutSession", {});
         const body = compactLive(cur);
-        liveCache = { at: Date.now(), body };
+        liveCaches.set(ctx.key, { at: Date.now(), body });
+        if (liveCaches.size > 500) liveCaches.delete(liveCaches.keys().next().value);
         return json(body);
       }
       if (path === "/live/hr" && request.method === "POST") {
@@ -175,19 +214,20 @@ export default {
       }
       if (path === "/live/mark" && request.method === "POST") {
         const b = await request.json().catch(() => ({}));
-        const cur = await action(env, "GetCurrentWorkoutSession", {});
+        const cur = await action(env, ctx, "GetCurrentWorkoutSession", {});
         const ws = cur && cur.workoutSession;
         if (!ws) return json({ detail: "Aucune seance ouverte" }, 409);
         const partition = Number(String(ws.startedOn || "").slice(0, 10).replace(/-/g, "")) || Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
-        const res = await action(env, "MarkPhysicalActivityAsDone", { position: Number(b.position), userWorkoutSessionId: ws.workoutSessionId, idCr: ws.idCr, partitionDate: partition });
-        liveCache = null;
+        const res = await action(env, ctx, "MarkPhysicalActivityAsDone", { position: Number(b.position), userWorkoutSessionId: ws.workoutSessionId, idCr: ws.idCr, partitionDate: partition });
+        liveCaches.delete(ctx.key);
         return json({ marked: true, response: res });
       }
       if (path === "/" && env.ASSETS) return env.ASSETS.fetch(request);
       if (path === "/") return new Response("Spotter for Technogym : relais en ligne. Voir /health.", { headers: { "Content-Type": "text/plain; charset=utf-8" } });
       return json({ detail: "Introuvable" }, 404);
     } catch (e) {
-      return json({ detail: String(e && e.message || e) }, 502);
+      const msg = String(e && e.message || e);
+      return json({ detail: msg }, /refuses|login HTTP 4/.test(msg) ? 401 : 502);
     }
   },
 };

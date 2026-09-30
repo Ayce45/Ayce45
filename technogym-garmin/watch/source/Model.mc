@@ -33,6 +33,8 @@ module Model {
     var backendUrl as String = "";
     var discoveryUrl as String = "";
     var pairToken as String = "";
+    var mwEmail as String = "";
+    var mwPassword as String = "";
     var autoStartRest as Boolean = true;
     var vibrateOnRestEnd as Boolean = true;
     var weightStep as Float = 2.5;
@@ -41,6 +43,8 @@ module Model {
         backendUrl = _prop("backendUrl", "") as String;
         discoveryUrl = _prop("discoveryUrl", "") as String;
         pairToken = _prop("pairToken", "") as String;
+        mwEmail = _prop("mwEmail", "") as String;
+        mwPassword = _prop("mwPassword", "") as String;
         autoStartRest = _prop("autoStartRest", true) as Boolean;
         vibrateOnRestEnd = _prop("vibrateOnRestEnd", true) as Boolean;
         var ws = _prop("weightStepKg", 2.5);

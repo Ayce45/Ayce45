@@ -79,14 +79,24 @@ compiles dans le binaire.
 
 ### Backend pour la beta
 
-**Recommande : le relais Cloudflare (`relay/`)**, un fichier `_worker.js` sans etat qui se connecte a Mywellness
-avec les identifiants configures dans Cloudflare et renvoie a la montre la seance courante en 3 Ko. Deploiement
-depuis un telephone : Cloudflare > Workers & Pages > Create > "Upload your static files" > glisser le contenu de
-`relay/spotter-relay-pages.zip` (`_worker.js` + `index.html`), nommer le projet, puis Settings > Variables and
-Secrets : `MYWELLNESS_EMAIL`, `MYWELLNESS_PASSWORD`, `PAIR_TOKEN` (le meme token que dans les reglages de la
-montre), et relancer le deploiement. `https://<projet>.pages.dev/health` doit repondre. Plan gratuit suffisant
-(100 000 requetes par jour ; la montre en fait une toutes les 10 s pendant la seance). Verifie hors ligne sur
-les 68 captures de la seance du 30/09 (`node relay/relay.test.mjs`).
+**Recommande : le relais Cloudflare (`relay/`)**, un fichier `_worker.js` sans etat, multi-utilisateur. Chaque
+utilisateur saisit son identifiant et son mot de passe Technogym dans les reglages de l'app (Garmin Connect,
+champ mot de passe), comme pour HassControl ; la montre les envoie au relais a chaque requete (HTTPS, en-tetes
+`X-MW-Email` / `X-MW-Password`), le relais se connecte a Mywellness, garde le jeton en memoire et renvoie la
+seance courante en moins de 8 Ko. Il n'ecrit rien : ni identifiants, ni donnees. Un seul deploiement sert tous
+les utilisateurs de l'app du store ; l'URL par defaut de l'app est `https://spotter-relay.pages.dev`.
+
+Deploiement depuis un telephone : Cloudflare > Workers & Pages > Create > "Upload your static files" > glisser le
+contenu de `relay/spotter-relay-pages.zip` (`_worker.js` + `index.html`), nommer le projet `spotter-relay`.
+Aucun secret n'est necessaire en mode multi-utilisateur. Mode perso (binaire sideloade sans reglages) : secrets
+`MYWELLNESS_EMAIL`, `MYWELLNESS_PASSWORD`, `PAIR_TOKEN` dans le projet, token dans le `.prg`.
+`https://<projet>.pages.dev/health` doit repondre. Plan gratuit suffisant (100 000 requetes par jour ; la montre
+en fait une toutes les 10 s pendant la seance). Verifie hors ligne sur les 68 captures de la seance du 30/09
+(`node relay/relay.test.mjs`).
+
+A savoir : les reglages Connect IQ sont stockes par Garmin Connect et sur la montre sans chiffrement particulier,
+et transitent par le telephone ; c'est le fonctionnement de toutes les apps du store qui demandent un compte
+tiers. Le relais ne journalise pas les en-tetes.
 
 Autres options :
 

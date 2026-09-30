@@ -1,8 +1,14 @@
 <settings>
-    <setting propertyKey="@Properties.backendUrl" title="URL du backend (https://..., vide = bêta)">
+    <setting propertyKey="@Properties.mwEmail" title="Identifiant Technogym (e-mail du compte Mywellness)">
         <settingConfig type="alphaNumeric" />
     </setting>
-    <setting propertyKey="@Properties.pairToken" title="Token d'appairage">
+    <setting propertyKey="@Properties.mwPassword" title="Mot de passe Technogym">
+        <settingConfig type="password" />
+    </setting>
+    <setting propertyKey="@Properties.backendUrl" title="Relais (avancé) : URL https, vide = bêta GitHub">
+        <settingConfig type="alphaNumeric" />
+    </setting>
+    <setting propertyKey="@Properties.pairToken" title="Token d'appairage (avancé, backend perso)">
         <settingConfig type="password" />
     </setting>
     <setting propertyKey="@Properties.discoveryUrl" title="Fichier d'URL du backend bêta (si URL vide)">

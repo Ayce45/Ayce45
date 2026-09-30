@@ -45,9 +45,13 @@ VOTRE PROGRAMME SUR VOTRE MONTRE
 L'application de synchronisation fournie avec Spotter convertit votre programme d'entraînement Technogym
 en séances d'entraînement Garmin, planifiées dans Garmin Connect.
 
-Spotter utilise votre compte Technogym (Mywellness) et un serveur que vous hébergez vous-même : les
-instructions sont sur la page du projet. Application indépendante, non officielle, sans lien avec
-Technogym S.p.A. ni Garmin Ltd. Technogym, Mywellness et MOVEs sont des marques de Technogym S.p.A.
+CONFIGURATION EN DEUX CHAMPS
+Dans Garmin Connect, ouvrez les réglages de l'app et saisissez l'identifiant et le mot de passe de votre
+compte Technogym (Mywellness). C'est tout. Vos identifiants ne sont stockés que dans Garmin Connect et ne
+sont utilisés que pour lire votre séance ; le relais ne conserve rien.
+
+Application indépendante, non officielle, sans lien avec Technogym S.p.A. ni Garmin Ltd. Technogym,
+Mywellness et MOVEs sont des marques de Technogym S.p.A. Code source ouvert sur la page du projet.
 
 ## Description (EN)
 
@@ -75,9 +79,13 @@ YOUR PROGRAM ON YOUR WATCH
 The sync app shipped with Spotter converts your Technogym training program into Garmin workouts scheduled
 in Garmin Connect.
 
-Spotter uses your Technogym (Mywellness) account and a server you host yourself: instructions are on the
-project page. Independent, unofficial application, not affiliated with Technogym S.p.A. or Garmin Ltd.
-Technogym, Mywellness and MOVEs are trademarks of Technogym S.p.A.
+TWO-FIELD SETUP
+In Garmin Connect, open the app settings and enter your Technogym (Mywellness) account email and password.
+That is all. Your credentials are stored only in Garmin Connect and used only to read your workout; the
+relay keeps nothing.
+
+Independent, unofficial application, not affiliated with Technogym S.p.A. or Garmin Ltd. Technogym,
+Mywellness and MOVEs are trademarks of Technogym S.p.A. Open source on the project page.
 
 ## Mots cles
 

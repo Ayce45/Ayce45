@@ -3,7 +3,7 @@
     <string id="ShortName">Spotter</string>
     <string id="Loading">Chargement...</string>
     <string id="NoWorkout">Aucune séance d'entraînement</string>
-    <string id="NoToken">Connectez votre compte : réglages de l'app dans Garmin Connect</string>
+    <string id="NoToken">Saisissez vos identifiants Technogym dans les réglages de l'app (Garmin Connect)</string>
     <string id="Offline">Hors ligne, dernière séance synchronisée</string>
     <string id="Start">Démarrer la séance</string>
     <string id="Refresh">Actualiser</string>
