@@ -53,6 +53,9 @@ class HomeView extends WatchUi.View {
             if (Model.pendingCount() > 0) {
                 Net.sendPending(method(:onPendingSent));
             }
+        } else if (msg.find("404") != null) {
+            // relais sans programme (mode store) : la seance vient du direct, pas d'erreur a afficher
+            status = "";
         } else {
             status = Model.hasWorkout() ? (WatchUi.loadResource(Rez.Strings.Offline) as String) : msg;
         }
@@ -104,7 +107,13 @@ class HomeView extends WatchUi.View {
             dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Model.liveMode ? Rez.Strings.Resume : Rez.Strings.Follow) as String, Graphics.TEXT_JUSTIFY_CENTER);
         } else {
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.40, Graphics.FONT_MEDIUM, WatchUi.loadResource(Rez.Strings.NoWorkout) as String, Graphics.TEXT_JUSTIFY_CENTER);
+            Ui.drawWrapped(dc, cx, h * 0.30, w * 0.80, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.NoLiveShort) as String, 2);
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, h * 0.50, w * 0.80, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.ReadyHint) as String, 2);
+            if (Net.configured()) {
+                dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
+                dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Model.liveMode ? Rez.Strings.Resume : Rez.Strings.Follow) as String, Graphics.TEXT_JUSTIFY_CENTER);
+            }
         }
         if (status.length() > 0) {
             dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
