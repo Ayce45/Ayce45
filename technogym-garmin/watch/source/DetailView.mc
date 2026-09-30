@@ -92,8 +92,12 @@ class DetailView extends WatchUi.View {
 
         var y = imgTop + imgH + h * 0.02;
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        y += Ui.drawWrapped(dc, cx, y, w * 0.86, Graphics.FONT_SMALL, Live.title(e), 1);
-        var eq = Live.equipment(e);
+        y += Ui.drawWrapped(dc, cx, y, w * 0.86, Graphics.FONT_SMALL, Live.headline(e), 1);
+        if (!Live.title(e).equals(Live.headline(e))) {
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.86, Graphics.FONT_XTINY, Live.title(e), 1);
+        }
+        var eq = "";
         var muscles = "";
         if (e.hasKey("muscles")) {
             var ms = e["muscles"] as Array;

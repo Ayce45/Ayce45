@@ -96,6 +96,25 @@ module Live {
         return "Exercice";
     }
 
+    // Titre principal : le nom de l'equipement ("Synchro", "Chest press Sel") ; sans equipement, la famille
+    // de l'exercice ("Étirement", "Cardio", "Poids libres"). Sous-titre : le nom de l'exercice.
+    function headline(ex as Dictionary?) as String {
+        var eq = equipment(ex);
+        if (eq.length() > 0) { return eq; }
+        var k = (ex != null && ex.hasKey("kind")) ? (ex["kind"] as String) : "";
+        if (k.equals("stretching")) { return "Étirement"; }
+        if (k.equals("cardio")) { return "Cardio"; }
+        return "Poids libres";
+    }
+
+    // "Synchro · Exercice personnalisé" pour les listes.
+    function fullTitle(ex as Dictionary?) as String {
+        var t = title(ex);
+        var hl = headline(ex);
+        if (hl.equals(t)) { return t; }
+        return hl + " · " + t;
+    }
+
     function equipment(ex as Dictionary?) as String {
         if (ex == null || !ex.hasKey("equipment")) { return ""; }
         return ex["equipment"] as String;

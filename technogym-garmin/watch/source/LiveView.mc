@@ -171,17 +171,16 @@ class LiveView extends WatchUi.View {
             Icons.link(dc, x + nw + ir * 1.4, iy - ir * 0.4, ir * 0.7, Graphics.COLOR_GREEN);
         }
 
-        // nom (2 lignes), equipement si place, series
+        // equipement en grand (1 ligne), nom de l'exercice en petit (2 lignes), puis les series
         dc.setColor(flash > 0 && cursor < 0 ? Graphics.COLOR_YELLOW : Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        var y = h * 0.26;
-        var used = Ui.drawWrapped(dc, cx, y, w * 0.84, Graphics.FONT_SMALL, Live.title(ex), 2);
-        y += used;
-        var eq = Live.equipment(ex);
-        if (used <= dc.getFontHeight(Graphics.FONT_SMALL) && eq.length() > 0 && !eq.equals(Live.title(ex))) {
+        var y = h * 0.245;
+        y += Ui.drawWrapped(dc, cx, y, w * 0.84, small ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM, Live.headline(ex), 1);
+        var sub = Live.title(ex);
+        if (!sub.equals(Live.headline(ex))) {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, y, w * 0.84, Graphics.FONT_XTINY, eq, 1);
-            y += dc.getFontHeight(Graphics.FONT_XTINY);
+            y += Ui.drawWrapped(dc, cx, y, w * 0.86, Graphics.FONT_XTINY, sub, 2);
         }
+        y += h * 0.01;
         dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
         Ui.drawWrapped(dc, cx, y, w * 0.86, small ? Graphics.FONT_SMALL : Graphics.FONT_MEDIUM, Live.setsText(ex), 1);
 
@@ -259,10 +258,12 @@ class LiveView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
             Ui.drawWrapped(dc, cx, h * 0.665 + lh, w * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.SessionDone) as String, 2);
         } else if (nxt != null) {
+            // equipement en grand, puis "exercice · series" en petit
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            var used = Ui.drawWrapped(dc, cx, h * 0.665 + lh, w * 0.72, Graphics.FONT_SMALL, Live.title(nxt), 1);
-            dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.665 + lh + used, w * 0.60, Graphics.FONT_XTINY, Live.setsText(nxt), 1);
+            var used = Ui.drawWrapped(dc, cx, h * 0.665 + lh, w * 0.72, Graphics.FONT_SMALL, Live.headline(nxt), 1);
+            var line2 = Live.title(nxt).equals(Live.headline(nxt)) ? Live.setsText(nxt) : Live.title(nxt) + (Live.setsText(nxt).length() > 0 ? " · " + Live.setsText(nxt) : "");
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, h * 0.665 + lh + used, w * 0.62, Graphics.FONT_XTINY, line2, 1);
         } else {
             dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(cx, h * 0.665 + lh, Graphics.FONT_XTINY, "--", Graphics.TEXT_JUSTIFY_CENTER);
@@ -319,7 +320,7 @@ class LiveDelegate extends WatchUi.BehaviorDelegate {
             var ex = exs[i] as Dictionary;
             var sub = Live.setsText(ex);
             if (Live.isDone(ex)) { sub = (WatchUi.loadResource(Rez.Strings.Done) as String) + (sub.length() > 0 ? "  " + sub : ""); }
-            menu.addItem(new WatchUi.IconMenuItem(Live.title(ex), sub, i, new StatusIconDrawable(ex, i == cur), null));
+            menu.addItem(new WatchUi.IconMenuItem(Live.fullTitle(ex), sub, i, new StatusIconDrawable(ex, i == cur), null));
         }
         WatchUi.pushView(menu, new LiveListDelegate(view), WatchUi.SLIDE_UP);
         return true;
