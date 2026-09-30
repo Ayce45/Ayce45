@@ -191,6 +191,14 @@ Donc une serie s'ecrit `{"position": 1, "stepData": [{"name": "IsoReps", "um": "
 `physicalProperty` echouaient ("StepData" requis puis `ExerciseDataNotValid`) : c'est ce schema qui manquait.
 Le constructeur `app/mywellness/writeback.py::summary_data` le produit. La frequence cardiaque par exercice
 passe par `analitics` / `analiticsData` (`hr: [{t, hr}]`), meme forme que celle lue dans `CardioLog/Details`.
+Analytique (`AnaliticsPhysicalActivityData`, champ `analitics` de `summaryData` ou `analiticsData`) :
+`{"hr": [{"t": 0, "hr": 112}, ...], "samples": [{"t": 1, "vs": [86.0, 82.0, 20.0]}], "descriptor": [{"i": 0, "pr": {...}}],
+"laps": [{"n", "lapDistance", "lapTime", "totalDistance", "totalTime"}], "hrZones": [...], "powerZones": [...]}`.
+La frequence cardiaque d'un exercice s'ecrit donc en `analitics.hr` sous la forme `{t (secondes), hr (bpm)}`,
+identique a ce que renvoie `CardioLog/{analyticsId}/Details`.
+Enumerations utiles : `doneAs` / statut = ToDo, Done, DoneAsModified, Added, Doing, None ; cible = Duration,
+Calories, Distance, IsoReps, StretchingSet, Floors, Watt, RowingDistance ; consoles (`ConnectedDeviceTypes`) =
+VisioWow, UnitySelf, UnityStrength, SkillBike, SkillRun, GcLive, TechnogymBike, TechnogymRun...
 Validation reelle a faire avec `scripts/test_writeback.py --mode save` sur une seance a blanc.
 
 `MarkPhysicalActivityAsDone {"position", "userWorkoutSessionId", "idCr", "partitionDate"}` : **verifie le

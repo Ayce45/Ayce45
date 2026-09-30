@@ -134,7 +134,8 @@ Observations :
 | Latence machine connectee -> cloud | **a mesurer** en salle (la seance test etait a blanc, sans machine) |
 | Contenu de `GetCurrentWorkoutSession` pendant une seance ouverte | **verifie** (seance test du 30/09 : statut, doneOn, type de connexion, series prescrites par exercice) |
 | Ecriture montre -> Technogym (exercice marque fait) | **verifie** (`MarkPhysicalActivityAsDone`, 4 s de latence) |
-| Ecriture de series reelles differentes de la prescription | **pas encore** (format `stepData` inconnu) |
+| Ecriture de series reelles differentes de la prescription | **schema connu** (decompile de l'app : `steps[].stepData` en `{name, um, value}`), ecriture reelle a valider avec `scripts/test_writeback.py --mode save` |
+| Frequence cardiaque par exercice vers Technogym | **schema connu** (`analitics.hr: [{t, hr}]`), a valider de la meme facon ; l'affichage en direct sur la console reste reserve a la diffusion systeme de la montre |
 | Detail serie par serie pendant l'exercice | **non disponible** cote cloud (les series arrivent avec `ExerciseDoneOnEquipment`) |
 
 Prochaine seance en salle : lancer `python scripts/poc_live.py` avant de badger sur la premiere
