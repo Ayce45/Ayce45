@@ -464,16 +464,13 @@ class LiveMenuDelegate extends WatchUi.Menu2InputDelegate {
             Net.fetchLive(null);
             Flow.showCurrent(WatchUi.SLIDE_LEFT, true);
         } else if (id == :finish) {
-            Live.flushHr();
-            var saved = Recording.save();
-            Model.liveMode = false;
-            Model.startedAt = 0;
-            view.status = saved ? (WatchUi.loadResource(Rez.Strings.Saved) as String) : "Aucune activité à enregistrer";
-            WatchUi.popView(WatchUi.SLIDE_RIGHT);
+            var sv = new SessionSummaryView(view);
+            WatchUi.pushView(sv, new SessionSummaryDelegate(sv), WatchUi.SLIDE_UP);
         } else if (id == :discard) {
             Recording.discard();
             Model.liveMode = false;
             Model.startedAt = 0;
+            Model.resetLiveStats();
             Live.reset();
             WatchUi.popView(WatchUi.SLIDE_RIGHT);
         }

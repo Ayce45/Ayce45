@@ -143,6 +143,7 @@ class HomeDelegate extends WatchUi.BehaviorDelegate {
         if (!Model.liveMode) {
             Model.liveMode = true;
             Model.startedAt = Time.now().value();
+            Model.resetLiveStats();
             Live.reset();
             Recording.start(Live.hasSession() ? Live.sessionName() : "Technogym");
         } else if (!Recording.isRecording() && Recording.session == null) {

@@ -7,6 +7,7 @@
 //   GET  /live              seance courante Technogym (bornes, equipements, app), compactee
 //   POST /live/hr           echantillons cardio de la montre (acceptes, non conserves sans stockage)
 //   POST /live/mark         {"position": n} : marque un exercice fait dans la seance ouverte
+//   POST /live/close        ferme la seance ouverte cote Technogym
 //   GET  /                  page d'accueil (statique)
 // Deux modes d'authentification :
 //   * multi-utilisateur (store) : la montre envoie les identifiants Technogym saisis dans Garmin Connect,
@@ -29,6 +30,8 @@ const HEADERS = {
 // Jetons Mywellness gardes en memoire de l'isolat, par utilisateur (cle = empreinte des identifiants).
 const sessions = new Map(); // key -> { token, userId, facilityUrl, at }
 const liveCaches = new Map(); // key -> { at, body }
+const prevCaches = new Map(); // key -> { at, map } : derniere execution et record par exercice
+const PREV_TTL_MS = 10 * 60 * 1000;
 const SESSION_TTL_MS = 6 * 3600 * 1000;
 const LIVE_CACHE_MS = 8000;
 
@@ -115,7 +118,44 @@ function kind(type, isCardio) {
   return "strength";
 }
 
-export function compactLive(cur) {
+function rm1(refs) {
+  for (const r of refs || []) if (r && String(r.name || "").toLowerCase() === "rm1" && r.value != null) return Math.round(Number(r.value) * 10) / 10;
+  return undefined;
+}
+
+function ymd(d) { return d.toISOString().slice(0, 10).replace(/-/g, ""); }
+
+// Derniere execution et record de charge par exercice, sur les 8 dernieres seances de 90 jours.
+async function previousByExercise(env, ctx) {
+  const c = prevCaches.get(ctx.key);
+  if (c && Date.now() - c.at < PREV_TTL_MS) return c.map;
+  const map = {};
+  try {
+    const end = new Date(); const start = new Date(end.getTime() - 90 * 86400000);
+    const hist = await action(env, ctx, "ActivityHistory", { startDay: ymd(start), endDay: ymd(end), justThisType: "WorkoutSession" });
+    const items = (hist.items || []).sort((a, b) => String(b.partitionDate).localeCompare(String(a.partitionDate))).slice(0, 8);
+    for (const it of items) {
+      let raw;
+      try { raw = await action(env, ctx, "GetPerformedWorkoutSessionByIdCr", { idCr: Number(it.idCr), partitionDate: String(it.partitionDate) }); } catch (e) { continue; }
+      const day = String(it.partitionDate); const dayIso = day.length === 8 ? `${day.slice(0, 4)}-${day.slice(4, 6)}-${day.slice(6, 8)}` : day;
+      for (const act of raw.physicalActivities || []) {
+        const sets = stepsToSets(((act.performedPhysicalActivity || {}).data || {}).steps);
+        if (!sets.length) continue;
+        const best = Math.max(...sets.map((s) => s.weight_kg || 0));
+        for (const key of [String(act.physicalActivityId || ""), String(act.physicalActivityName || "")]) {
+          if (!key) continue;
+          if (!map[key]) map[key] = { last_sets: sets, last_on: dayIso, best };
+          else map[key].best = Math.max(map[key].best, best);
+        }
+      }
+    }
+  } catch (e) { /* historique indisponible : on sert le direct sans "derniere fois" */ }
+  prevCaches.set(ctx.key, { at: Date.now(), map });
+  if (prevCaches.size > 500) prevCaches.delete(prevCaches.keys().next().value);
+  return map;
+}
+
+export function compactLive(cur, prev) {
   const ws = cur && cur.workoutSession;
   const st = { workout_id: "", date: new Date().toISOString().slice(0, 10), name: "", program_name: "", hr_samples: 0,
     has_current_workout: false, session_found: false, started_on: "", closed: false, done_count: 0, total_count: 0,
@@ -149,7 +189,13 @@ export function compactLive(cur) {
       picture_url: String(e.pictureUrl || (Array.isArray(e.imageFrames) && e.imageFrames[0]) || ""),
       equipment_picture_url: String(e.equipmentPictureUrl || ""),
       muscles: (e.muscles || []).map((m) => m && m.muscleName).filter(Boolean).slice(0, 4),
+      muscle_types: (e.muscles || []).map((m) => m && m.muscleType).filter(Boolean).slice(0, 6),
+      pa_id: String(e.physicalActivityId || ""),
+      rm1_kg: rm1(e.currentReferenceValues),
+      last_sets: [], last_on: "",
     };
+    const p = prev && (prev[ex.pa_id] || prev[ex.name] || prev[ex.short_name]);
+    if (p) { ex.last_sets = p.last_sets; ex.last_on = p.last_on; if (p.best) ex.best_weight_kg = p.best; }
     const mv = num(e.doneMove), kc = num(e.doneCalories);
     if (mv) ex.done_move = Math.round(mv);
     if (kc) ex.done_calories = Math.round(kc);
@@ -187,7 +233,7 @@ export default {
         return json({ status: "ok", relay: "cloudflare", modes: ["watch-credentials", ...(env.MYWELLNESS_EMAIL && env.MYWELLNESS_PASSWORD && env.PAIR_TOKEN ? ["pair-token"] : [])], users_cached: sessions.size });
       }
       let ctx = null;
-      if (path === "/live" || path === "/live/hr" || path === "/live/mark" || path === "/auth/check") {
+      if (path === "/live" || path === "/live/hr" || path === "/live/mark" || path === "/live/close" || path === "/auth/check") {
         const creds = credentials(request, env);
         if (!authorized(request, env, creds)) return json({ detail: "Identifiants Technogym (X-MW-Email, X-MW-Password) ou token d'appairage requis" }, 401);
         if (!creds) return json({ detail: "Identifiants Technogym absents" }, 401);
@@ -202,7 +248,8 @@ export default {
         const c = liveCaches.get(ctx.key);
         if (c && Date.now() - c.at < LIVE_CACHE_MS) return json(c.body);
         const cur = await action(env, ctx, "GetCurrentWorkoutSession", {});
-        const body = compactLive(cur);
+        const prev = cur && cur.workoutSession ? await previousByExercise(env, ctx) : null;
+        const body = compactLive(cur, prev);
         liveCaches.set(ctx.key, { at: Date.now(), body });
         if (liveCaches.size > 500) liveCaches.delete(liveCaches.keys().next().value);
         return json(body);
@@ -222,6 +269,15 @@ export default {
         const res = await action(env, ctx, "MarkPhysicalActivityAsDone", { position: Number(b.position), userWorkoutSessionId: ws.workoutSessionId, idCr: ws.idCr, partitionDate: partition });
         liveCaches.delete(ctx.key);
         return json({ marked: true, response: res });
+      }
+      if (path === "/live/close" && request.method === "POST") {
+        const cur = await action(env, ctx, "GetCurrentWorkoutSession", {});
+        const ws = cur && cur.workoutSession;
+        if (!ws) return json({ closed: false, reason: "Aucune seance ouverte" });
+        const partition = Number(String(ws.startedOn || "").slice(0, 10).replace(/-/g, "")) || Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
+        const res = await action(env, ctx, "CloseWorkoutSession", { idCr: ws.idCr, partitionDate: String(partition) });
+        liveCaches.delete(ctx.key);
+        return json({ closed: true, response: res });
       }
       if (path === "/" && env.ASSETS) return env.ASSETS.fetch(request);
       if (path === "/") return new Response("Spotter for Technogym : relais en ligne. Voir /health.", { headers: { "Content-Type": "text/plain; charset=utf-8" } });

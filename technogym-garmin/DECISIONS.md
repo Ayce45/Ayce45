@@ -289,3 +289,34 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
 * Reglable dans Garmin Connect (`autoReps`), actif par defaut ; permission `Sensor` ajoutee au manifeste.
   Non testable dans le simulateur (pas de flux accelerometre) : premiere validation reelle a faire a la
   salle, en comparant la valeur affichee et le compte reel sur quelques series.
+
+## 2026-09-30 : derniere fois, fin de serie auto, fin de seance, muscles et 1RM, charge
+
+* Cinq manques releves face a Garmin Musculation, Hevy et Strong ont ete traites d'un bloc, le simulateur
+  servant a verifier chaque ecran (captures `docs/screenshots/30` a `37`).
+* Derniere fois et record : le backend et le relais lisent `ActivityHistory` (90 jours, 8 seances au plus,
+  cache 10 min) et joignent a chaque exercice de la seance courante ses series de la derniere fois
+  (`last_sets`, `last_on`) et sa meilleure charge (`best_weight_kg`), par `physicalActivityId` puis par nom.
+  La montre affiche "Préc. 4x10x35kg · 29/09" sur la fiche et l'ecran de serie, et "RECORD !" quand la
+  charge validee depasse la meilleure connue. Aucun stockage cote relais : tout est recalcule par utilisateur.
+* Fin de serie automatique : quand le compteur de repetitions est actif et n'a pas vu de repetition depuis
+  `autoEndSetS` secondes (6 s, reglable, 0 = jamais), la serie est validee et la recuperation demarre. Une
+  correction manuelle (UP / DOWN) desactive l'automatisme pour la serie, la montre ne doit pas valider a la
+  place de l'utilisateur qui reprend la main.
+* Ecran de fin de seance (`SessionSummaryView`) : Terminer la séance affiche la grille durée, exercices,
+  MOVEs, kcal, FC moyenne / max et volume (somme reps x charge des series libres). START enregistre le FIT.
+  Fermer la seance cote Technogym reste une option du menu (`CloseWorkoutSession` via `/live/close`) parce
+  que la salle la ferme d'elle-meme a la deconnexion et qu'une fermeture prematuree perdrait les exercices
+  restants.
+* Carte musculaire : `muscles[].muscleType` est dessine sur une silhouette de face en primitives (pas de
+  bitmap, une seule ressource pour tous les ecrans), zones Technogym regroupees par famille. 1RM : la valeur
+  `currentReferenceValues.Rm1` de Technogym est reprise telle quelle, sans estimation maison (Epley ou
+  autre), pour ne pas contredire ce que l'utilisateur voit dans l'app Technogym.
+* Charge ajustable : appui long UP pendant la serie ouvre Charge, selecteur par pas de `weightStepKg`, avec
+  les disques par cote pour une barre de `barKg` (20 kg par defaut, reglable pour les barres de 15 ou 10).
+  La charge est memorisee par exercice dans `Application.Storage` et reproposee la fois suivante, avant la
+  cible du programme.
+* Simulateur : `makeImageRequest` declenche une boite de dialogue Garmin Connect a chaque visuel, ce qui
+  bloquait les captures automatiques ; la variante simulateur (`resources-sim`) coupe les visuels par la
+  propriete `loadImages`, absente des reglages exposes. Les menus d'appui long se declenchent au clavier
+  (touche Menu) et non par un clic long a la souris.

@@ -17,6 +17,12 @@
     <setting propertyKey="@Properties.autoReps" title="Compter les répétitions avec l'accéléromètre">
         <settingConfig type="boolean" />
     </setting>
+    <setting propertyKey="@Properties.autoEndSetS" title="Fin de série automatique après N s sans mouvement (0 = jamais)">
+        <settingConfig type="numeric" />
+    </setting>
+    <setting propertyKey="@Properties.barKg" title="Poids de la barre (kg) pour le calcul des disques">
+        <settingConfig type="numeric" />
+    </setting>
     <setting propertyKey="@Properties.autoStartRest" title="Lancer le repos automatiquement">
         <settingConfig type="boolean" />
     </setting>

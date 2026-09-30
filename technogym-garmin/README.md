@@ -62,8 +62,10 @@ exercices, appui long UP pour le menu, BACK pour sortir.
 | Cardio | FC en grand colorée par zone, jauge des 5 zones (celles du profil Garmin), moyenne et max |
 | Séance | grille 4 champs a la Garmin : durée, exercices terminés, MOVEs, kcal remontés par les équipements |
 | Actions (START) | sur l'exercice affiche, comme le bouton Lap d'une activite : Lancer l'exercice (exercice libre), Récupération (compte a rebours du repos prescrit, vibration), Marquer terminé (ecrit dans la seance Technogym), Fiche, Exercices (liste avec icones d'etat) |
-| Exercice libre | pour les poids libres, etirements et tout exercice fait sans equipement connecte : la montre enchaine les series prescrites. Compteur de repetitions par accelerometre (algorithme documente dans `tools/reps/README.md`, +/-1 rep dans 75 % des series du jeu MM-Fit, 82 % hors exercices alternes ; UP / DOWN corrigent et figent ; reglage `autoReps`), charge cible, START = serie faite (lap dans l'activite), puis récupération automatique du repos prescrit par le programme (60 s a defaut) avec vibrations a 3, 2, 1 et a la fin, START = passer. Apres la derniere serie l'exercice est marque terminé dans la seance Technogym (`POST /live/mark`) et la page Exercice passe au suivant |
-| Fiche exercice | visuel Technogym de l'exercice (UP / DOWN : visuel de l'équipement), muscles travaillés, séries ; START = suivre cet exercice. Les vidéos Technogym ne sont pas lisibles sur Connect IQ, seules les images le sont (téléchargées par le téléphone et redimensionnées) |
+| Exercice libre | pour les poids libres, etirements et tout exercice fait sans equipement connecte : la montre enchaine les series prescrites. Compteur de repetitions par accelerometre (algorithme documente dans `tools/reps/README.md`, +/-1 rep dans 75 % des series du jeu MM-Fit, 82 % hors exercices alternes ; UP / DOWN corrigent et figent ; reglage `autoReps`), charge proposee (derniere charge memorisee sur la montre, sinon la cible), ligne "Préc. 4x10x35kg · 29/09" (series de la derniere fois, lues dans l'historique Technogym). START = serie faite (lap dans l'activite) ; fin de serie automatique quand le compteur n'a plus vu de repetition depuis `autoEndSetS` secondes (6 s par defaut, 0 = jamais). Puis récupération automatique du repos prescrit par le programme (60 s a defaut) avec vibrations a 3, 2, 1 et a la fin, START = passer ; "RECORD !" en jaune quand la charge depasse la meilleure des 90 derniers jours. Apres la derniere serie l'exercice est marque terminé dans la seance Technogym (`POST /live/mark`) et la page Exercice passe au suivant |
+| Charge (appui long UP pendant la serie) | selecteur de charge par pas de `weightStepKg` (2,5 kg), avec les disques a mettre de chaque cote pour une barre de `barKg` (20 kg) ; la charge est memorisee par exercice sur la montre et reproposee la fois suivante |
+| Fiche exercice | visuel Technogym de l'exercice (UP / DOWN : visuel de l'équipement, puis carte des muscles travaillés dessinee sur une silhouette), muscles, séries, derniere fois et 1RM Technogym (`currentReferenceValues.Rm1`) quand il existe ; START = suivre cet exercice. Les vidéos Technogym ne sont pas lisibles sur Connect IQ, seules les images le sont (téléchargées par le téléphone et redimensionnées) |
+| Fin de séance (menu, Terminer la séance) | grille durée, exercices, MOVEs, kcal, FC moyenne / max, volume souleve dans les exercices libres ; START = enregistrer l'activite Musculation ; le menu propose aussi de fermer la seance cote Technogym (`POST /live/close`, `CloseWorkoutSession`) ou d'annuler |
 
 Titres : l'equipement en grand ("Synchro", "Chest press Sel") et le nom de l'exercice en dessous ; sans equipement,
 la famille ("Étirement", "Cardio", "Poids libres").
@@ -74,7 +76,8 @@ toutes les 30 s (`POST /live/hr`). Le mode Coach (la montre dicte séries et rep
 reste dans le menu.
 
 Captures (simulateur Forerunner 955, rejeu d'une seance reelle) : `docs/screenshots/21-page-exercice-fr955.png`
-a `25-aucune-seance-fr955.png`. Textes dans le vocabulaire Technogym ; fiche store : `docs/store-listing.md`.
+a `29-exercice-libre-recuperation-fr955.png`, puis `30-fiche-muscles-fr955.png` a `37-fin-de-seance-menu-fr955.png`
+(carte musculaire, derniere fois, menu de serie, selecteur de charge avec disques, fin de seance). Textes dans le vocabulaire Technogym ; fiche store : `docs/store-listing.md`.
 
 Installation : `docs/connectiq.md`. Binaires : `watch/dist/spotter.iq` (store) et `watch/dist/spotter-<modele>.prg`
 (fr955, fr965, fr265, venu3, vivoactive5, fenix7, epix2pro47mm, fenix843mm). Reglages (URL du backend, token)
@@ -222,6 +225,6 @@ chronologie compressee). Les autres endpoints continuent de parler a Mywellness.
    la montre.
 4. Tester sur la vraie montre (modele a confirmer) : lisibilite, tactile, HTTPS.
 5. Exposer le backend en https (Caddy ou Cloudflare Tunnel) pour la montre.
-6. Progression : proposer la charge de la derniere seance reussie sur la montre.
+6. Progression : fait sur la montre (derniere fois, record, charge memorisee) ; reste a ecrire les series reelles dans Technogym.
 7. Enrichir `exercise_map.json` au fil des programmes (rapport de mapping dans la synchro).
 8. Glance "seance du jour", publication eventuelle sur le store Connect IQ.

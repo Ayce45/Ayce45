@@ -1,6 +1,7 @@
 import Toybox.Communications;
 import Toybox.Graphics;
 import Toybox.Lang;
+import Toybox.Math;
 import Toybox.WatchUi;
 
 // Fiche d'un exercice : visuel Technogym (image de l'exercice ou de l'equipement), nom, equipement,
@@ -11,7 +12,7 @@ class DetailView extends WatchUi.View {
     var index as Number;
     var live as LiveView;
     var bitmap as WatchUi.BitmapResource or Graphics.BitmapReference or Null = null;
-    var which as Number = 0;       // 0 = exercice, 1 = equipement
+    var which as Number = 0;       // 0 = exercice, 1 = equipement, 2 = carte musculaire
     var loading as Boolean = false;
     var failed as Boolean = false;
 
@@ -42,7 +43,8 @@ class DetailView extends WatchUi.View {
         var url = imageUrl();
         bitmap = null;
         failed = false;
-        if (url.length() == 0 || !(Communications has :makeImageRequest)) { return; }
+        if (which == 2) { return; }
+        if (url.length() == 0 || !Model.loadImages || !(Communications has :makeImageRequest)) { return; }
         var w = System.getDeviceSettings().screenWidth;
         var h = System.getDeviceSettings().screenHeight;
         loading = true;
@@ -73,10 +75,13 @@ class DetailView extends WatchUi.View {
         var e = ex();
         if (e == null) { return; }
 
-        // visuel (ou cadre vide pendant le chargement)
-        var imgTop = h * 0.08;
-        var imgH = h * 0.42;
-        if (bitmap != null) {
+        // visuel (ou cadre vide pendant le chargement), ou carte musculaire
+        var imgTop = h * 0.06;
+        var imgH = h * 0.34;
+        if (which == 2) {
+            var types = e.hasKey("muscle_types") ? e["muscle_types"] as Array : [] as Array;
+            MuscleMap.draw(dc, cx - imgH * 0.32, imgTop, imgH * 0.64, imgH, types);
+        } else if (bitmap != null) {
             var bm = bitmap;
             var bw = (bm as WatchUi.BitmapResource).getWidth();
             var bh = (bm as WatchUi.BitmapResource).getHeight();
@@ -112,7 +117,21 @@ class DetailView extends WatchUi.View {
             y += Ui.drawWrapped(dc, cx, y, w * 0.80, Graphics.FONT_XTINY, eq, 1);
         }
         dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
-        Ui.drawWrapped(dc, cx, y, w * 0.70, Graphics.FONT_SMALL, Live.setsText(e), 1);
+        y += Ui.drawWrapped(dc, cx, y, w * 0.70, Graphics.FONT_SMALL, Live.setsText(e), 1);
+        // derniere fois / record / 1RM en une ligne discrete
+        var extra = "";
+        var lt = Live.lastTimeText(e);
+        if (lt.length() > 0) { extra = (WatchUi.loadResource(Rez.Strings.Prev) as String) + " " + lt; }
+        if (Live.rm1(e) > 0) { extra += (extra.length() > 0 ? " · " : "") + "1RM " + Ui.fmtKg(Live.rm1(e)); }
+        if (extra.length() > 0) {
+            // largeur utile du cercle a cette hauteur (ecran rond), avec une marge
+            var r = h / 2.0;
+            var dy = (y + dc.getFontHeight(Graphics.FONT_XTINY) / 2.0) - r;
+            var chord = Math.sqrt((r * r - dy * dy).abs()) * 2.0 * 0.88;
+            var maxW = chord < w * 0.72 ? chord : w * 0.72;
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, y, maxW, Graphics.FONT_XTINY, extra, 1);
+        }
     }
 }
 
@@ -126,14 +145,17 @@ class DetailDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onNextPage() as Boolean {
-        view.which = (view.which + 1) % 2;
+        view.which = (view.which + 1) % 3;
         view.loadImage();
         WatchUi.requestUpdate();
         return true;
     }
 
     function onPreviousPage() as Boolean {
-        return onNextPage();
+        view.which = (view.which + 2) % 3;
+        view.loadImage();
+        WatchUi.requestUpdate();
+        return true;
     }
 
     // START : suivre cet exercice sur la page Exercice

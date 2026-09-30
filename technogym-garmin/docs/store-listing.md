@@ -37,13 +37,16 @@ peut l'utiliser pendant l'exercice.
 COLLECTEZ VOS MOVEs
 Les MOVEs gagnés au fil de la séance s'affichent sur la montre.
 
-MODE COACH
-Pour les exercices au poids libre, la montre peut guider vos séries et vos repos et renvoyer vos résultats
-dans votre séance Technogym.
+EXERCICES LIBRES
+Pour les poids libres, les étirements et tout exercice sans équipement connecté, lancez l'exercice depuis la
+montre : elle compte vos répétitions au poignet, détecte la fin de la série, lance la récupération prescrite
+avec vibrations, puis marque l'exercice terminé dans votre séance Technogym.
 
-VOTRE PROGRAMME SUR VOTRE MONTRE
-L'application de synchronisation fournie avec Spotter convertit votre programme d'entraînement Technogym
-en séances d'entraînement Garmin, planifiées dans Garmin Connect.
+PROGRESSEZ
+Sur chaque exercice : vos séries de la dernière fois, votre 1RM Technogym, les muscles travaillés sur une
+silhouette, la charge mémorisée avec les disques à charger de chaque côté, et un RECORD quand vous
+dépassez votre meilleure charge. En fin de séance, un résumé : durée, exercices, MOVEs, kcal, fréquence
+cardiaque et volume soulevé.
 
 CONFIGURATION EN DEUX CHAMPS
 Dans Garmin Connect, ouvrez les réglages de l'app et saisissez l'identifiant et le mot de passe de votre
@@ -71,13 +74,15 @@ turn on your watch's heart rate broadcast, Technogym equipment can use it during
 COLLECT YOUR MOVEs
 MOVEs earned during the workout are shown on the watch.
 
-COACH MODE
-For free weight exercises, the watch can guide your sets and rests and send your results back to your
-Technogym workout.
+FREE EXERCISES
+For free weights, stretching and any exercise without connected equipment, start the exercise from the
+watch: it counts your reps at the wrist, detects the end of the set, runs the prescribed rest with
+vibrations, then marks the exercise done in your Technogym workout.
 
-YOUR PROGRAM ON YOUR WATCH
-The sync app shipped with Spotter converts your Technogym training program into Garmin workouts scheduled
-in Garmin Connect.
+PROGRESS
+On every exercise: your sets from last time, your Technogym 1RM, the muscles worked on a body map, the
+remembered load with the plates to put on each side, and a RECORD when you beat your best load. At the end
+of the workout, a summary: duration, exercises, MOVEs, kcal, heart rate and volume lifted.
 
 TWO-FIELD SETUP
 In Garmin Connect, open the app settings and enter your Technogym (Mywellness) account email and password.
@@ -94,13 +99,14 @@ fréquence cardiaque, MOVEs, Wellness
 
 ## Nouveautes (premiere version)
 
-Suivi en direct de la séance Technogym, fréquence cardiaque, MOVEs, mode Coach, synchronisation du
-programme vers Garmin Connect.
+Suivi en direct de la séance Technogym, fréquence cardiaque, MOVEs, exercices libres avec compteur de
+répétitions, dernière fois et record, carte des muscles, charge et disques, résumé de fin de séance.
 
 ## Rappels pour la relecture Garmin
 
 * Icone sans logo Technogym (la notre : silhouette d'un spotter, orange).
 * Ne pas ecrire "officiel", "partenaire" ni "by Technogym".
 * Garder la phrase de non-affiliation en fin de description dans chaque langue.
-* Captures : `docs/screenshots/14-live-exercice-courant.png`, `15-live-fait-machine.png`,
-  `16-live-fait-app.png`, `17-live-fr955.png`, `18-accueil-fr955.png`.
+* Captures : `docs/screenshots/21-page-exercice-fr955.png`, `22-page-cardio-fr955.png`,
+  `23-page-seance-fr955.png`, `26-fiche-exercice-fr955.png`, `28-exercice-libre-serie-fr955.png`,
+  `30-fiche-muscles-fr955.png`, `33-selecteur-charge-fr955.png`, `36-fin-de-seance-fr955.png`.

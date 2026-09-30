@@ -39,6 +39,43 @@ module Model {
     var vibrateOnRestEnd as Boolean = true;
     var weightStep as Float = 2.5;
     var autoReps as Boolean = true;           // comptage des repetitions par accelerometre
+    var loadImages as Boolean = true;         // visuels Technogym sur la fiche (false dans la variante simulateur)
+    var autoEndSetS as Number = 6;            // fin de serie automatique apres N s sans mouvement (0 = off)
+    var barKg as Float = 20.0;                // barre pour le calcul des disques
+
+    // seance live : series faites sur la montre (exercices libres) pour le volume et le resume
+    var liveSets as Number = 0;
+    var liveVolumeKg as Float = 0.0;
+    var liveReps as Number = 0;
+
+    function addLiveSet(reps as Number, weight as Float) as Void {
+        liveSets++;
+        liveReps += reps;
+        liveVolumeKg += reps * weight;
+    }
+
+    function resetLiveStats() as Void {
+        liveSets = 0; liveVolumeKg = 0.0; liveReps = 0;
+    }
+
+    // charge ajustee par exercice (cle : pa_id ou nom), memorisee pour la prochaine fois
+    function savedWeight(key as String) as Float? {
+        var d = Storage.getValue("weights");
+        if (d instanceof Dictionary && (d as Dictionary).hasKey(key)) {
+            var v = (d as Dictionary)[key];
+            if (v instanceof Float) { return v as Float; }
+            if (v instanceof Number) { return (v as Number).toFloat(); }
+        }
+        return null;
+    }
+
+    function saveWeight(key as String, kg as Float) as Void {
+        var d = Storage.getValue("weights");
+        var dict = (d instanceof Dictionary) ? d as Dictionary : ({} as Dictionary);
+        dict[key] = kg;
+        if (dict.size() > 60) { dict = { key => kg } as Dictionary; }
+        try { Storage.setValue("weights", dict); } catch (e) { }
+    }
 
     function reloadSettings() as Void {
         backendUrl = _prop("backendUrl", "") as String;
@@ -49,6 +86,11 @@ module Model {
         autoStartRest = _prop("autoStartRest", true) as Boolean;
         vibrateOnRestEnd = _prop("vibrateOnRestEnd", true) as Boolean;
         autoReps = _prop("autoReps", true) as Boolean;
+        loadImages = _prop("loadImages", true) as Boolean;
+        var ae = _prop("autoEndSetS", 6);
+        autoEndSetS = (ae instanceof Number) ? ae as Number : ((ae instanceof Float) ? (ae as Float).toNumber() : 6);
+        var bk = _prop("barKg", 20.0);
+        barKg = (bk instanceof Number) ? (bk as Number).toFloat() : ((bk instanceof Float) ? bk as Float : 20.0);
         var ws = _prop("weightStepKg", 2.5);
         weightStep = (ws instanceof Number) ? (ws as Number).toFloat() : ((ws instanceof Float) ? ws as Float : 2.5);
         if (backendUrl.length() > 0 && backendUrl.substring(backendUrl.length() - 1, backendUrl.length()).equals("/")) {

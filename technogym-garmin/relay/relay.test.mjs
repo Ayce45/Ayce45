@@ -4,7 +4,7 @@ const lines = fs.readFileSync("../scratch/poc_live_log.jsonl", "utf8").split("\n
 let checked = 0, maxBytes = 0;
 for (const line of lines) {
   const r = JSON.parse(line);
-  const c = compactLive(r.current);
+  const c = compactLive(r.current, { "Développés des bras": { last_sets: [{ reps: 10, weight_kg: 32.5 }], last_on: "2026-09-29", best: 35 } });
   const b = JSON.stringify(c);
   maxBytes = Math.max(maxBytes, b.length);
   if (c.has_current_workout) { checked++; if (checked === 1) console.log("premiere capture :", c.name, c.done_count + "/" + c.total_count, "pos", c.current_position, c.exercises[1]); }

@@ -116,6 +116,74 @@ module Icons {
     }
 }
 
+// Carte musculaire : silhouette de face dans le rectangle (x, y, w, h), zones en surbrillance pour les
+// cles Technogym (Pectorals, Abdominals, Deltoids, Biceps, Triceps, Forearms, Trapezius, LateralsBack,
+// Paravertebrals, RotatorCuff, Quadriceps, Hamstrings, Glutes, Calves, IleoPsoas, Adductors, Abductors,
+// UpperBody, LowerBody). Dessin en primitives, coordonnees relatives.
+module MuscleMap {
+
+    function hits(types as Array, names as Array<String>) as Boolean {
+        for (var i = 0; i < types.size(); i++) {
+            var t = types[i] as String;
+            for (var j = 0; j < names.size(); j++) {
+                if (t.equals(names[j])) { return true; }
+            }
+        }
+        return false;
+    }
+
+    function zone(dc as Dc, on as Boolean, x as Numeric, y as Numeric, w as Numeric, h as Numeric) as Void {
+        dc.setColor(on ? Graphics.COLOR_ORANGE : Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
+        if (on) { dc.fillRoundedRectangle(x, y, w, h, 3); } else { dc.drawRoundedRectangle(x, y, w, h, 3); }
+    }
+
+    function draw(dc as Dc, x as Numeric, y as Numeric, w as Numeric, h as Numeric, types as Array) as Void {
+        var cx = x + w / 2;
+        var u = h / 100.0;   // unite verticale
+        var upper = hits(types, ["UpperBody"] as Array<String>);
+        var lower = hits(types, ["LowerBody"] as Array<String>);
+        // tete
+        dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+        dc.drawCircle(cx, y + 6 * u, 5 * u);
+        // trapezes / cou
+        zone(dc, upper || hits(types, ["Trapezius", "RotatorCuff"] as Array<String>), cx - 10 * u, y + 12 * u, 20 * u, 5 * u);
+        // deltoides
+        var delt = upper || hits(types, ["Deltoids", "RotatorCuff"] as Array<String>);
+        zone(dc, delt, cx - 19 * u, y + 17 * u, 7 * u, 7 * u);
+        zone(dc, delt, cx + 12 * u, y + 17 * u, 7 * u, 7 * u);
+        // pectoraux
+        var pec = upper || hits(types, ["Pectorals"] as Array<String>);
+        zone(dc, pec, cx - 11 * u, y + 18 * u, 10 * u, 9 * u);
+        zone(dc, pec, cx + 1 * u, y + 18 * u, 10 * u, 9 * u);
+        // dos / paravertebraux (bandes laterales du tronc)
+        var back = upper || hits(types, ["LateralsBack", "Paravertebrals", "Trapezius"] as Array<String>);
+        zone(dc, back, cx - 12 * u, y + 28 * u, 3 * u, 14 * u);
+        zone(dc, back, cx + 9 * u, y + 28 * u, 3 * u, 14 * u);
+        // abdominaux
+        zone(dc, upper || hits(types, ["Abdominals", "Core"] as Array<String>), cx - 7 * u, y + 28 * u, 14 * u, 14 * u);
+        // biceps / triceps (bras)
+        var bic = upper || hits(types, ["Biceps"] as Array<String>);
+        var tri = upper || hits(types, ["Triceps"] as Array<String>);
+        zone(dc, bic || tri, cx - 21 * u, y + 25 * u, 6 * u, 14 * u);
+        zone(dc, bic || tri, cx + 15 * u, y + 25 * u, 6 * u, 14 * u);
+        // avant-bras
+        var fore = upper || hits(types, ["Forearms"] as Array<String>);
+        zone(dc, fore, cx - 23 * u, y + 40 * u, 6 * u, 13 * u);
+        zone(dc, fore, cx + 17 * u, y + 40 * u, 6 * u, 13 * u);
+        // hanches / fessiers / psoas
+        var hip = lower || hits(types, ["Glutes", "IleoPsoas", "Abductors"] as Array<String>);
+        zone(dc, hip, cx - 12 * u, y + 43 * u, 24 * u, 7 * u);
+        // cuisses (quadriceps, ischios, adducteurs)
+        var thigh = lower || hits(types, ["Quadriceps", "Hamstrings", "Adductors", "Abductors"] as Array<String>);
+        zone(dc, thigh, cx - 12 * u, y + 51 * u, 11 * u, 22 * u);
+        zone(dc, thigh, cx + 1 * u, y + 51 * u, 11 * u, 22 * u);
+        // mollets
+        var calf = lower || hits(types, ["Calves"] as Array<String>);
+        zone(dc, calf, cx - 11 * u, y + 75 * u, 9 * u, 20 * u);
+        zone(dc, calf, cx + 2 * u, y + 75 * u, 9 * u, 20 * u);
+    }
+}
+
 // Icone d'etat utilisable dans un Menu2 (IconMenuItem).
 class StatusIconDrawable extends WatchUi.Drawable {
 

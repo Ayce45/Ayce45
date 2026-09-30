@@ -54,5 +54,18 @@
     <string id="Marking">Enregistrement...</string>
     <string id="ExerciseDone">Exercice terminé</string>
     <string id="AutoCount">auto</string>
+    <string id="LastTime">Dernière fois</string>
+    <string id="Prev">Préc.</string>
+    <string id="Record">RECORD !</string>
+    <string id="Weight">Charge</string>
+    <string id="Plates">Disques par côté</string>
+    <string id="Bar">barre</string>
+    <string id="SessionSummary">Fin de séance</string>
+    <string id="Volume">VOLUME</string>
+    <string id="SaveAndQuit">START : enregistrer</string>
+    <string id="CloseTechnogym">Fermer aussi la séance Technogym</string>
+    <string id="Closed">Séance Technogym fermée</string>
+    <string id="MuscleMap">Muscles</string>
+    <string id="AutoEnd">Fin de série auto</string>
     <string id="Target">cible</string>
 </strings>

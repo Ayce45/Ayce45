@@ -30,6 +30,9 @@ class FreeExerciseView extends WatchUi.View {
     var finishing as Boolean = false;
     var status as String = "";
     var autoCount as Boolean = false;   // comptage par accelerometre actif sur cette serie
+    var lastRepTick as Number = 0;      // tick de la derniere repetition detectee (fin de serie auto)
+    var tick as Number = 0;
+    var record as Boolean = false;      // record de charge battu sur cette serie
     var autoReps as Number = 0;         // repetitions detectees
     var manual as Boolean = false;      // l'utilisateur a corrige a la main : on ne touche plus au compteur
 
@@ -55,7 +58,7 @@ class FreeExerciseView extends WatchUi.View {
     function loadTarget() as Void {
         var st = currentSet();
         reps = Model.autoReps && RepCounter.supported() ? 0 : Model.num(st, "reps", 0).toNumber();
-        weight = Model.num(st, "weight_kg", 0).toFloat();
+        weight = Live.startWeight(ex(), st);
         duration = Model.num(st, "duration_s", 0).toNumber();
     }
 
@@ -87,6 +90,7 @@ class FreeExerciseView extends WatchUi.View {
 
     function onRep(n as Number) as Void {
         autoReps = n;
+        lastRepTick = tick;
         if (!manual) {
             reps = n;
             if (n == Model.num(currentSet(), "reps", 0).toNumber()) { Recording.vibrate(false); }  // cible atteinte
@@ -95,7 +99,13 @@ class FreeExerciseView extends WatchUi.View {
     }
 
     function onTick() as Void {
+        tick++;
         Live.sampleHr();
+        // fin de serie automatique : des repetitions comptees puis plus aucun mouvement pendant N s
+        if (!resting && autoCount && !manual && reps > 0 && Model.autoEndSetS > 0 && tick - lastRepTick >= Model.autoEndSetS) {
+            validateSet();
+            return;
+        }
         if (resting) {
             restLeft--;
             if (restLeft <= 3 && restLeft > 0) { Recording.vibrate(false); }
@@ -131,7 +141,10 @@ class FreeExerciseView extends WatchUi.View {
         }
         var e = ex();
         Recording.lap(e != null ? Model.num(e, "position", 0).toNumber() : 0, reps, weight);
-        Recording.vibrate(false);
+        Model.addLiveSet(reps, weight);
+        if (weight > 0) { Model.saveWeight(Live.key(e), weight); }
+        record = weight > Live.bestWeight(e) && Live.bestWeight(e) > 0 && reps > 0;
+        Recording.vibrate(record);
         if (setIdx >= sets.size() - 1) {
             finish();
             return;
@@ -202,11 +215,15 @@ class FreeExerciseView extends WatchUi.View {
             dc.drawText(cx, h * 0.36, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.RestLabel) as String, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             dc.drawText(cx, h * 0.52, small ? Graphics.FONT_NUMBER_HOT : Graphics.FONT_NUMBER_THAI_HOT, Ui.fmtClock(restLeft), Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
             Ui.drawProgressArc(dc, restTotal > 0 ? (restTotal - restLeft).toFloat() / restTotal : 0.0, Graphics.COLOR_BLUE);
-            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            if (!restOnly && setIdx + 1 < sets.size()) {
+            if (record) {
+                dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
+                dc.drawText(cx, h * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.Record) as String, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+            } else if (!restOnly && setIdx + 1 < sets.size()) {
+                dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
                 var nx = sets[setIdx + 1] as Dictionary;
                 Ui.drawWrapped(dc, cx, h * 0.70, w * 0.70, Graphics.FONT_XTINY, (WatchUi.loadResource(Rez.Strings.NextExercise) as String) + Live.oneSet(nx), 1);
             }
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.SkipRestHint) as String, Graphics.TEXT_JUSTIFY_CENTER);
         } else {
             // serie : repetitions en grand (ou duree), charge
@@ -223,14 +240,21 @@ class FreeExerciseView extends WatchUi.View {
                 dc.drawText(cx - lh + tw / 2 + 4, h * 0.47 + lh * 0.4, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.Reps) as String, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
                 var target = Model.num(currentSet(), "reps", 0).toNumber();
                 var tag = autoCount && !manual ? (WatchUi.loadResource(Rez.Strings.AutoCount) as String) + " · " : "";
-                dc.drawText(cx, h * 0.585, Graphics.FONT_XTINY, tag + (WatchUi.loadResource(Rez.Strings.Target) as String) + " " + target, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+                var tgtW = Model.num(currentSet(), "weight_kg", 0).toFloat();
+                var tline = tag + (WatchUi.loadResource(Rez.Strings.Target) as String) + " " + target + (tgtW > 0 && (tgtW - weight).abs() > 0.01 ? " x " + Ui.fmtKg(tgtW) : "");
+                dc.drawText(cx, h * 0.585, Graphics.FONT_XTINY, tline, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
                 if (weight > 0) {
                     dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                    dc.drawText(cx, h * 0.69, Graphics.FONT_SMALL, Ui.fmtKg(weight) + " kg", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+                    dc.drawText(cx, h * 0.68, Graphics.FONT_SMALL, Ui.fmtKg(weight) + " kg", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
                 }
             }
+            var lt = Live.lastTimeText(e);
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.SetDoneHint) as String, Graphics.TEXT_JUSTIFY_CENTER);
+            if (lt.length() > 0) {
+                Ui.drawWrapped(dc, cx, h * 0.765, w * 0.80, Graphics.FONT_XTINY, (WatchUi.loadResource(Rez.Strings.Prev) as String) + " " + lt, 1);
+            } else {
+                dc.drawText(cx, h * 0.80, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.SetDoneHint) as String, Graphics.TEXT_JUSTIFY_CENTER);
+            }
         }
         // FC discrete en bas
         var hr = Live.hr;
@@ -276,6 +300,7 @@ class FreeExerciseDelegate extends WatchUi.BehaviorDelegate {
     function onMenu() as Boolean {
         var menu = new WatchUi.Menu2({ :title => Live.headline(view.ex()) });
         if (!view.restOnly) {
+            menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.Weight) as String, Ui.fmtKg(view.weight) + " kg", :weight, null));
             menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.FinishExercise) as String, null, :finish, null));
         }
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.Cancel) as String, null, :cancel, null));
@@ -298,10 +323,19 @@ class FreeExerciseMenuDelegate extends WatchUi.Menu2InputDelegate {
         view = v;
     }
 
+    function onWeight(kg as Float) as Void {
+        view.weight = kg;
+        Model.saveWeight(Live.key(view.ex()), kg);
+        WatchUi.requestUpdate();
+    }
+
     function onSelect(item as MenuItem) as Void {
         var id = item.getId();
         WatchUi.popView(WatchUi.SLIDE_DOWN);
-        if (id == :finish) {
+        if (id == :weight) {
+            var wp = new WeightPickerView(view.weight, Live.fullTitle(view.ex()), method(:onWeight));
+            WatchUi.pushView(wp, new WeightPickerDelegate(wp), WatchUi.SLIDE_UP);
+        } else if (id == :finish) {
             view.finish();
         } else if (id == :cancel) {
             WatchUi.popView(WatchUi.SLIDE_DOWN);

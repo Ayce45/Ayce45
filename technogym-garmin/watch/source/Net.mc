@@ -238,6 +238,30 @@ module Net {
         if (cb != null) { (cb as Method).invoke(code == 200, code == 200 ? "OK" : describe(code, data)); }
     }
 
+    // Fermeture de la seance cote Technogym (POST /live/close).
+    var closeBusy as Boolean = false;
+    var onClose as Method? = null;
+
+    function closeSession(callback as Method?) as Boolean {
+        if (closeBusy || !configured()) { return false; }
+        closeBusy = true;
+        onClose = callback;
+        var options = {
+            :method => Communications.HTTP_REQUEST_METHOD_POST,
+            :headers => _headers(true),
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+        Communications.makeWebRequest(Model.backendUrl + "/live/close" + (Model.pairToken.length() > 0 ? "?token=" + Model.pairToken : ""), {}, options, new Lang.Method(Net, :onCloseResponse));
+        return true;
+    }
+
+    function onCloseResponse(code as Number, data as Dictionary or String or Null) as Void {
+        closeBusy = false;
+        var cb = onClose;
+        onClose = null;
+        if (cb != null) { (cb as Method).invoke(code == 200, code == 200 ? "OK" : describe(code, data)); }
+    }
+
     var _sending as Dictionary? = null;
 
     function sendResults(payload as Dictionary, callback as Method?) as Boolean {

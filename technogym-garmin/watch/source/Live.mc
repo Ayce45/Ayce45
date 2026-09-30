@@ -157,6 +157,60 @@ module Live {
         return "";
     }
 
+    // Cle stable de l'exercice pour la memoire des charges.
+    function key(ex as Dictionary?) as String {
+        if (ex == null) { return ""; }
+        if (ex.hasKey("pa_id") && (ex["pa_id"] as String).length() > 0) { return ex["pa_id"] as String; }
+        return title(ex);
+    }
+
+    // "10 x 32.5 kg · 29/09" : derniere execution connue de l'exercice, ou "".
+    function lastTimeText(ex as Dictionary?) as String {
+        if (ex == null || !ex.hasKey("last_sets")) { return ""; }
+        var ls = ex["last_sets"] as Array;
+        if (ls.size() == 0) { return ""; }
+        var s0 = ls[0] as Dictionary;
+        var same = true;
+        for (var i = 1; i < ls.size(); i++) {
+            var si = ls[i] as Dictionary;
+            if (Model.num(si, "reps", -1) != Model.num(s0, "reps", -1) || Model.num(si, "weight_kg", -1) != Model.num(s0, "weight_kg", -1)) { same = false; }
+        }
+        // forme compacte : "4x10x35kg" (place comptee sur l'ecran de serie)
+        var txt = (same ? ls.size() + "x" : "") + compactSet(s0) + (same ? "" : "...");
+        if (ex.hasKey("last_on")) {
+            var d = ex["last_on"] as String;
+            if (d.length() >= 10) { txt += " · " + d.substring(8, 10) + "/" + d.substring(5, 7); }
+        }
+        return txt;
+    }
+
+    function compactSet(st as Dictionary) as String {
+        if (st.hasKey("reps")) {
+            var t = st["reps"].toString();
+            if (st.hasKey("weight_kg")) { t += "x" + Ui.fmtKg(Model.num(st, "weight_kg", 0)) + "kg"; }
+            return t;
+        }
+        if (st.hasKey("duration_s")) { return Model.num(st, "duration_s", 0).toNumber() + "s"; }
+        return "";
+    }
+
+    function bestWeight(ex as Dictionary?) as Float {
+        if (ex == null || !ex.hasKey("best_weight_kg")) { return 0.0; }
+        return Model.num(ex, "best_weight_kg", 0).toFloat();
+    }
+
+    function rm1(ex as Dictionary?) as Float {
+        if (ex == null || !ex.hasKey("rm1_kg")) { return 0.0; }
+        return Model.num(ex, "rm1_kg", 0).toFloat();
+    }
+
+    // Charge de depart d'une serie : charge memorisee sur la montre, sinon cible du programme.
+    function startWeight(ex as Dictionary?, st as Dictionary) as Float {
+        var saved = Model.savedWeight(key(ex));
+        if (saved != null) { return saved as Float; }
+        return Model.num(st, "weight_kg", 0).toFloat();
+    }
+
     function sourceText(ex as Dictionary?) as String {
         if (ex == null) { return ""; }
         var dev = ex.hasKey("device") ? (ex["device"] as String) : "";

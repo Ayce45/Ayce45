@@ -12,7 +12,7 @@ import json
 
 import threading
 import time
-from datetime import date
+from datetime import date, timedelta
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -45,7 +45,13 @@ class LiveExercise(BaseModel):
     done_calories: int | None = None
     picture_url: str = ""            # visuel Technogym de l'exercice (cmsmedia / cdnmedia)
     equipment_picture_url: str = ""  # visuel de l'equipement
-    muscles: list[str] = Field(default_factory=list)   # noms Technogym en francais
+    muscles: list[str] = Field(default_factory=list)        # noms Technogym en francais
+    muscle_types: list[str] = Field(default_factory=list)   # cles Technogym (Pectorals, Triceps...) pour la carte musculaire
+    pa_id: str = ""                                          # physicalActivityId (cle stable de l'exercice)
+    rm1_kg: float | None = None                              # 1RM estime par Technogym (currentReferenceValues)
+    last_sets: list[LiveSet] = Field(default_factory=list)   # series de la derniere fois (historique)
+    last_on: str = ""                                        # date de la derniere fois (YYYY-MM-DD)
+    best_weight_kg: float | None = None                      # record de charge sur l'historique lu
 
 
 class LiveState(BaseModel):
@@ -79,6 +85,16 @@ def _steps_to_sets(steps: list[dict[str, Any]] | None) -> list[LiveSet]:
             out.append(LiveSet(reps=int(reps) if reps is not None else None, weight_kg=weight, duration_s=int(dur) if dur is not None else None,
                                rest_s=int(rest) if rest is not None else None))
     return out
+
+
+def _rm1(refs: Any) -> float | None:
+    for r in refs or []:
+        if isinstance(r, dict) and str(r.get("name") or "").lower() == "rm1" and r.get("value") is not None:
+            try:
+                return round(float(r["value"]), 1)
+            except (TypeError, ValueError):
+                return None
+    return None
 
 
 def _kind(pa_type: str, is_cardio: bool) -> str:
@@ -138,6 +154,62 @@ class LiveService:
             return {}
         idx = min(int((time.time() - self._replay_t0) / max(self.replay_step, 0.5)), len(self._replay) - 1)
         return self._replay[idx]
+
+    # ------------------------------------------------------------------ historique par exercice
+    _prev: dict[str, Any] | None = None
+    _prev_at: float = 0.0
+    PREV_TTL = 600.0
+    PREV_DAYS = 90
+    PREV_SESSIONS = 8
+
+    def previous_by_exercise(self) -> dict[str, dict[str, Any]]:
+        """Derniere execution et record de charge par exercice (cle : physicalActivityId, puis nom), lus dans
+        les dernieres seances performees. Cache 10 min."""
+        if self._prev is not None and time.time() - self._prev_at < self.PREV_TTL:
+            return self._prev
+        out: dict[str, dict[str, Any]] = {}
+        if self._client is not None:
+            try:
+                today = date.today()
+                items = self._client.activity_history(today - timedelta(days=self.PREV_DAYS), today)
+                for item in items[: self.PREV_SESSIONS]:
+                    try:
+                        raw = self._client.performed_session_raw(item.get("idCr"), str(item.get("partitionDate")), item.get("facilityId"))
+                    except mw.MywellnessError:
+                        continue
+                    day = str(item.get("partitionDate"))
+                    day_iso = f"{day[:4]}-{day[4:6]}-{day[6:8]}" if len(day) == 8 else day
+                    for act in raw.get("physicalActivities") or []:
+                        pa = act.get("performedPhysicalActivity") or {}
+                        steps = ((pa.get("data") or {}).get("steps")) or []
+                        sets = _steps_to_sets(steps)
+                        if not sets:
+                            continue
+                        best = max((s.weight_kg or 0.0) for s in sets)
+                        for key in (str(act.get("physicalActivityId") or ""), str(act.get("physicalActivityName") or "")):
+                            if not key:
+                                continue
+                            cur = out.get(key)
+                            if cur is None:
+                                out[key] = {"last_sets": sets, "last_on": day_iso, "best": best}
+                            else:
+                                cur["best"] = max(cur["best"], best)
+            except mw.MywellnessError:
+                pass
+        self._prev = out
+        self._prev_at = time.time()
+        return out
+
+    def _fill_previous(self, st: LiveState) -> None:
+        prev = self.previous_by_exercise()
+        if not prev:
+            return
+        for ex in st.exercises:
+            p = prev.get(ex.pa_id) or prev.get(ex.name) or prev.get(ex.short_name)
+            if p:
+                ex.last_sets = p["last_sets"]
+                ex.last_on = p["last_on"]
+                ex.best_weight_kg = p["best"] or None
 
     def current(self) -> LiveState:
         """Seance courante cote Technogym, quelle qu'elle soit (bornes, machines, app). Cache court."""
@@ -208,8 +280,12 @@ class LiveService:
                     picture_url=str(e.get("pictureUrl") or ((e.get("imageFrames") or [""])[0] if isinstance(e.get("imageFrames"), list) else "") or ""),
                     equipment_picture_url=str(e.get("equipmentPictureUrl") or ""),
                     muscles=[str(m.get("muscleName") or "") for m in (e.get("muscles") or []) if isinstance(m, dict) and m.get("muscleName")][:4],
+                    muscle_types=[str(m.get("muscleType") or "") for m in (e.get("muscles") or []) if isinstance(m, dict) and m.get("muscleType")][:6],
+                    pa_id=str(e.get("physicalActivityId") or ""),
+                    rm1_kg=_rm1(e.get("currentReferenceValues")),
                 )
             )
+        self._fill_previous(st)
         st.exercises.sort(key=lambda x: x.position)
         st.total_count = len(st.exercises)
         st.done_count = sum(1 for e in st.exercises if e.status == "done")
