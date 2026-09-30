@@ -15,7 +15,10 @@ class HomeView extends WatchUi.View {
     }
 
     function onShow() as Void {
-        if (!Net.configured()) {
+        if (Net.needsDiscovery()) {
+            status = WatchUi.loadResource(Rez.Strings.Discovering) as String;
+            Net.discover(method(:onDiscovered));
+        } else if (!Net.configured()) {
             status = WatchUi.loadResource(Rez.Strings.NoToken) as String;
         } else {
             Net.fetchCurrent(method(:onCurrent));
@@ -23,6 +26,12 @@ class HomeView extends WatchUi.View {
                 refresh();
             }
         }
+    }
+
+    function onDiscovered(ok as Boolean, msg as String) as Void {
+        status = ok ? "" : msg;
+        if (ok) { onShow(); }
+        WatchUi.requestUpdate();
     }
 
     function onCurrent(ok as Boolean, events as Number) as Void {

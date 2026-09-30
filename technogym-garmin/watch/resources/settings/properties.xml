@@ -1,6 +1,7 @@
 <properties>
     <property id="backendUrl" type="string">http://127.0.0.1:8000</property>
     <property id="pairToken" type="string"></property>
+    <property id="discoveryUrl" type="string">https://raw.githubusercontent.com/Ayce45/Ayce45/ccr-a619a96d-3zoi93/technogym-garmin/beta/backend.txt</property>
     <property id="autoStartRest" type="boolean">true</property>
     <property id="vibrateOnRestEnd" type="boolean">true</property>
     <property id="weightStepKg" type="float">2.5</property>

@@ -79,6 +79,15 @@ class Storage:
             self._conn.commit()
         return token
 
+    def ensure_pair_token(self, token: str, label: str = "") -> None:
+        """Enregistre un token fourni (idempotent)."""
+        with self._lock:
+            self._conn.execute(
+                "INSERT OR IGNORE INTO pair_tokens(token, label, created_at) VALUES (?, ?, ?)", (token, label, utcnow())
+            )
+            self._conn.execute("UPDATE pair_tokens SET revoked = 0 WHERE token = ?", (token,))
+            self._conn.commit()
+
     def check_pair_token(self, token: str | None) -> bool:
         if not token:
             return False

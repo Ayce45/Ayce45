@@ -39,4 +39,5 @@
     <string id="NextExercise">Suivant : </string>
     <string id="Moves">MOVEs</string>
     <string id="DoneShort">terminés</string>
+    <string id="Discovering">Recherche du backend bêta...</string>
 </strings>

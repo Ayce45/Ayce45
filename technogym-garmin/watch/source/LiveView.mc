@@ -190,20 +190,11 @@ class LiveView extends WatchUi.View {
         dc.drawLine(w * 0.18, h * 0.655, w * 0.82, h * 0.655);
         drawHrField(dc, cx, h * 0.755, Graphics.FONT_NUMBER_MEDIUM);
 
-        var footer = "";
-        var color = Graphics.COLOR_LT_GRAY;
-        if (flash > 0 && Live.lastEvent.length() > 0) {
-            footer = Live.lastEvent;
-            color = Graphics.COLOR_YELLOW;
-        } else {
-            for (var k = i + 1; k < exs.size(); k++) {
-                if (!Live.isDone(exs[k] as Dictionary)) { footer = (WatchUi.loadResource(Rez.Strings.NextExercise) as String) + Live.title(exs[k] as Dictionary); break; }
-            }
-            if (footer.length() == 0 && Live.totalCount() > 0 && Live.doneCount() >= Live.totalCount()) { footer = WatchUi.loadResource(Rez.Strings.SessionDone) as String; }
-        }
-        if (footer.length() > 0 && status.length() == 0) {
-            dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.855, w * 0.60, Graphics.FONT_XTINY, footer, 1);
+        // en bas : seulement l'evenement du moment (exercice validé, séance démarrée), 6 s, puis rien.
+        // La page suit d'elle-meme l'exercice courant ; le suivant est sur la page Séance.
+        if (flash > 0 && Live.lastEvent.length() > 0 && status.length() == 0) {
+            dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, h * 0.855, w * 0.60, Graphics.FONT_XTINY, Live.lastEvent, 1);
         }
         Ui.drawProgressArc(dc, Live.totalCount() > 0 ? Live.doneCount().toFloat() / Live.totalCount() : 0.0, Graphics.COLOR_GREEN);
     }
@@ -229,21 +220,61 @@ class LiveView extends WatchUi.View {
         drawField(dc, cx + w * 0.17, h * 0.77, "MAX", Live.hrMax > 0 ? Live.hrMax.toString() : "--", Graphics.COLOR_WHITE);
     }
 
-    // ---- page 2 : seance (grille 4 champs a la Garmin)
+    // ---- page 2 : seance. Grille 4 champs a la Garmin en haut, champ "Suivant" au centre-bas.
     function drawSummary(dc as Dc) as Void {
         var w = dc.getWidth();
         var h = dc.getHeight();
         var cx = w / 2;
+        var small = w < 300;
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
         Ui.drawWrapped(dc, cx, h * 0.06, w * 0.6, Graphics.FONT_XTINY, Live.hasSession() ? Live.sessionName() : (WatchUi.loadResource(Rez.Strings.NoLiveShort) as String), 1);
         dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawLine(w * 0.12, h * 0.50, w * 0.88, h * 0.50);
-        dc.drawLine(cx, h * 0.16, cx, h * 0.86);
+        dc.drawLine(w * 0.10, h * 0.395, w * 0.90, h * 0.395);
+        dc.drawLine(cx, h * 0.15, cx, h * 0.62);
+        dc.drawLine(w * 0.16, h * 0.635, w * 0.84, h * 0.635);
         var kcal = Live.caloriesDone();
-        drawField(dc, cx - w * 0.2, h * 0.33, "DURÉE", Ui.fmtClock(Live.elapsedSeconds()), Graphics.COLOR_WHITE);
-        drawField(dc, cx + w * 0.2, h * 0.33, "EXERCICES", Live.doneCount() + "/" + Live.totalCount(), Graphics.COLOR_GREEN);
-        drawField(dc, cx - w * 0.2, h * 0.68, "MOVEs", Live.movesDone().toString(), Graphics.COLOR_ORANGE);
-        drawField(dc, cx + w * 0.2, h * 0.68, "KCAL", kcal > 0 ? kcal.toString() : "--", Graphics.COLOR_WHITE);
+        var vf = small ? Graphics.FONT_TINY : Graphics.FONT_NUMBER_MILD;
+        drawFieldF(dc, cx - w * 0.21, h * 0.265, "DURÉE", Ui.fmtClock(Live.elapsedSeconds()), Graphics.COLOR_WHITE, vf);
+        drawFieldF(dc, cx + w * 0.21, h * 0.265, "EXERCICES", Live.doneCount() + "/" + Live.totalCount(), Graphics.COLOR_GREEN, vf);
+        drawFieldF(dc, cx - w * 0.21, h * 0.505, "MOVEs", Live.movesDone().toString(), Graphics.COLOR_ORANGE, vf);
+        drawFieldF(dc, cx + w * 0.21, h * 0.505, "KCAL", kcal > 0 ? kcal.toString() : "--", Graphics.COLOR_WHITE, vf);
+
+        // champ Suivant : premier exercice non fait apres le courant ; sinon fin de seance
+        var nxt = null;
+        var exs = Live.exercises();
+        var i = Live.currentIndex();
+        if (i >= 0) {
+            var cur = Live.exerciseAt(i);
+            if (cur != null && !Live.isDone(cur)) {
+                for (var k = i + 1; k < exs.size(); k++) {
+                    if (!Live.isDone(exs[k] as Dictionary)) { nxt = exs[k] as Dictionary; break; }
+                }
+            }
+        }
+        var complete = Live.totalCount() > 0 && Live.doneCount() >= Live.totalCount();
+        var lh = dc.getFontHeight(Graphics.FONT_XTINY);
+        dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(cx, h * 0.665, Graphics.FONT_XTINY, complete ? "SÉANCE" : "SUIVANT", Graphics.TEXT_JUSTIFY_CENTER);
+        if (complete) {
+            dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, h * 0.665 + lh, w * 0.70, Graphics.FONT_SMALL, WatchUi.loadResource(Rez.Strings.SessionDone) as String, 2);
+        } else if (nxt != null) {
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            var used = Ui.drawWrapped(dc, cx, h * 0.665 + lh, w * 0.72, Graphics.FONT_SMALL, Live.title(nxt), 1);
+            dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
+            Ui.drawWrapped(dc, cx, h * 0.665 + lh + used, w * 0.60, Graphics.FONT_XTINY, Live.setsText(nxt), 1);
+        } else {
+            dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(cx, h * 0.665 + lh, Graphics.FONT_XTINY, "--", Graphics.TEXT_JUSTIFY_CENTER);
+        }
+    }
+
+    function drawFieldF(dc as Dc, cx as Numeric, cy as Numeric, label as String, value as String, color as ColorType, font as FontDefinition) as Void {
+        var lh = dc.getFontHeight(Graphics.FONT_XTINY);
+        dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(cx, cy - lh * 0.85, Graphics.FONT_XTINY, label, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.setColor(color, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(cx, cy + lh * 0.45, font, value, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     // Champ a la Garmin : etiquette petite au-dessus, valeur en chiffres.
@@ -327,8 +358,8 @@ class LiveListDelegate extends WatchUi.Menu2InputDelegate {
         var id = item.getId();
         WatchUi.popView(WatchUi.SLIDE_DOWN);
         if (id instanceof Number) {
-            view.cursor = (id as Number) == Live.currentIndex() ? -1 : id as Number;
-            view.page = 0;
+            var dv = new DetailView(id as Number, view);
+            WatchUi.pushView(dv, new DetailDelegate(dv), WatchUi.SLIDE_LEFT);
         }
         WatchUi.requestUpdate();
     }

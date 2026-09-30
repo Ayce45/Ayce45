@@ -49,6 +49,8 @@ def build_state(settings: Settings | None = None, mywellness_client: mw.Mywellne
         st.mywellness = None
     st.program = ProgramService(st.mywellness, cache_ttl=s.program_cache_ttl, override_path=s.program_override_path)
     st.live = LiveService(st.mywellness)
+    for tok in [x.strip() for x in s.pair_tokens.split(",") if x.strip()]:
+        st.storage.ensure_pair_token(tok, "env")
     if s.live_replay_path:
         st.live.replay_path = s.live_replay_path
         st.live.replay_step = s.live_replay_step

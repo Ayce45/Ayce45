@@ -1,0 +1,98 @@
+name: beta-backend
+
+# Demarre le backend Spotter sur un runner GitHub et l'expose par un tunnel Cloudflare sans compte,
+# pour une seance de test. L'URL est ecrite dans technogym-garmin/beta/backend.txt (lue par la montre).
+on:
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "Duree du backend en minutes (max 340)"
+        required: false
+        default: "180"
+
+concurrency:
+  group: beta-backend
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  serve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    defaults:
+      run:
+        working-directory: technogym-garmin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependances
+        run: |
+          python -m pip install --quiet --upgrade pip
+          pip install --quiet -e .
+      - name: Backend
+        env:
+          MYWELLNESS_EMAIL: ${{ secrets.MYWELLNESS_EMAIL }}
+          MYWELLNESS_PASSWORD: ${{ secrets.MYWELLNESS_PASSWORD }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+          PAIR_TOKENS: ${{ secrets.PAIR_TOKEN }}
+          BACKEND_HOST: 127.0.0.1
+          BACKEND_PORT: "8000"
+          DATABASE_PATH: /tmp/spotter.sqlite3
+          TZ: Europe/Paris
+        run: |
+          nohup python run.py > /tmp/backend.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8000/health && break
+            sleep 2
+          done
+          curl -sf http://127.0.0.1:8000/health
+      - name: Tunnel Cloudflare
+        id: tunnel
+        run: |
+          curl -sL -o /tmp/cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+          chmod +x /tmp/cloudflared
+          nohup /tmp/cloudflared tunnel --url http://127.0.0.1:8000 --no-autoupdate > /tmp/cloudflared.log 2>&1 &
+          for i in $(seq 1 30); do
+            URL=$(grep -o "https://[a-z0-9-]*\.trycloudflare\.com" /tmp/cloudflared.log | head -1)
+            [ -n "$URL" ] && break
+            sleep 2
+          done
+          [ -n "$URL" ] || { cat /tmp/cloudflared.log; exit 1; }
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "### Backend beta en ligne" >> "$GITHUB_STEP_SUMMARY"
+          echo "URL : $URL (jusqu'a $(date -u -d "+${{ github.event.inputs.minutes }} minutes" +%H:%M) UTC)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Publier l'URL pour la montre
+        run: |
+          echo "${{ steps.tunnel.outputs.url }}" > beta/backend.txt
+          git config user.name "spotter-beta[bot]"
+          git config user.email "spotter-beta@users.noreply.github.com"
+          git add beta/backend.txt
+          git commit -m "beta: backend en ligne" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - name: Verification depuis l'exterieur
+        run: |
+          sleep 5
+          curl -sf -m 30 "${{ steps.tunnel.outputs.url }}/health"
+      - name: Servir pendant la duree demandee
+        run: |
+          MIN=${{ github.event.inputs.minutes }}
+          [ "$MIN" -gt 340 ] && MIN=340
+          END=$(( $(date +%s) + MIN * 60 ))
+          while [ $(date +%s) -lt $END ]; do
+            curl -sf http://127.0.0.1:8000/health > /dev/null || { echo "backend arrete"; tail -50 /tmp/backend.log; exit 1; }
+            sleep 60
+          done
+      - name: Hors ligne
+        if: always()
+        run: |
+          echo "offline" > beta/backend.txt
+          git add beta/backend.txt
+          git commit -m "beta: backend hors ligne" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}" || true
+          echo "### Backend beta arrete" >> "$GITHUB_STEP_SUMMARY"

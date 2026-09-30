@@ -1,8 +1,11 @@
 <settings>
-    <setting propertyKey="@Properties.backendUrl" title="URL du backend (https://...)">
+    <setting propertyKey="@Properties.backendUrl" title="URL du backend (https://..., vide = bêta)">
         <settingConfig type="alphaNumeric" />
     </setting>
-    <setting propertyKey="@Properties.pairToken" title="Token d'appairage (POST /auth/pair)">
+    <setting propertyKey="@Properties.pairToken" title="Token d'appairage">
+        <settingConfig type="password" />
+    </setting>
+    <setting propertyKey="@Properties.discoveryUrl" title="Fichier d'URL du backend bêta (si URL vide)">
         <settingConfig type="alphaNumeric" />
     </setting>
     <setting propertyKey="@Properties.autoStartRest" title="Lancer le repos automatiquement">

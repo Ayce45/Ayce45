@@ -209,3 +209,24 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   externe). Alternatives documentees dans le README : tunnel Cloudflare lance par l'utilisateur sur son PC
   (sans compte), relais Cloudflare Worker sans etat (compte necessaire), backend complet heberge. Pages
   statiques (GitHub Pages, artefact) exclues : pas d'execution serveur.
+
+## 2026-09-30 : relais Cloudflare, fiche exercice, page Séance
+
+* Backend beta sans ordinateur : l'utilisateur a un compte Cloudflare. Le glisser-deposer Pages accepte un
+  `_worker.js` (verifie dans la doc Cloudflare : "a _worker.js file is supported by both Wrangler and drag and
+  drop deployments"). `relay/_worker.js` reimplemente en JavaScript le sous-ensemble utilise par la montre
+  (`/health`, `/live`, `/live/hr`, `/live/mark`) avec la meme compaction que `app/mywellness/live.py`, testee
+  hors ligne sur les captures reelles (`relay/relay.test.mjs`). Identifiants et token dans les secrets du
+  projet Cloudflare ; les pulsations sont accusees mais pas conservees (pas de stockage sans KV).
+* GitHub Action `beta-backend` gardee comme seconde option (backend Python complet, 3 h, URL publiee dans
+  `beta/backend.txt`, lue par la montre via `discoveryUrl`). Le tunnel n'est jamais lance depuis cet
+  environnement : c'est l'utilisateur qui declenche le workflow.
+* Visuels Technogym : chaque exercice expose `pictureUrl`, `imageFrames` (en pratique une image 750x950),
+  `equipmentPictureUrl`, `videoUrl` (mp4) et `muscles`. Connect IQ ne lit pas de video ; la fiche exercice
+  affiche l'image via `Communications.makeImageRequest` (telechargement et redimensionnement par le
+  telephone) et les muscles en francais. Le simulateur exige un compte Garmin pour ces images : verifie sur
+  montre uniquement.
+* Page Séance : grille compacte en haut et champ "SUIVANT" au centre-bas (nom + séries) ; la page Exercice
+  n'affiche plus que l'evenement du moment en bas.
+* Le `.prg` personnel (URL du relais et token compiles) n'est pas versionne : `resources-beta/` est ignore
+  par git et le binaire est remis directement a l'utilisateur.

@@ -42,6 +42,9 @@ class LiveExercise(BaseModel):
     target_sets: list[LiveSet] = Field(default_factory=list)     # series prescrites
     done_move: int | None = None
     done_calories: int | None = None
+    picture_url: str = ""            # visuel Technogym de l'exercice (cmsmedia / cdnmedia)
+    equipment_picture_url: str = ""  # visuel de l'equipement
+    muscles: list[str] = Field(default_factory=list)   # noms Technogym en francais
 
 
 class LiveState(BaseModel):
@@ -199,6 +202,9 @@ class LiveService:
                     target_sets=targets,
                     done_move=int(e.get("doneMove") or 0) or None,
                     done_calories=int(e.get("doneCalories") or 0) or None,
+                    picture_url=str(e.get("pictureUrl") or ((e.get("imageFrames") or [""])[0] if isinstance(e.get("imageFrames"), list) else "") or ""),
+                    equipment_picture_url=str(e.get("equipmentPictureUrl") or ""),
+                    muscles=[str(m.get("muscleName") or "") for m in (e.get("muscles") or []) if isinstance(m, dict) and m.get("muscleName")][:4],
                 )
             )
         st.exercises.sort(key=lambda x: x.position)

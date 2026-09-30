@@ -31,6 +31,7 @@ module Model {
 
     // reglages
     var backendUrl as String = "";
+    var discoveryUrl as String = "";
     var pairToken as String = "";
     var autoStartRest as Boolean = true;
     var vibrateOnRestEnd as Boolean = true;
@@ -38,6 +39,7 @@ module Model {
 
     function reloadSettings() as Void {
         backendUrl = _prop("backendUrl", "") as String;
+        discoveryUrl = _prop("discoveryUrl", "") as String;
         pairToken = _prop("pairToken", "") as String;
         autoStartRest = _prop("autoStartRest", true) as Boolean;
         vibrateOnRestEnd = _prop("vibrateOnRestEnd", true) as Boolean;
