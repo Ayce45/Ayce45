@@ -4,7 +4,13 @@ Textes prets a coller dans le formulaire de publication (apps.garmin.com, compte
 vocabulaire reprennent ceux de l'app Technogym (seance d'entrainement, exercices, equipement, MOVEs, Wellness),
 avec la mention non officielle exigee par le store et par l'honnetete envers les utilisateurs.
 
-## Deux apps sur le store
+## Une app avec essai, ou deux apps
+
+Chemin recommande : une seule fiche, app payante (4,99 EUR) avec essai. La boutique signe l'app verrouillee
+(`isTrial()` = true : 10 seances) ou debloquee apres achat ; pas de compte marchand a ouvrir avant d'avoir
+fixe un prix. Le chemin a deux apps ci-dessous reste disponible.
+
+## Deux apps sur le store (variante)
 
 | | Spotter for Technogym | Spotter Pro for Technogym |
 | --- | --- | --- |

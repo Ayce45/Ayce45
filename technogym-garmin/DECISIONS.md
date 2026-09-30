@@ -355,3 +355,16 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   reglages persistes priment sur les valeurs compilees : il faut supprimer ces fichiers pour tester une valeur.
 * Limites assumees : le compteur est local a la montre (reinstaller le remet a zero) ; la Pro ne peut etre
   vendue qu'apres ouverture du compte marchand Garmin (100 USD/an) et relecture de la fiche.
+
+## 2026-09-30 : deblocage par la boutique Connect IQ (une seule app possible)
+
+* Question : avec un essai Connect IQ, qui sait qui a paye ? Garmin. La boutique signe l'app verrouillee ou
+  debloquee selon l'achat (Garmin Pay, lie au compte Garmin, valable sur toutes les montres du compte) et
+  `AppBase.isTrial()` renvoie cet etat sur la montre. Le developpeur ne voit jamais l'acheteur : seulement des
+  rapports de ventes agreges (portail developpeur, compte marchand > Documents). Pour un binaire de
+  developpement ou sideloade, `isTrial()` vaut toujours true.
+* Realisation : `Model.isPro = edition == "pro" || !isTrial()`. La propriete `edition` reste le repli pour le
+  binaire perso et le simulateur ; `getTrialDaysRemaining()` renvoie null (pas de limite de duree, la limite est
+  en seances). Les deux chemins de publication restent ouverts : une seule app "payante avec essai" (recommande,
+  une fiche) ou deux apps (manifest-pro.xml conserve).
+* Le compteur de seances gratuites reste local a la montre dans les deux cas.

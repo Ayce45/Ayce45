@@ -24,6 +24,12 @@ class TgApp extends Application.AppBase {
         return [new HomeView(), new HomeDelegate()];
     }
 
+    // Essai Connect IQ : pas de limite de duree (la limite est en seances, voir Model.sessionAllowed) ;
+    // la boutique affiche sa page de deblocage pour les apps verrouillees.
+    function getTrialDaysRemaining() as Number? {
+        return null;
+    }
+
     function onSettingsChanged() as Void {
         Model.reloadSettings();
         WatchUi.requestUpdate();

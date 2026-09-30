@@ -80,7 +80,10 @@ a `29-exercice-libre-recuperation-fr955.png`, puis `30-fiche-muscles-fr955.png` 
 (carte musculaire, derniere fois, menu de serie, selecteur de charge avec disques, fin de seance). Textes dans le vocabulaire Technogym ; fiche store : `docs/store-listing.md` ;
 marche et business model : `docs/marche-et-business-model.md`.
 
-Deux editions, memes sources (`watch/monkey.jungle` et `watch/monkey-pro.jungle`, propriete `edition`) :
+Gratuit avec limite, complet apres achat. Deux chemins possibles sur le store, memes sources : une seule app
+"payante avec essai" (la boutique Connect IQ signe l'app verrouillee ou debloquee selon l'achat Garmin Pay,
+`AppBase.isTrial()` le dit a l'app ; recommande), ou deux apps (`watch/monkey.jungle` et `watch/monkey-pro.jungle`,
+propriete `edition`) :
 
 | Edition | Store | Limite | Binaires |
 | --- | --- | --- | --- |

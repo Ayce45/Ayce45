@@ -113,7 +113,10 @@ module Model {
         vibrateOnRestEnd = _prop("vibrateOnRestEnd", true) as Boolean;
         autoReps = _prop("autoReps", true) as Boolean;
         loadImages = _prop("loadImages", true) as Boolean;
-        isPro = (_prop("edition", "free") as String).equals("pro");
+        // Pro si : edition compilee "pro" (binaire perso, variante Pro) ou app debloquee par la boutique Connect IQ.
+        // isTrial() est fixe par le store (achat Garmin Pay lie au compte) ; il vaut toujours true pour un
+        // binaire de developpement, d'ou le repli sur la propriete.
+        isPro = (_prop("edition", "free") as String).equals("pro") || !storeLocked();
         freeSessions = (_prop("freeSessions", 10) as Number).toNumber();
         var ae = _prop("autoEndSetS", 6);
         autoEndSetS = (ae instanceof Number) ? ae as Number : ((ae instanceof Float) ? (ae as Float).toNumber() : 6);
@@ -124,6 +127,13 @@ module Model {
         if (backendUrl.length() > 0 && backendUrl.substring(backendUrl.length() - 1, backendUrl.length()).equals("/")) {
             backendUrl = backendUrl.substring(0, backendUrl.length() - 1);
         }
+    }
+
+    // etat de deblocage tenu par la boutique Connect IQ (true = version d'essai / non achetee)
+    function storeLocked() as Boolean {
+        var app = Application.getApp();
+        if (!(app has :isTrial)) { return true; }
+        try { return app.isTrial(); } catch (e) { return true; }
     }
 
     function _prop(key as String, dflt as Object) as Object? {
