@@ -1,9 +1,0 @@
-# Deploiement en Worker classique (alternative au glisser-deposer Pages) :
-#   npx wrangler deploy
-#   npx wrangler secret put MYWELLNESS_EMAIL / MYWELLNESS_PASSWORD / PAIR_TOKEN
-name = "spotter-relay"
-main = "_worker.js"
-compatibility_date = "2026-09-01"
-[assets]
-directory = "./public"
-binding = "ASSETS"
