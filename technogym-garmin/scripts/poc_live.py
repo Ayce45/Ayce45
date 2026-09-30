@@ -74,8 +74,21 @@ def diff(prev: dict | None, cur: dict) -> list[str]:
             for e in s["exercises"]:
                 out.append(f"   pos {e['position']} {e['name']} : {e['status']} {('fait a ' + str(e['done_on'])[11:19] + ' via ' + str(e['console'])) if e['done_on'] else ''} {e['sets'][:3] if e['sets'] else ''}")
         return out
-    if prev["current"] != cur["current"]:
-        out.append(f"GetCurrentWorkoutSession : {prev['current']} -> {cur['current']}")
+    pws = (prev["current"] or {}).get("workoutSession") or {}
+    cws = (cur["current"] or {}).get("workoutSession") or {}
+    if bool(pws) != bool(cws):
+        out.append(f"SEANCE COURANTE {'OUVERTE' if cws else 'FERMEE'} : idCr={cws.get('idCr') or pws.get('idCr')} {cws.get('name') or pws.get('name')} debut={cws.get('startedOn') or pws.get('startedOn')} via {((cws or pws).get('extData') or {}).get('mwc_client_application')}")
+    pex = {e.get("position"): e for e in pws.get("exercises") or []}
+    for e in cws.get("exercises") or []:
+        q = pex.get(e.get("position"))
+        if q is None:
+            continue
+        if q.get("executionStatus") != e.get("executionStatus") or q.get("doneOn") != e.get("doneOn"):
+            steps = [{p.get("physicalProperty"): p.get("value") for p in (st.get("properties") or st.get("data") or [])} for st in e.get("steps") or []]
+            out.append(f"COURANTE pos {e.get('position')} {e.get('name')} : {q.get('executionStatus')} -> {e.get('executionStatus')} doneOn={e.get('doneOn')} dev={e.get('equipmentConnectedDevice')} steps={steps[:4]}")
+        for k in ("doneMove", "doneCalories", "doneDuration"):
+            if q.get(k) != e.get(k):
+                out.append(f"COURANTE pos {e.get('position')} {k}: {q.get(k)} -> {e.get(k)}")
     prev_s = {s["id_cr"]: s for s in prev["sessions"]}
     for s in cur["sessions"]:
         p = prev_s.get(s["id_cr"])

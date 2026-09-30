@@ -73,13 +73,50 @@ class LiveService:
         st = LiveState(workout_id=workout_id, date=day.isoformat(), fetched_at=int(time.time()))
         if self._client is None:
             return st
+        # 1. seance courante (ouverte sur une machine, un kiosque ou l'app) : GetCurrentWorkoutSession
+        #    renvoie idCr + chaque exercice avec executionStatus / doneOn / equipmentConnectedDevice,
+        #    avant meme que la seance n'apparaisse dans ActivityHistory (observe le 2026-09-30).
         try:
-            cur = self._client.current_workout()
-            st.has_current_workout = bool(cur.get("hasCurrentWorkout")) if isinstance(cur, dict) else None
-            if st.has_current_workout:
-                st.current = cur
+            cur = self._client.current_workout_session()
         except mw.MywellnessError:
-            st.has_current_workout = None
+            cur = {}
+        ws = cur.get("workoutSession") if isinstance(cur, dict) else None
+        if isinstance(ws, dict) and ws.get("exercises") and str(ws.get("workoutSessionId")) == workout_id:
+            st.has_current_workout = True
+            st.session_found = True
+            st.id_cr = int(ws.get("idCr") or 0) or None
+            st.started_on = str(ws.get("startedOn") or "")
+            st.closed = False
+            for e in ws.get("exercises") or []:
+                status_raw = str(e.get("executionStatus") or "")
+                status = "done" if status_raw == "Done" else ("partial" if status_raw in ("Partial", "PartiallyDone") else "todo")
+                done_on = str(e.get("doneOn") or "")
+                if done_on.startswith("0001-"):
+                    done_on = ""
+                sets = []
+                if status == "done":
+                    for step in e.get("steps") or []:
+                        v = {p.get("physicalProperty"): p.get("value") for p in (step.get("properties") or step.get("data") or [])}
+                        reps = v.get("IsoReps", v.get("Reps"))
+                        weight = v.get("IsoWeight", v.get("Weight"))
+                        dur = v.get("Duration")
+                        if reps is not None or weight is not None or dur is not None:
+                            sets.append(LiveSet(reps=int(reps) if reps is not None else None, weight_kg=weight, duration_s=int(dur) if dur is not None else None))
+                st.exercises.append(
+                    LiveExercise(
+                        position=int(e.get("position") or 0),
+                        name=str(e.get("name") or e.get("shortName") or ""),
+                        status=status,
+                        source=("machine" if str(e.get("equipmentConnectedDevice") or "") == "FullConnected" else ("manual" if status == "done" else "")),
+                        done_on=done_on,
+                        sets=sets,
+                    )
+                )
+            st.total_count = len(st.exercises)
+            st.done_count = sum(1 for e in st.exercises if e.status == "done")
+            return st
+        st.has_current_workout = bool(isinstance(cur, dict) and cur.get("hasCurrentWorkout"))
+        # 2. sinon, seance performee du jour deja fermee : historique + detail
         items = self._client.activity_history(day, day)
         item = next((i for i in items if str(i.get("userWorkoutSessionId")) == workout_id and partition_iso(i.get("partitionDate")) == day.isoformat()), None)
         if item is None or item.get("idCr") in (None, ""):
