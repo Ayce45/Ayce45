@@ -123,9 +123,8 @@ La montre ne peut pas parler directement a Technogym (reponses de 100 a 230 Ko, 
 il faut un relais qui se connecte a Mywellness et renvoie les 3 Ko utiles. Options, de la plus simple a la
 plus durable :
 
-1. **Decouverte de l'URL** : si `backendUrl` est vide, la montre lit `beta/backend.txt` sur GitHub (reglage
-   `discoveryUrl`) : une ligne, l'URL du relais. Utile pour un binaire sideloade dont on ne veut pas recompiler
-   les reglages.
+1. **Relais en dur** : l'app utilise `https://spotter-b6j.pages.dev` (constante `Net.DEFAULT_BACKEND`) quand le
+   reglage `backendUrl` est vide ; ce reglage ne sert qu'au backend perso ou au simulateur.
 2. **Test perso** : lancer le backend sur son PC (`python run.py`) et l'exposer avec un tunnel Cloudflare sans
    compte : `cloudflared tunnel --url http://localhost:8000` donne une URL `https://xxx.trycloudflare.com`
    valable tant que la commande tourne. Coller cette URL dans les reglages de la montre.

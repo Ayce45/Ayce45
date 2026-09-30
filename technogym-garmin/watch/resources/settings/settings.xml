@@ -11,9 +11,6 @@
     <setting propertyKey="@Properties.pairToken" title="Token d'appairage (avancé, backend perso)">
         <settingConfig type="password" />
     </setting>
-    <setting propertyKey="@Properties.discoveryUrl" title="Fichier d'URL du backend bêta (si URL vide)">
-        <settingConfig type="alphaNumeric" />
-    </setting>
     <setting propertyKey="@Properties.autoReps" title="Compter les répétitions avec l'accéléromètre">
         <settingConfig type="boolean" />
     </setting>

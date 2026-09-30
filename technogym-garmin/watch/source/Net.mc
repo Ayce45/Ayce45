@@ -28,52 +28,9 @@ module Net {
         return q;
     }
 
-    // URL du backend non renseignee : on lit le fichier texte publie par la GitHub Action beta
-    // (une ligne : l'URL du tunnel, ou "offline").
-    var discovering as Boolean = false;
-    var discoveryDone as Method? = null;
-
-    function needsDiscovery() as Boolean {
-        return Model.backendUrl.length() == 0 && Model.discoveryUrl.length() > 0 && (hasCredentials() || Model.pairToken.length() > 0);
-    }
-
-    function discover(callback as Method?) as Boolean {
-        if (discovering || !needsDiscovery()) { return false; }
-        discovering = true;
-        discoveryDone = callback;
-        var options = {
-            :method => Communications.HTTP_REQUEST_METHOD_GET,
-            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_TEXT_PLAIN
-        };
-        Communications.makeWebRequest(Model.discoveryUrl, { "t" => Time.now().value() }, options, new Lang.Method(Net, :onDiscovery));
-        return true;
-    }
-
-    function onDiscovery(code as Number, data as Dictionary or String or Null) as Void {
-        discovering = false;
-        var ok = false;
-        if (code == 200 && data instanceof String) {
-            var txt = (data as String);
-            var idx = txt.find("https://");
-            if (idx != null) {
-                var url = txt.substring(idx as Number, txt.length());
-                var cut = url.find("\n");
-                if (cut != null) { url = url.substring(0, cut as Number); }
-                cut = url.find(" ");
-                if (cut != null) { url = url.substring(0, cut as Number); }
-                Model.backendUrl = url;
-                ok = true;
-            } else {
-                Model.lastError = "Backend bêta hors ligne";
-            }
-        } else {
-            Model.lastError = describe(code, data);
-        }
-        var cb = discoveryDone;
-        discoveryDone = null;
-        if (cb != null) { (cb as Method).invoke(ok, Model.lastError); }
-        WatchUi.requestUpdate();
-    }
+    // URL du relais Spotter (Cloudflare Pages). Le reglage backendUrl, s'il est renseigne, prend le dessus
+    // (backend perso ou simulateur) ; sinon cette constante.
+    const DEFAULT_BACKEND = "https://spotter-b6j.pages.dev";
 
     function _headers(json as Boolean) as Dictionary {
         var h = {} as Dictionary;

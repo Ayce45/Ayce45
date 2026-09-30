@@ -31,7 +31,6 @@ module Model {
 
     // reglages
     var backendUrl as String = "";
-    var discoveryUrl as String = "";
     var pairToken as String = "";
     var mwEmail as String = "";
     var mwPassword as String = "";
@@ -105,7 +104,7 @@ module Model {
 
     function reloadSettings() as Void {
         backendUrl = _prop("backendUrl", "") as String;
-        discoveryUrl = _prop("discoveryUrl", "") as String;
+        if (backendUrl.length() == 0) { backendUrl = Net.DEFAULT_BACKEND; }
         pairToken = _prop("pairToken", "") as String;
         mwEmail = _prop("mwEmail", "") as String;
         mwPassword = _prop("mwPassword", "") as String;

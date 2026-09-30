@@ -42,7 +42,6 @@
     <string id="NextExercise">Suivant : </string>
     <string id="Moves">MOVEs</string>
     <string id="DoneShort">terminés</string>
-    <string id="Discovering">Recherche du backend bêta...</string>
     <string id="ReadyHint">Démarrez votre séance sur un équipement ou dans l'app Technogym</string>
     <string id="FreeStart">Lancer l'exercice</string>
     <string id="RestNow">Récupération</string>

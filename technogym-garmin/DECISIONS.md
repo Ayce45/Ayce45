@@ -372,3 +372,11 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   manifeste du store (meme identifiant, `edition=pro` dans `resources-beta/`), les binaires de la variante Pro
   sortent de `dist/`, textes "Essai : n/10 séances" et "Vos 10 séances d'essai sont utilisées. Débloquez Spotter
   dans la boutique Connect IQ". La variante a deux apps reste dans le depot sans etre le chemin par defaut.
+
+## 2026-09-30 : depot prive, relais en dur
+
+* Le code devient payant : le dossier `technogym-garmin` part avec son historique dans le depot prive
+  `Ayce45/Spotter` (branche `main`, `git subtree split`), et sort du depot public.
+* La decouverte de l'URL du relais via `beta/backend.txt` sur GitHub disparait (un depot prive ne sert pas de
+  fichiers bruts sans authentification, et l'URL Pages ne changera pas) : `Net.DEFAULT_BACKEND` en dur, le
+  reglage `backendUrl` ne sert plus qu'au backend perso et au simulateur.
