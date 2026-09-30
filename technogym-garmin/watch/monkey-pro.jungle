@@ -1,0 +1,5 @@
+# Edition Pro (payante, sans limite de seances) : memes sources, manifeste avec son propre identifiant,
+# resources-pro/ change le nom et la propriete edition.
+project.manifest = manifest-pro.xml
+base.sourcePath = source
+base.resourcePath = resources;resources-pro

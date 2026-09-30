@@ -40,6 +40,8 @@ module Model {
     var weightStep as Float = 2.5;
     var autoReps as Boolean = true;           // comptage des repetitions par accelerometre
     var loadImages as Boolean = true;         // visuels Technogym sur la fiche (false dans la variante simulateur)
+    var isPro as Boolean = false;             // edition Pro (resources-pro) : sans limite de seances
+    var freeSessions as Number = 10;          // quota de seances distinctes de l'edition gratuite
     var autoEndSetS as Number = 6;            // fin de serie automatique apres N s sans mouvement (0 = off)
     var barKg as Float = 20.0;                // barre pour le calcul des disques
 
@@ -57,6 +59,30 @@ module Model {
     function resetLiveStats() as Void {
         liveSets = 0; liveVolumeKg = 0.0; liveReps = 0;
     }
+
+    // ------------------------------------------------------------------ edition gratuite : quota de seances
+    // Une seance = un identifiant de seance Technogym distinct (workout_id). Rouvrir la meme seance ne compte pas.
+    function freeUsedKeys() as Array<String> {
+        var a = Storage.getValue("freeSessions");
+        return (a instanceof Array) ? a as Array<String> : [] as Array<String>;
+    }
+
+    function freeUsed() as Number { return freeUsedKeys().size(); }
+
+    // true si la seance peut etre suivie ; consume = l'enregistre dans le quota si elle est nouvelle
+    function sessionAllowed(key as String, consume as Boolean) as Boolean {
+        if (isPro) { return true; }
+        var used = freeUsedKeys();
+        if (used.indexOf(key) >= 0) { return true; }
+        if (used.size() >= freeSessions) { return false; }
+        if (consume) {
+            used.add(key);
+            try { Storage.setValue("freeSessions", used); } catch (e) { }
+        }
+        return true;
+    }
+
+    function freeQuotaExhausted() as Boolean { return !isPro && freeUsed() >= freeSessions; }
 
     // charge ajustee par exercice (cle : pa_id ou nom), memorisee pour la prochaine fois
     function savedWeight(key as String) as Float? {
@@ -87,6 +113,8 @@ module Model {
         vibrateOnRestEnd = _prop("vibrateOnRestEnd", true) as Boolean;
         autoReps = _prop("autoReps", true) as Boolean;
         loadImages = _prop("loadImages", true) as Boolean;
+        isPro = (_prop("edition", "free") as String).equals("pro");
+        freeSessions = (_prop("freeSessions", 10) as Number).toNumber();
         var ae = _prop("autoEndSetS", 6);
         autoEndSetS = (ae instanceof Number) ? ae as Number : ((ae instanceof Float) ? (ae as Float).toNumber() : 6);
         var bk = _prop("barKg", 20.0);

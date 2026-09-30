@@ -7,6 +7,9 @@
     <property id="autoStartRest" type="boolean">true</property>
     <property id="autoReps" type="boolean">true</property>
     <property id="loadImages" type="boolean">true</property>
+    <!-- edition : "free" (10 seances) ou "pro" (resources-pro/), freeSessions = quota de la version gratuite -->
+    <property id="edition" type="string">free</property>
+    <property id="freeSessions" type="number">10</property>
     <property id="autoEndSetS" type="number">6</property>
     <property id="barKg" type="float">20</property>
     <property id="vibrateOnRestEnd" type="boolean">true</property>

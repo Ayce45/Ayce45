@@ -185,10 +185,12 @@ nulle.
 Decision de l'utilisateur : pas d'API Entreprise pour l'instant, une app entierement gratuite avec des
 limitations, mesurer qui paie, puis proposer le produit a Technogym.
 
-1. **Freemium en une seule app** : app declaree payante sur le store avec un essai que l'app controle, illimite
-   dans le temps mais limite en fonctions. Gratuit : suivi en direct, FC, MOVEs, liste, fiche (ce qui prouve
-   l'usage). Payant, 4,99 EUR une fois via Garmin Pay : exercice libre avec compteur, derniere fois et records,
-   charge et disques, ecran de fin avec volume et fermeture de seance (ce qui prouve la volonte de payer).
+1. **Deux apps sur le store** (decision du 30 septembre, soir) : "Spotter for Technogym", gratuite, limitee a
+   10 seances Technogym distinctes (identifiant de seance, rouvrir la meme seance ne compte pas), puis message
+   vers la Pro ; "Spotter Pro for Technogym", 4,99 EUR une fois via Garmin Pay, sans limite, memes fonctions.
+   Plus simple que l'essai Connect IQ (pas de compte marchand tant que la Pro n'est pas publiee, une seule
+   fiche gratuite qui porte la recherche "Technogym"), au prix d'une deuxieme fiche a maintenir. Le compteur
+   de seances vit dans le stockage de la montre : une reinstallation le remet a zero, ce qu'on accepte.
 2. **Prealables a la soumission** : politique de confidentialite du relais, telemetrie anonyme (Cloudflare
    Analytics Engine : utilisateurs actifs par hash, seances suivies par semaine, retention 30 et 90 jours,
    conversion), message clair pour les comptes Technogym crees via Apple, Google ou Facebook, qui n'ont pas de

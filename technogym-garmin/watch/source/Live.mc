@@ -2,6 +2,7 @@ import Toybox.Activity;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.Time;
+import Toybox.WatchUi;
 
 // Mode live : la seance est pilotee depuis la salle (bornes, machines, app Technogym) ; la montre
 // affiche ou on en est (GET /live, seance courante Technogym), enregistre une activite Musculation
@@ -24,6 +25,7 @@ module Live {
     // suivi des changements pour vibrer / poser un lap quand une machine termine un exercice
     var _doneKnown as Dictionary = {} as Dictionary;   // position -> true
     var lastEvent as String = "";
+    var blocked as Boolean = false;   // edition gratuite : quota de seances atteint, seance non suivie
 
     function hasSession() as Boolean {
         return state != null && (state as Dictionary).hasKey("has_current_workout")
@@ -230,6 +232,22 @@ module Live {
     // Applique une reponse GET /live. Retourne le nombre d'exercices nouvellement faits.
     function apply(data as Dictionary) as Number {
         polls++;
+        // edition gratuite : une seance ouverte compte dans le quota quand on la suit (mode live)
+        var open = data.hasKey("has_current_workout") && (data["has_current_workout"] as Boolean);
+        if (open) {
+            var key = data.hasKey("workout_id") ? (data["workout_id"] as String) : "";
+            if (key.length() == 0 && data.hasKey("id_cr")) { key = "" + data["id_cr"]; }
+            if (key.length() == 0 && data.hasKey("started_on")) { key = data["started_on"] as String; }
+            blocked = !Model.sessionAllowed(key.length() > 0 ? key : "?", Model.liveMode);
+            if (blocked) {
+                state = null;
+                stateAt = Time.now().value();
+                lastError = Lang.format(WatchUi.loadResource(Rez.Strings.FreeExhausted) as String, [Model.freeSessions]);
+                return 0;
+            }
+        } else {
+            blocked = false;
+        }
         var newlyDone = 0;
         var exs = data.hasKey("exercises") ? data["exercises"] as Array : [] as Array;
         for (var i = 0; i < exs.size(); i++) {

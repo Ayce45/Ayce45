@@ -4,9 +4,21 @@ Textes prets a coller dans le formulaire de publication (apps.garmin.com, compte
 vocabulaire reprennent ceux de l'app Technogym (seance d'entrainement, exercices, equipement, MOVEs, Wellness),
 avec la mention non officielle exigee par le store et par l'honnetete envers les utilisateurs.
 
+## Deux apps sur le store
+
+| | Spotter for Technogym | Spotter Pro for Technogym |
+| --- | --- | --- |
+| Prix | gratuite | 4,99 EUR (palier Garmin Pay, compte marchand 100 USD/an, 15 % pour Garmin) |
+| Limite | 10 seances Technogym, puis message vers Spotter Pro | aucune |
+| Identifiant | `7c1f2b5e9a3d4f60b8e1c2d3a4f5b6c7` (`manifest.xml`) | `3f8e2a1c6b4d4e9f9a705c1d2e3f4a5b` (`manifest-pro.xml`) |
+| Fonctions | identiques | identiques |
+
+La fiche gratuite porte le trafic de recherche ("Technogym") ; sa description se termine par le paragraphe
+"Version gratuite" ci-dessous. La fiche Pro reprend la meme description sans ce paragraphe.
+
 ## Nom
 
-Spotter for Technogym
+Spotter for Technogym (gratuite) et Spotter Pro for Technogym (payante)
 
 ## Sous-titre (80 caracteres max)
 
@@ -53,6 +65,10 @@ Dans Garmin Connect, ouvrez les réglages de l'app et saisissez l'identifiant et
 compte Technogym (Mywellness). C'est tout. Vos identifiants ne sont stockés que dans Garmin Connect et ne
 sont utilisés que pour lire votre séance ; le relais ne conserve rien.
 
+VERSION GRATUITE
+Spotter suit vos 10 premières séances gratuitement. Ensuite, Spotter Pro (achat unique) suit vos séances sans
+limite, avec les mêmes fonctions.
+
 Application indépendante, non officielle, sans lien avec Technogym S.p.A. ni Garmin Ltd. Technogym,
 Mywellness et MOVEs sont des marques de Technogym S.p.A. Code source ouvert sur la page du projet.
 
@@ -88,6 +104,10 @@ TWO-FIELD SETUP
 In Garmin Connect, open the app settings and enter your Technogym (Mywellness) account email and password.
 That is all. Your credentials are stored only in Garmin Connect and used only to read your workout; the
 relay keeps nothing.
+
+FREE VERSION
+Spotter follows your first 10 workouts for free. Then Spotter Pro (one-time purchase) follows your workouts
+without limit, with the same features.
 
 Independent, unofficial application, not affiliated with Technogym S.p.A. or Garmin Ltd. Technogym,
 Mywellness and MOVEs are trademarks of Technogym S.p.A. Open source on the project page.

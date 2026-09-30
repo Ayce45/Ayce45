@@ -337,3 +337,21 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   Connect IQ (illimite en duree, limite en fonctions), gratuit = direct, FC, MOVEs, liste, fiche ; payant 4,99 EUR
   = exercice libre, derniere fois et records, charge et disques, fin de seance. Prealables : politique de
   confidentialite, telemetrie anonyme, message pour les comptes sans mot de passe (Apple, Google, Facebook).
+
+## 2026-09-30 : deux editions, gratuite (10 seances) et Pro
+
+* Demande : une app gratuite limitee a 10 seances et une app payante complete. Compter des seances est aussi
+  simple que compter des series : `/live` porte l'identifiant de seance Technogym (`workout_id`, sinon `idCr`),
+  donc la gratuite compte les seances distinctes suivies en mode live et rouvrir la meme seance ne consomme rien.
+* Realisation : memes sources, propriete `edition` (`free` par defaut, `pro` dans `resources-pro/` qui change
+  aussi le nom en "Spotter Pro for Technogym"), `manifest-pro.xml` avec son propre identifiant, `monkey-pro.jungle`,
+  `build.sh --pro`. Le binaire perso (`monkey-beta.jungle`) est desormais Pro + reglages personnels. Quota dans
+  `Application.Storage` (`freeSessions`, liste des identifiants), compteur "Gratuit : n/10 séances" sur l'accueil,
+  et quand le quota est atteint la seance ouverte n'est pas chargee : message jaune vers Spotter Pro sur l'accueil
+  et l'ecran live, START sans effet.
+* Verifie dans le simulateur (captures 38 a 40) : compteur 0/10 puis 1/10 apres une seance, nom "Spotter Pro",
+  blocage avec quota force a 0 via `resources-sim`. Le simulateur conserve stockage et reglages dans
+  `/tmp/com.garmin.connectiq/GARMIN/APPS/{DATA,SETTINGS}` ; "Reset All App Data" ne vide que l'app courante et les
+  reglages persistes priment sur les valeurs compilees : il faut supprimer ces fichiers pour tester une valeur.
+* Limites assumees : le compteur est local a la montre (reinstaller le remet a zero) ; la Pro ne peut etre
+  vendue qu'apres ouverture du compte marchand Garmin (100 USD/an) et relecture de la fiche.

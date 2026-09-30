@@ -66,6 +66,8 @@ cd watch
 ./build.sh                 # bin/spotter-fr965.prg (debug, type check gradual)
 ./build.sh -d venu3        # autre appareil
 ./build.sh --iq            # bin/spotter.iq : paquet release, tous les appareils du manifest
+./build.sh --pro --iq      # bin/spotter-pro.iq : edition Pro (manifest-pro.xml, resources-pro/)
+./build.sh --pro -d fr955  # bin/spotter-pro-fr955.prg
 ./build.sh --sim           # variante simulateur (voir plus bas)
 ```
 

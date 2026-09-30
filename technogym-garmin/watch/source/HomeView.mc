@@ -92,6 +92,11 @@ class HomeView extends WatchUi.View {
             if (cur != null) {
                 y += Ui.drawWrapped(dc, cx, y, w * 0.76, Graphics.FONT_XTINY, Live.fullTitle(cur), 1);
             }
+        } else if (Live.blocked) {
+            // edition gratuite, quota atteint : la seance ouverte n'est pas suivie
+            dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
+            y += xt * 0.8;
+            y += Ui.drawWrapped(dc, cx, y, w * 0.80, Graphics.FONT_XTINY, Lang.format(WatchUi.loadResource(Rez.Strings.FreeExhausted) as String, [Model.freeSessions]), 4);
         } else if (Model.hasWorkout() && !Net.hasCredentials()) {
             // backend perso avec programme : seance du jour
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
@@ -105,7 +110,7 @@ class HomeView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             y += Ui.drawWrapped(dc, cx, y, w * 0.78, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.ReadyHint) as String, 2);
         }
-        if (Net.configured() || Model.hasWorkout()) {
+        if ((Net.configured() || Model.hasWorkout()) && !Live.blocked) {
             dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_TRANSPARENT);
             var by = y + xt * 0.4;
             if (by < h * 0.66) { by = h * 0.66; }
@@ -114,6 +119,10 @@ class HomeView extends WatchUi.View {
         if (status.length() > 0) {
             dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
             Ui.drawWrapped(dc, cx, h * 0.80, w * 0.70, Graphics.FONT_XTINY, status, 1);
+        }
+        if (!Model.isPro && !Live.blocked) {
+            dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(cx, h * 0.84, Graphics.FONT_XTINY, Lang.format(WatchUi.loadResource(Rez.Strings.FreeLeft) as String, [Model.freeUsed(), Model.freeSessions]), Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         }
         var pend = Model.pendingCount();
         if (pend > 0) {
@@ -139,7 +148,7 @@ class HomeDelegate extends WatchUi.BehaviorDelegate {
 
     // START : mode live (la seance est geree depuis la salle, la montre suit et enregistre l'activite).
     function startWorkout() as Boolean {
-        if (!Net.configured()) { return false; }
+        if (!Net.configured() || Live.blocked) { return false; }
         if (!Model.liveMode) {
             Model.liveMode = true;
             Model.startedAt = Time.now().value();

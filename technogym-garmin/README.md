@@ -80,10 +80,17 @@ a `29-exercice-libre-recuperation-fr955.png`, puis `30-fiche-muscles-fr955.png` 
 (carte musculaire, derniere fois, menu de serie, selecteur de charge avec disques, fin de seance). Textes dans le vocabulaire Technogym ; fiche store : `docs/store-listing.md` ;
 marche et business model : `docs/marche-et-business-model.md`.
 
-Installation : `docs/connectiq.md`. Binaires : `watch/dist/spotter.iq` (store) et `watch/dist/spotter-<modele>.prg`
-(fr955, fr965, fr265, venu3, vivoactive5, fenix7, epix2pro47mm, fenix843mm). Reglages (URL du backend, token)
-dans Garmin Connect une fois l'app installee depuis le store ; pour un `.prg` sideloade, les reglages sont
-compiles dans le binaire.
+Deux editions, memes sources (`watch/monkey.jungle` et `watch/monkey-pro.jungle`, propriete `edition`) :
+
+| Edition | Store | Limite | Binaires |
+| --- | --- | --- | --- |
+| Spotter for Technogym | gratuite | 10 seances Technogym distinctes (identifiant de seance `workout_id`, rouvrir la meme seance ne compte pas ; compteur sur l'accueil, message vers Spotter Pro quand le quota est atteint) | `watch/dist/spotter.iq`, `watch/dist/spotter-<modele>.prg` (fr955, fr965, fr265, venu3, vivoactive5, fenix7, epix2pro47mm, fenix843mm) |
+| Spotter Pro for Technogym | payante (4,99 EUR, Garmin Pay) | aucune | `watch/dist/spotter-pro.iq`, `watch/dist/spotter-pro-fr955.prg` |
+
+Installation : `docs/connectiq.md`. Reglages (identifiants Technogym) dans Garmin Connect une fois l'app installee
+depuis le store ; pour un `.prg` sideloade, les reglages sont compiles dans le binaire (`monkey-beta.jungle` =
+Pro + reglages personnels, gitignore). Captures : `docs/screenshots/38-gratuit-quota-atteint-fr955.png`,
+`39-gratuit-compteur-fr955.png`, `40-pro-accueil-fr955.png`.
 
 ### Backend pour la beta
 

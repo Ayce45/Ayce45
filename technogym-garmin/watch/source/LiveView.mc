@@ -145,8 +145,9 @@ class LiveView extends WatchUi.View {
             Icons.circle(dc, cx, h * 0.30, h * 0.06, Graphics.COLOR_DK_GRAY);
             Icons.link(dc, cx, h * 0.30 - h * 0.02, h * 0.035, Graphics.COLOR_LT_GRAY);
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.40, w * 0.78, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.NoLiveSession) as String, 3);
-            drawHrField(dc, cx, h * 0.76, Graphics.FONT_NUMBER_MEDIUM);
+            if (Live.blocked) { dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT); }
+            Ui.drawWrapped(dc, cx, h * 0.40, w * 0.78, Graphics.FONT_XTINY, Live.blocked ? Lang.format(WatchUi.loadResource(Rez.Strings.FreeExhausted) as String, [Model.freeSessions]) : (WatchUi.loadResource(Rez.Strings.NoLiveSession) as String), 4);
+            if (!Live.blocked) { drawHrField(dc, cx, h * 0.76, Graphics.FONT_NUMBER_MEDIUM); }
             return;
         }
 
@@ -230,8 +231,9 @@ class LiveView extends WatchUi.View {
             Icons.circle(dc, cx, h * 0.30, h * 0.06, Graphics.COLOR_DK_GRAY);
             Icons.link(dc, cx, h * 0.30 - h * 0.02, h * 0.035, Graphics.COLOR_LT_GRAY);
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            Ui.drawWrapped(dc, cx, h * 0.40, w * 0.78, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.NoLiveSession) as String, 3);
-            drawHrField(dc, cx, h * 0.76, Graphics.FONT_NUMBER_MEDIUM);
+            if (Live.blocked) { dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT); }
+            Ui.drawWrapped(dc, cx, h * 0.40, w * 0.78, Graphics.FONT_XTINY, Live.blocked ? Lang.format(WatchUi.loadResource(Rez.Strings.FreeExhausted) as String, [Model.freeSessions]) : (WatchUi.loadResource(Rez.Strings.NoLiveSession) as String), 4);
+            if (!Live.blocked) { drawHrField(dc, cx, h * 0.76, Graphics.FONT_NUMBER_MEDIUM); }
             return;
         }
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);

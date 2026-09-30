@@ -4,6 +4,7 @@
 #   ./build.sh -d venu3        -> .prg pour un autre appareil
 #   ./build.sh --iq            -> paquet .iq (release, tous les appareils du manifest) pour sideload
 #   ./build.sh --sim           -> variante simulateur (monkey-sim.jungle, reglages locaux)
+#   ./build.sh --pro           -> edition Pro (monkey-pro.jungle, manifest-pro.xml) ; combinable avec --iq
 # Prerequis : SDK dans ~/.Garmin/ConnectIQ/Sdks (voir docs/connectiq.md), cle keys/developer_key.der,
 # appareils dans ~/.Garmin/ConnectIQ/Devices (python watch/tools/fetch_devices.py).
 set -euo pipefail
@@ -18,6 +19,7 @@ while [ $# -gt 0 ]; do
     -d) DEVICE="$2"; shift 2;;
     --iq) MODE=iq; shift;;
     --sim) JUNGLE=monkey-sim.jungle; shift;;
+    --pro) JUNGLE=monkey-pro.jungle; shift;;
     -l) LEVEL="$2"; shift 2;;
     *) echo "option inconnue: $1"; exit 1;;
   esac
@@ -25,10 +27,10 @@ done
 mkdir -p bin
 export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 if [ "$MODE" = iq ]; then
-  OUT=bin/spotter.iq
+  OUT=bin/spotter.iq; [ "$JUNGLE" = monkey-pro.jungle ] && OUT=bin/spotter-pro.iq
   "$SDK_DIR/bin/monkeyc" -e -f "$PWD/$JUNGLE" -o "$PWD/$OUT" -y "$PWD/$KEY" -r -l "$LEVEL" 2>&1 | grep -v "Picked up JAVA_TOOL_OPTIONS" || true
 else
-  SUFFIX=""; [ "$JUNGLE" = monkey-sim.jungle ] && SUFFIX="-sim"
+  SUFFIX=""; [ "$JUNGLE" = monkey-sim.jungle ] && SUFFIX="-sim"; [ "$JUNGLE" = monkey-pro.jungle ] && SUFFIX="-pro"
   OUT="bin/spotter${SUFFIX}-${DEVICE}.prg"
   "$SDK_DIR/bin/monkeyc" -d "$DEVICE" -f "$PWD/$JUNGLE" -o "$PWD/$OUT" -y "$PWD/$KEY" -l "$LEVEL" -w 2>&1 | grep -v "Picked up JAVA_TOOL_OPTIONS" || true
 fi
