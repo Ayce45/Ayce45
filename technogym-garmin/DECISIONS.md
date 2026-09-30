@@ -269,3 +269,23 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   long UP garde le menu general.
 * GitHub Action `beta-backend` retiree a la demande de l'utilisateur (relais Cloudflare deploye par lui).
   Le fichier `beta/backend.txt` reste pour la decouverte d'URL.
+
+## 2026-09-30 : comptage des repetitions par accelerometre
+
+* Demande : compter les repetitions automatiquement. Il existe des algorithmes ouverts (RecoFit, Microsoft
+  Research 2014 : autocorrelation et detection de pics, +/-1 rep dans 93 % des series ; comptage de pas par
+  fenetres glissantes) mais pas d'implementation Connect IQ. Ecrit ici en deux versions identiques : reference
+  Python (`tools/reps/repcounter2.py`) et module Monkey C (`watch/source/RepCounter.mc`), temps reel, sans FFT.
+* Donnees d'evaluation : MM-Fit (Strömbäck et al. 2020, montre au poignet gauche, 100 Hz, series de 10 reps
+  annotees a la video), telecharge par requetes HTTP Range sur le zip de 1,7 Go (23 Mo lus). Reglage des
+  parametres sur 5 seances, verification sur 6 seances jamais vues : +/-1 repetition dans 75 % des series
+  (82 % hors curls) avec la regle anti faux departs retenue, 80 % (88 %) sans elle mais avec un faux mouvement
+  par minute de repos bruite. Les curls de MM-Fit sont alternes et comptent les deux bras : la montre gauche ne voit
+  qu'un bras sur deux et compte la moitie, ce qui est le bon comportement pour un capteur de poignet.
+* Choix de conception : trois detecteurs, un par axe, et l'axe retenu est celui aux cycles les plus reguliers
+  (pas le plus energique : sur les curls, l'axe le plus energique est la rotation lente du poignet). Le cycle
+  entame a l'appui START compte pour une repetition. Le compteur part de zero quand il est actif ; UP / DOWN
+  corrigent et figent la valeur, qui reste celle envoyee dans le lap FIT.
+* Reglable dans Garmin Connect (`autoReps`), actif par defaut ; permission `Sensor` ajoutee au manifeste.
+  Non testable dans le simulateur (pas de flux accelerometre) : premiere validation reelle a faire a la
+  salle, en comparant la valeur affichee et le compte reel sur quelques series.

@@ -38,6 +38,7 @@ module Model {
     var autoStartRest as Boolean = true;
     var vibrateOnRestEnd as Boolean = true;
     var weightStep as Float = 2.5;
+    var autoReps as Boolean = true;           // comptage des repetitions par accelerometre
 
     function reloadSettings() as Void {
         backendUrl = _prop("backendUrl", "") as String;
@@ -47,6 +48,7 @@ module Model {
         mwPassword = _prop("mwPassword", "") as String;
         autoStartRest = _prop("autoStartRest", true) as Boolean;
         vibrateOnRestEnd = _prop("vibrateOnRestEnd", true) as Boolean;
+        autoReps = _prop("autoReps", true) as Boolean;
         var ws = _prop("weightStepKg", 2.5);
         weightStep = (ws instanceof Number) ? (ws as Number).toFloat() : ((ws instanceof Float) ? ws as Float : 2.5);
         if (backendUrl.length() > 0 && backendUrl.substring(backendUrl.length() - 1, backendUrl.length()).equals("/")) {

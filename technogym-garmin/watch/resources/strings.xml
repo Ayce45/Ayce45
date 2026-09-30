@@ -53,4 +53,6 @@
     <string id="FinishExercise">Terminer l'exercice</string>
     <string id="Marking">Enregistrement...</string>
     <string id="ExerciseDone">Exercice terminé</string>
+    <string id="AutoCount">auto</string>
+    <string id="Target">cible</string>
 </strings>

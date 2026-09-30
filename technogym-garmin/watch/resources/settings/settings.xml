@@ -14,6 +14,9 @@
     <setting propertyKey="@Properties.discoveryUrl" title="Fichier d'URL du backend bêta (si URL vide)">
         <settingConfig type="alphaNumeric" />
     </setting>
+    <setting propertyKey="@Properties.autoReps" title="Compter les répétitions avec l'accéléromètre">
+        <settingConfig type="boolean" />
+    </setting>
     <setting propertyKey="@Properties.autoStartRest" title="Lancer le repos automatiquement">
         <settingConfig type="boolean" />
     </setting>

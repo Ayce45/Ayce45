@@ -29,6 +29,9 @@ class FreeExerciseView extends WatchUi.View {
     var timer as Timer.Timer? = null;
     var finishing as Boolean = false;
     var status as String = "";
+    var autoCount as Boolean = false;   // comptage par accelerometre actif sur cette serie
+    var autoReps as Number = 0;         // repetitions detectees
+    var manual as Boolean = false;      // l'utilisateur a corrige a la main : on ne touche plus au compteur
 
     function initialize(i as Number, lv as LiveView, rest as Boolean) {
         View.initialize();
@@ -51,7 +54,7 @@ class FreeExerciseView extends WatchUi.View {
 
     function loadTarget() as Void {
         var st = currentSet();
-        reps = Model.num(st, "reps", 0).toNumber();
+        reps = Model.autoReps && RepCounter.supported() ? 0 : Model.num(st, "reps", 0).toNumber();
         weight = Model.num(st, "weight_kg", 0).toFloat();
         duration = Model.num(st, "duration_s", 0).toNumber();
     }
@@ -66,10 +69,29 @@ class FreeExerciseView extends WatchUi.View {
             timer = new Timer.Timer();
             (timer as Timer.Timer).start(method(:onTick), 1000, true);
         }
+        if (!resting && !restOnly) { startCounting(); }
     }
 
     function onHide() as Void {
         if (timer != null) { (timer as Timer.Timer).stop(); timer = null; }
+        RepCounter.stop();
+        autoCount = false;
+    }
+
+    // Comptage automatique : l'accelerometre compte, l'affichage suit ; UP / DOWN corrigent et figent.
+    function startCounting() as Void {
+        autoReps = 0;
+        manual = false;
+        autoCount = Model.autoReps && RepCounter.start(method(:onRep));
+    }
+
+    function onRep(n as Number) as Void {
+        autoReps = n;
+        if (!manual) {
+            reps = n;
+            if (n == Model.num(currentSet(), "reps", 0).toNumber()) { Recording.vibrate(false); }  // cible atteinte
+        }
+        WatchUi.requestUpdate();
     }
 
     function onTick() as Void {
@@ -87,19 +109,26 @@ class FreeExerciseView extends WatchUi.View {
                 setIdx++;
                 if (setIdx >= sets.size()) { finish(); return; }
                 loadTarget();
+                startCounting();
             }
         }
         WatchUi.requestUpdate();
     }
 
     function startRest() as Void {
+        RepCounter.stop();
+        autoCount = false;
         restTotal = restSeconds();
         restLeft = restTotal;
         resting = true;
     }
 
-    // START pendant une serie : serie faite
+    // START pendant une serie : serie faite (le cycle entame par l'accelerometre compte)
     function validateSet() as Void {
+        if (autoCount && !manual) {
+            var n = RepCounter.finalReps();
+            if (n > 0) { reps = n; }
+        }
         var e = ex();
         Recording.lap(e != null ? Model.num(e, "position", 0).toNumber() : 0, reps, weight);
         Recording.vibrate(false);
@@ -118,6 +147,7 @@ class FreeExerciseView extends WatchUi.View {
         setIdx++;
         if (setIdx >= sets.size()) { finish(); return; }
         loadTarget();
+        startCounting();
         WatchUi.requestUpdate();
     }
 
@@ -125,6 +155,8 @@ class FreeExerciseView extends WatchUi.View {
         if (finishing) { return; }
         finishing = true;
         resting = false;
+        RepCounter.stop();
+        autoCount = false;
         status = WatchUi.loadResource(Rez.Strings.Marking) as String;
         var e = ex();
         var pos = e != null ? Model.num(e, "position", 0).toNumber() : 0;
@@ -189,9 +221,12 @@ class FreeExerciseView extends WatchUi.View {
                 dc.drawText(cx - lh, h * 0.47, f, txt, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
                 dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
                 dc.drawText(cx - lh + tw / 2 + 4, h * 0.47 + lh * 0.4, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.Reps) as String, Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+                var target = Model.num(currentSet(), "reps", 0).toNumber();
+                var tag = autoCount && !manual ? (WatchUi.loadResource(Rez.Strings.AutoCount) as String) + " · " : "";
+                dc.drawText(cx, h * 0.585, Graphics.FONT_XTINY, tag + (WatchUi.loadResource(Rez.Strings.Target) as String) + " " + target, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
                 if (weight > 0) {
                     dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                    dc.drawText(cx, h * 0.66, Graphics.FONT_SMALL, Ui.fmtKg(weight) + " kg", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+                    dc.drawText(cx, h * 0.69, Graphics.FONT_SMALL, Ui.fmtKg(weight) + " kg", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
                 }
             }
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
@@ -227,13 +262,13 @@ class FreeExerciseDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onPreviousPage() as Boolean {   // UP
-        if (view.resting) { view.restLeft += 15; view.restTotal += 15; } else { view.reps++; }
+        if (view.resting) { view.restLeft += 15; view.restTotal += 15; } else { view.reps++; view.manual = true; }
         WatchUi.requestUpdate();
         return true;
     }
 
     function onNextPage() as Boolean {       // DOWN
-        if (view.resting) { view.restLeft -= 15; if (view.restLeft < 1) { view.restLeft = 1; } } else if (view.reps > 0) { view.reps--; }
+        if (view.resting) { view.restLeft -= 15; if (view.restLeft < 1) { view.restLeft = 1; } } else if (view.reps > 0) { view.reps--; view.manual = true; }
         WatchUi.requestUpdate();
         return true;
     }
