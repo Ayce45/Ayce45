@@ -25,11 +25,11 @@ done
 mkdir -p bin
 export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 if [ "$MODE" = iq ]; then
-  OUT=bin/tgmuscu.iq
+  OUT=bin/tglive.iq
   "$SDK_DIR/bin/monkeyc" -e -f "$PWD/$JUNGLE" -o "$PWD/$OUT" -y "$PWD/$KEY" -r -l "$LEVEL" 2>&1 | grep -v "Picked up JAVA_TOOL_OPTIONS" || true
 else
   SUFFIX=""; [ "$JUNGLE" = monkey-sim.jungle ] && SUFFIX="-sim"
-  OUT="bin/tgmuscu${SUFFIX}-${DEVICE}.prg"
+  OUT="bin/tglive${SUFFIX}-${DEVICE}.prg"
   "$SDK_DIR/bin/monkeyc" -d "$DEVICE" -f "$PWD/$JUNGLE" -o "$PWD/$OUT" -y "$PWD/$KEY" -l "$LEVEL" -w 2>&1 | grep -v "Picked up JAVA_TOOL_OPTIONS" || true
 fi
 ls -la "$OUT"

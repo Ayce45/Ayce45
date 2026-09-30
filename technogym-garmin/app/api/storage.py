@@ -29,6 +29,16 @@ CREATE TABLE IF NOT EXISTS workout_results (
     mywellness_detail TEXT
 );
 CREATE INDEX IF NOT EXISTS ix_results_workout ON workout_results(workout_id, date);
+CREATE TABLE IF NOT EXISTS hr_samples (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    workout_id TEXT NOT NULL,
+    id_cr INTEGER,
+    date TEXT NOT NULL,
+    t INTEGER NOT NULL,
+    hr INTEGER NOT NULL,
+    received_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_hr_workout ON hr_samples(workout_id, date, t);
 CREATE TABLE IF NOT EXISTS garmin_pushes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     date TEXT NOT NULL,
@@ -125,6 +135,31 @@ class Storage:
             d["payload"] = json.loads(d["payload"])
             out.append(d)
         return out
+
+    # ---------------------------------------------------------------- frequence cardiaque (montre)
+    def add_hr_samples(self, workout_id: str, day: str, id_cr: int | None, samples: list[tuple[int, int]]) -> int:
+        if not samples:
+            return 0
+        now = utcnow()
+        with self._lock:
+            self._conn.executemany(
+                "INSERT INTO hr_samples(workout_id, id_cr, date, t, hr, received_at) VALUES (?, ?, ?, ?, ?, ?)",
+                [(workout_id, id_cr, day, int(t), int(hr), now) for t, hr in samples if hr > 0],
+            )
+            self._conn.commit()
+        return len(samples)
+
+    def hr_samples(self, workout_id: str, day: str, since_t: int = 0) -> list[dict[str, int]]:
+        with self._lock:
+            rows = self._conn.execute(
+                "SELECT t, hr FROM hr_samples WHERE workout_id = ? AND date = ? AND t >= ? ORDER BY t", (workout_id, day, since_t)
+            ).fetchall()
+        return [{"t": r["t"], "hr": r["hr"]} for r in rows]
+
+    def hr_count(self, workout_id: str, day: str) -> int:
+        with self._lock:
+            row = self._conn.execute("SELECT COUNT(*) AS n FROM hr_samples WHERE workout_id = ? AND date = ?", (workout_id, day)).fetchone()
+        return int(row["n"]) if row else 0
 
     # ---------------------------------------------------------------- push garmin
     def record_push(self, day: str, workout_id: str, garmin_workout_id: str | None, scheduled: bool, response: Any) -> None:

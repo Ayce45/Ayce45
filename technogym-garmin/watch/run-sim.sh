@@ -5,8 +5,8 @@ set -euo pipefail
 cd "$(dirname "$0")"
 DEVICE="${1:-fr965}"
 SDK_DIR="${CIQ_SDK:-$(ls -d ~/.Garmin/ConnectIQ/Sdks/connectiq-sdk-* 2>/dev/null | sort | tail -1)}"
-PRG="$PWD/bin/tgmuscu-sim-${DEVICE}.prg"
-[ -f "$PRG" ] || PRG="$PWD/bin/tgmuscu-${DEVICE}.prg"
+PRG="$PWD/bin/tglive-sim-${DEVICE}.prg"
+[ -f "$PRG" ] || PRG="$PWD/bin/tglive-${DEVICE}.prg"
 [ -f "$PRG" ] || { echo "Compiler d'abord: ./build.sh --sim -d $DEVICE"; exit 1; }
 # Libs webkit2gtk 4.0 (Ubuntu 22.04) extraites pour Ubuntu 24.04 : voir docs/connectiq.md
 export LD_LIBRARY_PATH="${CIQ_COMPAT_LIBS:-/usr/local/lib/ciq-compat}:${LD_LIBRARY_PATH:-}"

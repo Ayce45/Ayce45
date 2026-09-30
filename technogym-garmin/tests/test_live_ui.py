@@ -68,3 +68,13 @@ def test_ui_sync_rejects_bad_mywellness_credentials(client, monkeypatch):
     assert r.status_code == 200
     assert r.json()["ok"] is False
     assert "Mywellness" in r.json()["error"]
+
+
+def test_live_hr_batch_stored(client):
+    r = client.post("/live/hr", json={"workout_id": "w1", "date": "2026-09-30", "samples": [[1790764834, 135], [1790764835, 137], [1790764836, 0]]}, headers=ADMIN)
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["workout_id"] == "w1"
+    assert body["total"] == 2  # l'echantillon a 0 bpm est ignore
+    r2 = client.post("/live/hr", json={"workout_id": "w1", "date": "2026-09-30", "samples": [[1790764837, 140]]}, headers=ADMIN)
+    assert r2.json()["total"] == 3

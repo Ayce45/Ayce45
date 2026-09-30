@@ -8,6 +8,8 @@ machines ou par l'app Mywellness. La montre marque ces exercices comme faits et 
 
 from __future__ import annotations
 
+import json
+
 import threading
 import time
 from datetime import date
@@ -29,15 +31,26 @@ class LiveSet(BaseModel):
 class LiveExercise(BaseModel):
     position: int
     name: str = ""
-    status: str = "todo"  # done | todo | partial
+    short_name: str = ""
+    equipment: str = ""
+    kind: str = ""        # strength | cardio | stretching
+    status: str = "todo"  # done | doing | todo | partial
     source: str = ""      # machine | manual
+    device: str = ""      # FullConnected | Offline | ...
     done_on: str = ""
-    sets: list[LiveSet] = Field(default_factory=list)
+    sets: list[LiveSet] = Field(default_factory=list)            # series faites
+    target_sets: list[LiveSet] = Field(default_factory=list)     # series prescrites
+    done_move: int | None = None
+    done_calories: int | None = None
 
 
 class LiveState(BaseModel):
     workout_id: str
     date: str
+    name: str = ""
+    program_name: str = ""
+    current_position: int | None = None   # premier exercice non fait (ou "Doing")
+    hr_samples: int = 0                   # echantillons cardio deja recus de la montre pour cette seance
     has_current_workout: bool | None = None   # workout.mywellness.com/v2/enduser/workout/current
     current: dict | None = None               # seance courante brute si une machine / kiosque l'a ouverte
     session_found: bool = False
@@ -48,6 +61,27 @@ class LiveState(BaseModel):
     total_count: int = 0
     exercises: list[LiveExercise] = Field(default_factory=list)
     fetched_at: int = 0
+
+
+def _steps_to_sets(steps: list[dict[str, Any]] | None) -> list[LiveSet]:
+    out: list[LiveSet] = []
+    for step in steps or []:
+        v = {p.get("physicalProperty") or p.get("name"): p.get("value") for p in (step.get("properties") or step.get("data") or step.get("stepData") or [])}
+        reps = v.get("IsoReps", v.get("Reps"))
+        weight = v.get("IsoWeight", v.get("Weight"))
+        dur = v.get("Duration")
+        if reps is not None or weight is not None or dur is not None:
+            out.append(LiveSet(reps=int(reps) if reps is not None else None, weight_kg=weight, duration_s=int(dur) if dur is not None else None))
+    return out
+
+
+def _kind(pa_type: str, is_cardio: bool) -> str:
+    t = (pa_type or "").lower()
+    if is_cardio or t.startswith("cardio"):
+        return "cardio"
+    if t.startswith("stretch"):
+        return "stretching"
+    return "strength"
 
 
 class LiveService:
@@ -69,6 +103,111 @@ class LiveService:
             self._cache[key] = (time.time(), st)
         return st
 
+    # ------------------------------------------------------------------ rejeu (tests sans salle)
+    _replay: list[dict[str, Any]] | None = None
+    _replay_t0: float = 0.0
+    replay_path: str = ""
+    replay_step: float = 3.0
+
+    def _replay_snapshot(self) -> dict[str, Any] | None:
+        """Sert les captures GetCurrentWorkoutSession d'un journal poc_live.py, dans l'ordre, une par pas."""
+        if not self.replay_path:
+            return None
+        if self._replay is None:
+            snaps: list[dict[str, Any]] = []
+            try:
+                for line in open(self.replay_path, encoding="utf-8"):
+                    try:
+                        rec = json.loads(line)
+                    except ValueError:
+                        continue
+                    cur = rec.get("current")
+                    if isinstance(cur, dict):
+                        snaps.append(cur)
+            except OSError:
+                snaps = []
+            self._replay = snaps
+            self._replay_t0 = time.time()
+        if not self._replay:
+            return {}
+        idx = min(int((time.time() - self._replay_t0) / max(self.replay_step, 0.5)), len(self._replay) - 1)
+        return self._replay[idx]
+
+    def current(self) -> LiveState:
+        """Seance courante cote Technogym, quelle qu'elle soit (bornes, machines, app). Cache court."""
+        key = "__current__"
+        with self._lock:
+            hit = self._cache.get(key)
+            if hit and time.time() - hit[0] < self._ttl:
+                return hit[1]
+        st = LiveState(workout_id="", date=date.today().isoformat(), fetched_at=int(time.time()))
+        replay = self._replay_snapshot()
+        if replay is not None or self._client is not None:
+            if replay is not None:
+                cur: Any = replay
+            else:
+                try:
+                    cur = self._client.current_workout_session()  # type: ignore[union-attr]
+                except mw.MywellnessError:
+                    cur = {}
+            ws = cur.get("workoutSession") if isinstance(cur, dict) else None
+            if isinstance(ws, dict) and ws.get("exercises"):
+                st.workout_id = str(ws.get("workoutSessionId") or "")
+                st = self._from_current(ws, st)
+            else:
+                st.has_current_workout = False
+        with self._lock:
+            self._cache[key] = (time.time(), st)
+        return st
+
+    def _from_current(self, ws: dict[str, Any], st: LiveState) -> LiveState:
+        """Etat live depuis GetCurrentWorkoutSession (seance ouverte). Verifie sur seance reelle le 2026-09-30."""
+        st.has_current_workout = True
+        st.session_found = True
+        st.id_cr = int(ws.get("idCr") or 0) or None
+        st.started_on = str(ws.get("startedOn") or "")
+        st.closed = False
+        st.name = str(ws.get("name") or "")
+        st.program_name = str((ws.get("extData") or {}).get("mwc_workout_name") or "")
+        for e in ws.get("exercises") or []:
+            status_raw = str(e.get("executionStatus") or "")
+            if status_raw in ("Done", "DoneAsModified"):
+                status = "done"
+            elif status_raw == "Doing":
+                status = "doing"
+            elif status_raw in ("Partial", "PartiallyDone"):
+                status = "partial"
+            else:
+                status = "todo"
+            done_on = str(e.get("doneOn") or "")
+            if done_on.startswith("0001-"):
+                done_on = ""
+            targets = _steps_to_sets(e.get("steps"))
+            device = str(e.get("equipmentConnectedDevice") or "")
+            st.exercises.append(
+                LiveExercise(
+                    position=int(e.get("position") or 0),
+                    name=str(e.get("name") or e.get("shortName") or ""),
+                    short_name=str(e.get("shortName") or e.get("name") or ""),
+                    equipment=str(e.get("equipmentName") or ""),
+                    kind=_kind(str(e.get("physicalActivityType") or ""), bool(e.get("isCardio"))),
+                    status=status,
+                    source=("machine" if device == "FullConnected" else ("manual" if status == "done" else "")),
+                    device=device,
+                    done_on=done_on,
+                    sets=targets if status == "done" else [],
+                    target_sets=targets,
+                    done_move=int(e.get("doneMove") or 0) or None,
+                    done_calories=int(e.get("doneCalories") or 0) or None,
+                )
+            )
+        st.exercises.sort(key=lambda x: x.position)
+        st.total_count = len(st.exercises)
+        st.done_count = sum(1 for e in st.exercises if e.status == "done")
+        doing = next((e.position for e in st.exercises if e.status == "doing"), None)
+        st.current_position = doing if doing is not None else next((e.position for e in st.exercises if e.status != "done"), None)
+        return st
+
     def _fetch(self, workout_id: str, day: date) -> LiveState:
         st = LiveState(workout_id=workout_id, date=day.isoformat(), fetched_at=int(time.time()))
         if self._client is None:
@@ -82,39 +221,7 @@ class LiveService:
             cur = {}
         ws = cur.get("workoutSession") if isinstance(cur, dict) else None
         if isinstance(ws, dict) and ws.get("exercises") and str(ws.get("workoutSessionId")) == workout_id:
-            st.has_current_workout = True
-            st.session_found = True
-            st.id_cr = int(ws.get("idCr") or 0) or None
-            st.started_on = str(ws.get("startedOn") or "")
-            st.closed = False
-            for e in ws.get("exercises") or []:
-                status_raw = str(e.get("executionStatus") or "")
-                status = "done" if status_raw == "Done" else ("partial" if status_raw in ("Partial", "PartiallyDone") else "todo")
-                done_on = str(e.get("doneOn") or "")
-                if done_on.startswith("0001-"):
-                    done_on = ""
-                sets = []
-                if status == "done":
-                    for step in e.get("steps") or []:
-                        v = {p.get("physicalProperty"): p.get("value") for p in (step.get("properties") or step.get("data") or [])}
-                        reps = v.get("IsoReps", v.get("Reps"))
-                        weight = v.get("IsoWeight", v.get("Weight"))
-                        dur = v.get("Duration")
-                        if reps is not None or weight is not None or dur is not None:
-                            sets.append(LiveSet(reps=int(reps) if reps is not None else None, weight_kg=weight, duration_s=int(dur) if dur is not None else None))
-                st.exercises.append(
-                    LiveExercise(
-                        position=int(e.get("position") or 0),
-                        name=str(e.get("name") or e.get("shortName") or ""),
-                        status=status,
-                        source=("machine" if str(e.get("equipmentConnectedDevice") or "") == "FullConnected" else ("manual" if status == "done" else "")),
-                        done_on=done_on,
-                        sets=sets,
-                    )
-                )
-            st.total_count = len(st.exercises)
-            st.done_count = sum(1 for e in st.exercises if e.status == "done")
-            return st
+            return self._from_current(ws, st)
         st.has_current_workout = bool(isinstance(cur, dict) and cur.get("hasCurrentWorkout"))
         # 2. sinon, seance performee du jour deja fermee : historique + detail
         items = self._client.activity_history(day, day)

@@ -123,7 +123,33 @@ Observations :
   `{"name", "um", "value"}` ; le format des pas reste a trouver (`ExerciseDataNotValid`).
 * Le backend `/workout/{id}/live` utilise desormais la seance courante en priorite (avant meme l'historique).
 
-## 5. Verifie / pas verifie
+## 5. POC montre : l'ecran live (2026-09-30)
+
+But : je gere ma seance avec les bornes, les machines et l'app ; ma montre me montre ou j'en suis et
+enregistre l'activite (frequence cardiaque). Realise dans `watch/` (app Connect IQ "TG Live", ecran
+`LiveView`, module `Live`) et teste dans le simulateur fr965 contre le backend :
+
+* backend : `GET /live` renvoie la seance courante Technogym (`GetCurrentWorkoutSession`) sous forme
+  simplifiee : `name`, `done_count / total_count`, `current_position`, et par exercice `status`
+  (todo / doing / done), `device` (`FullConnected` = machine en reseau), `source` (machine / manual),
+  `target_sets` (prescrit) et `sets` (fait), `done_on`. Cache 15 s cote backend.
+* montre : poll toutes les 10 s, affichage exercice courant + series + FC, vibration et lap FIT quand un
+  exercice passe a "fait", envoi des echantillons cardio toutes les 30 s (`POST /live/hr`).
+* test : la seance a blanc du matin (journal `scratch/poc_live_log.jsonl`, 68 captures reelles de
+  `GetCurrentWorkoutSession`) a ete rejouee par le backend (`LIVE_REPLAY_PATH`, une capture toutes les
+  4 s), donnees cardio simulees par le simulateur (Simulation > Activity Data). Resultat : ouverture de
+  seance detectee, 5 exercices passes a "fait" avec vibration, series reelles affichees
+  (`4 x 10 x 12.5 kg` pour la poulie validee dans l'app, `4 x 10 x 35 kg` pour un exercice marque par le
+  backend), 458 echantillons cardio (135 a 162 bpm) stockes dans `hr_samples` en 7 min 37 s.
+  Captures : `docs/screenshots/14-live-exercice-courant.png`, `15-live-fait-machine.png`, `16-live-fait-app.png`.
+
+Ouvrir la seance depuis la montre : pas encore possible. `StartWorkoutSession` (Training/User) repond
+`{"notFound": true}` pour les trois seances du programme, quelle que soit la salle ou le corps envoye ; la
+decompilation montre que l'app n'appelle jamais cette action (seul l'adaptateur JSON existe), elle ouvre
+la seance par un autre chemin (kiosque, machine, ou API "workout") qui reste a trouver. En attendant, la
+seance s'ouvre depuis la borne, une machine ou l'app, et la montre la detecte en moins de 10 s.
+
+## 6. Verifie / pas verifie
 
 | | Etat |
 | --- | --- |
@@ -137,6 +163,9 @@ Observations :
 | Ecriture de series reelles differentes de la prescription | **schema connu** (decompile de l'app : `steps[].stepData` en `{name, um, value}`), ecriture reelle a valider avec `scripts/test_writeback.py --mode save` |
 | Frequence cardiaque par exercice vers Technogym | **schema connu** (`analitics.hr: [{t, hr}]`), a valider de la meme facon ; l'affichage en direct sur la console reste reserve a la diffusion systeme de la montre |
 | Detail serie par serie pendant l'exercice | **non disponible** cote cloud (les series arrivent avec `ExerciseDoneOnEquipment`) |
+| Ecran live sur la montre (exercice courant, faits / a faire, series, FC) | **verifie** en simulateur sur rejeu de la seance reelle du 30/09 (section 5) |
+| Frequence cardiaque montre -> backend | **verifie** (`POST /live/hr`, 458 echantillons stockes) ; ecriture dans Technogym a faire |
+| Ouvrir la seance depuis la montre | **non** : `StartWorkoutSession` repond `notFound`, chemin de l'app a trouver |
 
 Prochaine seance en salle : lancer `python scripts/poc_live.py` avant de badger sur la premiere
 machine et me transmettre `scratch/poc_live_log.jsonl`. Il contiendra la forme exacte de la seance

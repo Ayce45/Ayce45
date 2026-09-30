@@ -27,6 +27,7 @@ module Model {
     var undoStack as Array = [];              // [[exIndex, setIndex]] pour annuler
     var startedAt as Number = 0;
     var inProgress as Boolean = false;
+    var liveMode as Boolean = false;          // activite live en cours (ecran LiveView)
 
     // reglages
     var backendUrl as String = "";

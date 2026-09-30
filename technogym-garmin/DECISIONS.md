@@ -140,3 +140,27 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
   pas le SDK mobile Connect IQ (contrairement a QZ). Le chemin retenu : la montre lit le capteur du poignet,
   envoie au backend, qui ecrit les echantillons `{t, hr}` par exercice dans la seance Technogym (`analitics`).
   L'affichage en direct sur la console d'une machine reste reserve a la diffusion systeme de la montre.
+
+## 2026-09-30 : POC montre "TG Live" (suivi en direct)
+
+* Recadrage demande : la seance est pilotee depuis la salle (bornes, machines, app), la montre montre ou on
+  en est. L'app Connect IQ est renommee "TG Live" (c'etait "TG Muscu", nom choisi ici, pas une app
+  existante) et son ecran principal devient l'ecran live ; le mode guide (la montre dicte les series) reste
+  accessible par le menu. Les binaires `watch/dist/tgmuscu*` sont remplaces par `tglive*`.
+* Nouveau `GET /live` sans identifiant de seance : la montre n'a pas a savoir quelle seance est ouverte,
+  le backend renvoie la seance courante Technogym telle quelle. `GET /workout/{id}/live` reste pour le
+  mode guide.
+* Frequence cardiaque : la montre lit son capteur pendant l'enregistrement et envoie des lots `[t, bpm]`
+  toutes les 30 s (`POST /live/hr`, table `hr_samples`). Choix de stocker cote backend plutot que d'ecrire
+  directement dans Technogym : l'ecriture par exercice (`analitics.hr`) depend de la validation de
+  `SavePerformedPhysicalActivity`. La diffusion vers une console de machine reste le reglage systeme de
+  la montre ; l'activite lancee par l'app suffit a l'activer.
+* Test sans salle : mode rejeu du backend (`LIVE_REPLAY_PATH`) qui sert les captures reelles de
+  `scripts/poc_live.py`. Prefere a des fixtures inventees : ce sont les vraies reponses de Technogym du
+  matin, seule la chronologie est compressee.
+* `StartWorkoutSession` repond `notFound` pour toutes les seances (3 corps, 2 salles) : l'app ne l'appelle
+  pas (code mort). `POST /live/start` reste expose pour tester d'autres pistes, mais la montre ne propose
+  pas "Demarrer la seance" ; la seance s'ouvre depuis la salle.
+* Detail technique : un modele Pydantic declare dans `create_app` n'est pas resolu par FastAPI avec
+  `from __future__ import annotations` (le corps devient un parametre de query, 422). Modele remonte au
+  niveau module ; un handler journalise desormais le corps des 422 pour voir ce que la montre envoie.

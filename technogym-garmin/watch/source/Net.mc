@@ -85,6 +85,70 @@ module Net {
         WatchUi.requestUpdate();
     }
 
+    // Seance courante Technogym (bornes, machines, app) : GET /live.
+    var curBusy as Boolean = false;
+    var onCurrent as Method? = null;
+
+    function fetchCurrent(callback as Method?) as Boolean {
+        if (curBusy || !configured()) { return false; }
+        curBusy = true;
+        onCurrent = callback;
+        var options = {
+            :method => Communications.HTTP_REQUEST_METHOD_GET,
+            :headers => _headers(false),
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+        Communications.makeWebRequest(Model.backendUrl + "/live", { "token" => Model.pairToken }, options, new Lang.Method(Net, :onCurrentResponse));
+        return true;
+    }
+
+    function onCurrentResponse(code as Number, data as Dictionary or String or Null) as Void {
+        curBusy = false;
+        var events = 0;
+        var ok = code == 200 && data instanceof Dictionary && (data as Dictionary).hasKey("has_current_workout");
+        if (ok) {
+            events = Live.apply(data as Dictionary);
+            Model.online = true;
+        } else {
+            Live.lastError = describe(code, data);
+            Model.online = false;
+        }
+        var cb = onCurrent;
+        onCurrent = null;
+        if (cb != null) { (cb as Method).invoke(ok, events); }
+        WatchUi.requestUpdate();
+    }
+
+    // Echantillons cardio : POST /live/hr (independant des autres requetes, une a la fois).
+    var hrBusy as Boolean = false;
+    var _hrPayload as Dictionary? = null;
+
+    function sendHr(payload as Dictionary) as Boolean {
+        if (hrBusy || !configured()) { return false; }
+        hrBusy = true;
+        _hrPayload = payload;
+        var options = {
+            :method => Communications.HTTP_REQUEST_METHOD_POST,
+            :headers => _headers(true),
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+        Communications.makeWebRequest(Model.backendUrl + "/live/hr?token=" + Model.pairToken, payload, options, new Lang.Method(Net, :onHrResponse));
+        return true;
+    }
+
+    function onHrResponse(code as Number, data as Dictionary or String or Null) as Void {
+        hrBusy = false;
+        var p = _hrPayload;
+        _hrPayload = null;
+        if (code == 200) {
+            if (data instanceof Dictionary && (data as Dictionary).hasKey("total")) {
+                Live.hrSent = Model.num(data as Dictionary, "total", 0).toNumber();
+            }
+        } else if (p != null) {
+            Live.hrFailed(p as Dictionary);
+        }
+    }
+
     var _sending as Dictionary? = null;
 
     function sendResults(payload as Dictionary, callback as Method?) as Boolean {

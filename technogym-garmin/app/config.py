@@ -34,6 +34,10 @@ class Settings(BaseSettings):
     program_cache_ttl: int = 300
     # Debug / demo : force la date du jour (YYYY-MM-DD) pour /workout/today et le job
     today_override: str = ""
+    # Rejeu (tests) : journal JSONL de scripts/poc_live.py servi par GET /live a la place de Technogym,
+    # une capture toutes les LIVE_REPLAY_STEP secondes.
+    live_replay_path: str = ""
+    live_replay_step: float = 3.0
 
 
 @lru_cache

@@ -6,7 +6,7 @@ Deux produits, un backend commun :
    Garmin, tu cliques : chaque seance de ton programme Mywellness devient un workout structure Garmin
    Connect (exercices, series, charges, repos), la seance du jour est planifiee sur le calendrier. Un job
    peut refaire ce push chaque matin a 6h.
-2. **Compagnon de seance sur la montre (app Connect IQ "TG Muscu").** Seance du jour sur la montre,
+2. **Compagnon de seance sur la montre (app Connect IQ "TG Live").** Seance du jour sur la montre,
    guidage serie par serie (cible reps / charge, repos avec vibration, blocs cardio a duree), activite FIT
    Strength. Bidirectionnel via le backend : ce que tu fais sur les machines Technogym apparait sur la
    montre en cours de seance, et ce que tu saisis sur la montre (poids libres) est renvoye au backend puis,
@@ -49,23 +49,38 @@ Execution reelle du 2026-09-30 : 3 workouts crees en 22 s (Seance 1 : 39 steps, 
 Sans interface (serveur, Docker) : identifiants dans `.env` et `POST /garmin/push-today` ou le job
 APScheduler (`PUSH_HOUR`, `TZ`).
 
-## 2. Compagnon de seance sur la montre
+## 2. Compagnon de seance sur la montre (app Connect IQ "TG Live")
 
-Parcours : accueil (seance du jour, cache si hors ligne) -> START -> pour chaque exercice : serie cible
-`10 reps x 80 kg`, START = fait, saisie reps puis charge (UP / DOWN, START), repos 45 s avec vibration
--> serie suivante. Blocs cardio / etirements : compte a rebours de la duree cible. Appui long UP : menu
-(annuler la derniere serie, passer l'exercice, liste des exercices, terminer, abandonner). Fin : resume,
-START = sauvegarde FIT **puis** envoi des resultats ; en echec, mise en attente et renvoi automatique.
+"TG Live" est le nom de **notre** app (elle n'existe pas sur le store Connect IQ) ; elle apparait dans la
+liste des activites de la montre comme n'importe quelle app et enregistre une activite Musculation.
 
-Live : au demarrage, a chaque ecran de serie et toutes les 20 s, la montre demande au backend l'etat de la
-seance du jour cote Technogym. Un exercice termine sur une machine passe en `[M]` dans la liste, l'ecran
-affiche "Machine : fait" avec les series enregistrees et START passe au suivant en reprenant ces series.
-Les exercices faits hors machine (poids libres) sont saisis sur la montre et envoyes au backend
-(`POST /workout/{id}/results`) ; avec `MYWELLNESS_WRITEBACK=1` le backend les ecrit dans Mywellness dans la
-seance du jour (voir "Etat de l'ecriture Mywellness").
+**Mode live (par defaut, START sur l'accueil).** La seance est geree comme d'habitude depuis la salle
+(bornes, machines, app Technogym) ; la montre se contente de montrer ou on en est et d'enregistrer
+l'activite :
+
+* chrono de seance, `faits / total` et arc de progression ;
+* exercice courant (premier non fait cote Technogym) : nom, statut (`Connectee` = machine en reseau,
+  `A faire`, `Fait`, `Fait machine`), series prescrites ou, une fois fait, series reelles remontees par la
+  machine (`4 x 10 x 35 kg`) ; UP / DOWN pour parcourir les autres exercices, "Suivant : ..." en bas ;
+* frequence cardiaque du poignet en grand (max en petit) : l'activite est enregistree, donc le capteur
+  optique est actif et la **diffusion cardio** de la montre (reglage systeme "Diffuser pendant l'activite",
+  ANT+ / Bluetooth) peut alimenter la console d'une machine Technogym qui accepte un capteur ;
+* toutes les 10 s la montre relit `GET /live` (seance courante Technogym) ; quand une machine ou l'app
+  valide un exercice, la montre vibre, affiche `<exercice> : fait` et pose un lap dans le FIT ;
+* toutes les 30 s elle envoie ses echantillons cardio au backend (`POST /live/hr`), qui les stocke par
+  seance (base pour les ecrire ensuite dans Technogym via `analitics.hr`) ;
+* START : menu (actualiser, revenir a l'exercice en cours, mode guide, terminer et sauver, abandonner).
+
+**Mode guide (menu de l'accueil).** Ancien parcours ou la montre dicte la seance prescrite : serie cible
+`10 reps x 80 kg`, START = fait, saisie reps puis charge, repos avec vibration, blocs cardio / etirements en
+compte a rebours, resume, sauvegarde FIT puis envoi des resultats (`POST /workout/{id}/results`, mise en
+attente si hors ligne). Les exercices deja faits sur machine y apparaissent `[M]`.
+
+Captures (simulateur fr965, rejeu de la seance reelle du 2026-09-30) : `docs/screenshots/14-live-*.png`,
+`15-live-*.png`, `16-live-*.png`.
 
 Installation : `docs/connectiq.md` (compilation, simulateur, sideload). Binaires prets :
-`watch/dist/tgmuscu.iq` (tous appareils) et `watch/dist/tgmuscu-<modele>.prg` (fr965, fr265, venu3,
+`watch/dist/tglive.iq` (tous appareils) et `watch/dist/tglive-<modele>.prg` (fr965, fr265, venu3,
 vivoactive5, fenix7, epix2pro47mm, fenix843mm). Appairage : `POST /auth/pair` puis `backendUrl` (https
 obligatoire sur une vraie montre) et `pairToken` dans les reglages de l'app via Garmin Connect Mobile.
 
@@ -100,7 +115,10 @@ Mywellness (API privee)  <->  app/mywellness  ->  FastAPI (app/api)   ->  app/ga
 | POST | `/auth/pair` | `X-Admin-Token` | token d'appairage pour la montre |
 | GET | `/workout/today` | pair ou admin | seance du jour (`?day=` optionnel) |
 | GET | `/workout/all`, `/workout/{id}` | pair ou admin | seances du programme |
-| GET | `/workout/{id}/live` | pair ou admin | etat Technogym de la seance du jour (machines) |
+| GET | `/live` | pair ou admin | seance courante Technogym (bornes, machines, app) : exercices faits / en cours / a faire, series |
+| POST | `/live/hr` | pair ou admin | echantillons cardio de la montre `{"samples": [[t, bpm], ...]}` |
+| POST | `/live/start`, `/live/close` | pair ou admin | ouvrir / fermer la seance cote Technogym (voir limites : `StartWorkoutSession` repond `notFound`) |
+| GET | `/workout/{id}/live` | pair ou admin | etat Technogym d'une seance donnee (mode guide) |
 | POST | `/workout/{id}/results` | pair ou admin | series faites (montre -> backend, puis Mywellness si active) |
 | GET | `/workout/{id}/results` | pair ou admin | resultats stockes |
 | GET | `/history`, `/history/{idCr}` | pair ou admin | historique Mywellness |
@@ -151,11 +169,25 @@ backend local servant la vraie seance ; push et planification de workouts dans G
 web) ; app Connect IQ compilee pour 64 appareils et testee dans le simulateur fr965 sur le parcours complet,
 y compris la reprise d'un envoi en attente et le mode live sur la seance faite la veille sur machines.
 
+## Rejouer une seance sans aller a la salle
+
+`LIVE_REPLAY_PATH=scratch/poc_live_log.jsonl LIVE_REPLAY_STEP=4 python run.py` : `GET /live` sert, une
+capture toutes les 4 s, le journal enregistre par `scripts/poc_live.py` pendant une vraie seance, au lieu
+d'interroger Technogym. C'est ainsi que l'ecran live a ete teste dans le simulateur (donnees reelles,
+chronologie compressee). Les autres endpoints continuent de parler a Mywellness.
+
 ## Prochaines etapes
 
-1. Valider l'ecriture Mywellness avec `scripts/test_writeback.py`, puis activer `MYWELLNESS_WRITEBACK=1`.
-2. Tester sur la vraie montre (modele a confirmer) : lisibilite, tactile, HTTPS.
-3. Exposer le backend en https (Caddy ou Cloudflare Tunnel) pour la montre.
-4. Progression : proposer la charge de la derniere seance reussie sur la montre.
-5. Enrichir `exercise_map.json` au fil des programmes (rapport de mapping dans la synchro).
-6. Glance "seance du jour", publication eventuelle sur le store Connect IQ.
+1. Prochaine seance en salle : lancer l'app sur la montre avant de badger, verifier la latence machine ->
+   montre et la lisibilite ; activer la diffusion cardio de la montre et voir si la console la capte.
+2. Ecrire la frequence cardiaque stockee (`hr_samples`) dans la seance Technogym par exercice
+   (`SavePerformedPhysicalActivity`, `analitics.hr`), une fois l'ecriture "save" validee avec
+   `scripts/test_writeback.py`, puis activer `MYWELLNESS_WRITEBACK=1`.
+3. Trouver comment l'app ouvre une seance (l'action `StartWorkoutSession` du portail repond `notFound`
+   pour toutes les seances du programme : code mort dans l'app) pour permettre "Demarrer la seance" depuis
+   la montre.
+4. Tester sur la vraie montre (modele a confirmer) : lisibilite, tactile, HTTPS.
+5. Exposer le backend en https (Caddy ou Cloudflare Tunnel) pour la montre.
+6. Progression : proposer la charge de la derniere seance reussie sur la montre.
+7. Enrichir `exercise_map.json` au fil des programmes (rapport de mapping dans la synchro).
+8. Glance "seance du jour", publication eventuelle sur le store Connect IQ.

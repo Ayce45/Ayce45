@@ -1,5 +1,5 @@
 <strings>
-    <string id="AppName">TG Muscu</string>
+    <string id="AppName">TG Live</string>
     <string id="Loading">Chargement...</string>
     <string id="NoWorkout">Aucune seance</string>
     <string id="NoToken">Token manquant : reglages de l'app dans Garmin Connect</string>
@@ -25,4 +25,13 @@
     <string id="Confirm">OK</string>
     <string id="Cancel">Retour</string>
     <string id="Done">Fait</string>
+    <string id="Follow">Suivre la seance</string>
+    <string id="Resume">Reprendre</string>
+    <string id="LiveOpen">Seance ouverte en salle</string>
+    <string id="NoLiveSession">Aucune seance ouverte. Badge sur une borne ou lance-la dans l'app Technogym.</string>
+    <string id="NoLiveShort">Pas de seance ouverte</string>
+    <string id="FollowCurrent">Revenir a l'exercice en cours</string>
+    <string id="GuidedMode">Mode guide</string>
+    <string id="GuidedModeHint">La montre dicte les series</string>
+    <string id="FinishLive">Terminer et sauver</string>
 </strings>
