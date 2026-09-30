@@ -38,6 +38,10 @@ def now() -> str:
 
 def snapshot(c: mw.MywellnessClient, day: date) -> dict:
     cur = c.current_workout_session()
+    try:
+        cur["workout_current"] = c.current_workout()   # GET workout.mywellness.com/v2/enduser/workout/current
+    except mw.MywellnessError as exc:
+        cur["workout_current"] = {"error": str(exc)}
     items = c.activity_history(day, day)
     sessions = []
     for it in items:
