@@ -30,7 +30,7 @@ backend local et la vraie seance Mywellness. `[M]` = exercice deja enregistre pa
   l'historique des premiers commits (qui contiennent un id utilisateur Mywellness et un id de salle, non
   secrets) : `git rebase -i <commit de base>` puis squash, ou `git filter-repo`, puis `git push --force-with-lease`.
 
-## 1. Appli de synchro
+## 1. Appli de synchro (mise de cote)
 
 ```
 cd technogym-garmin
@@ -49,43 +49,48 @@ Execution reelle du 2026-09-30 : 3 workouts crees en 22 s (Seance 1 : 39 steps, 
 Sans interface (serveur, Docker) : identifiants dans `.env` et `POST /garmin/push-today` ou le job
 APScheduler (`PUSH_HOUR`, `TZ`).
 
-## 2. Compagnon de seance sur la montre (app Connect IQ "Spotter for Technogym")
+## 2. Spotter for Technogym : l'app montre (le produit)
 
-"Spotter for Technogym" est le nom de **notre** app (elle n'existe pas sur le store Connect IQ) ; elle apparait dans la
-liste des activites de la montre comme n'importe quelle app et enregistre une activite Musculation.
+"Spotter for Technogym" est le nom de **notre** app Connect IQ (elle n'existe pas sur le store). Elle
+apparait dans la liste des activites de la montre, enregistre une activite Musculation, et se lit comme
+une activite Garmin : plusieurs pages de donnees, UP / DOWN pour changer de page, START pour la liste des
+exercices, appui long UP pour le menu, BACK pour sortir.
 
-**Mode live (par defaut, START sur l'accueil).** La seance est geree comme d'habitude depuis la salle
-(bornes, machines, app Technogym) ; la montre se contente de montrer ou on en est et d'enregistrer
-l'activite :
+| Page | Contenu |
+| --- | --- |
+| Exercice | chrono, icone d'etat (coche verte = terminé, triangle orange = en cours, cercle gris = à faire, ondes vertes = équipement connecté), nom de l'exercice, séries prescrites ou faites (`4 x 10 x 35 kg`), FC avec coeur colorée par zone, exercice suivant, arc de progression de la séance |
+| Cardio | FC en grand colorée par zone, jauge des 5 zones (celles du profil Garmin), moyenne et max |
+| Séance | grille 4 champs a la Garmin : durée, exercices terminés, MOVEs, kcal remontés par les équipements |
+| Liste (START) | menu natif avec une icone d'etat par exercice, séries en sous-titre ; choisir un exercice l'affiche sur la page Exercice |
 
-* chrono de seance, `faits / total` et arc de progression ;
-* exercice courant (premier non fait cote Technogym) : nom, statut (`Connectee` = machine en reseau,
-  `A faire`, `Fait`, `Fait machine`), series prescrites ou, une fois fait, series reelles remontees par la
-  machine (`4 x 10 x 35 kg`) ; UP / DOWN pour parcourir les autres exercices, "Suivant : ..." en bas ;
-* frequence cardiaque du poignet en grand (max en petit) : l'activite est enregistree, donc le capteur
-  optique est actif et la **diffusion cardio** de la montre (reglage systeme "Diffuser pendant l'activite",
-  ANT+ / Bluetooth) peut alimenter la console d'une machine Technogym qui accepte un capteur ;
-* toutes les 10 s la montre relit `GET /live` (seance courante Technogym) ; quand une machine ou l'app
-  valide un exercice, la montre vibre, affiche `<exercice> : fait` et pose un lap dans le FIT ;
-* toutes les 30 s elle envoie ses echantillons cardio au backend (`POST /live/hr`), qui les stocke par
-  seance (base pour les ecrire ensuite dans Technogym via `analitics.hr`) ;
-* START : menu (actualiser, revenir a l'exercice en cours, mode guide, terminer et sauver, abandonner).
+La séance est pilotée depuis la salle (bornes, équipements, app Technogym) ; la montre relit `GET /live`
+toutes les 10 s, vibre et pose un lap quand un exercice est validé, et envoie ses pulsations au backend
+toutes les 30 s (`POST /live/hr`). Le mode Coach (la montre dicte séries et repos, pour les poids libres)
+reste dans le menu.
 
-**Mode guide (menu de l'accueil).** Ancien parcours ou la montre dicte la seance prescrite : serie cible
-`10 reps x 80 kg`, START = fait, saisie reps puis charge, repos avec vibration, blocs cardio / etirements en
-compte a rebours, resume, sauvegarde FIT puis envoi des resultats (`POST /workout/{id}/results`, mise en
-attente si hors ligne). Les exercices deja faits sur machine y apparaissent `[M]`.
+Captures (simulateur Forerunner 955, rejeu d'une seance reelle) : `docs/screenshots/21-page-exercice-fr955.png`
+a `25-aucune-seance-fr955.png`. Textes dans le vocabulaire Technogym ; fiche store : `docs/store-listing.md`.
 
-Les textes de la montre reprennent le vocabulaire de l'app Technogym (séance d'entraînement, exercices,
-équipement, MOVEs, "Terminé", "À faire") ; la fiche store prete a publier est dans `docs/store-listing.md`.
+Installation : `docs/connectiq.md`. Binaires : `watch/dist/spotter.iq` (store) et `watch/dist/spotter-<modele>.prg`
+(fr955, fr965, fr265, venu3, vivoactive5, fenix7, epix2pro47mm, fenix843mm). Reglages (URL du backend, token)
+dans Garmin Connect une fois l'app installee depuis le store ; pour un `.prg` sideloade, les reglages sont
+compiles dans le binaire.
 
-Captures (simulateurs fr965 et fr955, rejeu de la seance reelle du 2026-09-30) : `docs/screenshots/14-live-*.png`,
-`15-live-*.png`, `16-live-*.png`.
+### Backend pour la beta
 
-Installation : `docs/connectiq.md` (compilation, simulateur, sideload). Binaires prets :
-`watch/dist/spotter.iq` (tous appareils) et `watch/dist/spotter-<modele>.prg` (fr965, fr265, venu3,
-vivoactive5, fenix7, epix2pro47mm, fenix843mm). Appairage : `POST /auth/pair` puis `backendUrl` (https
-obligatoire sur une vraie montre) et `pairToken` dans les reglages de l'app via Garmin Connect Mobile.
+La montre ne peut pas parler directement a Technogym (reponses de 100 a 230 Ko, trop grosses pour une montre) :
+il faut un relais qui se connecte a Mywellness et renvoie les 3 Ko utiles. Options, de la plus simple a la
+plus durable :
+
+1. **Test perso** : lancer le backend sur son PC (`python run.py`) et l'exposer avec un tunnel Cloudflare sans
+   compte : `cloudflared tunnel --url http://localhost:8000` donne une URL `https://xxx.trycloudflare.com`
+   valable tant que la commande tourne. Coller cette URL dans les reglages de la montre.
+2. **Beta partagee** : un relais sans etat (Cloudflare Worker, plan gratuit) qui recoit identifiant et mot de
+   passe Technogym depuis les reglages Garmin Connect de chaque utilisateur, se connecte, allege le JSON.
+   Rien n'est stocke. A construire avec un compte Cloudflare.
+3. **Complet** : ce backend FastAPI heberge derriere HTTPS (journal des seances, cardio, mode Coach).
+
+GitHub Pages ou un artefact statique ne conviennent pas : ils ne peuvent pas executer de code cote serveur.
 
 ## Architecture
 

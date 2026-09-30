@@ -192,3 +192,20 @@ Chaque decision prise sans consulter l'utilisateur est notee ici, avec le contex
 * Mise en page revue pour l'ecran rond 260 px de la Forerunner 955 : en-tete court (chrono + numero),
   statut seul, ligne "n/total terminés + MOVEs", FC compacte, pied de page avec points de suspension
   (`Ui.drawWrapped` signale desormais un texte coupe).
+
+## 2026-09-30 : ecrans facon activite Garmin, priorite a l'app montre
+
+* Demande : moins de texte, des ecrans comme les vraies activites Garmin. Reference prise sur les pages de
+  donnees des activites Course et Musculation : pages defilantes UP / DOWN, champs a etiquette petite et
+  valeur en chiffres, coeur pour la FC coloree par zone (zones du profil utilisateur via `UserProfile`),
+  jauge de zones, separateurs fins, points de page sur le bord. Trois pages (Exercice, Cardio, Séance) et
+  la liste des exercices en menu natif `Menu2` avec `IconMenuItem`.
+* Icones dessinees en primitives (`Icons.mc`) plutot qu'en bitmaps : nettes a toutes les resolutions,
+  colorables, pas de ressources par appareil. Codes : coche verte = terminé, triangle orange = en cours,
+  cercle gris = à faire, ondes vertes = équipement connecté, coeur = FC, chronometre = durée.
+* L'appli de synchro (programme vers workouts Garmin) est mise de cote a la demande de l'utilisateur : le
+  code reste mais n'est plus le produit ; README recentre sur l'app montre.
+* Backend beta : le tunnel public depuis cet environnement a ete refuse par la politique de l'outil (ingress
+  externe). Alternatives documentees dans le README : tunnel Cloudflare lance par l'utilisateur sur son PC
+  (sans compte), relais Cloudflare Worker sans etat (compte necessaire), backend complet heberge. Pages
+  statiques (GitHub Pages, artefact) exclues : pas d'execution serveur.

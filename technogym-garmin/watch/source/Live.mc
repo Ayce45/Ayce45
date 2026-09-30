@@ -220,6 +220,15 @@ module Live {
         }
     }
 
+    function caloriesDone() as Number {
+        var exs = exercises();
+        var n = 0;
+        for (var i = 0; i < exs.size(); i++) {
+            n += Model.num(exs[i] as Dictionary, "done_calories", 0).toNumber();
+        }
+        return n;
+    }
+
     function hrAvg() as Number { return _hrN > 0 ? _hrSum / _hrN : 0; }
 
     // Vide le tampon vers le backend (POST /live/hr). Les echantillons sont remis en tampon en cas d'echec.
