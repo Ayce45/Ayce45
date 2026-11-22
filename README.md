@@ -23,7 +23,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (3 days ago)
+- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (4 days ago)
 - [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (2 months ago)
 - [AnshulJ999/SyncLyrics](https://github.com/AnshulJ999/SyncLyrics) - A real-time synced lyrics app. Cross-platform support (including Home Assistant). Runs as a server that can be displayed on any device via a webpage. Optimized for tablet dashboards.  (3 months ago)
 - [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (3 months ago)
@@ -47,7 +47,7 @@
 
 - [dailydotdev/awesome-developer-essentials](https://github.com/dailydotdev/awesome-developer-essentials) - A curated list of tools, platforms, browser extensions and resources for staying informed, productive, and growing as a software developer. (4 months ago)
 - [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (7 months ago)
-- [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (11 months ago)
+- [kalligator/ulauncher-gemini-direct](https://github.com/kalligator/ulauncher-gemini-direct) - Get answers from Gemini AI directly in your Ulauncher window. (1 year ago)
 - [briacdev/shadcn-icon-picker](https://github.com/briacdev/shadcn-icon-picker) - An icon picker component for Vue featuring Lucide icons and shadcn/ui. Supports search, infinite scrolling and popovers. (1 year ago)
 - [Gilux/wsfr2025-test-project](https://github.com/Gilux/wsfr2025-test-project) - Monorepo - Docs and Starters - Test Project for WSFR National Finals 2025 (1 year ago)
 </details>
