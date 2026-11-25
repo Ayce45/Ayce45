@@ -23,7 +23,7 @@
   <summary>I'm currently working on 👷</summary>
   
 
-- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (6 days ago)
+- [Ayce45/gitlab-history](https://github.com/Ayce45/gitlab-history) - Recreate my GitLab activity chart in Github (1 week ago)
 - [usebruno/bruno](https://github.com/usebruno/bruno) - Opensource IDE For Exploring and Testing API&#39;s (lightweight alternative to Postman/Insomnia) (2 months ago)
 - [AnshulJ999/SyncLyrics](https://github.com/AnshulJ999/SyncLyrics) - A real-time synced lyrics app. Cross-platform support (including Home Assistant). Runs as a server that can be displayed on any device via a webpage. Optimized for tablet dashboards.  (3 months ago)
 - [Ayce45/claude-terminator-notify](https://github.com/Ayce45/claude-terminator-notify) - Desktop notifications for Claude Code on Terminator (Linux): click to focus the right pane, approve/deny prompts from the notification (3 months ago)
